@@ -13,6 +13,16 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r libraries, echo=FALSE, results='hide'}
+#library(jsonlite)
+#library(readxl)
+#library(tidyr)
+# library(reshape2)
+suppressMessages(library("tidyverse"))
+setwd("~/Documentos/UnB/Listas e Trabalhos/Data Science/Relatório 4")
+```
+
+
 # Introdução
 
 Este relatório tem como foco principal a contextualização das áreas de pesquisa relacionadas ao programa de Pós-Graduação em Matemática da UnB, dos anos 2010 à 2017. Para tal está sendo apresentado dados de produção científica dos docentes do programa, retirados do currículo Lattes dos professores e do repositório `OASIS` do `IBICT` (Instituto Brasileiro de Informação em Ciência e Tecnologia). 
@@ -39,7 +49,7 @@ A metodologia para desenvolvimento do relatório é baseada no modelo de minera�
 
 Para desenvolvimento do trabalho devem ser seguidos, da forma mais simplificada e coerente possível, as fases e atividades genéricas do ciclo de vida de um projeto executado em aderência ao CRISP-DM. Em outras palavras, a produção do relatorio deve seguir a metodologia CRISP-DM.
 
-![Fases do Ciclo de Vida do CRISM-DM. Fonte: (Chapman et al., 2000).](CRISP-DM)
+<!-- ![Fases do Ciclo de Vida do CRISM-DM. Fonte: (Chapman et al., 2000).](CRISP-DM) -->
 
 "A widely used methodology for data mining is the CRoss-Industry Standard Process for Data Mining (CRISP-DM) which mas initiated in 1996 (…) with the intent of providing a process that is __reliable and repeatable__ by people with little data-mining background, with a framework within which experience can be recorded, to support the replication of projects, to support planning and management, as well as to demonstrate data mining as a mature discipline (…)" [Sullivan, Rob. Introduction to Data Mining for the Life Sciences. Springer Science & Business Media. 2012]
 
@@ -124,7 +134,7 @@ Quanto ao plano para realização do projeto, será realizada as seguintes etapa
 
 O segundo estágio do CRISP-DM requer que se tenha acesso ao dado listado nos recursos do projeto. Essa fase requer a realização da descrição, exploração, verificação da qualidade e relatório da qualidade dos dados.
 
-Os dados analisados nesse relatório foram pegos a partir do arquivo Matematica.profile.json que representa o dataset do programa de Matemática (código: `53001010003P2`) e conta com uma lista de docentes e seus dados pessoais. Essa descrição e exploração foi feita utilizando do comando **View** no rstudio. A qualidade dos dados se encontra bastante satisfatória, com alguns problemas na padronização de alguns
+Os dados analisados nesse relatório foram pegos a partir do arquivo Matematica.profile.json que representa o dataset do programa de pós graduação em Matemática (código: `53001010003P2`) e conta com uma lista de docentes e seus dados pessoais. Essa descrição e exploração foi feita utilizando do comando **View** no rstudio. A qualidade dos dados se encontra bastante satisfatória, com alguns problemas na padronização de alguns
 dados como o endereço que em alguns casos apresenta diferentes nomes para um mesmo curso como "Matematica" e "Matemática".
 <!-- Na fase de entendimento dos dados pode-se trabalhar com quatro atividades genéricas: -->
 
@@ -305,8 +315,7 @@ Os arquivos estão no formato JSON, e seus atributos iniciais e conteúdos são 
 ###Perfil profissional dos docentes vinculados às pós-graduações
 
 ```{r}
-setwd("~/Documents/eLattes/UNB/CD4A")
-json.perfil <- "data/unbpos.profile.json"
+json.perfil <- "Matematica.profile.json"
 file.info(json.perfil)
 ```
 
@@ -316,7 +325,7 @@ Esse arquivo foi fornecido pelos docentes responsáveis pela disciplina.
 ###Orientações de mestrado e doutorado realizadas pelos docentes vinculados às pós-graduações
 
 ```{r}
-json.advise <- "data/unbpos.advise.json"
+json.advise <- "Matematica.advise.json"
 file.info(json.advise)
 ```
 
@@ -327,7 +336,7 @@ Esse arquivo foi fornecido pelos docentes responsáveis pela disciplina.
 ###Produção bibliográfica gerada pelos docentes vinculados às pós-graduações
 
 ```{r}
-json.producao.bibliografica <- "data/unbpos.publication.json"
+json.producao.bibliografica <- "Matematica.publication.json"
 file.info(json.producao.bibliografica) 
 ```
 
@@ -336,14 +345,14 @@ O arquivo `r json.producao.bibliografica` apresenta dados sobre a produção bib
 ###Agrupamento dos docentes conforme áreas de atuação
 
 ```{r}
-json.researchers_by_area <- "data/unbpos.researchers_by_area.json" 
+json.researchers_by_area <- "Matematica.researchers_by_area.json" 
 file.info(json.researchers_by_area)
 ```
 
 O arquivo `r json.researchers_by_area` apresenta as vinculações de todos os docentes que declararam atuar em cada uma das áreas de pós-graduação do Sistema Nacional de Pós-Graduação da CAPES, conforme apresenta-se registrada essa informação no currículo Lattes de cada um, em data recente. 
 
 ```{r}
-file.info('data/unbpos.graph.json')
+file.info('Matematica.graph.json')
 ```
 
 ###Redes de colaboração entre docentes
@@ -359,7 +368,7 @@ library(jsonlite)
 library(listviewer)
 library(readxl)
 library(readr)
-library(readtext)
+#library(readtext)
 library(ggplot2)
 suppressMessages(library("tidyverse"))
 ```
@@ -371,7 +380,7 @@ Como já informado, a descrição dos dados verifica se os dados sendo acessados
 O arquivo unb.perfis.json, que contém dados que caracterizam o perfil profissional de todos os docentes do grupo sob análise, podem ser lido por meio do comando seguinte.
 
 ```{r}
-unb.prof <- fromJSON("data/unbpos.profile.json")
+unb.prof <- fromJSON("Matematica.profile.json")
 ```
 
 A quantidade de docentes sob análise é apresentada a seguir.
@@ -415,7 +424,7 @@ A fim de compreender a relevância dos dados para a avaliação da produção ac
 ###Descrição dos dados de orientações
 
 ```{r}
-unb.adv <- fromJSON("data/unbpos.advise.json")
+unb.adv <- fromJSON("Matematica.advise.json")
 names(unb.adv)
 names(unb.adv$ORIENTACAO_CONCLUIDA_DOUTORADO)
 length(unb.adv$ORIENTACAO_CONCLUIDA_DOUTORADO$`2016`$natureza)
@@ -426,7 +435,7 @@ head(sort(table(unb.adv$ORIENTACAO_CONCLUIDA_MESTRADO$`2017`$curso), decreasing 
 
 ###Descrição dos dados de produção bibliográfica
 ```{r}
-unb.pub <- fromJSON("data/unbpos.publication.json")
+unb.pub <- fromJSON("Matematica.publication.json")
 names(unb.pub)
 names(unb.pub$PERIODICO$`2012`)
 head(sort(table(unb.pub$PERIODICO$`2017`$periodico), decreasing = TRUE), 10)
@@ -436,7 +445,7 @@ head(sort(table(unb.pub$LIVRO$`2015`$nome_da_editora), decreasing = TRUE), 10)
 
 ###Descrição dos dados de agregação de docentes por área
 ```{r}
-unb.area <- fromJSON("data/unbpos.researchers_by_area.json")
+unb.area <- fromJSON("Matematica.researchers_by_area.json")
 unb.area.df <- cbind(names(unb.area$`Areas dos pesquisadores`),
            (sapply(unb.area$`Areas dos pesquisadores`, function(x) length(x))))
 rownames(unb.area.df) <- c(1:nrow(unb.area.df)); colnames(unb.area.df) <- c("Area", "Professores")
@@ -783,9 +792,9 @@ extrai_areas_atuacao <- function(jsonProfessores){
 ########################### Inicio 
 
 # colocar o diretorio onde está o arquivo json de perfis a serem lidos 
-unb.prof.json <- read_file("data/unbpos.profile.json")
-unb.prof.df.capes <- read.csv("data/PesqPosCapes.csv", 
-                              sep = ";", header = TRUE, colClasses = "character")
+unb.prof.json <- read_file("Matematica.profile.json")
+# unb.prof.df.capes <- read.csv("data/PesqPosCapes.csv", 
+#                               sep = ";", header = TRUE, colClasses = "character")
 unb.prof <- fromJSON(unb.prof.json)
 length(unb.prof)
 
@@ -802,43 +811,43 @@ unb.prof.df.orientacoes <- extrai_orientacoes(unb.prof)
 unb.prof.df.areas.de.atuacao <- extrai_areas_atuacao(unb.prof)
 
 #salva os daframes 
-save(unb.prof.df.professores, unb.prof.df.publicacoes,
-     unb.prof.df.orientacoes, unb.prof.df.areas.de.atuacao, file = "dataframes.Rda")
+# save(unb.prof.df.professores, unb.prof.df.publicacoes,
+#      unb.prof.df.orientacoes, unb.prof.df.areas.de.atuacao, file = "dataframes.Rda")
 
 #cria arquivo para análise
-unb.prof.df <- data.frame()
-unb.prof.df <- unb.prof.df.professores %>% 
-  select(idLattes, nome, resumo_cv, senioridade) %>% 
-  left_join(
-    unb.prof.df.orientacoes %>% 
-      select(orientacao, idLattes) %>% 
-      filter(!grepl("EM_ANDAMENTO", orientacao)) %>% 
-      group_by(idLattes) %>% 
-      count(orientacao) %>% 
-      spread(key = orientacao, value = n), 
-    by = "idLattes") %>% 
-  left_join(
-    unb.prof.df.publicacoes %>% 
-      select(tipo_producao, idLattes) %>% 
-      filter(!grepl("ARTIGO_ACEITO", tipo_producao)) %>% 
-      group_by(idLattes) %>% 
-      count(tipo_producao) %>% 
-      spread(key = tipo_producao, value = n), 
-    by = "idLattes") %>% 
-  left_join(
-    unb.prof.df.areas.de.atuacao %>% 
-      select(area, idLattes) %>% 
-      group_by(idLattes) %>% 
-      summarise(n_distinct(area)), 
-    by = "idLattes") %>% 
-  left_join(
-    unb.prof.df.capes %>% 
-      select(AreaPos, idLattes) %>% 
-      group_by(idLattes) %>% 
-      summarise(n_distinct(AreaPos)), 
-    by = "idLattes")
+# unb.prof.df <- data.frame()
+# unb.prof.df <- unb.prof.df.professores %>% 
+#   select(idLattes, nome, resumo_cv, senioridade) %>% 
+#   left_join(
+#     unb.prof.df.orientacoes %>% 
+#       select(orientacao, idLattes) %>% 
+#       filter(!grepl("EM_ANDAMENTO", orientacao)) %>% 
+#       group_by(idLattes) %>% 
+#       count(orientacao) %>% 
+#       spread(key = orientacao, value = n), 
+#     by = "idLattes") %>% 
+#   left_join(
+#     unb.prof.df.publicacoes %>% 
+#       select(tipo_producao, idLattes) %>% 
+#       filter(!grepl("ARTIGO_ACEITO", tipo_producao)) %>% 
+#       group_by(idLattes) %>% 
+#       count(tipo_producao) %>% 
+#       spread(key = tipo_producao, value = n), 
+#     by = "idLattes") %>% 
+#   left_join(
+#     unb.prof.df.areas.de.atuacao %>% 
+#       select(area, idLattes) %>% 
+#       group_by(idLattes) %>% 
+#       summarise(n_distinct(area)), 
+#     by = "idLattes") %>% 
+#   left_join(
+#     unb.prof.df.capes %>% 
+#       select(AreaPos, idLattes) %>% 
+#       group_by(idLattes) %>% 
+#       summarise(n_distinct(AreaPos)), 
+#     by = "idLattes")
 
-glimpse(unb.prof.df)
+# glimpse(unb.prof.df)
 ```
 
 
