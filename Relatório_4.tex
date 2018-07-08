@@ -24,8 +24,8 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={CiÃªncia de Dados para Todos (Data Science For All) - 2018.1 - AnÃ¡lise da ProduÃ§Ã£o CientÃ­fica e AcadÃªmica da Universidade de BrasÃ­lia - RelatÃ³rio Final da Disciplina - Departamento de CiÃªncia da ComputaÃ§Ã£o da UnB},
-            pdfauthor={Jorge H. C. Fernandes, Ricardo B. Sampaio, JoÃ£o Ribas de Moura e JerÃ´nimo A. Filho},
+            pdftitle={Ciência de Dados para Todos (Data Science For All) - 2018.1 - Análise da Produção Científica e Acadêmica da Universidade de Brasília - Relatório Final da Disciplina - Departamento de Ciência da Computação da UnB},
+            pdfauthor={Jorge H. C. Fernandes, Ricardo B. Sampaio, João Ribas de Moura e Jerônimo A. Filho},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -114,14 +114,13 @@
 }
 
 \setlength{\droptitle}{-2em}
-  \title{CiÃªncia de Dados para Todos (Data Science For All) - 2018.1 - AnÃ¡lise
-da ProduÃ§Ã£o CientÃ­fica e AcadÃªmica da Universidade de BrasÃ­lia -
-RelatÃ³rio Final da Disciplina - Departamento de CiÃªncia da
-ComputaÃ§Ã£o da UnB}
+  \title{Ciência de Dados para Todos (Data Science For All) - 2018.1 - Análise da
+Produção Científica e Acadêmica da Universidade de Brasília - Relatório
+Final da Disciplina - Departamento de Ciência da Computação da UnB}
   \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{Jorge H. C. Fernandes, Ricardo B. Sampaio, JoÃ£o Ribas de Moura e
-JerÃ´nimo A. Filho}
+  \author{Jorge H. C. Fernandes, Ricardo B. Sampaio, João Ribas de Moura e
+Jerônimo A. Filho}
   \preauthor{\centering\large\emph}
   \postauthor{\par}
   \predate{\centering\large\emph}
@@ -131,6 +130,29 @@ JerÃ´nimo A. Filho}
 
 \begin{document}
 \maketitle
+
+\begin{verbatim}
+## Warning: package 'readxl' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tidyr' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'reshape2' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'reshape2'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:tidyr':
+## 
+##     smiths
+\end{verbatim}
 
 \begin{verbatim}
 ## Warning: package 'tidyverse' was built under R version 3.4.4
@@ -145,10 +167,6 @@ JerÃ´nimo A. Filho}
 \end{verbatim}
 
 \begin{verbatim}
-## Warning: package 'tidyr' was built under R version 3.4.4
-\end{verbatim}
-
-\begin{verbatim}
 ## Warning: package 'readr' was built under R version 3.4.4
 \end{verbatim}
 
@@ -160,697 +178,586 @@ JerÃ´nimo A. Filho}
 ## Warning: package 'forcats' was built under R version 3.4.4
 \end{verbatim}
 
-\section{IntroduÃ§Ã£o}\label{introduaao}
+\section{Introdução}\label{introducao}
 
-Este relatÃ³rio tem como foco principal a contextualizaÃ§Ã£o das Ã¡reas
-de pesquisa relacionadas ao programa de PÃ³s-GraduaÃ§Ã£o em MatemÃ¡tica
-da UnB, dos anos 2010 Ã~ 2017. Para tal estÃ¡ sendo apresentado dados de
-produÃ§Ã£o cientÃ­fica dos docentes do programa, retirados do currÃ­culo
-Lattes dos professores e do repositÃ³rio \texttt{OASIS} do
-\texttt{IBICT} (Instituto Brasileiro de InformaÃ§Ã£o em CiÃªncia e
-Tecnologia).
-
-O programa de pesquisa utilizado neste relatÃ³rio Ã© o de MatemÃ¡tica
-(cÃ³digo: \texttt{53001010003P2}). O coordenador Ã© o Carlos Alberto
-Pereira dos Santos e as subÃ¡reas de concentraÃ§Ã£o sÃ£o:
-\textbf{Ãlgebra, AnÃ¡lise, Geometria e MatemÃ¡tica Aplicada}. Mais
-informaÃ§Ãµes do programa podem ser acessadas pelo site
-\href{https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/programa/viewPrograma.jsf?popup=true\&cd_programa=53001010003P2}{sucupira}.
-
-O programa de PÃ³s-GraduaÃ§Ã£o em MatemÃ¡tica da UnB, iniciado em 1962,
-oferece Mestrado e Doutorado em MatemÃ¡tica nas subÃ¡reas de Ãlgebra,
-AnÃ¡lise, Geometria e MatemÃ¡tica Aplicada (Probabilidade,
-FÃ­sica-MatemÃ¡tica e ComputaÃ§Ã£o). O corpo docente mantÃ©m um programa
-ativo de pesquisa, participa regular e ativamente de forma destacada em
-reuniÃµes cientÃ­ficas e em corpos editoriais de revistas cientÃ­ficas,
-alÃ©m de manter intercÃ¢mbio cientÃ­fico com diversas instituiÃ§Ãµes do
-paÃ­s e do exterior.
-
-HÃ¡ tambÃ©m um programa de mestrado profissional \texttt{PROFMAT}, que
-Ã© um programa de pÃ³s-graduaÃ§Ã£o stricto sensu em MatemÃ¡tica,
-reconhecido pelo MinistÃ©rio da EducaÃ§Ã£o e conduzindo ao tÃ­tulo de
-Mestre. Tem como objetivo proporcionar formaÃ§Ã£o matemÃ¡tica
-aprofundada relevante ao exercÃ­cio da docÃªncia no Ensino BÃ¡sico,
-visando dar ao egresso a qualificaÃ§Ã£o certificada para o exercÃ­cio da
-profissÃ£o de professor de MatemÃ¡tica.
-
-O \texttt{PROFMAT} Ã© um curso semipresencial ministrado por
-InstituiÃ§Ãµes de Ensino Superior associadas em uma Rede Nacional, no
-Ã¢mbito do \textbf{Sistema Universidade Aberta do Brasil} (UAB). Ã
-coordenado pela ComissÃ£o AcadÃªmica Nacional, que opera sob a Ã©gide da
-Diretoria da \textbf{Sociedade Brasileira de MatemÃ¡tica} (SBM).
-
-As InstituiÃ§Ãµes de Ensino Superior que integram a Rede Nacional do
-\texttt{PROFMAT} sÃ£o denominadas InstituiÃ§Ãµes Associadas e sÃ£o
-responsÃ¡veis, por intermÃ©dio das respectivas CoordenaÃ§Ãµes
-AcadÃªmicas Institucionais, por toda a gestÃ£o local do
-\texttt{PROFMAT}, descritas no Regimento. InformaÃ§Ãµes completas sobre
-este mestrado podem ser encontradas na pÃ¡gina do
-\href{http://www.profmat-sbm.org.br}{\texttt{PROFMAT}}. Na Universidade
-de BrasÃ­lia este curso Ã© ofertado no Ã¢mbito do Instituto de CiÃªncias
-Exatas, Departamento de MatemÃ¡tica.
-
-O Departamento de MatemÃ¡tica da UnB obteve nota 7 na Ãºltima
-avaliaÃ§Ã£o trienal da Capes. Essa avaliaÃ§Ã£o de excelÃªncia Ã© o
-resultado de um longo, Ã¡rduo e contÃ­nuo trabalho iniciado em 1962 por
-professores/colaboradores corajosos e idealistas que acreditaram em
-tornar o sonho do Departamento de MatemÃ¡tica da Universidade de
-BrasÃ­lia uma realidade. Desde entÃ£o, esse ideal vem sendo fortalecido
-com a chegada de novos professores/colaboradores que conduziram este
-programa ao reconhecimento da sua excelÃªncia.
-
-A metodologia para desenvolvimento do relatÃ³rio Ã© baseada no modelo de
-mineraÃ§Ã£o de dados denominado CRISP-DM (Chapman et al., 2000, Mariscal
-et al., 2010).
+O presente relatório tem por objetivo descrever e analisar 3 programas
+de pós-graduação da UNB, tendo como foco principal dois programas de
+Pós-Graduação em Matemática da UnB e o programa de Ensino em Ciências.
+Serão analisados o contexto dos programas de pós-graduação (PPG), para
+que sejam expostas de maneira organizada as informações levantadas pelos
+datasets disponibilizados pela plataforma do E-Lattes. Também serão
+propostas relações com outras bases de dados da UNB como a base do
+DGP(dados de grupos de pesquisa) e da base OASIS que contém informações
+sobre as produções nacionais. A metodologia de análise a ser seguida é
+uma aproximação ao CRISP-DM que visa unificar as formas de se realizar
+mineração de dados, para que os procedimentos possam ser reproduzidos e
+possuem algum nivel de confiabilizade com relação ao resultados obtidos.
 
 \ldots{}
 
 \section{Metodologia}\label{metodologia}
 
-\section{CRISP-DM (Corresponderia Ã~ seÃ§Ã£o de
-Metodologia)}\label{crisp-dm-corresponderia-a-seaao-de-metodologia}
+\subsection{Delimitações iniciais}\label{delimitacoes-iniciais}
 
-Para desenvolvimento do trabalho devem ser seguidos, da forma mais
-simplificada e coerente possÃ­vel, as fases e atividades genÃ©ricas do
-ciclo de vida de um projeto executado em aderÃªncia ao CRISP-DM. Em
-outras palavras, a produÃ§Ã£o do relatorio deve seguir a metodologia
-CRISP-DM.
+Em aderência à estrutura do CRISP-DM, algumas delimitações de contexto
+para o trabalho são apresentadas a seguir:
 
-``A widely used methodology for data mining is the CRoss-Industry
-Standard Process for Data Mining (CRISP-DM) which mas initiated in 1996
-(â¦) with the intent of providing a process that is \textbf{reliable
-and repeatable} by people with little data-mining background, with a
-framework within which experience can be recorded, to support the
-replication of projects, to support planning and management, as well as
-to demonstrate data mining as a mature discipline (â¦)'' {[}Sullivan,
-Rob. Introduction to Data Mining for the Life Sciences. Springer Science
-\& Business Media. 2012{]}
+\subsubsection{Domínio de Aplicação do
+projeto}\label{dominio-de-aplicacao-do-projeto}
 
-O seu trabalho deve conter uma seÃ§Ã£o metodologia, onde vocÃª faz uma
-breve descriÃ§Ã£o da metodologia que seu grupo adotou para realizaÃ§Ã£o
-do trabalho, que pode ser baseada no texto dessa seÃ§Ã£o, desde que
-citado adequadamente.
-
-\subsection{DelimitaÃ§Ãµes iniciais}\label{delimitaaaes-iniciais}
-
-Em aderÃªncia Ã~ estrutura do CRISP-DM, algumas delimitaÃ§Ãµes de
-contexto para o trabalho sÃ£o apresentadas a seguir:
-
-\subsubsection{DomÃ­nio de AplicaÃ§Ã£o do
-projeto}\label{domanio-de-aplicaaao-do-projeto}
-
-O domÃ­nio de aplicaÃ§Ã£o do projeto Ã© o da produÃ§Ã£o cientÃ­fica e
-acadÃªmica brasileira, mais especÃ­ficamente a produÃ§Ã£o cientÃ­fica ou
-produÃ§Ã£o acadÃªmica de um subgrupo de pesquisadores vinculados Ã~
-Universidade de BrasÃ­lia. O domÃ­nio de aplicaÃ§Ã£o do projeto deve ser
-declarado na introduÃ§Ã£o ao relatÃ³rio.
+O domínio de aplicação do projeto é o da produção científica e acadêmica
+brasileira, mais específicamente a produção científica ou produção
+acadêmica de um subgrupo de pesquisadores vinculados à Universidade de
+Brasília. O domínio de aplicação do projeto deve ser declarado na
+introdução ao relatório.
 
 \subsubsection{Tipo de Problema
 abordado}\label{tipo-de-problema-abordado}
 
-O tipo de problema abordado Ã© o da produÃ§Ã£o de anÃ¡lises descritivas,
-quantitativas e de modelagem computacional ou estatÃ­stica, que permitam
-caracterizar como e porque ocorre a produÃ§Ã£o cientÃ­fica e acadÃªmica
-de um grupo de pesquisadores. Essa caracterizaÃ§Ã£o visa subsidiar a
-tomada de decisÃ£o por membros do Sistema Nacional de PÃ³s-GraduaÃ§Ã£o.
-O tipo de problema abordado no projeto deve ser declarado na
-introduÃ§Ã£o ao relatÃ³rio.
+O tipo de problema abordado é o da produção de análises descritivas,
+quantitativas e de modelagem computacional ou estatística, que permitam
+caracterizar como e porque ocorre a produção científica e acadêmica de
+um grupo de pesquisadores. Essa caracterização visa subsidiar a tomada
+de decisão por membros do Sistema Nacional de Pós-Graduação. O tipo de
+problema abordado no projeto deve ser declarado na introdução ao
+relatório.
 
-\subsubsection{Conjunto de Ferramentas e
-TÃ©cnicas}\label{conjunto-de-ferramentas-e-tacnicas}
+\subsection{Modelo de Referência
+CRISP-DM}\label{modelo-de-referencia-crisp-dm}
 
-O conjunto de requisitos relativos a ferramentas e tÃ©cnicas a serem
-empregadas na execuÃ§Ã£o do trabalho Ã©:
-
-\begin{itemize}
-\tightlist
-\item
-  O relatÃ³rio deve ser entregue no formato R Markdown, apto Ã~
-  geraÃ§Ã£o de saÃ­da \LaTeX e PDF, composto por comandos em R
-  entremeados por descriÃ§Ãµes textuais que auxiliem na interpretaÃ§Ã£o
-  dos resultados, bem como na compreensÃ£o do domÃ­nio de conhecimento
-  sob anÃ¡lise.
-\item
-  As anÃ¡lises descritivas devem empregar de forma criativa as funÃ§Ãµes
-  das bibliotecas de ciÃªncia de dados em R propostas por Wickham e
-  Grolemund (2016).
-\item
-  As anÃ¡lises quantitativas devem lanÃ§ar mÃ£o de recursos grÃ¡ficos
-  variados, que complementarÃ£o anÃ¡lises descritivas com
-  \emph{insights} sobre de que forma os processos de produÃ§Ã£o
-  cientÃ­fica e acadÃªmica contribuem para os resultados apresentados.
-  Por exemplo, os dados analisados possibilitam justificar o eventual
-  crescimento ou decrÃ©scimo de Ã­ndices de produÃ§Ã£o observados?
-\item
-  A modelagem computacional ou estatÃ­stica avanÃ§ada dos dados deve
-  usar uma das quatro tÃ©cnicas prescritas:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Aprendizado de MÃ¡quina (Datacamp, 2018; Kuhn et al., 2018; Bruce e
-    Bruce, 2017);
-  \item
-    Aprendizado EstatÃ­stico;
-  \item
-    MineraÃ§Ã£o de Texto ou;
-  \item
-    AnÃ¡lise de Redes (Kolaczyk e CsÃ¡rdi, 2014; Lusher et al., 2013; de
-    Nooy et al., 2005).
-  \end{itemize}
-\end{itemize}
-
-O conjunto de requisitos relativos a ferramentas e tÃ©cnicas a serem
-empregadas na execuÃ§Ã£o do trabalhodo projeto deve ser declarado na
-parte de metodologia do relatÃ³rio.
-
-\subsection{Modelo de ReferÃªncia
-CRISP-DM}\label{modelo-de-referancia-crisp-dm}
-
-Miner (2012), aprofunda: â(â¦) In CRISP-DM, the complete life cycle
-of a data mining project is represented with \textbf{six phases}:
+Miner (2012), aprofunda: ``(\ldots{}) In CRISP-DM, the complete life
+cycle of a data mining project is represented with \textbf{six phases}:
 business understanding (determining the purpose of the study), data
 understanding (data exploration and understanding), data preparation,
-modeling, evaluation, and deployment.(â¦). {[}Miner, Gary. Practical
-Text Mining and Statistical Analysis for Non-structure Text Data
-Applications. Academic Press, 2012.{]}
+modeling, evaluation, and deployment.(\ldots{}). {[}Miner, Gary.
+Practical Text Mining and Statistical Analysis for Non-structure Text
+Data Applications. Academic Press, 2012.{]}
 
 \subsubsection{Por que usar o CRISP-DM?}\label{por-que-usar-o-crisp-dm}
 
-Imagine uma analogia entre um projeto de datamining e a preparaÃ§Ã£o de
-uma receita de bolo para ser usada em uma fÃ¡brica. Para iniciar a
-produÃ§Ã£o, com base numa receita de comprovada eficÃ¡cia (metodolÃ³gica
-e cientÃ­fica), vocÃª tem que minerar os ingredientes (dados) em um
-grande supermercado (\emph{dataset}). Com os ingredientes vocÃª precisa
-aplicar um mÃ©todo (a forma de misturÃ¡-los), colocar os ingredientes
-numa determinada ordem, mexer por um certo tempo, aquecer por tantos
-minutos atÃ© o bolo ficar pronto e ser aprovado em um ou mais testes de
-degustaÃ§Ã£o.
+Imagine uma analogia entre um projeto de datamining e a preparação de
+uma receita de bolo para ser usada em uma fábrica. Para iniciar a
+produção, com base numa receita de comprovada eficácia (metodológica e
+científica), você tem que minerar os ingredientes (dados) em um grande
+supermercado (\emph{dataset}). Com os ingredientes você precisa aplicar
+um método (a forma de misturá-los), colocar os ingredientes numa
+determinada ordem, mexer por um certo tempo, aquecer por tantos minutos
+até o bolo ficar pronto e ser aprovado em um ou mais testes de
+degustação.
 
-Tendo por objetivo fazer com que essa receita (script de mineraÃ§Ã£o de
-dados) possa ser executada com sucesso diversas vezes, numa fÃ¡brica,
-serÃ¡ que outro cozinheiro (cientista) que reproduzisse a receita
-(mÃ©todo) chegaria ao mesmo resultado? Se a metodologia (receita) jÃ¡
-foi bastante testada, entÃ£o Ã© bem provÃ¡vel que o resultado serÃ¡ o
-mesmo e seu produto (receita de bolo) serÃ¡ aceito para a produÃ§Ã£o
-(\emph{deployment}) de anÃ¡lises para consumo futuro, com base em
-fundamentos cientÃ­ficos.
+Tendo por objetivo fazer com que essa receita (script de mineração de
+dados) possa ser executada com sucesso diversas vezes, numa fábrica,
+será que outro cozinheiro (cientista) que reproduzisse a receita
+(método) chegaria ao mesmo resultado? Se a metodologia (receita) já foi
+bastante testada, então é bem provável que o resultado será o mesmo e
+seu produto (receita de bolo) será aceito para a produção
+(\emph{deployment}) de análises para consumo futuro, com base em
+fundamentos científicos.
 
-\subsubsection{OrganizaÃ§Ã£o hierÃ¡rquica de atividades em
-fases}\label{organizaaao-hierarquica-de-atividades-em-fases}
+\subsubsection{Organização hierárquica de atividades em
+fases}\label{organizacao-hierarquica-de-atividades-em-fases}
 
-Dentro de cada fase no CRISP-DM existe uma estrutura hierÃ¡rquica de
-atividades genÃ©ricas para serem realizadas. Cada uma dessas atividades
-\textbf{genÃ©ricas} pode determinar a execuÃ§Ã£o de atividades
-\textbf{especÃ­ficas}.
+Dentro de cada fase no CRISP-DM existe uma estrutura hierárquica de
+atividades genéricas para serem realizadas. Cada uma dessas atividades
+\textbf{genéricas} pode determinar a execução de atividades
+\textbf{específicas}.
 
-Voltando ao exemplo do bolo, a atividade â 1. Entendimento do Boloâ
-poderia conter uma atividade genÃ©rica chamada â1.1. Determinar para
-que o bolo servirÃ¡ (simples cafÃ© da manhÃ£? bolo de aniversÃ¡rio? bolo
-de casamento?)â. Dentro dessa atividade genÃ©rica poderia haver
-atividades especÃ­ficas como â1.1.1.Entrevistar o contratante para
-obter detalhes de onde o bolo serÃ¡ usado?â; â1.1.2. Conversar com
-os convidados sob alguma necessidade especial (sem lactose? sem
-glÃºtem?)â, etc.
+Voltando ao exemplo do bolo, a atividade '' 1. Entendimento do Bolo''
+poderia conter uma atividade genérica chamada ``1.1. Determinar para que
+o bolo servirá (simples café da manhã? bolo de aniversário? bolo de
+casamento?)``. Dentro dessa atividade genérica poderia haver atividades
+específicas como ``1.1.1.Entrevistar o contratante para obter detalhes
+de onde o bolo será usado?``; ``1.1.2. Conversar com os convidados sob
+alguma necessidade especial (sem lactose? sem glútem?)``, etc.
 
 \subsubsection{Seis Fases do CRISP-DM}\label{seis-fases-do-crisp-dm}
 
-Com base no apresentado, segue uma descriÃ§Ã£o um pouco mais detalhada
-das seis fases de um projeto no CRISP-DM, interpretadas no contexto
-deste relatÃ³rio.
+Com base no apresentado, segue uma descrição um pouco mais detalhada das
+seis fases de um projeto no CRISP-DM, interpretadas no contexto deste
+relatório.
 
-\paragraph{\texorpdfstring{\textbf{Entendimento do
-NegÃ³cio}}{Entendimento do NegÃ³cio}}\label{entendimento-do-negacio}
+\paragraph{Entendimento do Negócio}\label{entendimento-do-negocio}
 
-Ã o desenvolvimento dos objetivos e declaraÃ§Ã£o das necessidades do
-projeto sob a perspectiva do negÃ³cio, para transformar isso tudo em
-definiÃ§Ã£o de um problema de data mining. No caso desse relatÃ³rio irÃ¡
-se buscar encontrar dados referentes aos perfis, publicaÃ§Ãµes e
-orientaÃ§Ãµes dos discentes dos programas de pÃ³s-graduaÃ§Ã£o em
-matemÃ¡tica, \ldots{}, . Deve-se tambÃ©m definir um grupo de objetivos,
-um plano para a realizaÃ§Ã£o do projeto e um critÃ©rio de sucesso. Como
-objetivo para a parte de datamining desse relatÃ³rio tem-se conseguir
-dados referentes Ã~s seguintes Ã¡reas:
+É o desenvolvimento dos objetivos e declaração das necessidades do
+projeto sob a perspectiva do negócio, para transformar isso tudo em
+definição de um problema de data mining. No caso desse relatório irá se
+buscar encontrar dados referentes aos perfis, publicações e orientações
+dos discentes dos programas de pós-graduação em matemática, . . . , .
+Deve-se também definir um grupo de objetivos, um plano para a realização
+do projeto e um critério de sucesso. Como objetivo para a parte de
+datamining desse relatório tem-se conseguir dados referentes às
+seguintes áreas:
 
 \begin{itemize}
 \tightlist
 \item
-  Ãreas com resultados mais relevantes / expressivos;\\
+  Áreas com resultados mais relevantes / expressivos;
 \item
-  NÃ­vel de InternacionalizaÃ§Ã£o;
+  Nível de Internacionalização;
 \item
-  Principais congressos e eventos da Ã¡rea no Brasil e no mundo;
+  Principais congressos e eventos da área no Brasil e no mundo;
 \item
-  Principais revistas e local de publicaÃ§Ã£o de trabalhos no Brasil e
-  no mundo;
+  Principais revistas e local de publicação de trabalhos no Brasil e no
+  mundo;
 \item
   Quantitativo de pessoas e programas dentro do universo;
-\item
-  Quantitativo de orientandos atuais e que jÃ¡ finalizaram;
 \item
   Grupos de pesquisa associados ou que os professores / pesquisadores
   fazem parte.
 \end{itemize}
 
-Quanto ao plano para realizaÃ§Ã£o do projeto, serÃ¡ realizada as
-seguintes etapas:
+Quanto ao plano para realização do projeto, será realizada as seguintes
+etapas: * Tratamento dos dados para transformá-lo em um dataset; *
+Análise dos dados para a criação de resultados relevantes; * Análise dos
+resultados para encontrar os dados citados nos objetivos.
+
+\paragraph{Entendimento dos Dados}\label{entendimento-dos-dados}
+
+O segundo estágio do CRISP-DM requer que se tenha acesso ao dado listado
+nos recursos do projeto. Essa fase requer a realização da descrição,
+exploração, verificação da qualidade e relatório da qualidade dos dados.
+
+Os dados analisados nesse relatório foram pegos a partir do arquivo
+Matematica.profile.json que representa o dataset do programa de pós
+graduação em Matemática (código: 53001010003P2) e conta com uma lista de
+docentes e seus dados pessoais. Essa descrição e exploração foi feita
+utilizando do comando View no rstudio. A qualidade dos dados se encontra
+bastante satisfatória, com alguns problemas na padronização de alguns
+dados como o endereço que em alguns casos apresenta diferentes nomes
+para um mesmo curso como ``Matematica'' e ``Matemática''.
+
+\paragraph{Preparação dos Dados}\label{preparacao-dos-dados}
+
+Aqui os dados são ``filtrados'' retirando-se partes que não interessam e
+selecionando-se os ``campos'' necessários para o trabalho de mineração.
+São 5 as atividades genéricas nesta fase de preparação dos dados:
 
 \begin{itemize}
 \tightlist
 \item
-  Tratamento dos dados para transformÃ¡-lo em um dataset;
-\item
-  AnÃ¡lise dos dados para a criaÃ§Ã£o de resultados relevantes;
-\item
-  AnÃ¡lise dos resultados para encontrar os dados citados nos objetivos.
-\end{itemize}
-
-\paragraph{\texorpdfstring{\textbf{Entendimento dos
-Dados}}{Entendimento dos Dados}}\label{entendimento-dos-dados}
-
-O segundo estÃ¡gio do CRISP-DM requer que se tenha acesso ao dado
-listado nos recursos do projeto. Essa fase requer a realizaÃ§Ã£o da
-descriÃ§Ã£o, exploraÃ§Ã£o, verificaÃ§Ã£o da qualidade e relatÃ³rio da
-qualidade dos dados.
-
-Os dados analisados nesse relatÃ³rio foram pegos a partir do arquivo
-Matematica.profile.json que representa o dataset do programa de pÃ³s
-graduaÃ§Ã£o em MatemÃ¡tica (cÃ³digo: \texttt{53001010003P2}) e conta com
-uma lista de docentes e seus dados pessoais. Essa descriÃ§Ã£o e
-exploraÃ§Ã£o foi feita utilizando do comando \textbf{View} no rstudio. A
-qualidade dos dados se encontra bastante satisfatÃ³ria, com alguns
-problemas na padronizaÃ§Ã£o de alguns dados como o endereÃ§o que em
-alguns casos apresenta diferentes nomes para um mesmo curso como
-``Matematica'' e ``MatemÃ¡tica''.
-
-\paragraph{\texorpdfstring{\textbf{PreparaÃ§Ã£o dos
-Dados}}{PreparaÃ§Ã£o dos Dados}}\label{preparaaao-dos-dados}
-
-Aqui os dados sÃ£o âfiltradosâ retirando-se partes que nÃ£o
-interessam e selecionando-se os âcampos" necessÃ¡rios para o trabalho
-de mineraÃ§Ã£o.
-
-SÃ£o 5 as atividades genÃ©ricas nesta fase de preparaÃ§Ã£o dos dados:
-
-\begin{itemize}
-\item
-  SeleÃ§Ã£o dos dados. Envolve identificar quais dados, da nossa
-  ``montanha de dados'', serÃ£o realmente utilizados. Quais variÃ¡veis
-  dos dados brutos serÃ£o convertidas para o \emph{dataset}? NÃ£o Ã©
-  raro cometer o erro de selecionar dados para um modelo preditivo com
-  base em uma falsa ideia de que aqueles dados contÃ©m a resposta para o
-  modelo que se quer construir. Surge o cuidado de se separar o sinal do
-  ruÃ­do (Silver, Nate. The Signal and the Noise: Why so many
-  predictions fail â but some donât. USA: The Penguin Press HC,
-  2012.).
+  Seleção dos dados. Envolve identificar quais dados, da nossa
+  ``montanha de dados'', serão realmente utilizados. Quais variáveis dos
+  dados brutos serão convertidas para o dataset? Não é raro cometer o
+  erro de selecionar dados para um modelo preditivo com base em uma
+  falsa ideia de que aqueles dados contém a resposta para o modelo que
+  se quer construir. Surge o cuidado de se separar o sinal do ruído
+  (Silver, Nate. The Signal and the Noise: Why so many predictions fail
+  --- but some don't. USA: The Penguin Press HC, 2012.).
 \item
   Limpeza dos dados.
 \item
-  ConstruÃ§Ã£o dos dados. Envolve a criaÃ§Ã£o de novas variÃ¡veis a
-  partir de outras presentes nos \emph{datasets}.
+  Construção dos dados. Envolve a criação de novas variáveis a partir de
+  outras presentes nos \texttt{datasets.}
 \item
-  IntegraÃ§Ã£o dos dados. Envolve a uniÃ£o (merge) de diferentes tabelas
-  para criar um Ãºnico \emph{dataset} para ser utilizado no R, por
+  Integração dos dados. Envolve a união (merge) de diferentes tabelas
+  para criar um único \texttt{dataset} para ser utilizado no R, por
   exemplo.
 \item
-  FormataÃ§Ã£o dos dados. Envolve a realizaÃ§Ã£o de pequenas
-  alteraÃ§Ãµes na estrutura dos dados, como a ordem das variÃ¡veis, para
-  permitir a execuÃ§Ã£o de determinado mÃ©todo de data mining.
+  Formatação dos dados. Envolve a realização de pequenas alterações na
+  estrutura dos dados, como a ordem das variáveis, para permitir a
+  execução de determinado método de data mining.
 \end{itemize}
 
-\paragraph{\texorpdfstring{\textbf{Modelagem}}{Modelagem}}\label{modelagem}
+\paragraph{Modelagem}\label{modelagem}
 
-No CRISP-DM este estÃ¡gio envolve a construÃ§Ã£o e avaliaÃ§Ã£o do
-modelo, podendo ser realizada em quatro atividades genÃ©ricas:
+No CRISP-DM este estágio envolve a construção e avaliação do modelo,
+podendo ser realizada em quatro atividades genéricas: * Seleção das
+técnicas de modelagem; * Realização de testes de modelagem, onde
+diferentes modelos são previamente testados e avaliados. Pode-se dividir
+o dataset criado na etapa anterior para se ter uma base de treino na
+construção de modelos, e outra pequena parte para validar e avaliar a
+eficiência de cada modelo criado até se chegar ao mais ``eficiente''. *
+Construção do modelo definitivo, com base na melhor experiência do passo
+anterior. * Avaliação do modelo.
 
-\begin{itemize}
-\item
-  SeleÃ§Ã£o das tÃ©cnicas de modelagem.
-\item
-  RealizaÃ§Ã£o de testes de modelagem, onde diferentes modelos sÃ£o
-  previamente testados e avaliados. Pode-se dividir o \emph{dataset}
-  criado na etapa anterior para se ter uma base de treino na
-  construÃ§Ã£o de modelos, e outra pequena parte para validar e avaliar
-  a eficiÃªncia de cada modelo criado atÃ© se chegar ao mais
-  âeficienteâ.
-\item
-  ConstruÃ§Ã£o do modelo definitivo, com base na melhor experiÃªncia do
-  passo anterior.
-\item
-  AvaliaÃ§Ã£o do modelo.
-\end{itemize}
+\paragraph{Avaliação}\label{avaliacao}
 
-\paragraph{\texorpdfstring{\textbf{AvaliaÃ§Ã£o}}{AvaliaÃ§Ã£o}}\label{avaliaaao}
+Aqui os resultados não são apenas avaliados, mas se verifica se existem
+questões relacionadas à organização que não foram suficientemente
+abordadas. Deve-se refletir se o uso arepetido do modelo criado pode
+trazer algum ``efeito colateral'' para a organização.
 
-Aqui os resultados nÃ£o sÃ£o apenas avaliados, mas se verifica se
-existem questÃµes relacionadas Ã~ organizaÃ§Ã£o que nÃ£o foram
-suficientemente abordadas. Deve-se refletir se o uso arepetido do modelo
-criado pode trazer algum âefeito colateralâ para a organizaÃ§Ã£o.
+Nesta fase, pode-se trabalhar com 3 atividades genéricas: * Avaliação
+dos resultados; * Revisão do processo, por meio da qual verifica-se se o
+modelo foi construído adequadamente. As variáveis (passadas) para
+construir o modelo estarão disponíveis no futuro? * Determinação dos
+etapas seguintes. Pode ser necessário decidir-se por finalizar o
+projeto, passar à etapa de desenvolvimento, ou rever algumas fases
+anteriores para a melhoria do projeto.
 
-Nesta fase, pode-se trabalhar com 3 atividades genÃ©ricas:
+\paragraph{\texorpdfstring{Implantação
+(\texttt{deployment})}{Implantação (deployment)}}\label{implantacao-deployment}
 
-\begin{itemize}
-\item
-  AvaliaÃ§Ã£o dos resultados
-\item
-  RevisÃ£o do processo, por meio da qual verifica-se se o modelo foi
-  construÃ­do adequadamente. As variÃ¡veis (passadas) para construir o
-  modelo estarÃ£o disponÃ­veis no futuro?
-\item
-  DeterminaÃ§Ã£o dos etapas seguintes. Pode ser necessÃ¡rio decidir-se
-  por finalizar o projeto, passar Ã~ etapa de desenvolvimento, ou rever
-  algumas fases anteriores para a melhoria do projeto.
-\end{itemize}
-
-\paragraph{\texorpdfstring{\textbf{ImplantaÃ§Ã£o}
-(\emph{deployment})}{ImplantaÃ§Ã£o (deployment)}}\label{implantaaao-deployment}
-
-Foi realizado o planejamento de implantaÃ§Ã£o dos produtos desenvolvidos
+Foi realizado o planejamento de implantação dos produtos desenvolvidos
 (scripts, no caso do executado nesta disciplina) para o ambiente
 operacional, para seu uso repetitivo, envolvendo atividades de
-monitoramento e manutenÃ§Ã£o do sistema (script) desenvolvido. A fase de
-implantaÃ§Ã£o concluir com a produÃ§Ã£o e apresentaÃ§Ã£o do relatÃ³rio
-final com os resultados do projeto.
+monitoramento e manutenção do sistema (script) desenvolvido. A fase de
+implantação concluir com a produção e apresentação do relatório final
+com os resultados do projeto.
 
-SÃ£o atividades genÃ©ricas na fase de \textbf{implantaÃ§Ã£o}:
+São atividades genéricas na fase de \textbf{implantação}: * Planejamento
+da transição dos produtos; * Planejamento do monitoramento dos produtos
+em utilização no ambiente operacional; * Planejamento de manuteção a ser
+eventualmente efetuada no produto (scripts); * Produção do relatório
+final; * Apresentação do relatório final; * Revisão sobre a execução do
+projeto, com registro de lições aprendidas.
 
-\begin{itemize}
-\tightlist
-\item
-  Planejamento da transiÃ§Ã£o dos produtos;
-\item
-  Planejamento do monitoramento dos produtos em utilizaÃ§Ã£o no ambiente
-  operacional;
-\item
-  Planejamento de manuteÃ§Ã£o a ser eventualmente efetuada no produto
-  (scripts);
-\item
-  ProduÃ§Ã£o do relatÃ³rio final;
-\item
-  ApresentaÃ§Ã£o do relatÃ³rio final;
-\item
-  RevisÃ£o sobre a execuÃ§Ã£o do projeto, com registro de liÃ§Ãµes
-  aprendidas etc.
-\end{itemize}
-
-No contexto do projeto realizado no Ã¢mbito desta disciplina, a
-responsabilidade por execuÃ§Ã£o de todas essas atividades Ã© dos alunos,
-com exceÃ§Ã£o da apresentaÃ§Ã£o do relatÃ³rio final, que nÃ£o serÃ¡
-realizada.
+No contexto do projeto realizado no âmbito desta disciplina, a
+responsabilidade por execução de todas essas atividades é dos alunos,
+com exceção da apresentação do relatório final, que não será realizada.
 
 \section{CRISP-DM Fase 1 - Entendimento do
-NegÃ³cio}\label{crisp-dm-fase-1---entendimento-do-negacio}
+Negócio}\label{crisp-dm-fase-1---entendimento-do-negocio}
 
-\subsection{O que Ã© o Sistema Nacional de PÃ³s-GraduaÃ§Ã£o?
-(ContextualizaÃ§Ã£o)}\label{o-que-a-o-sistema-nacional-de-pas-graduaaao-contextualizaaao}
+\subsection{O que é o Sistema Nacional de Pós-Graduação?
+(Contextualização)}\label{o-que-e-o-sistema-nacional-de-pos-graduacao-contextualizacao}
 
-A produÃ§Ã£o do conhecimento cientÃ­fico, no Brasil, Ã©
-predominantemente efetuada por meio do Sistema Nacional de
-PÃ³s-GraduaÃ§Ã£o - SNPG, e mais fortemente relacionada com a formaÃ§Ã£o
-de doutores nesse sistema (PÃ¡taro e Mezzomo, 2013), por meio de cursos
-de pÃ³s-graduaÃ§Ã£o \emph{strictu sensu}.
+A produção do conhecimento científico, no Brasil, é predominantemente
+efetuada por meio do Sistema Nacional de Pós-Graduação - SNPG, e mais
+fortemente relacionada com a formação de doutores nesse sistema (Pátaro
+e Mezzomo, 2013), por meio de cursos de pós-graduação \emph{strictu
+sensu}.
 
-Fernandes e Sampaio (2017) jÃ¡ indicaram que a ciÃªncia Ã©
-reconhecidamente um elemento essencial para o desenvolvimento social e
-econÃ´mico de qualquer naÃ§Ã£o. Assim sendo, faz-se mister aprimorar o
-SNPG como forma de promoÃ§Ã£o desse crescimento, visando maximizar o
-retorno decorrente do emprego dos recursos nele aplicados. A promoÃ§Ã£o
-do crescimento do SNPG se dÃ¡ predominantemente por meio de avaliaÃ§Ãµes
-regulares de seus programas de pÃ³s-graduaÃ§Ã£o, sob responsabilidade da
-CAPES, que realiza a cada quatro anos um complexo (Leite, 2018, p.~13) e
-custoso processo de coleta de dados, anÃ¡lise e deliberaÃ§Ã£o sobre as
-pÃ³s-graduaÃ§Ãµes \emph{strictu sensu}, em coerÃªncia com o estabelecido
-no Plano Nacional de PÃ³s-GraduaÃ§Ã£o (PNPG) 2012-2020 (CAPES, 2010) e
-nos diversos documentos que definem os critÃ©rios de organizaÃ§Ã£o da
-pÃ³s-graduaÃ§Ã£o em cada Ã¡rea do conhecimento (CAPES, 2018). Leite
-(2018) faz uma apresentaÃ§Ã£o geral de como se organizam e sÃ£o
-avaliadas as pÃ³s-graduaÃ§Ãµes no Brasil.
+Fernandes e Sampaio (2017) já indicaram que a ciência é reconhecidamente
+um elemento essencial para o desenvolvimento social e econômico de
+qualquer nação. Assim sendo, faz-se mister aprimorar o SNPG como forma
+de promoção desse crescimento, visando maximizar o retorno decorrente do
+emprego dos recursos nele aplicados. A promoção do crescimento do SNPG
+se dá predominantemente por meio de avaliações regulares de seus
+programas de pós-graduação, sob responsabilidade da CAPES, que realiza a
+cada quatro anos um complexo (Leite, 2018, p.~13) e custoso processo de
+coleta de dados, análise e deliberação sobre as pós-graduações
+\emph{strictu sensu}, em coerência com o estabelecido no Plano Nacional
+de Pós-Graduação (PNPG) 2012-2020 (CAPES, 2010) e nos diversos
+documentos que definem os critérios de organização da pós-graduação em
+cada área do conhecimento (CAPES, 2018). Leite (2018) faz uma
+apresentação geral de como se organizam e são avaliadas as
+pós-graduações no Brasil.
 
-O Plano Nacional de PÃ³s-GraduaÃ§Ã£o (PNPG), por outro lado, define
-diretrizes estratÃ©gicas para desenvolvimento da pÃ³s-graduaÃ§Ã£o
+O Plano Nacional de Pós-Graduação (PNPG), por outro lado, define
+diretrizes estratégicas para desenvolvimento da pós-graduação
 brasileira, que deve abordar prioritariamente grandes temas de interesse
-nacional, tais como a reduÃ§Ã£o das assimetrias de desenvolvimento entre
-as regiÃµes do Brasil, a formaÃ§Ã£o de professores para a educaÃ§Ã£o
-bÃ¡sica, a formaÃ§Ã£o de recursos humanos para as empresas, a resposta
-aos grandes desafios brasileiros sobre Ãgua, Energia, Transporte,
-Controle de Fronteiras, AgronegÃ³cio, AmazÃ´nia, AmazÃ´nia Azul (Mar),
-SaÃºde, Defesa, Programa Espacial, alÃ©m de JustiÃ§a, SeguranÃ§a
-PÃºblica, Criminologia e DesequilÃ­brio Regional. O PNPG tambÃ©m traÃ§a
-as diretrizes para financiamento da pÃ³s-graduaÃ§Ã£o e sua
-internacionalizaÃ§Ã£o, apresentando conclusÃµes e recomendaÃ§Ãµes.
+nacional, tais como a redução das assimetrias de desenvolvimento entre
+as regiões do Brasil, a formação de professores para a educação básica,
+a formação de recursos humanos para as empresas, a resposta aos grandes
+desafios brasileiros sobre Água, Energia, Transporte, Controle de
+Fronteiras, Agronegócio, Amazônia, Amazônia Azul (Mar), Saúde, Defesa,
+Programa Espacial, além de Justiça, Segurança Pública, Criminologia e
+Desequilíbrio Regional. O PNPG também traça as diretrizes para
+financiamento da pós-graduação e sua internacionalização, apresentando
+conclusões e recomendações.
 
-As avaliaÃ§Ãµes do SNPG, ao atribuirem mensuraÃ§Ãµes de desempenho Ã~s
-diversas pÃ³s-graduaÃ§Ãµes que dele fazem parte, geram incentivos e
+As avaliações do SNPG, ao atribuirem mensurações de desempenho às
+diversas pós-graduações que dele fazem parte, geram incentivos e
 penalidades aos programas, tendo em vista a limitada disponibilidade de
 recursos para investimento em bolsas, taxas de bancada etc. Embora o
-sistema seja altamente sofisticado ele Ã© tambÃ©m altamente criticado
-(Azevedo et al., 2016), sobretudo porque hÃ¡ percalÃ§os na busca por um
-equilÃ­brio entre as diferentes concepÃ§Ãµes de finalidade da ciÃªncia.
-Se de um lado a promoÃ§Ã£o do conhecimento gerado predominantemente nas
-ditas ciÃªncias \emph{hard} constribui para criar fluxos econÃ´micos
-mais intensos, isso nÃ£o significa que essa promoÃ§Ã£o possa ocorrer em
-detrimento da menor promoÃ§Ã£o na geraÃ§Ã£o de conhecimento sobre
-problemas sociais, predominantemente gerado nas ditas ciÃªncias
-\emph{soft}, especialmente das Ã¡reas de humanidades, sob pena de
-ampliaÃ§Ã£o de desigualdades (Azevedo et al., 2016).
+sistema seja altamente sofisticado ele é também altamente criticado
+(Azevedo et al., 2016), sobretudo porque há percalços na busca por um
+equilíbrio entre as diferentes concepções de finalidade da ciência. Se
+de um lado a promoção do conhecimento gerado predominantemente nas ditas
+ciências \emph{hard} constribui para criar fluxos econômicos mais
+intensos, isso não significa que essa promoção possa ocorrer em
+detrimento da menor promoção na geração de conhecimento sobre problemas
+sociais, predominantemente gerado nas ditas ciências \emph{soft},
+especialmente das áreas de humanidades, sob pena de ampliação de
+desigualdades (Azevedo et al., 2016).
 
-NÃ£o hÃ¡ soluÃ§Ã£o simples, mas postula-se, nesta disciplina, que uma
-maior agilidade na avaliaÃ§Ã£o e a utilizaÃ§Ã£o de critÃ©rios mais
-objetivos, poderÃ¡ facilitar a melhoria do sistema.
+Não há solução simples, mas postula-se, nesta disciplina, que uma maior
+agilidade na avaliação e a utilização de critérios mais objetivos,
+poderá facilitar a melhoria do sistema.
 
-\subsubsection{Os ColÃ©gios, Grandes Ãreas e Ãreas da PÃ³s-GraduaÃ§Ã£o
-Brasileira}\label{os-colagios-grandes-areas-e-areas-da-pas-graduaaao-brasileira}
+\subsubsection{Os Colégios, Grandes Áreas e Áreas da Pós-Graduação
+Brasileira}\label{os-colegios-grandes-areas-e-areas-da-pos-graduacao-brasileira}
 
-A partir de 2018, as diversas Ã¡reas da pÃ³s-graduaÃ§Ã£o brasileira
-foram organizadas na forma de colÃ©gios, grandes Ã¡reas e Ã¡reas,
-conforme apresentam as tabelas a seguir.
+A partir de 2018, as diversas áreas da pós-graduação brasileira foram
+organizadas na forma de colégios, grandes áreas e áreas, conforme
+apresentam as tabelas a seguir.
 
-\paragraph{ColÃ©gio de CiÃªncias da
-vida}\label{colagio-de-ciancias-da-vida}
+\paragraph{Colégio de Ciências da
+vida}\label{colegio-de-ciencias-da-vida}
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
-CIÃNCIAS AGRÃRIAS & CIÃNCIAS BIOLÃ``GICAS & CIÃNCIAS DA
-SAÃDE\tabularnewline
+CIÊNCIAS AGRÁRIAS & CIÊNCIAS BIOLÓGICAS & CIÊNCIAS DA
+SAÚDE\tabularnewline
 \midrule
 \endhead
-CiÃªncia de Alimentos & Biodiversidade & EducaÃ§Ã£o
-FÃ­sica\tabularnewline
-CiÃªncias AgrÃ¡rias I & CiÃªncias BiolÃ³gicas I &
-Enfermagem\tabularnewline
-Medicina VeterinÃ¡ria & CiÃªncias BiolÃ³gicas II &
-FarmÃ¡cia\tabularnewline
-Zootecnia / Recursos Pesqueiros & CiÃªncias BiolÃ³gicas III & Medicina
+Ciência de Alimentos & Biodiversidade & Educação Física\tabularnewline
+Ciências Agrárias I & Ciências Biológicas I & Enfermagem\tabularnewline
+Medicina Veterinária & Ciências Biológicas II & Farmácia\tabularnewline
+Zootecnia / Recursos Pesqueiros & Ciências Biológicas III & Medicina
 I\tabularnewline
 - & - & Medicina II\tabularnewline
 - & - & Medicina III\tabularnewline
-- & - & NutriÃ§Ã£o\tabularnewline
+- & - & Nutrição\tabularnewline
 - & - & Odontologia\tabularnewline
-- & - & SaÃºde Coletiva\tabularnewline
+- & - & Saúde Coletiva\tabularnewline
 \bottomrule
 \end{longtable}
 
-\paragraph{ColÃ©gio de CiÃªncias Exatas, TecnolÃ³gicas e
-Multidisciplinar}\label{colagio-de-ciancias-exatas-tecnolagicas-e-multidisciplinar}
+\paragraph{Colégio de Ciências Exatas, Tecnológicas e
+Multidisciplinar}\label{colegio-de-ciencias-exatas-tecnologicas-e-multidisciplinar}
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
-CIÃNCIAS EXATAS E DA TERRA & ENGENHARIAS &
+CIÊNCIAS EXATAS E DA TERRA & ENGENHARIAS &
 MULTIDISCIPLINAR\tabularnewline
 \midrule
 \endhead
-Astronomia / FÃ­sica & Engenharias I & Biotecnologia\tabularnewline
-CiÃªncia da ComputaÃ§Ã£o & Engenharias II & CiÃªncias
+Astronomia / Física & Engenharias I & Biotecnologia\tabularnewline
+Ciência da Computação & Engenharias II & Ciências
 Ambientais\tabularnewline
-GeociÃªncias & Engenharias III & Ensino\tabularnewline
-MatemÃ¡tica / Probabilidade e EstatÃ­stica & Engenharias IV &
+Geociências & Engenharias III & Ensino\tabularnewline
+Matemática / Probabilidade e Estatística & Engenharias IV &
 Interdisciplinar\tabularnewline
-QuÃ­mica & - & Materiais\tabularnewline
+Química & - & Materiais\tabularnewline
 \bottomrule
 \end{longtable}
 
-\paragraph{ColÃ©gio de Humanidades}\label{colagio-de-humanidades}
+\paragraph{Colégio de Humanidades}\label{colegio-de-humanidades}
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
-\begin{minipage}[b]{0.03\columnwidth}\raggedright\strut
-CIÃNCIAS HUMANAS\strut
-\end{minipage} & \begin{minipage}[b]{0.03\columnwidth}\raggedright\strut
-CIÃNCIAS SOCIAIS APLICADAS\strut
-\end{minipage} & \begin{minipage}[b]{0.03\columnwidth}\raggedright\strut
-LINGUÃSTICA, LETRAS E ARTES\strut
-\end{minipage}\tabularnewline
+CIÊNCIAS HUMANAS & CIÊNCIAS SOCIAIS APLICADAS & LINGUÍSTICA, LETRAS E
+ARTES\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Antropol/Arqueol\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Admin.PÃºb./Empr.,C.ContÃ¡b. e Tur.\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Artes\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-CiÃªncia Pol. e Rel. Int.\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Arquit., Urban. e Design\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-LinguÃ­stica e Literatura\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-CiÃªncias da ReligiÃ£o e Teol.\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-ComunicaÃ§Ã£o e InformaÃ§Ã£o\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
--\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-EducaÃ§Ã£o\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Direito\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
--\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Filosofia\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Economia\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
--\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Geografia\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Planej. Urbano e Reg. / Demografia\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
--\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-HistÃ³ria\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-ServiÃ§o Social\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
--\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Psicologia\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
--\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
--\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Sociologia\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
--\strut
-\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
--\strut
-\end{minipage}\tabularnewline
+Antropol/Arqueol & Admin.Púb./Empr.,C.Contáb. e Tur. &
+Artes\tabularnewline
+Ciência Pol. e Rel. Int. & Arquit., Urban. e Design & Linguística e
+Literatura\tabularnewline
+Ciências da Religião e Teol. & Comunicação e Informação &
+-\tabularnewline
+Educação & Direito & -\tabularnewline
+Filosofia & Economia & -\tabularnewline
+Geografia & Planej. Urbano e Reg. / Demografia & -\tabularnewline
+História & Serviço Social & -\tabularnewline
+Psicologia & - & -\tabularnewline
+Sociologia & - & -\tabularnewline
 \bottomrule
 \end{longtable}
 
-Cada um desses colÃ©gios, grandes Ã¡reas e Ã¡reas de conhecimento
-possuem dinÃ¢micas prÃ³prias, e, portanto, nÃ£o hÃ¡ um modelo universal
-que se aplique a todas. Existem aspectos comuns, mas tambÃ©m grandes
+Cada um desses colégios, grandes áreas e áreas de conhecimento possuem
+dinâmicas próprias, e, portanto, não há um modelo universal que se
+aplique a todas. Existem aspectos comuns, mas também grandes
 peculiaridades, descritas parcialmente nos correspondentes documentos de
-Ã¡rea disponÃ­veis em CAPES (2018).
+área disponíveis em CAPES (2018).
 
-\subsection{A UnB dentro do Sistema Nacional de PÃ³s-GraduaÃ§Ã£o
-(ContextualizaÃ§Ã£o)}\label{a-unb-dentro-do-sistema-nacional-de-pas-graduaaao-contextualizaaao}
+\subsection{A UnB dentro do Sistema Nacional de Pós-Graduação
+(Contextualização)}\label{a-unb-dentro-do-sistema-nacional-de-pos-graduacao-contextualizacao}
 
-\subsubsection{O que Ã© a UnB?}\label{o-que-a-a-unb}
+\subsubsection{O que é a UnB?}\label{o-que-e-a-unb}
 
-DescriÃ§Ã£o da Universidade de BrasÃ­lia, com foco na sua produÃ§Ã£o
-cientÃ­fica e acadÃªmica.
+A Universidade de Brasília é uma instituição de ensino superior composta
+por cinco campus em Brasília e cidades satélites que oferecem formação
+da graduação à pós-graduação. Do ponto de vista de sua produção
+científica a UnB ocupa atualmente a posição número 737 no ranking
+mundial de melhores universidades do mundo de acordo com o Center for
+World University Rankings (CWUR), que leva em consideração
+principalmente premiações, artigos, número de citações, pesquisas e
+publicações.
 
-\subsubsection{DescriÃ§Ã£o das pÃ³s-graduaÃ§Ãµes da
-UnB}\label{descriaao-das-pas-graduaaaes-da-unb}
+Em relação às demais universidades do Brasil, segundo o Ranking de
+Universidades Folha (2017) que classifica as melhores universidades do
+país, entre as 296 instituições públicas de nível superior a UnB se
+encontra na posição número 20 sendo a 11ª em número de teses publicadas,
+a 10ª e número de publicações em revistas nacionais e a 20ª em núméro de
+publicações por docente.
 
-Texto a desenvolver.
+\subsubsection{Descrição das pós-graduações da
+UnB}\label{descricao-das-pos-graduacoes-da-unb}
 
-\subsubsection{Outros aspectos que caracterizam a produÃ§Ã£o cientÃ­fica
-e acadÃªmica da
-UnB}\label{outros-aspectos-que-caracterizam-a-produaao-cientafica-e-acadamica-da-unb}
+Neste trabalho o foco foi em três programas de pós-graduação da UNB.
+Entre eles dois programas do departamento de matemática e outro do
+programa de ensino em ciências. Nós próximos tópicos serão detalhados os
+contextos de cada PPG sendo trabalhado.
 
-Texto a desenvolver.
+\paragraph{Programa de Pós-graduação de ensino em
+ciências}\label{programa-de-pos-graduacao-de-ensino-em-ciencias}
 
-\subsection{O que a OrganizaÃ§Ã£o precisa realmente
-alcanÃ§ar?}\label{o-que-a-organizaaao-precisa-realmente-alcanaar}
+O programa de pós-graduação em ensino de ciências, tem como objetivo
+qualificar os professores de nível básico em matérias relativas a
+ciências e afins. O foco é dado no desenvolvimento de conteúdos de
+ciências, o que envolve aspectos teóricos, metodológicos e
+epistemológicos relativo ao ensino de ciências além do desenvolvimento e
+aprendizado de novas tecnologias que permitam a evolução do ensino.
 
-VÃ¡rios stakeholders estÃ£o envolvidos no projeto em curso, e
-poderÃ­amos considerar cada um deles como distintas organizaÃ§Ãµes que
-possuem interesses distintos e complementares. Elas sÃ£o: * A Disciplina
-CiÃªncia de Dados para Todos 2018.1, que quer comprovar que seus alunos
-dominam ferramentas e tÃ©cnicas de ciÃªncia de dados, para fins de
-avaliaÃ§Ã£o de rendimento da disciplina. * A UnB, representada pelos
-decanatos de pÃ³s-graduaÃ§Ã£o (DPG) e de pesquisa e inovaÃ§Ã£o (DPI),
-que querem dispor de instrumentos para realizaÃ§Ã£o de avaliaÃ§Ãµes
-contÃ­nuas de suas pÃ³s-graduaÃ§Ãµes. * O SNPG, que assim com o DPG e
-DPI, tambÃ©m pode se beneficiar do uso de instrumentos para realizaÃ§Ã£o
-de avaliaÃ§Ãµes contÃ­nuas de suas pÃ³s-graduaÃ§Ãµes. * Os interessados
-em melhor conhecer o que Ã© produzido pelo Sistema Nacional de
-PÃ³s-graduaÃ§Ã£o, como empresas privadas, que querem desfrutar dos
-benefÃ­cios gerados pela ciÃªncia brasileira.
+O programa engloba professores com as mais diversas áreas de atuação e
+de diferentes cantos da universidade. Podemos citar como áreas a física,
+bioquímica, ecologia, história, química, genética, medicina, psicologia
+entre outras, com destaques para a participação do Instituto de Física,
+Química e Ciências Biológicas. Os programas englobam três linhas de
+pesquisa sendo elas: Ensino-Aprendizagem em Ciências da Natureza em seus
+mutilplos aspectos; Formação de Professores de Ciências da Natureza e
+Educação Científica e Cidadania.
 
-A fim de dar maior fidelidade e homogeneidade ao exercÃ­cio realizado na
-disciplina, focaremos em atendimento aos interesses comuns das
-organizaÃ§Ãµes DPI, DPG e CAPES, que desejam dispor de instrumentos
-Ã¡geis para avaliaÃ§Ã£o contÃ­nua da pÃ³s-graduaÃ§Ã£o brasileira.
+A implementação do Programa de Pós-Graduação em Ensino de Ciências na
+UnB, se deu inicialmente em 2007 e desde 2010, tem sido ampliado seu
+quadro de docentes por meio do credenciamento de novos orientadores,
+principalmente a partir da aproximação com o curso de Licenciatura em
+Ciências Naturais da Faculdade UnB Planaltina.
 
-Com base no exposto, o objetivo do trabalho final a ser alcanÃ§ado pelos
-produtos d emineraÃ§Ã£o de dados desenvolvido pelos alunos da disciplina
-CiÃªncia de Dados para Todos Ã© produzir, tomando por base inicial os
-dados fornecidos pelos professores responsÃ¡veis pela disciplina,
-ferramentas para anÃ¡lise e avaliaÃ§Ã£o contÃ­nuas e de baixo custo, do
-desempenho de um conjunto de pÃ³s-graduaÃ§Ãµes que estÃ£o vinculadas a
-uma mesma subÃ¡rea ou grupo de conhecimento. Cada Ã¡rea de
-pÃ³s-graduaÃ§Ã£o apresenta suas caracterÃ­sticas peculiares, assim como
-cada um dos programas vinculados a essas Ã¡reas. Como jÃ¡ informado,
-caracterÃ­sticas peculiares de cada programa podem ser obtidas a partir
-de visita ao sÃ­tio da CAPES (2018).
+O programa é composto por 19 professores que já realizaram cerca de 709
+orientações ao longo dos anos de 2010 a 2017 com cerca de 174
+dissertações de mestrado concluidas até o momento. Podemos observar
+abaixo as distribuições de cada orientação realizada ao longo dos anos.
+É possível observar um grande aumento na quantidade(relativa) de
+orientações realizadas de mestrado, o que pode ser explicado pelo
+aumento do número de novos orientadores credenciados ao PPG.
 
-\subsection{AvaliaÃ§Ã£o das
-CircunstÃ¢ncias}\label{avaliaaao-das-circunstancias}
+\includegraphics{Relatório_4_files/figure-latex/plot1-1.pdf}
 
-Este documento serve como base para a realizaÃ§Ã£o dos trabalhos dos
-alunos. apresenta limitaÃ§Ãµes no tocante Ã~ quantidade pequena de dados
-que serÃ£o empregados para anÃ¡lises e avaliaÃ§Ãµes, tendo em vista sua
-finalidade maior que Ã© a didÃ¡tica, de permitir aos alunos demonstrarem
-a capacidade de aplicaÃ§Ã£o das tÃ©cnicas e ferramentas apreendidas
-durante o semestre.
+Abaixo teremos as quantidades absolutas totais de orientações realizadas
+ao longo dos anos de 2010 a 2017 apenas para complementar a distribuição
+acima apresentada:
 
-\subsubsection{AvaliaÃ§Ã£o preliminar das pÃ³s-graduaÃ§Ãµes na
-UnB}\label{avaliaaao-preliminar-das-pas-graduaaaes-na-unb}
+\includegraphics{Relatório_4_files/figure-latex/plot2-1.pdf}
 
-Texto a desenvolver.
+Em média os orientadores possuem nível de senioridade 7, tendo 5 como
+mínimo e 9 como máximo, o que indica que no geral os professores possuem
+bastante experiência no meio acadêmico, e pode ser relevante para
+explicar a quantidade de orientações realizadas pelo programa e também o
+número de publicações realizadas. No total os orientadores participam de
+29 grupos de pesquisa e são em sua totalidade nascidos no brasil com uma
+idade média de 58 anos de idade. Entre os grupos aos quais os
+orientadores participam podemos citar os de Educação Científica e
+Cidadania, Ensino de Ciências e Mediação Pedagógica, Aprendizagem e
+mediação pedagógica, Ecologia e Comportamento e o grupo de Ensino de
+Química.
 
-\subsubsection{AvaliaÃ§Ã£o preliminar da produÃ§Ã£o cientÃ­fica e
-acadÃªmica da
-UnB}\label{avaliaaao-preliminar-da-produaao-cientafica-e-acadamica-da-unb}
+Atualmente estão sendo realizadas 74 orientações que incluem,
+mestrandos, doutorandos e PHDs. Deste conjunto existem alunos que vieram
+de diversas instituições, dentre elas Universidade Federal de Mato
+Grosso, Universidade Federal de Pernambuco, Universidade Federal de
+Sergipe e Centro Universitário Norte do Espírito Santo, porém nenhum
+estudante proveniente de instituições internacionais.
 
-Texto a desenvolver.
+\paragraph{Programas de Pós-graduação da
+Matemática}\label{programas-de-pos-graduacao-da-matematica}
+
+Aqui será feita uma contextualização das áreas de pesquisa relacionadas
+ao programa de Pós-Graduação em Matemática da UnB, dos anos 2010 à 2017.
+Para tal está sendo apresentado dados de produção científica dos
+docentes do programa, retirados do currículo Lattes dos professores e do
+repositório \texttt{OASIS} do \texttt{IBICT} (Instituto Brasileiro de
+Informação em Ciência e Tecnologia).
+
+O coordenador do PPG é o Carlos Alberto Pereira dos Santos e as subáreas
+de concentração são: \textbf{Álgebra, Análise, Geometria e Matemática
+Aplicada}. Mais informações do programa podem ser acessadas pelo site
+\href{https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/programa/viewPrograma.jsf?popup=true\&cd_programa=53001010003P2}{sucupira}.
+
+O programa de Pós-Graduação em Matemática da UnB, iniciado em 1962,
+oferece Mestrado e Doutorado em Matemática nas subáreas de Álgebra,
+Análise, Geometria e Matemática Aplicada (Probabilidade,
+Física-Matemática e Computação). O corpo docente mantém um programa
+ativo de pesquisa, participa regular e ativamente de forma destacada em
+reuniões científicas e em corpos editoriais de revistas científicas,
+além de manter intercâmbio científico com diversas instituições do país
+e do exterior.
+
+Há também um programa de mestrado profissional \texttt{PROFMAT}, que é
+um programa de pós-graduação stricto sensu em Matemática, reconhecido
+pelo Ministério da Educação e conduzindo ao título de Mestre. Tem como
+objetivo proporcionar formação matemática aprofundada relevante ao
+exercício da docência no Ensino Básico, visando dar ao egresso a
+qualificação certificada para o exercício da profissão de professor de
+Matemática.
+
+O \texttt{PROFMAT} é um curso semipresencial ministrado por Instituições
+de Ensino Superior associadas em uma Rede Nacional, no âmbito do
+\textbf{Sistema Universidade Aberta do Brasil} (UAB). É coordenado pela
+Comissão Acadêmica Nacional, que opera sob a égide da Diretoria da
+\textbf{Sociedade Brasileira de Matemática} (SBM).
+
+As Instituições de Ensino Superior que integram a Rede Nacional do
+\texttt{PROFMAT} são denominadas Instituições Associadas e são
+responsáveis, por intermédio das respectivas Coordenações Acadêmicas
+Institucionais, por toda a gestão local do \texttt{PROFMAT}, descritas
+no Regimento. Informações completas sobre este mestrado podem ser
+encontradas na página do
+\href{http://www.profmat-sbm.org.br}{\texttt{PROFMAT}}. Na Universidade
+de Brasília este curso é ofertado no âmbito do Instituto de Ciências
+Exatas, Departamento de Matemática.
+
+O Departamento de Matemática da UnB obteve nota 7 na última avaliação
+trienal da Capes. Essa avaliação de excelência é o resultado de um
+longo, árduo e contínuo trabalho iniciado em 1962 por
+professores/colaboradores corajosos e idealistas que acreditaram em
+tornar o sonho do Departamento de Matemática da Universidade de Brasília
+uma realidade. Desde então, esse ideal vem sendo fortalecido com a
+chegada de novos professores/colaboradores que conduziram este programa
+ao reconhecimento da sua excelência.
 
 \section{CRISP-DM Fase 2 - Entendimento dos
 Dados}\label{crisp-dm-fase-2---entendimento-dos-dados}
-
-Doravante, a fim de facilitar aos alunos seguirem a metodologia
-CRISP-DM, os nomes das seÃ§Ãµes e subseÃ§Ãµes de texto serÃ£o prefixadas
-com o nÃºmero e nome da fase e atividade genÃ©rica do CRISP-DM. Fica
-facultado aos grupos seguir ou nÃ£o a sequÃªncia prevista, tendo em
-vista que se pode retornar Ã~s fases anteriores, bem como podem haver
-atividades que nÃ£o foram adequadas Ã~s caracterÃ­sticas do problema
-especÃ­fico sob anÃ¡lise.
 
 \subsection{CRISP-DM Fase.Atividade 2.1 - Coleta inicial dos
 dados}\label{crisp-dm-fase.atividade-2.1---coleta-inicial-dos-dados}
 
 Todos os arquivos com dados iniciais a seguir apresentados foram
-fornecidos pelos professores responsÃ¡veis pela disciplina. Os dados
-foram gerados no mÃªs de maio de 2018, e compilam informaÃ§Ãµes entre os
-anos de 2010 e 2017. Os arquivos estÃ£o no formato JSON, e seus
-atributos iniciais e conteÃºdos sÃ£o apresentados a seguir.
+fornecidos pelos professores responsáveis pela disciplina. Os dados
+foram gerados no mês de maio de 2018, e compilam informações entre os
+anos de 2010 e 2017. Os arquivos estão no formato JSON, e seus atributos
+iniciais e conteúdos são apresentados a seguir.
 
-\subsubsection{Perfil profissional dos docentes vinculados Ã~s
-pÃ³s-graduaÃ§Ãµes}\label{perfil-profissional-dos-docentes-vinculados-as-pas-graduaaaes}
+A metodologia utilizada tenta seguir o que é proposto pelo modelo
+CRISP-DM. Inicialmente o contexto do programa de pós-graduação foi
+explorado, buscando o máximo possível de informações sobre o PPG
+incluindo seu funcionamento e suas áreas de pesquisa. Os dados foram
+buscados e explorados a partir do website do programa com o intuito de
+compreender melhor o contexto que será trabalhado.. Os dados utilizados
+para pesquisa foram tirados do dataset de publicações, orientações e
+perfis da Matemática do portal do programa e do
+\href{http://unb.elattes.com.br/user/login}{elattes}.
+
+Uma vez compreendido do que se trata o programa os dados dispostos pelo
+E-Lattes foram explorados para um reconhecimento inicial. Pode-se notar
+que os dados vieram em formato JSON, englobando os universos de
+publicações, orientações, perfis e áreas de pesquisa dos orientadores do
+departamento, além dos dados referentes as bases do DGP e OASIS. Após
+importação devida os dados passaram por uma exploração inicial para
+entender sua formatação e se alguma modificação seria necessária para
+trabalhar com as ferramentas disponíveis framework da linguagem R.
+
+Os dados constituem informações sobre os orientadores do departamento o
+que inclui, senioridade, produções, endereço profissional, produção
+bibliográfica e orientações que os mesmos realizaram. Também podemos
+identificar informações sobre as orientações realizadas pelo
+departamento que incluem informações sobre o aluno sendo orientado, como
+curso, instituição, nome dos orientadores, título da orientação, ano e
+qual estado se encontra a orientação, em andamento ou concluída. Por
+último temos os dados de publicações que englobam 6 tipos de publicações
+que serão detalhadas nos resultados obtidos.
+
+Em seguida foi identificado que alguns dados não estavam totalmente
+preparados para a realização de buscas, uma vez que é necessária a
+formatação em tabelas (e não em listas) para a realização de filtragens
+e joins de maneira clara prática. Portanto os arquivos de publicações e
+perfis foram modificados para que fossem removidas algumas listas
+internas a estruturam que dificultavam sua utilização. Por exemplo, no
+arquivo de publicações, temos uma grande lista com 7 outras listas como
+elementos: periódico, livro, capítulo de livro, texto em jornais,
+evento, artigo aceito e demais tipos de produação bibliográfica.
+
+Tendo os dados filtrados e organizados foram efetuadas consultas básicas
+com o intuito de ter uma visualização mais clara dos conjuntos de dados.
+As bibliotecas utilizadas para filtragem e visualização foram a
+\texttt{dplyr}, que permitem consultas semelhantes a consultas de bancos
+de dados, com dados organizadas em tabelas (em R conhecidas como
+dataframes), e a biblioteca \texttt{ggplot2} que possibilita a fácil
+criação de gráficos a parir de dataframes.
+
+Após a realização das consultas foram geradas algumas conclusões que
+foram cruzadas com os dados iniciais obtidos a partir da avaliação do
+contexto do programa, apesar de o trabalho ter caráter expositivo foi
+gerado um modelo para tentar explicar algumas situações identificadas ao
+longo da pesquisa do PPG. O procedimento aqui demonstrado foi repetido
+até que fossem obtidos resultados satisfatórios assim como descreve o
+modelo CRISP-DM.
+
+\subsubsection{Perfil profissional dos docentes vinculados às
+pós-graduações}\label{perfil-profissional-dos-docentes-vinculados-as-pos-graduacoes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -867,13 +774,13 @@ pÃ³s-graduaÃ§Ãµes}\label{perfil-profissional-dos-docentes-vinculados-as-pa
 \end{verbatim}
 
 O arquivo Matematica.profile.json apresenta dados sobre o perfil de
-todos os docentes vinculados a programas de pÃ³s-graduaÃ§Ã£o da UnB,
-entre 2010 e 2017. Esse arquivo foi fornecido pelos docentes
-responsÃ¡veis pela disciplina.
+todos os docentes vinculados a programas de pós-graduação da UnB, entre
+2010 e 2017. Esse arquivo foi fornecido pelos docentes responsáveis pela
+disciplina.
 
-\subsubsection{OrientaÃ§Ãµes de mestrado e doutorado realizadas pelos
-docentes vinculados Ã~s
-pÃ³s-graduaÃ§Ãµes}\label{orientaaaes-de-mestrado-e-doutorado-realizadas-pelos-docentes-vinculados-as-pas-graduaaaes}
+\subsubsection{Orientações de mestrado e doutorado realizadas pelos
+docentes vinculados às
+pós-graduações}\label{orientacoes-de-mestrado-e-doutorado-realizadas-pelos-docentes-vinculados-as-pos-graduacoes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -889,14 +796,14 @@ pÃ³s-graduaÃ§Ãµes}\label{orientaaaes-de-mestrado-e-doutorado-realizadas-pe
 ## Matematica.advise.json 2018-07-07 17:52:28 2018-07-07 17:52:28  no
 \end{verbatim}
 
-O arquivo Matematica.advise.json apresenta dados sobre o orientaÃ§Ãµes
-de mestrado e doutorado feitas por todos os docentes vinculados a
-programas de pÃ³s-graduaÃ§Ã£o da UnB, entre 2010 e 2017. Esse arquivo
-foi fornecido pelos docentes responsÃ¡veis pela disciplina.
+O arquivo Matematica.advise.json apresenta dados sobre o orientações de
+mestrado e doutorado feitas por todos os docentes vinculados a programas
+de pós-graduação da UnB, entre 2010 e 2017. Esse arquivo foi fornecido
+pelos docentes responsáveis pela disciplina.
 
-\subsubsection{ProduÃ§Ã£o bibliogrÃ¡fica gerada pelos docentes
-vinculados Ã~s
-pÃ³s-graduaÃ§Ãµes}\label{produaao-bibliografica-gerada-pelos-docentes-vinculados-as-pas-graduaaaes}
+\subsubsection{Produção bibliográfica gerada pelos docentes vinculados
+às
+pós-graduações}\label{producao-bibliografica-gerada-pelos-docentes-vinculados-as-pos-graduacoes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -912,12 +819,12 @@ pÃ³s-graduaÃ§Ãµes}\label{produaao-bibliografica-gerada-pelos-docentes-vinc
 ## Matematica.publication.json 2018-07-07 17:52:28 2018-07-07 17:52:28  no
 \end{verbatim}
 
-O arquivo Matematica.publication.json apresenta dados sobre a produÃ§Ã£o
-bibliogrÃ¡fica gerada por todos os docentes vinculados a programas de
-pÃ³s-graduaÃ§Ã£o da UnB, entre 2010 e 2017.
+O arquivo Matematica.publication.json apresenta dados sobre a produção
+bibliográfica gerada por todos os docentes vinculados a programas de
+pós-graduação da UnB, entre 2010 e 2017.
 
-\subsubsection{Agrupamento dos docentes conforme Ã¡reas de
-atuaÃ§Ã£o}\label{agrupamento-dos-docentes-conforme-areas-de-atuaaao}
+\subsubsection{Agrupamento dos docentes conforme áreas de
+atuação}\label{agrupamento-dos-docentes-conforme-areas-de-atuacao}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -935,11 +842,11 @@ atuaÃ§Ã£o}\label{agrupamento-dos-docentes-conforme-areas-de-atuaaao}
 ## Matematica.researchers_by_area.json 2018-07-07 17:52:28  no
 \end{verbatim}
 
-O arquivo Matematica.researchers\_by\_area.json apresenta as
-vinculaÃ§Ãµes de todos os docentes que declararam atuar em cada uma das
-Ã¡reas de pÃ³s-graduaÃ§Ã£o do Sistema Nacional de PÃ³s-GraduaÃ§Ã£o da
-CAPES, conforme apresenta-se registrada essa informaÃ§Ã£o no currÃ­culo
-Lattes de cada um, em data recente.
+O arquivo Matematica.researchers\_by\_area.json apresenta as vinculações
+de todos os docentes que declararam atuar em cada uma das áreas de
+pós-graduação do Sistema Nacional de Pós-Graduação da CAPES, conforme
+apresenta-se registrada essa informação no currículo Lattes de cada um,
+em data recente.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -954,38 +861,15 @@ Lattes de cada um, em data recente.
 ## Matematica.graph.json 2018-07-07 17:52:28 2018-07-07 17:52:28  no
 \end{verbatim}
 
-\subsubsection{Redes de colaboraÃ§Ã£o entre
-docentes}\label{redes-de-colaboraaao-entre-docentes}
+\subsection{CRISP-DM Fase.Atividade 2.2 - Descrição dos
+Dados}\label{crisp-dm-fase.atividade-2.2---descricao-dos-dados}
 
-O arquivo data/unbpos.graph.json apresenta redes de colaboraÃ§Ã£o na
-co-autoria de artigos cientpificos, feitas entre os docentes vinculados
-a programas de pÃ³s-graduaÃ§Ã£o da UnB, entre 2010 e 2017.
-
-\subsection{CRISP-DM Fase.Atividade 2.2 - DescriÃ§Ã£o dos
-Dados}\label{crisp-dm-fase.atividade-2.2---descriaao-dos-dados}
-
-Para ler e manipular inicialmente esses dados, serÃ£o usadas
+Para ler e manipular inicialmente esses dados, serão usadas
 primordialmente as bibliotecas seguintes
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(jsonlite)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Attaching package: 'jsonlite'
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:purrr':
-## 
-##     flatten
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(listviewer)}
 \end{Highlighting}
 \end{Shaded}
@@ -997,15 +881,6 @@ primordialmente as bibliotecas seguintes
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(readxl)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: package 'readxl' was built under R version 3.4.4
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(readr)}
 \CommentTok{#library(readtext)}
 \KeywordTok{library}\NormalTok{(ggplot2)}
@@ -1013,20 +888,19 @@ primordialmente as bibliotecas seguintes
 \end{Highlighting}
 \end{Shaded}
 
-Como jÃ¡ informado, a descriÃ§Ã£o dos dados verifica se os dados sendo
-acessados terÃ£o potencial para responder Ã~s questÃµes de \emph{data
-mining}. AlÃ©m disso, deve-se avaliar qual o volume de dados, a
-estrutura dos dados (tipos), codificaÃ§Ãµes usadas, etc. Neste projeto,
-a descriÃ§Ã£o dos dados Ã© responsabilidade parcial dos alunos, tendo em
-vista que esta seÃ§Ã£o jÃ¡ oferece uma descriÃ§Ã£o inicial simplificada.
-O relatÃ³rio final deve conter descriÃ§Ãµes significativas e
-aprofundadas dos dados.
+Como já informado, a descrição dos dados verifica se os dados sendo
+acessados terão potencial para responder às questões de \emph{data
+mining}. Além disso, deve-se avaliar qual o volume de dados, a estrutura
+dos dados (tipos), codificações usadas, etc. Neste projeto, a descrição
+dos dados é responsabilidade parcial dos alunos, tendo em vista que esta
+seção já oferece uma descrição inicial simplificada. O relatório final
+deve conter descrições significativas e aprofundadas dos dados.
 
-\subsubsection{DescriÃ§Ã£o dos dados do
-perfil}\label{descriaao-dos-dados-do-perfil}
+\subsubsection{Descrição dos dados do
+perfil}\label{descricao-dos-dados-do-perfil}
 
-O arquivo unb.perfis.json, que contÃ©m dados que caracterizam o perfil
-profissional de todos os docentes do grupo sob anÃ¡lise, podem ser lido
+O arquivo unb.perfis.json, que contém dados que caracterizam o perfil
+profissional de todos os docentes do grupo sob análise, podem ser lido
 por meio do comando seguinte.
 
 \begin{Shaded}
@@ -1035,7 +909,7 @@ por meio do comando seguinte.
 \end{Highlighting}
 \end{Shaded}
 
-A quantidade de docentes sob anÃ¡lise Ã© apresentada a seguir.
+A quantidade de docentes sob análise é apresentada a seguir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1047,12 +921,12 @@ A quantidade de docentes sob anÃ¡lise Ã© apresentada a seguir.
 ## [1] 44
 \end{verbatim}
 
-Para gerar uma apresentaÃ§Ã£o inicial dos dados que estÃ£o contido nos
-dados de perfil dos docentes, pode-se usar a funÃ§Ã£o glimpse, da
-biblioteca dplyr, como ilustra o cÃ³digo seguinte, que apresenta os
-atributos tÃ­picos que podem ser obtidos relativamente a um pesquisador
-especÃ­fico, o mais antigo docente ainda em exercÃ­cio na UnB a ter
-criado seu registro na plataforma Lattes.
+Para gerar uma apresentação inicial dos dados que estão contido nos
+dados de perfil dos docentes, pode-se usar a função glimpse, da
+biblioteca dplyr, como ilustra o código seguinte, que apresenta os
+atributos típicos que podem ser obtidos relativamente a um pesquisador
+específico, o mais antigo docente ainda em exercício na UnB a ter criado
+seu registro na plataforma Lattes.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1170,92 +1044,26 @@ criado seu registro na plataforma Lattes.
 ##  $ senioridade           : chr "8"
 \end{verbatim}
 
-Uma breve inspeÃ§Ã£o visual dos atributos anteriormente apresentados
-permite inferir que o pesquisador sob anÃ¡lise:
+Uma breve inspeção visual dos atributos anteriormente apresentados
+permite inferir que o pesquisador sob análise:
 
 \begin{itemize}
 \tightlist
 \item
-  Atua predominantemente na Ã¡rea de matemÃ¡tica.
+  Atua predominantemente na área de matemática.
 \item
-  Trabalha no Instituto de CiÃªncias Exatas da UnB.
+  Trabalha no Instituto de Ciências Exatas da UnB.
 \item
-  Possui trÃªs artigos recentes publicados, alÃ©m de um aceito para
-  publicaÃ§Ã£o.
+  Possui três artigos recentes publicados, além de um aceito para
+  publicação.
 \item
-  Possui uma orientaÃ§Ã£o de doutorado em andamento, iniciada em 2014.
+  Possui uma orientação de doutorado em andamento, iniciada em 2014.
 \item
   Foi classificado com senioridade 5.
 \end{itemize}
 
-\paragraph{Potencial de utilizaÃ§Ã£o dos dados do perfil dos
-docentes}\label{potencial-de-utilizaaao-dos-dados-do-perfil-dos-docentes}
-
-Esses dados terÃ£o potencial para responder Ã~s questÃµes de \emph{data
-mining}? O que Ã© possÃ­vel gerar a partir desses dados, para o conjunto
-dos 1592 docentes da UnB? A fim de compreender a relevÃ¢ncia dos dados
-para a avaliaÃ§Ã£o da produÃ§Ã£o acadÃªmica nas pÃ³s-graduaÃ§Ãµes
-brasileiras pode-se recorrer a trabalhos como os seguintes:
-
-\begin{itemize}
-\tightlist
-\item
-  Leite (2018) apresenta, em suas ``ConsideraÃ§Ãµes bÃ¡sicas sobre a
-  AvaliaÃ§Ã£o do Sistema Nacional de PÃ³s-GraduaÃ§Ã£o'', o conjunto dos
-  itens que sÃ£o tÃ³picos de avaliaÃ§Ã£o das pÃ³s-graduaÃ§Ãµes pela
-  CAPES, e que envolvem, entre outros:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    AvaliaÃ§Ã£o do corpo docente, com 20\% a 30\% de peso na avaliaÃ§Ã£o
-    total do programa, a depender do seu tipo. Analisando-se de forma
-    mais detalhada os critÃ©rios de avaliaÃ§Ã£o do corpo docente,
-    indicados por Leite, o que Ã© possÃ­vel gerar com base nos dados
-    disponÃ­veis em unb.prof? HÃ¡ dados que permitam identificar o
-    perfil do docente, como proposto pela CAPES, inclusive no documento
-    de Ã¡rea especÃ­fica na qual atua o pesquisador? Que outros aspectos
-    relevantes para a CAPES podem ser levantados com base nos dados
-    dessa fonte?
-  \item
-    AvaliaÃ§Ã£o do corpo discente, Teses e dissertaÃ§Ãµes, com 30\% a
-    20\% de peso na avaliaÃ§Ã£o total do programa, a depender de seu
-    tipo. Os dados sobre orientaÃ§Ã£o permitem fazer quais tipos de
-    avaliaÃ§Ãµes do corpo discente?
-  \item
-    AvaliaÃ§Ã£o da produÃ§Ã£o intelectual, com 40\% de peso na
-    avaliaÃ§Ã£o total. Qual a relevÃ¢ncia dos dados em unb.prof para
-    essa avaliaÃ§Ã£o? Que outros arquivos podem melhor subsidiar essa
-    avaliaÃ§Ã£o?
-  \end{itemize}
-\item
-  Em busca de considerar outros fatores relevantes para a avaliaÃ§Ã£o da
-  pÃ³s-graduaÃ§Ã£o, nÃ£o considerados no modelo da CAPES, pode-se
-  recorrer ao trabalho de Kalpazidou Schmidt e Graversen (2018), que
-  apresentam um conjunto de fatores persistentes que facilitam a
-  existÃªncia de ambientes de pesquisa inovadores e dinÃ¢micos, dentre
-  os quais se destaca:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Atividade em pesquisas com elevado grau de impacto social;
-  \item
-    PromoÃ§Ã£o de elevado grau de autonomia individual, tanto do ponto
-    de vista teÃ³rico quanto metodolÃ³gico;
-  \item
-    Possuem um bom clima de trabalho, baseado no trabalho em times;
-  \item
-    SÃ£o internacioinalmente bem conhecidas etc.
-  \end{itemize}
-
-  Estariam esses fatores contemplados, de alguma forma, memso que
-  parcialmente, nos dados presentes em unb.prof? Ou em qualquer outros
-  dos arquivos? Cabe explorar.
-\end{itemize}
-
-\subsubsection{DescriÃ§Ã£o dos dados de
-orientaÃ§Ãµes}\label{descriaao-dos-dados-de-orientaaaes}
+\subsubsection{Descrição dos dados de
+orientações}\label{descricao-dos-dados-de-orientacoes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1324,8 +1132,8 @@ orientaÃ§Ãµes}\label{descriaao-dos-dados-de-orientaaaes}
 ##                                    1                                    1
 \end{verbatim}
 
-\subsubsection{DescriÃ§Ã£o dos dados de produÃ§Ã£o
-bibliogrÃ¡fica}\label{descriaao-dos-dados-de-produaao-bibliografica}
+\subsubsection{Descrição dos dados de produção
+bibliográfica}\label{descricao-dos-dados-de-producao-bibliografica}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1398,8 +1206,8 @@ bibliogrÃ¡fica}\label{descriaao-dos-dados-de-produaao-bibliografica}
 ##                                                                 1
 \end{verbatim}
 
-\subsubsection{DescriÃ§Ã£o dos dados de agregaÃ§Ã£o de docentes por
-Ã¡rea}\label{descriaao-dos-dados-de-agregaaao-de-docentes-por-area}
+\subsubsection{Descrição dos dados de agregação de docentes por
+área}\label{descricao-dos-dados-de-agregacao-de-docentes-por-area}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1434,29 +1242,23 @@ bibliogrÃ¡fica}\label{descriaao-dos-dados-de-produaao-bibliografica}
 ## 6 "Probabilidade e Estatística" "2"
 \end{verbatim}
 
-\subsubsection{DescriÃ§Ã£o dos dados de redes de
-colaboraÃ§Ã£o}\label{descriaao-dos-dados-de-redes-de-colaboraaao}
+\subsubsection{Descrição dos dados de redes de
+colaboração}\label{descricao-dos-dados-de-redes-de-colaboracao}
 
-\subsection{CRISP-DM Fase.Atividade 2.3 - AnÃ¡lise exploratÃ³ria dos
-dados}\label{crisp-dm-fase.atividade-2.3---analise-explorataria-dos-dados}
+\subsection{CRISP-DM Fase.Atividade 2.3 - Análise exploratória dos
+dados}\label{crisp-dm-fase.atividade-2.3---analise-exploratoria-dos-dados}
 
-Como jÃ¡ informado, a anÃ¡lise exploratÃ³ria dos dados possibilita um
-entendimento mais profundo da relaÃ§Ã£o estatÃ­stica existente entre os
+Como já informado, a análise exploratória dos dados possibilita um
+entendimento mais profundo da relação estatística existente entre os
 dados dos \emph{datasets} para um melhor entendimento da qualidade
 daqueles dados para os objetivos do projeto.
-
-Como jÃ¡ informado, a anÃ¡lise exploratÃ³ria dos dados Ã©
-responsabilidade parcial dos alunos, tendo em vista que este relatÃ³rio
-apresenta uma anÃ¡lise exploratÃ³ria preliminar. O relatÃ³rio final deve
-conter anÃ¡lises exploratÃ³rias dos dados que sejam significativas e
-aprofundadas.
 
 \subsubsection{Arquivo Profile}\label{arquivo-profile}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# jsonedit(unb.prof)}
-\CommentTok{# NÃºmero de Ã¡reas de atuaÃ§Ã£o cumulativo}
+\CommentTok{# Número de áreas de atuação cumulativo}
 \KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{nrow}\NormalTok{(x}\OperatorTok{$}\NormalTok{areas_de_atuacao)))}
 \end{Highlighting}
 \end{Shaded}
@@ -1467,7 +1269,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# NÃºmero de Ã¡reas de atuaÃ§Ã£o por pessoa}
+\CommentTok{# Número de áreas de atuação por pessoa}
 \KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{nrow}\NormalTok{(x}\OperatorTok{$}\NormalTok{areas_de_atuacao))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1480,7 +1282,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# NÃºmero de pessoas por grande area}
+\CommentTok{# Número de pessoas por grande area}
 \KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{areas_de_atuacao}\OperatorTok{$}\NormalTok{grande_area))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1495,7 +1297,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# NÃºmero de pessoas que produziram os especÃ­ficos tipos de produÃ§Ã£o}
+\CommentTok{# Número de pessoas que produziram os específicos tipos de produção}
 \KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{names}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1520,7 +1322,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# NÃºmero de publicaÃ§Ãµes por tipo}
+\CommentTok{# Número de publicações por tipo}
 \KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{ARTIGO_ACEITO}\OperatorTok{$}\NormalTok{ano)))}
 \end{Highlighting}
 \end{Shaded}
@@ -1571,7 +1373,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# NÃºmero de pessoas por quantitativo de produÃ§Ãµes por pessoa 0 = 1; 1 = 2...}
+\CommentTok{# Número de pessoas por quantitativo de produções por pessoa 0 = 1; 1 = 2...}
 \KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{ARTIGO_ACEITO}\OperatorTok{$}\NormalTok{ano))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1632,7 +1434,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# NÃºmero de produÃ§Ãµes por ano}
+\CommentTok{# Número de produções por ano}
 \KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{ARTIGO_ACEITO}\OperatorTok{$}\NormalTok{ano))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1693,7 +1495,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# NÃºmero de pessoas que realizaram diferentes tipos de orientaÃ§Ãµes}
+\CommentTok{# Número de pessoas que realizaram diferentes tipos de orientações}
 \KeywordTok{length}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{names}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1704,7 +1506,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# NÃºmero de pessoas por tipo de orientaÃ§Ã£o}
+\CommentTok{# Número de pessoas por tipo de orientação}
 \KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{names}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1729,7 +1531,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#NÃºmero de orientaÃ§Ãµes concluidas}
+\CommentTok{#Número de orientações concluidas}
 \KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_MESTRADO}\OperatorTok{$}\NormalTok{ano)))}
 \end{Highlighting}
 \end{Shaded}
@@ -1760,7 +1562,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# NÃºmero de pessoas por quantitativo de orientaÃ§Ãµes por pessoa 0 = 1; 1 = 2...}
+\CommentTok{# Número de pessoas por quantitativo de orientações por pessoa 0 = 1; 1 = 2...}
 \KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_MESTRADO}\OperatorTok{$}\NormalTok{ano))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1797,7 +1599,7 @@ aprofundadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# NÃºmero de orientaÃ§Ãµes por ano}
+\CommentTok{# Número de orientações por ano}
 \KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_MESTRADO}\OperatorTok{$}\NormalTok{ano))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1832,7 +1634,7 @@ aprofundadas.
 ##    1    4    2    2    3    2    3    1
 \end{verbatim}
 
-\subsubsection{Arquivo PublicaÃ§Ã£o}\label{arquivo-publicaaao}
+\subsubsection{Arquivo Publicação}\label{arquivo-publicacao}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1887,14 +1689,14 @@ aprofundadas.
 ## $ `autores-endogeno` <chr> "0293171472213095", "0293171472213095", "04...
 \end{verbatim}
 
-\subsubsection{Arquivo OrientaÃ§Ã£o}\label{arquivo-orientaaao}
+\subsubsection{Arquivo Orientação}\label{arquivo-orientacao}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#OrientaÃ§Ã£o}
+\CommentTok{#Orientação}
 \CommentTok{#Visualizar a estrutura do json no painel Viewer}
 \CommentTok{#jsonedit(unb.adv)}
-\CommentTok{#Reunir todos os anos e orientaÃ§Ãµes concluidas em um mesmo data-frame}
+\CommentTok{#Reunir todos os anos e orientações concluidas em um mesmo data-frame}
 \NormalTok{unb.adv.tipo.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(); unb.adv.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(unb.adv[[}\DecValTok{1}\NormalTok{]]))}
 \NormalTok{  unb.adv.tipo.df <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(unb.adv.tipo.df, unb.adv}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_POS_DOUTORADO[[i]])}
@@ -2017,53 +1819,20 @@ aprofundadas.
 ##                                     6
 \end{verbatim}
 
-\subsection{CRISP-DM Fase.Atividade 2.4 - VerificaÃ§Ã£o da qualidade dos
-dados.}\label{crisp-dm-fase.atividade-2.4---verificaaao-da-qualidade-dos-dados.}
+\section{\texorpdfstring{CRISP-DM Fase 3 - \textbf{Preparação dos
+Dados}}{CRISP-DM Fase 3 - Preparação dos Dados}}\label{crisp-dm-fase-3---preparacao-dos-dados}
 
-Como jÃ¡ informado, a verificaÃ§Ã£o da qualidade dos dados envolve
-responder se os dados disponÃ­veis estÃ£o realmente completos.
+Como já informado, na fase de \textbf{Preparação dos Dados} os
+\emph{datasets} que serão utilizados em todo o trabalho são construídos
+a partir dos dados brutos. Aqui os dados são ``filtrados'' retirando-se
+partes que não interessam e selecionando-se os ``campos'' necessários
+para o trabalho de mineração.
 
-As informaÃ§Ãµes disponÃ­veis sÃ£o suficientes para o trabalho proposto?
+\subsection{CRISP-DM Fase.Atividade 3.1 - Construção dos
+dados}\label{crisp-dm-fase.atividade-3.1---construcao-dos-dados}
 
-Neste projeto, a verificaÃ§Ã£o da qualidade dos dados Ã©
-responsabilidade dos alunos.
-
-\section{\texorpdfstring{CRISP-DM Fase 3 - \textbf{PreparaÃ§Ã£o dos
-Dados}}{CRISP-DM Fase 3 - PreparaÃ§Ã£o dos Dados}}\label{crisp-dm-fase-3---preparaaao-dos-dados}
-
-Como jÃ¡ informado, na fase de \textbf{PreparaÃ§Ã£o dos Dados} os
-\emph{datasets} que serÃ£o utilizados em todo o trabalho sÃ£o
-construÃ­dos a partir dos dados brutos. Aqui os dados sÃ£o
-âfiltradosâ retirando-se partes que nÃ£o interessam e
-selecionando-se os âcamposâ necessÃ¡rios para o trabalho de
-mineraÃ§Ã£o.
-
-SÃ£o 5 as atividades genÃ©ricas nesta fase de preparaÃ§Ã£o dos dados, a
-seguir divididas em subseÃ§Ãµes
-
-\subsection{CRISP-DM Fase.Atividade 3.1 - SeleÃ§Ã£o dos
-dados.}\label{crisp-dm-fase.atividade-3.1---seleaao-dos-dados.}
-
-Como jÃ¡ informado, a seleÃ§Ã£o dos dados envolve identificar quais
-dados, da nossa ``montanha de dados'', serÃ£o realmente utilizados.
-
-Quais variÃ¡veis dos dados brutos serÃ£o convertidas para o
-\emph{dataset}?
-
-NÃ£o Ã© raro cometer o erro de selecionar dados para um modelo preditivo
-com base em uma falsa ideia de que aqueles dados contÃ©m a resposta para
-o modelo que se quer construir. Surge o cuidado de se separar o sinal do
-ruÃ­do (Silver, Nate. The Signal and the Noise: Why so many predictions
-fail â but some donât. USA: The Penguin Press HC, 2012.).
-
-\subsection{CRISP-DM Fase.Atividade 3.2 - Limpeza dos
-dados}\label{crisp-dm-fase.atividade-3.2---limpeza-dos-dados}
-
-\subsection{CRISP-DM Fase.Atividade 3.3 - ConstruÃ§Ã£o dos
-dados}\label{crisp-dm-fase.atividade-3.3---construaao-dos-dados}
-
-Como jÃ¡ informado, a construÃ§Ã£o dos dados envolve a criaÃ§Ã£o de
-novas variÃ¡veis a partir de outras presentes nos \emph{datasets}.
+Como já informado, a construção dos dados envolve a criação de novas
+variáveis a partir de outras presentes nos \emph{datasets}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2267,7 +2036,7 @@ novas variÃ¡veis a partir de outras presentes nos \emph{datasets}.
 \NormalTok{\}}
 \NormalTok{########################### Inicio }
 
-\CommentTok{# colocar o diretorio onde estÃ¡ o arquivo json de perfis a serem lidos }
+\CommentTok{# colocar o diretorio onde está o arquivo json de perfis a serem lidos }
 \NormalTok{unb.prof.json <-}\StringTok{ }\KeywordTok{read_file}\NormalTok{(}\StringTok{"Matematica.profile.json"}\NormalTok{)}
 \CommentTok{# unb.prof.df.capes <- read.csv("data/PesqPosCapes.csv", }
 \CommentTok{#                               sep = ";", header = TRUE, colClasses = "character")}
@@ -2287,15 +2056,7 @@ novas variÃ¡veis a partir de outras presentes nos \emph{datasets}.
 
 \CommentTok{# extrai producao bibliografica de todos os professores }
 \NormalTok{unb.prof.df.publicacoes <-}\StringTok{ }\KeywordTok{extrai_producoes}\NormalTok{(unb.prof)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning: package 'bindrcpp' was built under R version 3.4.4
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{#extrai orientacoes }
 \NormalTok{unb.prof.df.orientacoes <-}\StringTok{ }\KeywordTok{extrai_orientacoes}\NormalTok{(unb.prof)}
 
@@ -2306,7 +2067,7 @@ novas variÃ¡veis a partir de outras presentes nos \emph{datasets}.
 \CommentTok{# save(unb.prof.df.professores, unb.prof.df.publicacoes,}
 \CommentTok{#      unb.prof.df.orientacoes, unb.prof.df.areas.de.atuacao, file = "dataframes.Rda")}
 
-\CommentTok{#cria arquivo para anÃ¡lise}
+\CommentTok{#cria arquivo para análise}
 \CommentTok{# unb.prof.df <- data.frame()}
 \CommentTok{# unb.prof.df <- unb.prof.df.professores %>% }
 \CommentTok{#   select(idLattes, nome, resumo_cv, senioridade) %>% }
@@ -2343,225 +2104,688 @@ novas variÃ¡veis a partir de outras presentes nos \emph{datasets}.
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{CRISP-DM Fase.Atividade 3.4 - IntegraÃ§Ã£o dos
-dados}\label{crisp-dm-fase.atividade-3.4---integraaao-dos-dados}
+\section{CRISP-DM Fase.Atividade 4 - Avaliação dados qualitativos e
+quantitativos}\label{crisp-dm-fase.atividade-4---avaliacao-dados-qualitativos-e-quantitativos}
 
-Como jÃ¡ informado, a integraÃ§Ã£o dos dados envolve a uniÃ£o (merge) de
-diferentes tabelas para criar um Ãºnico \emph{dataset} para ser
-utilizado no R, por exemplo.
+\subsection{Orientações do PPG de Ensino
+Ciências}\label{orientacoes-do-ppg-de-ensino-ciencias}
 
-\subsection{CRISP-DM Fase.Atividade 3.5 - FormataÃ§Ã£o dos
-dados}\label{crisp-dm-fase.atividade-3.5---formataaao-dos-dados}
+Como foi dito o foco da análise será nas publicações realizadas pelo
+programa. Os tipos de publicações envolvem periódicos, livros, capítulos
+de livros, textos em jornais, eventos, artigos e outras demais
+publicações. Abaixo teremos as quantidades totais de registros no
+conjunto de dados obtidos:
 
-Como jÃ¡ informado, a formataÃ§Ã£o de dados envolve a realizaÃ§Ã£o de
-pequenas alteraÃ§Ãµes na estrutura dos dados, como a ordem das
-variÃ¡veis, para permitir a execuÃ§Ã£o de determinado mÃ©todo de data
-mining.
+\includegraphics{Relatório_4_files/figure-latex/plot3-1.pdf}
 
-\section{\texorpdfstring{CRISP-DM Fase 4 -
-\textbf{Modelagem}}{CRISP-DM Fase 4 - Modelagem}}\label{crisp-dm-fase-4---modelagem}
+As maiores quantidades observadas são de participações em periódicos e
+de eventos sejam eles internacionais ou nacionais. Participações em
+eventos geralmente evidenciam algum tipo de engajamento dos
+pesquisadores com as comunidades externas a universidade e podem trazer
+informações importantes sobre o quanto determinado departamento da UNB
+influencia ou é influenciado por outras comunidades. A seguir teremos as
+quantidades especificadas de participações em eventos:
 
-Como jÃ¡ informado, na fase de \textbf{Modelagem} no CRISP-DM ocorre a
-construÃ§Ã£o e avaliaÃ§Ã£o de modelos estatÃ­sticos ou computacionais,
-podendo ser realizada em quatro atividades genÃ©ricas, a seguir
-organizadas na forma de seÃ§Ãµes
+\includegraphics{Relatório_4_files/figure-latex/plot4-1.pdf}
 
-\subsection{CRISP-DM Fase.Atividade 4.1 - SeleÃ§Ã£o das tÃ©cnicas de
-modelagem}\label{crisp-dm-fase.atividade-4.1---seleaao-das-tacnicas-de-modelagem}
+Como pode-se notar a maior quantidade de participações são de eventos
+nacionais, com destaque também para participações em Portugal e na
+Espanha, o que indica que o departamento tende a se relacionar
+majoritariamente com países que não possuam grandes barreiras
+línguisticas em relação ao português do Brasil.
 
-\subsection{CRISP-DM Fase.Atividade 4.2 - RealizaÃ§Ã£o de testes de
-modelagem}\label{crisp-dm-fase.atividade-4.2---realizaaao-de-testes-de-modelagem}
+Ao analisar as publicações realizadas pelo programa também podemos notar
+que em sua grande maioria são focadas em periódicos nacionais o que
+fortalece a ideia de que o departamento tende a manter sua influência
+apenas dentro do país. Isto poderia ser explicado pelo fato de que as
+áreas de pesquisa do programa são mais aplicáveis ou fazem mais sentido
+em um contexto brasileiro, talvez por questões culturais ou até mesmo
+porque o ensino sempre deve ser algo particular de uma população (o que
+é o foco do PPG). Abaixo podemos observar os dez periódicos em que
+ocorreram mais publicações pelo programa:
 
-Como jÃ¡ informado, na realizaÃ§Ã£o de testes de modelagem diferentes
-modelos estatÃ­sticos ou computacionais sÃ£o previamente testados e
-avaliados. Pode-se dividir o \emph{dataset} criado na etapa anterior
-para se ter uma base de treino na construÃ§Ã£o de modelos, e outra
-pequena parte para validar e avaliar a eficiÃªncia de cada modelo criado
-atÃ© se chegar ao mais âeficienteâ.
+\includegraphics{Relatório_4_files/figure-latex/plot5-1.pdf}
 
-\subsection{CRISP-DM Fase.Atividade 4.3 - ConstruÃ§Ã£o do modelo
-definitivo}\label{crisp-dm-fase.atividade-4.3---construaao-do-modelo-definitivo}
+Apenas para medir a relevância dos periódicos publicados foram
+verificados os qualis a partir da plataforma sucupira e foram
+identificados para os periódicos acima citados as classificações B5, B2,
+B4, B1 e C que definem um nível de relevância médio, Outro aspecto
+importante de se avaliar são as parcerias que estes orientadores
+realizam, podemos avaliar por exemplo a quantidade de autores associada
+a uma mesma publicação de um periódico e observar se obtemos mais
+publicações solo ou publicações conjuntas e determinar o grau de
+colaboração entre os profissionais.
 
-Como jÃ¡ informado, a construÃ§ao do modelo definitivo Ã© realizada com
-base na melhor experiÃªncia do passo anterior.
+\includegraphics{Relatório_4_files/figure-latex/plot6-1.pdf}
 
-\subsection{CRISP-DM Fase.Atividade 4.4 - AvaliaÃ§Ã£o do
-modelo}\label{crisp-dm-fase.atividade-4.4---avaliaaao-do-modelo}
+O gráfico acima mostra que em sua grande maioria as publicações em
+periódicos envolvem 2 ou 3 pesquisadores e a maior parte da distribuição
+se concentra em colaborações de 2 a 6 pesquisadores. Isto mostra que o
+programa possui um forte grau de colaboração entre seus pesquisadores e
+juntamente com a quantidade de grupos de pesquisa podemos dizer que o
+departamento possui um bom engajamento com relação a produção acadêmica
+sendo realizada na universidade.
 
-\section{\texorpdfstring{CRISP-DM Fase 5 -
-\textbf{AvaliaÃ§Ã£o}}{CRISP-DM Fase 5 - AvaliaÃ§Ã£o}}\label{crisp-dm-fase-5---avaliaaao}
+Com relações aos outros tipos de publicações temos um volume de dados
+menor a serem considerados mas vale a pena também analisa-los de alguma
+forma. Com relação a publicação de livros, temos no total 27 publicações
+todas realizadas para o Brasil, o que evidencia a tendência observada
+anteriormente de que o foco do programa é em território nacional. No
+total existe uma média de 208 páginas por livro e as publicações são
+realizadas em colaborações em sua maioria de 2 e 8 escritores, o que
+também evidencia o caráter colaborativo do programa, sendo que grande
+parte das publicações foram realizadas em 2010 e 2013 com 7 publicações
+e 8 respectivamente.
 
-Como jÃ¡ informado, na fase de \textbf{AvaliaÃ§Ã£o} do CRISP-DM os
-resultados nÃ£o sÃ£o apenas avaliados, mas se verifica se existem
-questÃµes relacionadas Ã~ organizaÃ§Ã£o que nÃ£o foram suficientemente
-abordadas. Deve-se refletir se o uso arepetido do modelo criado pode
-trazer algum âefeito colateralâ para a organizaÃ§Ã£o.
+Para propósitos mais gerais podemos analisar se existe alguma tendência
+em relação a quantidade de cada tipo de produção realizada ao longo do
+tempo pelo PPG. É de se esperar que as quantidades absolutas apresentem
+um aumento com relação ao tempo, uma vez que o departamento apresentou
+uma expansão de seu quadro de docentes em 2010. Também é importante que
+sejam analisadas as distribuições do que é produzido uma vez que isto
+pode revelar algum tipo de influência externa aos pesquisadores, como
+por exemplo um grande evento em que ocorrerão mais publicações ou algum
+período de crise em que as verbas de pesquisas foram cortadas. Abaixo
+seguem os modelos de regressão que apresentam as tendências para cada
+tipo de produção:
 
-Como jÃ¡ informado, nesta fase, pode-se trabalhar com 3 atividades
-genÃ©ricas, a seguir distribuÃ­das em seÃ§Ãµes.
+\includegraphics{Relatório_4_files/figure-latex/plot7-1.pdf}
 
-\subsection{CRISP-DM Fase.Atividade 5.1 - AvaliaÃ§Ã£o dos
-resultados}\label{crisp-dm-fase.atividade-5.1---avaliaaao-dos-resultados}
+Como podemos notar, a quantidade de participações em eventos veio
+decrescendo nos últimos anos, talvez devido a cortes recentes em verbas
+acadêmicas que podem estar fortemente associadas a crise em que o país
+vem vivendo nos últimos anos. Já as participações em periódicos
+demostraram um aumento considerável o que pode também estar associado a
+diminuição de participações em eventos. Para os demais tipos de
+publicações não existe uma tendência clara uma vez que os mesmos se
+apresentaram relativamente constantes nos últimos 7 anos.
 
-\subsection{CRISP-DM Fase.Atividade 5.2 - RevisÃ£o do
-processo}\label{crisp-dm-fase.atividade-5.2---revisao-do-processo}
+\subsection{Orientações do PPG
+Matemática}\label{orientacoes-do-ppg-matematica}
 
-Como jÃ¡ informado, durante a revisÃ£o do processo verifica-se se o
-modelo foi construÃ­do adequadamente. As variÃ¡veis (passadas) para
-construir o modelo estarÃ£o disponÃ­veis no futuro?
+Para o DataSet profile de Matemática foi utilizado \texttt{fromJSON}
+para importar \texttt{Matematica.profile.json} recebendo a estrutura na
+variável \texttt{perfis}. Com o comando \texttt{length(names(perfis))}
+recebemos o valor de 44, o que indica o números e professores no
+departamento de matemática. Para fins de análise utilizaremos a
+quantidade de orientações de cada tipo que cada professor fez até o
+momento da extração dos dados. Após uma série de tratamentos da tabela
+demonstrados nos passos abaixo foi possível separar o número de tipos de
+orientações por professor. Assim, por motivos de vizualização pegamos os
+25 professores com maior número de orientações e inserimos em um gráfico
+de barras, apresentado logo abaixo.
 
-\subsection{CRISP-DM Fase.Atividade 5.3 - DeterminaÃ§Ã£o dos etapas
-seguintes}\label{crisp-dm-fase.atividade-5.3---determinaaao-dos-etapas-seguintes}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{perfis <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\StringTok{"Matematica.profile.json"}\NormalTok{)}
+\NormalTok{orient_prof_perfis <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(perfis, }\ControlFlowTok{function}\NormalTok{(x) x}\OperatorTok{$}\NormalTok{orientacoes_academicas)}
+\NormalTok{tipos_orientacoes <-}\StringTok{ }\KeywordTok{unique}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(orient_prof_perfis, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{names}\NormalTok{(x))))}
+\NormalTok{table_orientacoes <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\DataTypeTok{ncol =} \DecValTok{7}\NormalTok{, }\DataTypeTok{nrow =} \DecValTok{0}\NormalTok{))}
+\KeywordTok{colnames}\NormalTok{(table_orientacoes) <-}\StringTok{ }\NormalTok{tipos_orientacoes}
 
-Como jÃ¡ informado, pode ser necessÃ¡rio decidir-se por finalizar o
-projeto, passar Ã~ etapa de desenvolvimento, ou rever algumas fases
-anteriores para a melhoria do projeto.
+\ControlFlowTok{for}\NormalTok{(prof }\ControlFlowTok{in}\NormalTok{ perfis)\{}
+\NormalTok{  aux <-}\StringTok{ }\NormalTok{prof}\OperatorTok{$}\NormalTok{orientacoes_academicas}
+\NormalTok{  total <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(aux, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{titulo))}
+\NormalTok{  total <-}\StringTok{ }\KeywordTok{append}\NormalTok{(total, }\KeywordTok{list}\NormalTok{(}\DataTypeTok{nome =}\NormalTok{ prof}\OperatorTok{$}\NormalTok{nome))}
+\NormalTok{  table_orientacoes <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(table_orientacoes, total)}
+\NormalTok{\}}
+\NormalTok{total <-}\StringTok{ }\KeywordTok{rowSums}\NormalTok{(table_orientacoes[,}\DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(table_orientacoes)}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{na.rm=}\OtherTok{TRUE}\NormalTok{)}
 
-\section{\texorpdfstring{CRISP-DM Fase 6 - \textbf{ImplantaÃ§Ã£o}
-(\emph{deployment})}{CRISP-DM Fase 6 - ImplantaÃ§Ã£o (deployment)}}\label{crisp-dm-fase-6---implantaaao-deployment}
+\NormalTok{table_orientacoes <-}\StringTok{ }\KeywordTok{bind_cols}\NormalTok{(table_orientacoes, }\DataTypeTok{total =}\NormalTok{ total)}
+\NormalTok{table_orientacoes <-}\StringTok{ }\KeywordTok{arrange}\NormalTok{(table_orientacoes, }\KeywordTok{desc}\NormalTok{(total))}
+\NormalTok{table_orientacoes <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(}\KeywordTok{head}\NormalTok{(table_orientacoes[,}\DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(table_orientacoes)}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DecValTok{25}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
-Como jÃ¡ informado, na fase de \textbf{ImplantaÃ§Ã£o}
-(\emph{deployment}) se realiza o planejamento de implantaÃ§Ã£o dos
-produtos desenvolvidos (scripts, no caso do executado nesta disciplina)
-para o ambiente operacional, para seu uso repetitivo, envolvendo
-atividades de monitoramento e manutenÃ§Ã£o do sistema (script)
-desenvolvido. A fase de implantaÃ§Ã£o concluir com a produÃ§Ã£o e
-apresentaÃ§Ã£o do relatÃ³rio final com os resultados do projeto.
+\begin{verbatim}
+## Using nome as id variables
+\end{verbatim}
 
-Como jÃ¡ informado, sÃ£o seis as atividades genÃ©ricas na fase de
-\textbf{implantaÃ§Ã£o}, a seguir apresentadas na forma de seÃ§Ãµes.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table_orientacoes}\OperatorTok{$}\NormalTok{variable <-}\StringTok{ }\KeywordTok{sub}\NormalTok{(}\StringTok{"_"}\NormalTok{, }\StringTok{" }\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, table_orientacoes}\OperatorTok{$}\NormalTok{variable)}
+\NormalTok{table_orientacoes}\OperatorTok{$}\NormalTok{nome <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"^((}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{W+)\{1\}}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+).*$"}\NormalTok{,}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1"}\NormalTok{, table_orientacoes}\OperatorTok{$}\NormalTok{nome)}
 
-\subsection{CRISP-DM Fase.Atividade 6.1 - Planejamento da
-transiÃ§Ã£o}\label{crisp-dm-fase.atividade-6.1---planejamento-da-transiaao}
+
+\KeywordTok{ggplot}\NormalTok{(table_orientacoes, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{nome, }\DataTypeTok{y=}\NormalTok{value, }\DataTypeTok{fill=}\NormalTok{variable)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{45}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Quantidade de orientações"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Nome do professor"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{guides}\NormalTok{(}\DataTypeTok{fill=}\KeywordTok{guide_legend}\NormalTok{(}\DataTypeTok{keywidth=}\FloatTok{0.2}\NormalTok{, }\DataTypeTok{keyheight=}\FloatTok{0.4}\NormalTok{, }\DataTypeTok{default.unit=}\StringTok{"inch"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 83 rows containing missing values (position_stack).
+\end{verbatim}
+
+\includegraphics{Relatório_4_files/figure-latex/perfis-1.pdf}
+
+O professor com o maior número de orientações foi o
+\href{http://www.mat.unb.br/ayala/}{Maurício Ayala}, pode-se notar uma
+grande diferença entre o número de orientandos dele e dos outros
+orientadores.
+
+\subsection{Publicações PPG MAT}\label{publicacoes-ppg-mat}
+
+Para publicações podemos obter um total de 162 publicações usando o
+código abaixo. Usando \texttt{pub.df\$autores} obtém-se como resultado
+apenas 6 autores com artigos aceitos. Dentre eles, dois estão no gráfico
+apresentado anteriormente: Yuri Dumaresq e Alexei.
+
+Além disso, podemos notar que temos um maior número de publicações em
+eventos, artigos e capítulos de livro. Participações em eventos
+geralmente evidenciam algum tipo de engajamento dos pesquisadores com as
+comunidades externas à universidade e podem trazer informações
+importantes sobre o quanto determinado departamento influencia ou é
+influenciado por outras comunidades.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{publicacoes <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\StringTok{"Matematica.publication.json"}\NormalTok{)}
+
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ publicacoes) \{}
+\NormalTok{  x <-}\StringTok{ }\KeywordTok{append}\NormalTok{(}\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(i, length)), x)}
+\NormalTok{\}}
+
+\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{numero_pesquisas =}\NormalTok{ x, }\DataTypeTok{ano =} \KeywordTok{names}\NormalTok{(publicacoes)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{, }\DataTypeTok{y =}\NormalTok{ numero_pesquisas, }\DataTypeTok{fill =}\NormalTok{ ano)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{, }\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =} \KeywordTok{paste0}\NormalTok{(}\KeywordTok{round}\NormalTok{(numero_pesquisas), }\StringTok{""}\NormalTok{)), }
+            \DataTypeTok{position =} \KeywordTok{position_stack}\NormalTok{(}\DataTypeTok{vjust =} \FloatTok{0.5}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_polar}\NormalTok{(}\StringTok{"y"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_void}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Relatório_4_files/figure-latex/publicacoes-1.pdf}
+
+A seguir, temos dois gráficos que mostram o número de eventos de acordo
+o ano e país do evento. Podemos notar que o PPG participou de um maior
+número de eventos em 2014, 2012 e 2011, respectivamente. O que indica
+uma queda considerável no número de participações. Também podemos
+perceber que o PPG participa de vários eventos nos Estados Unidos e que
+há um número considerável de artigos aceitos que pode ser tanto em
+eventos/periódicos nacionais quanto internacionais.
+
+Usando \texttt{length(unique(pub.df3\$periodico))} obtemos como resposta
+243, um número grande de publicações em periódicos \textbf{diferentes}
+de Matemática.
+
+Esses dados indicam um grau considerável de intercionalização do
+programa uma vez que o segundo país com maior número de participação de
+eventos de membros do programa é o Estados Unidos - 38 - e não há
+barreiras linguísticas para as publicações, visto que boa parte de suas
+produções são em periódicos internacionais .
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pub.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(publicacoes}\OperatorTok{$}\NormalTok{ARTIGO_ACEITO))}
+\NormalTok{   pub.df <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(pub.df, publicacoes}\OperatorTok{$}\NormalTok{ARTIGO_ACEITO[[i]])}
+\KeywordTok{glimpse}\NormalTok{(pub.df)}
+\KeywordTok{unique}\NormalTok{(pub.df}\OperatorTok{$}\NormalTok{ano)}
+
+\NormalTok{pub.df2 <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(publicacoes}\OperatorTok{$}\NormalTok{EVENTO))}
+\NormalTok{  pub.df2 <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(pub.df2, publicacoes}\OperatorTok{$}\NormalTok{EVENTO[[i]])}
+\KeywordTok{glimpse}\NormalTok{(pub.df2)}
+
+\NormalTok{pub.df2 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(pais_do_evento, ano_do_trabalho) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{eventos =} \KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(eventos)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ ano_do_trabalho, }\DataTypeTok{y =}\NormalTok{ eventos, }\DataTypeTok{col =}\NormalTok{ pais_do_evento, }
+             \DataTypeTok{group =}\NormalTok{ pais_do_evento)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Relatório_4_files/figure-latex/publicacoes2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pub.df2 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(pais_do_evento) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{eventos =} \KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(eventos)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(eventos, }\DataTypeTok{fill =}\NormalTok{ pais_do_evento)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ ..density..), }\DataTypeTok{binwidth =} \DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Relatório_4_files/figure-latex/publicacoes2-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pub.df3 <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(publicacoes}\OperatorTok{$}\NormalTok{PERIODICO))}
+\NormalTok{   pub.df3 <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(pub.df3, publicacoes}\OperatorTok{$}\NormalTok{PERIODICO[[i]])}
+\KeywordTok{glimpse}\NormalTok{(pub.df3)}
+\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(pub.df3}\OperatorTok{$}\NormalTok{periodico))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Orientações PPG MAT}\label{orientacoes-ppg-mat}
+
+No gráfico abaixo temos o número de bolsistas do programa. Boa parte das
+bolsas se concentram no grupo que está fazendo dissertação de mestrado,
+o que já era de se esperar pois há um maior número de Mestrandos do que
+de Doutorandos, analisando o DataSet \textbf{OASIS}.
+
+\includegraphics{graph.png}
+
+Além disso, 2014 foi o ano com o maior número de bolsistas: 47 do total
+de 236 bolsas avaliadas desde 2010. O número de bolsas sofreu um grande
+aumento em relação à anos anteriores, o que indica crescimento e
+desenvolvimento do programa desde 2010. Entretanto, em 2017 este número
+caiu para 29. Que pode ser interpretado como uma reflexão do menor
+número de mestrandos no programa ou um menor número de bolsas
+disponíveis.
+
+O ano de 2014 também foi o ano com resultados mais expressivos para
+publicações do programa, conforme comentado anteriormente. Isso nos
+mostra uma relação direta entre o número de bolsas para orientações e
+publicações.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{orientacoes <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\StringTok{"Matematica.advise.json"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(orientacoes)}
+\CommentTok{# orientacoes <- orientacoes[-4:-5] # Tirar dados da Graduação}
+\KeywordTok{names}\NormalTok{(orientacoes)}
+
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(orientacoes}\OperatorTok{$}\NormalTok{ORIENTACAO_EM_ANDAMENTO_DE_POS_DOUTORADO, length))}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(orientacoes}\OperatorTok{$}\NormalTok{ORIENTACAO_EM_ANDAMENTO_DOUTORADO, length))}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(orientacoes}\OperatorTok{$}\NormalTok{ORIENTACAO_EM_ANDAMENTO_MESTRADO, length))}
+
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(orientacoes}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_POS_DOUTORADO, length))}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(orientacoes}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_DOUTORADO, length))}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(orientacoes}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_MESTRADO, length))}
+
+\NormalTok{ori.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ orientacoes) \{}
+  \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in}\NormalTok{ i) \{}
+\NormalTok{    ori.df <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(ori.df, j)}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\KeywordTok{glimpse}\NormalTok{(ori.df)}
+\KeywordTok{unique}\NormalTok{(ori.df}\OperatorTok{$}\NormalTok{natureza)}
+\KeywordTok{unique}\NormalTok{(ori.df}\OperatorTok{$}\NormalTok{curso)}
+
+\NormalTok{ori.df}\OperatorTok{$}\NormalTok{curso <-}\StringTok{ }
+\StringTok{  }\NormalTok{ori.df}\OperatorTok{$}\NormalTok{curso }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\StringTok{"Dotorado em matemática"}\NormalTok{, }\StringTok{"Doutorado em Matemática"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\StringTok{"Doutorado em Matematica"}\NormalTok{, }\StringTok{"Doutorado em Matemática"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\StringTok{"Doutorado em matemática"}\NormalTok{, }\StringTok{"Doutorado em Matemática"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\StringTok{"Matematica"}\NormalTok{, }\StringTok{"Matemática"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\StringTok{"matemática"}\NormalTok{, }\StringTok{"Matemática"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\StringTok{"matematica"}\NormalTok{, }\StringTok{"Matemática"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\StringTok{"Ciências da Computação"}\NormalTok{, }\StringTok{"Ciência da Computação"}\NormalTok{)}
+
+\NormalTok{ori.df }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(bolsa }\OperatorTok{==}\StringTok{ "SIM"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(natureza, curso) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{bolsas =} \KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(bolsas)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ natureza, }\DataTypeTok{y =}\NormalTok{ bolsas, }\DataTypeTok{col =}\NormalTok{ curso)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_jitter}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{45}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Relatório_4_files/figure-latex/orientacoes-1.pdf}
+\#\#AQUI VAI O DO PAULO
+
+O dataset MatematicaRedeResearchers.json contém todas as áreas em que
+existem algum tipo de produção científica, a nível de pós-graduação,
+produzida ou em produção até 2017 por membros do Departamento de
+Matemática. Como é possível notar os temas desenvolvidos não são
+exculivamente da Matemática ou ainda das Ciências Exatas, existe uma
+flexibilização que permite ao pesquisador trabalhar em diferentes campos
+do saber. Outro dado interessante é o desenvolvimento de trabalhos na
+área da educação o que valida as informações apresentadas no site do
+departamento onde são apresentados diversos projetos nesse âmbito.
+
+print(administração)
+
+\#\# {[}1{]} 1
+
+print(educação)
+
+\#\# {[}1{]} 4
+
+print(engBioMédica)
+
+\#\# {[}1{]} 1
+
+print(matemática)
+
+\#\# {[}1{]} 26
+
+print(ProbeEstat)
+
+\#\# {[}1{]} 2
+
+print(Psicologia)
+
+\#\# {[}1{]} 2
+
+Visando aprofundar as análises será dado foco ao grupo de quatro
+pesquisadores do Departamento de Matemática que desenvolveram trabalhos
+na área da Psicologia. Estes podem ser identifados pelo número de seu ID
+do Currículo Lattes, como já é conhecido temos dois resultados:
+
+\begin{verbatim}
+##  chr [1:2] "0556476746202406" "5874654544324539"
+\end{verbatim}
+
+De posse dos IDs é possível fazer algumas observações, para tal foi
+adicionado o dataset MatematicaRede.profile.json que contém o perfil
+Lattes de todos os membros do departamento. De posse dessas informações
+é possível comprovar a existência dos pesquisadores com os ID que foram
+encontrados e ainda verificar se eles, mesmo sendo ``nativos'' da
+Matemática, possuem alguma pesquisa na área da Psicologia olhando suas
+áreas de atuação:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(pesq1 <-}\StringTok{ }\KeywordTok{data_frame}\NormalTok{(perfil}\OperatorTok{$}\StringTok{`}\DataTypeTok{0556476746202406}\StringTok{`}\OperatorTok{$}\NormalTok{areas_de_atuacao}\OperatorTok{$}\NormalTok{area))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'tbl_df', 'tbl' and 'data.frame':    3 obs. of  1 variable:
+##  $ perfil$`0556476746202406`$areas_de_atuacao$area: chr  "Matemática" "Educação" "Psicologia"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(pesq2 <-}\StringTok{ }\KeywordTok{data_frame}\NormalTok{(perfil}\OperatorTok{$}\StringTok{`}\DataTypeTok{5874654544324539}\StringTok{`}\OperatorTok{$}\NormalTok{areas_de_atuacao}\OperatorTok{$}\NormalTok{area))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'tbl_df', 'tbl' and 'data.frame':    4 obs. of  1 variable:
+##  $ perfil$`5874654544324539`$areas_de_atuacao$area: chr  "Matemática" "Educação" "Educação" "Psicologia"
+\end{verbatim}
+
+Ainda sobre as áreas de pesquisa é possível notar, como talvez já fosse
+esperado, que as sub-áreas da Matemáticas são majoritariamente as mais
+buscadas para desenvolvimento de pesquisas e isso pode ser verificado no
+gráfico a seguir que mostra a distribuição das pesquisas por área e
+diante do número pode-se afirmar que as sub-áres da Matemática são as de
+maior interesse e por consequência possuem os \textbf{resultados mais
+relevantes}.
+\includegraphics{Relatório_4_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+Limitando o escopo de análise aos pesquisadores que se dedicaram à
+pesquisas envolvendo temas da Psicologia é interessante analisar que se
+em algum momento antes de adquirirem seus títulos eles se dedicaram de
+alguma forma ao estudo da Psicologia. Para isso é feita uma análise dos
+resumos dos seus currículos Lattes. Devido
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{resumo_pesq1 <-}\StringTok{ }\NormalTok{(perfil}\OperatorTok{$}\StringTok{`}\DataTypeTok{0556476746202406}\StringTok{`}\OperatorTok{$}\NormalTok{resumo_cv )}
+\NormalTok{resumo_pesq2 <-}\StringTok{ }\NormalTok{(perfil}\OperatorTok{$}\StringTok{`}\DataTypeTok{5874654544324539}\StringTok{`}\OperatorTok{$}\NormalTok{resumo_cv)}
+\NormalTok{resumo_pesq1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Professor Associado I na Universidade de Brasília - UnB, com lotação no Departamento de Matemática. É membro do Programa de Pós-Graduação em Educação da UnB, orientando pesquisas nos cursos de mestrado acadêmico e doutorado em educação. Possui graduação em Licenciatura em Ciências e Matemática pelo Centro Universitário de Brasília (1991), mestrado em Educação pela Universidade de Brasília (1999) e doutorado em Psicologia pela Universidade de Brasília (2007). Tem experiência na área de Matemática, com ênfase em Educação Matemática, atuando principalmente nos seguintes temas: criatividade em matemática, avaliação em matemática e resolução de problemas."
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{resumo_pesq2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Possui Licenciatura em Matemática (1995) e Especialização em Matemática (1998) pela Universidade Federal de Goiás, Mestrado em Educação (2002) e Doutorado em Psicologia (2008) pela Universidade de Brasília. Tem experiência profissional: 1) na Educação Básica como docente de matemática e coordenadora de área em instituições de ensino públicas e particulares; 2) no Ensino Superior como docente nos Cursos de Licenciatura em Matemática e Pedagogia e Coordenadora do Curso de Licenciatura em Matemática; 3) na pós-graduação como docente dos cursos de Especialização em Educação Matemática e Psicopedagogia;coordenadora do Curso de Especialização em Educação Matemática; 4) na Educação à Distância como tutora, formadora e autora de material didático para a formação continuada de professores que ensinam matemática (Ensino Fundamental Anos Iniciais e Finais; Ensino Médio) e alfabetizadores de Jovens e Adultos; Atuou como primeira secretária da Sociedade Brasileira de Educação Matemática (gestão 2010-2013); Desenvolve consultorias desde 2002 para o Ministério da Educação (MEC), Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep) e Secretarias Estaduais de Educação nas áreas de tecnologia educacional, formação de professores (presencial, semipresencial e à distância) e avaliação em matemática; Atualmente é professora adjunta, coordenadora da comissão de extensão e membro do Núcleo Docente Estruturante (NDE) do Departamento de Matemática da Universidade de Brasília(UnB); Coordenadora da Extensão do Instituto de Exatas; Docente do Programa de Pós-Graduação do Instituto de Exatas, Mestrado Profissional em Matemática (PROFMat/IE/UnB); Colaboradora do Programa de Pós-graduação em Educação da Faculdade de Educação (UnB); Colaboradora do Curso de Especialização em Psicopedagogia Clínica e Institucional, do Instituto de Psicologia (UnB); Diretora da Sociedade Brasileira de Educação Matemática - Regional Distrito Federal; Membro dos seguintes Grupos de Pesquisa: Grupo de Investigação em Educação Matemática da UnB; Grupo de Pesquisas Interdisciplinares sobre Tecnologias e Educação (ÁBACO/FE/UnB); Grupo de Pesquisas e Investigações em Educação Matemática (PI/FE/UnB) e Grupo de pesquisa em Psicologia do Conhecimento (COGITO). Coordenadora Geral da I Feira de Matemática do Distrito Federal, realizada no dia 01.09.2017 e do VII Encontro Brasiliense de Educação Matemática, realizado nos dias 01,02 e 03.09.2017."
+\end{verbatim}
+
+Outro dado interessante é analisar o nível de internacionalização das
+produções dos pesquisadores, isso pode ser analisado com a quantidade de
+participações em eventos internacionais e nacionais.Como é possível ver
+através dos gráficos a internacionalização das pequisas pode ser
+considerada baixa, porém existe forte participação desses pesquisadoes
+em âmbito nacional.
+
+\paragraph{Pesquisador
+ID\_0556476746202406}\label{pesquisador-id_0556476746202406}
+
+\includegraphics{Relatório_4_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\paragraph{Pesquisador
+ID\_5874654544324539}\label{pesquisador-id_5874654544324539}
+
+\includegraphics{Relatório_4_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+\section{CRISP-DM Fase.Atividade 5 - conclusões dos relatorios
+3}\label{crisp-dm-fase.atividade-5---conclusoes-dos-relatorios-3}
+
+\subsection{Quanto ao PPG de ensino de
+ciências}\label{quanto-ao-ppg-de-ensino-de-ciencias}
+
+Portanto podemos observar que o programa de pós-graduação de ensino em
+ciências apresenta um baixo nível de internacionalização uma vez que
+grande parte de suas produções e orientações são voltadas a alunos de
+instituições nacionais e a periódicos nacionais em sua grande maioria
+publicados em língua portuguesa do Brasil.
+
+É importante também notar que o programa possui um grande grau de
+colaboração entre seus participantes uma vez que a maior parte das
+publicações são realizadas em grupos, assim como as produções literárias
+e artigos produzidos. Também foram observadas mudanças nas produções do
+departamento ao longo dos últimos anos que podem ser analisadas mais a
+fundo, aqui foi proposta uma relação com cortes de fundos mas que devem
+ser avaliados traçando relações com informações sobre o cenário
+brasileiro.
+
+Algumas informações sobre a mudança no quadro de funcionários também foi
+levantada durante a pesquisa e poderá também ser avaliada com mais
+profundidade para averiguar qual o real impacto disso no programa.
+
+\subsection{AQUI VAI O DO PAULO}\label{aqui-vai-o-do-paulo}
+
+O simples estudo dos datasets da Matemática permitiu tirar conclusões
+acerca de seu programa de pós-graduação e validar as informações
+contidas no site do programa. Assim como havia sido afirmado
+anteriormente o Departamento é capaz de oferecer oportunidades de estudo
+em diversos campos do saber, ainda assim não deixa de privilegiar as
+sub-áreas das Ciências Exatas como a Álgebra e a Estatística. De acordo
+com os resultados obtidos é possível notar que as áreas de pós-graduação
+dentro da Matemática que não trabalham diretamente com sub-áreas das
+exatas não possuem o mesmo grau de internacionalização que as demais,
+porém por serem numericamente inferiores não tem impacto direto na nota
+do curso que é alta, outra informação que foi validade de acordo com o
+que está no site do programa.
+
+\section{CRISP-DM Fase.Atividade 6}\label{crisp-dm-fase.atividade-6}
 
 De que forma os produtos desenvolvidos pelo grupo poderiam ser colocados
-em uso prÃ¡tico regular, na organizaÃ§Ã£o cliente?
+em uso prático regular, na organização cliente?
 
 \subsection{CRISP-DM Fase.Atividade 6.2 - Planejamento do monitoramento
 dos
 produtos}\label{crisp-dm-fase.atividade-6.2---planejamento-do-monitoramento-dos-produtos}
 
-De que forma seria possÃ­vel realizar o monitoramento do funcionamento
-dos produtos em utilizaÃ§Ã£o no ambiente operacional?
+De que forma seria possível realizar o monitoramento do funcionamento
+dos produtos em utilização no ambiente operacional?
 
 \subsection{CRISP-DM Fase.Atividade 6.3 - Planejamento de
-manuteÃ§Ã£o}\label{crisp-dm-fase.atividade-6.3---planejamento-de-manuteaao}
+manuteção}\label{crisp-dm-fase.atividade-6.3---planejamento-de-manutecao}
 
-que manutenÃ§Ãµes, ajustes, mudanÃ§as, poderia ter que ser eventualmente
+que manutenções, ajustes, mudanças, poderia ter que ser eventualmente
 realizadas no produto (scripts), quando em uso no ambiente operacional
 do cliente?
 
-\subsection{CRISP-DM Fase.Atividade 6.4 - ProduÃ§Ã£o do relatÃ³rio
-final}\label{crisp-dm-fase.atividade-6.4---produaao-do-relatario-final}
+\subsection{CRISP-DM Fase.Atividade 6.6 - Revisão sobre a execução do
+projeto}\label{crisp-dm-fase.atividade-6.6---revisao-sobre-a-execucao-do-projeto}
 
-A entrega do relatÃ³rio do grupo, tomando como base este aqui, reflete a
-execuÃ§Ã£o desta etapa.
+O trabalho feito visou o estudo de tudo aquilo que é produzido
+cientificamente pela universidade (ciência da ciência) e qual a
+relevância destas descobertas para os próprios pesquisadores e alunos,
+com o intuito de validarem o método que utilizam e a qualidade daquilo
+que vem sendo criado.
 
-\subsection{CRISP-DM Fase.Atividade 6.5 - ApresentaÃ§Ã£o do relatÃ³rio
-final}\label{crisp-dm-fase.atividade-6.5---apresentaaao-do-relatario-final}
+A mais antiga das ciências da ciência é a filosofia. A tarefa da
+filosofia consistiu, durante séculos, em estabelecer o melhor método do
+conhecimento verdadeiro, e depois aplicá-lo para o entendimento do
+mundo, da religião e da moral. A ciência da ciência é hoje uma atividade
+multi-disciplinar, com muitas abordagens distintas.
 
-Como jÃ¡ informado, nÃ£o serÃ¡ feita apresentaÃ§Ã£o do relatÃ³rio, mas
-esperamos que publicaÃ§Ãµes cientÃ­ficas possam ser geradas com pelo seu
-grupo, com o apoio dos professores da disciplina.
+O pensamento lógico já se demonstrou ineficiente para criação de teorias
+científicas e para descrever a natureza. René Descartes, já afirmava
+que: ``Matemática é uma ferramenta para se fazer ciência, mas não é uma
+ciência''. Isso ocorre, pois palavras e números não existem na natureza,
+portanto não são ciência. Mas, a matemática já se mostrou ótima
+ferramenta para o estudo e formulação de teorias científicas.
 
-\subsection{CRISP-DM Fase.Atividade 6.6 - RevisÃ£o sobre a execuÃ§Ã£o do
-projeto}\label{crisp-dm-fase.atividade-6.6---revisao-sobre-a-execuaao-do-projeto}
+A Matemática é essencial para muitas ciências. A função mais importante
+da Matemática na ciência é o papel que ela possui na expressão de
+modelos científicos. Medidas de coleta e observação, bem como
+hipotetizar e prever, geralmente requerem modelos matemáticos e um
+extensivo uso da Matemática. Os ramos matemáticos mais utilizados na
+ciência incluem o cálculo e a estatística, apesar de virtualmente cada
+ramo da Matemática ter aplicações, mesmo áreas ``puras'' tais como a
+teoria numérica e a topologia. A Matemática prevalece mais na Física, e
+menos em Química e algumas ciências sociais. Alguns pensadores vêem os
+matemáticos como cientistas, considerando os experimentos físicos como
+não essenciais ou as provas matemáticas como equivalentes a
+experimentos. Outros não vêem a Matemática como ciência, já que ela não
+requer teste experimental de suas teorias e hipóteses. Em qualquer caso,
+o fato de que a Matemática é uma ferramenta útil na descrição do
+universo é uma questão da Filosofia da Matemática. Richard Feynman
+disse: ``A Matemática não é real, mas se sente real. Onde é esse
+lugar?'', enquanto que a definição favorita de Bertrand Russell sobre a
+Matemática é ``o assunto no qual nunca sabemos do que estamos falando
+nem se o que estamos dizendo está certo.''
 
-Deve-se fazer aqui o registro de liÃ§Ãµes aprendidas, bem como traÃ§adas
-perspectivas futuras de aprimoramento deste trabalho, da disciplina de
-CiÃªncia de Dados para Todos etc.
+O programa de pós-graduação sendo avaliado gerou ao longo dos anos
+diversos subprodutos que são consequências direta da atividade
+cientifica como por exemplo publicações e ou orientações acadêmicas que
+podem ser avaliadas para gerar um feedback qualitativo sobre o programa.
+Algumas questões devem ser levantadas ao realizar estes estudos, entre
+elas como definir uma métrica para o que está sendo avaliado? Sabemos
+que grande parte das bases de dados internacionais indexam apenas
+pesquisas realizadas em língua inglesa, portanto como é possível avaliar
+o impacto internacional do que é produzido no país?
 
-\section{ReferÃªncias}\label{referancias}
+Estas questões são discutidas e exploradas na ciência da ciência poís
+devemos ser capazes de medir e validar o impacto do que é produzido em
+nossas universidade e como é possível melhorar o que vem sendo
+produzido. Existem grupos de pesquisa como por exemplo o Science and
+Evaluation Studies(SES) que se dedicam exclusivamente ao estudo de
+métricas de avaliações de pesquisas cientificas.
+
+A plataforma Lattes vem com o objetivo de auxiliar nos estudos acerca da
+produção realizada na universidade. Diversos conjuntos de dados
+acadêmicos são agregados com o intuito de gerar um material organizado e
+padronizado para que outros usuários possam disfrutar destas
+informações. Os estudos aqui realizados se baseiam nos conjuntos de
+dados fornecidos a respeito de publicações, orientações e perfis
+agregados pela própria plataforma do Lattes que se tornou bastante
+relevante no momento de definir nossas métricas de avaliação.
+
+\section{Referências}\label{referencias}
 
 \begin{itemize}
 \tightlist
 \item
-  Azevedo, MÃ¡rio Luiz Neves de, JoÃ£o Ferreira de Oliveira, e AfrÃ¢nio
-  Mendes Catani. âO Sistema Nacional de PÃ³s-GraduaÃ§Ã£o (SNPG) e o
-  Plano Nacional de EducaÃ§Ã£o (PNE 2014-2024): regulaÃ§Ã£o, avaliaÃ§Ã£o
-  e financiamentoâ. Revista Brasileira de PolÃ­tica e AdministraÃ§Ã£o
-  da EducaÃ§Ã£o 32, nÂº 3 (2016).
+  Azevedo, Mário Luiz Neves de, João Ferreira de Oliveira, e Afrânio
+  Mendes Catani. ``O Sistema Nacional de Pós-Graduação (SNPG) e o Plano
+  Nacional de Educação (PNE 2014-2024): regulação, avaliação e
+  financiamento''. Revista Brasileira de Política e Administração da
+  Educação 32, nº 3 (2016).
   \url{http://dx.doi.org/10.21573/vol32n32016.68576}.
 \item
-  Can, Fazli, Tansel Ãzyer, e Faruk Polat, orgs. State of the Art
+  Can, Fazli, Tansel Özyer, e Faruk Polat, orgs. State of the Art
   Applications of Social Network Analysis. Lecture Notes in Social
   Networks. Switzerland: Springer International Publishing, 2014.
 \item
-  CAPES. âDocumentos de Ãreaâ. CAPES.gov.br. Acessado 12 de junho
-  de 2018.
+  CAPES. ``Documentos de Área''. CAPES.gov.br. Acessado 12 de junho de
+  2018.
   \url{http://avaliacaoquadrienal.capes.gov.br/documentos-de-area}.
 \item
-  âââ. âPlano Nacional de PÃ³s-GraduaÃ§Ã£o - PNPG 2011/2020 Vol.
-  1â. BrasÃ­lia - DF, dezembro de 2010.
+  ---------. ``Plano Nacional de Pós-Graduação - PNPG 2011/2020 Vol.
+  1''. Brasília - DF, dezembro de 2010.
   \url{http://www.capes.gov.br/images/stories/download/Livros-PNPG-Volume-I-Mont.pdf}.
 \item
-  âââ. âPlano Nacional de PÃ³s-GraduaÃ§Ã£o - PNPG 2011/2020 Vol.
-  2â. BrasÃ­lia - DF, dezembro de 2010.
+  ---------. ``Plano Nacional de Pós-Graduação - PNPG 2011/2020 Vol.
+  2''. Brasília - DF, dezembro de 2010.
   \url{http://www.capes.gov.br/images/stories/download/PNPG_Miolo_V2.pdf}.
 \item
-  âââ. âSucupira: coleta de dados, docentes de pÃ³s-graduaÃ§Ã£o
-  stricto sensu no Brasil 2015â. CAPES - Banco de Metadados, 16 de
-  marÃ§o de 2016.
+  ---------. ``Sucupira: coleta de dados, docentes de pós-graduação
+  stricto sensu no Brasil 2015''. CAPES - Banco de Metadados, 16 de
+  março de 2016.
   \url{http://metadados.capes.gov.br/index.php/catalog/63}.
 \item
   Chapman, Pete, Julian Clinton, Randy Kerber, Thomas Khabaza, Thomas
-  Reinartz, Colin Shearer, e RÃ¼diger Wirth. âCRISP-DM 1.0:
-  Step-by-Step Data Mining Guideâ. USA: CRISP-DM Consortium, 2000.
+  Reinartz, Colin Shearer, e Rüdiger Wirth. ``CRISP-DM 1.0: Step-by-Step
+  Data Mining Guide''. USA: CRISP-DM Consortium, 2000.
   \url{https://www.the-modeling-agency.com/crisp-dm.pdf}.
 \item
-  Datacamp. âMachine Learning with R (Skill Track)â. Datacamp, 2018.
+  Datacamp. ``Machine Learning with R (Skill Track)''. Datacamp, 2018.
   \url{https://www.datacamp.com/tracks/machine-learning}.
 \item
-  Fernandes, Jorge H C, e Ricardo Barros Sampaio.
-  âDataScienceForAllâ. Zotero, 13 de junho de 2018.
+  Fernandes, Jorge H C, e Ricardo Barros Sampaio. ``DataScienceForAll''.
+  Zotero, 13 de junho de 2018.
   \url{https://www.zotero.org/groups/2197167/datascienceforall}.
 \item
-  âââ. âEspecificaÃ§Ã£o do Trabalho Final da Disciplina de
-  CiÃªncia de Dados para Todos 2017.2: Estudo sobre a visibilidade
-  internacional da produÃ§Ã£o cientÃ­fica das pÃ³s-graduaÃ§Ãµes
-  vinculadas Ã~s Ã¡reas de conhecimento da CAPES, na Universidade de
-  BrasÃ­lia (ComunicaÃ§Ã£o Interna)â. Disciplina 116297 - TÃ³picos
-  AvanÃ§ados em Computadores, turma D, do semestre 2017.2, do
-  Departamento de CiÃªncia da ComputaÃ§Ã£o do Instituto de CiÃªncias
-  Exatas da Universidade de BrasÃ­lia, 28 de novembro de 2017.
+  ---------. ``Especificação do Trabalho Final da Disciplina de Ciência
+  de Dados para Todos 2017.2: Estudo sobre a visibilidade internacional
+  da produção científica das pós-graduações vinculadas às áreas de
+  conhecimento da CAPES, na Universidade de Brasília (Comunicação
+  Interna)''. Disciplina 116297 - Tópicos Avançados em Computadores,
+  turma D, do semestre 2017.2, do Departamento de Ciência da Computação
+  do Instituto de Ciências Exatas da Universidade de Brasília, 28 de
+  novembro de 2017.
   \url{https://aprender.ead.unb.br/pluginfile.php/474549/mod_resource/content/1/Estudo\%20da\%20Cie\%CC\%82ncia.pdf}.
 \item
-  Fernandes, Jorge H C, Ricardo Barros Sampaio, e JoÃ£o Ribas de Moura.
-  âCiÃªncia de Dados para Todos (Data Science For All) - 2018.1 -
-  AnÃ¡lise da ProduÃ§Ã£o CientÃ­fica e AcadÃªmica da Universidade de
-  BrasÃ­lia - Modelo de RelatÃ³rio Final da Disciplina - Departamento de
-  CiÃªncia da ComputaÃ§Ã£o da UnBâ. Disciplina 116297 - TÃ³picos
-  AvanÃ§ados em Computadores, turma D, do semestre 2018.1, do
-  Departamento de CiÃªncia da ComputaÃ§Ã£o do Instituto de CiÃªncias
-  Exatas da Universidade de BrasÃ­lia, 13 de junho de 2018.
+  Fernandes, Jorge H C, Ricardo Barros Sampaio, e João Ribas de Moura.
+  ``Ciência de Dados para Todos (Data Science For All) - 2018.1 -
+  Análise da Produção Científica e Acadêmica da Universidade de Brasília
+  - Modelo de Relatório Final da Disciplina - Departamento de Ciência da
+  Computação da UnB''. Disciplina 116297 - Tópicos Avançados em
+  Computadores, turma D, do semestre 2018.1, do Departamento de Ciência
+  da Computação do Instituto de Ciências Exatas da Universidade de
+  Brasília, 13 de junho de 2018.
 \item
   Frickel, Scott, e Kelly Moore. The New Political Sociology of Science:
   Institutions, Networks, and Power. Science and technology in society.
   USA: The University of Wisconsin Press, 2006.
 \item
-  Graduate Prospects Ltd. âJob profile: Higher education lecturerâ,
+  Graduate Prospects Ltd. ``Job profile: Higher education lecturer'',
   2018.
   \url{https://www.prospects.ac.uk/job-profiles/higher-education-lecturer}.
 \item
-  Kalpazidou Schmidt, Evanthia, e Ebbe Krogh Graversen. âPersistent
-  factors facilitating excellence in research environmentsâ. Higher
-  Education 75, nÂº 2 (1Âº de fevereiro de 2018): 341â``63.
+  Kalpazidou Schmidt, Evanthia, e Ebbe Krogh Graversen. ``Persistent
+  factors facilitating excellence in research environments''. Higher
+  Education 75, nº 2 (1º de fevereiro de 2018): 341--63.
   \url{https://doi.org/10.1007/s10734-017-0142-0}.
 \item
   Kilduff, Martin, e Wenpin Tsai. Social Networks and Organizations. UK:
   Sage Publications, 2003.
 \item
-  Kolaczyk, Eric D., e GÃ¡bor CsÃ¡rdi. Statistical Analysis of Network
+  Kolaczyk, Eric D., e Gábor Csárdi. Statistical Analysis of Network
   Data with R. USA: Springer, 2014.
 \item
   Kuhn, Max, Jed Wing, Steve Weston, Andre Williams, Chris Keefer, Allan
-  Engelhardt, Tony Cooper, et al. âPackage âCaretâ -
-  Classification and Regression Trainingâ, 27 de maio de 2018.
+  Engelhardt, Tony Cooper, et al. ``Package `Caret' - Classification and
+  Regression Training'', 27 de maio de 2018.
   \url{https://cran.r-project.org/web/packages/caret/caret.pdf}.
 \item
-  Leite, Fernando CÃ©sar Lima. âConsideraÃ§Ãµes bÃ¡sicas sobre a
-  AvaliaÃ§Ã£o do Sistema Nacional de PÃ³s-GraduaÃ§Ã£oâ. ComunicaÃ§Ã£o
-  Pessoal (slides). Universidade de BrasÃ­lia, abril de 2018.
+  Leite, Fernando César Lima. ``Considerações básicas sobre a Avaliação
+  do Sistema Nacional de Pós-Graduação''. Comunicação Pessoal (slides).
+  Universidade de Brasília, abril de 2018.
   \url{https://aprender.ead.unb.br/pluginfile.php/502250/mod_resource/content/1/Considera\%C3\%A7\%C3\%B5es\%20b\%C3\%A1sicas\%20sobre\%20a\%20Avalia\%C3\%A7\%C3\%A3o\%20do\%20Sistema\%20Nacional.pdf}.
 \item
   Lusher, Dean, Johan Koskinen, e Garry Robins, orgs. Exponential Random
@@ -2569,30 +2793,30 @@ CiÃªncia de Dados para Todos etc.
   Structural Analysis in the Social Sciences. USA: Cambridge University
   Press, 2013.
 \item
-  Mariscal, Gonzalo, Ã``scar MarbÃ¡n, e Covadonga FernÃ¡ndez. âA
-  survey of data mining and knowledge discovery process models and
-  methodologiesâ. The Knowledge Engineering Review 25, nÂº 2 (2010):
-  137â``66. \url{https://doi.org/10.1017/S0269888910000032}.
+  Mariscal, Gonzalo, Óscar Marbán, e Covadonga Fernández. ``A survey of
+  data mining and knowledge discovery process models and
+  methodologies''. The Knowledge Engineering Review 25, nº 2 (2010):
+  137--66. \url{https://doi.org/10.1017/S0269888910000032}.
 \item
-  Nery, Guilherme, Ana Paula Bragaglia, FlÃ¡via Clemente, e Suzana
-  Barbosa. âNem tudo parece o que Ã©: Entenda o que Ã© plÃ¡gioâ.
-  Instituto de Arte e ComunicaÃ§Ã£o Social da UFF, 2009.
+  Nery, Guilherme, Ana Paula Bragaglia, Flávia Clemente, e Suzana
+  Barbosa. ``Nem tudo parece o que é: Entenda o que é plágio''.
+  Instituto de Arte e Comunicação Social da UFF, 2009.
   \url{http://www.noticias.uff.br/arquivos/cartilha-sobre-plagio-academico.pdf}.
 \item
   Nooy, Wouter de, Andrej Mrvar, e Vladimir Batagelj. Exploratory Social
   Network Analysis with Pajek. Structural Analysis in the Social
   Sciences. USA: Routldge, 2005.
 \item
-  PÃ¡taro, Cristina SaitÃª de Oliveira, e Frank Antonio Mezzomo.
-  âSistema Nacional de PÃ³s-GraduaÃ§Ã£o no Brasil: estrutura,
-  resultados e desafios para polÃ­tica de Estado - LÃ­vio Amaralâ.
-  Revista EducaÃ§Ã£o e Linguagens 2, nÂº 3 (julho de 2013): 11â``17.
+  Pátaro, Cristina Saitê de Oliveira, e Frank Antonio Mezzomo. ``Sistema
+  Nacional de Pós-Graduação no Brasil: estrutura, resultados e desafios
+  para política de Estado - Lívio Amaral''. Revista Educação e
+  Linguagens 2, nº 3 (julho de 2013): 11--17.
 \item
-  Schwartzman, Simon. âA CiÃªncia da CiÃªnciaâ. CiÃªncia Hoje 2, nÂº
-  11 (marÃ§o de 1984): 54â``59.
+  Schwartzman, Simon. ``A Ciência da Ciência''. Ciência Hoje 2, nº 11
+  (março de 1984): 54--59.
 \item
   Silver, Nate. The Signal and the Noise: Why so many predictions fail
-  â but some donât. USA: The Penguin Press HC, 2012.
+  --- but some don't. USA: The Penguin Press HC, 2012.
 \item
   Vicari, Donatella, Akinori Okada, Giancarlo Ragozini, e Claus Wiehs.
   Analysis and Modeling of Complex Data in Behavioral and Social
@@ -2600,7 +2824,7 @@ CiÃªncia de Dados para Todos etc.
   Organization. Switzerland: Springer, 2014.
 \item
   Wickham, Hadley, e Garrett Grolemund. R for Data Science: Import,
-  Tidy, Transform, Visualize, and Model Data. USA: OâReilly, 2016.
+  Tidy, Transform, Visualize, and Model Data. USA: O'Reilly, 2016.
 \end{itemize}
 
 
