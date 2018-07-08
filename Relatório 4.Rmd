@@ -131,7 +131,8 @@ Existem aspectos comuns, mas também grandes peculiaridades, descritas parcialme
 ##A UnB dentro do Sistema Nacional de Pós-Graduação (Contextualização)
 
 ### O que é a UnB?
-Descrição da Universidade de Brasília, com foco na sua produção científica e acadêmica.
+<p>A Universidade de Brasília é uma instituição de ensino superior composta por cinco campus em Brasília e cidades satélites que oferecem formação da graduação à pós-graduação. Do ponto de vista de sua produção científica a UnB ocupa atualmente a posição número 737 no ranking mundial de melhores universidades do mundo  de acordo com o Center for World University Rankings (CWUR), que leva em consideração principalmente premiações, artigos, número de citações, pesquisas e publicações. 
+<p>Em relação às demais universidades do Brasil, segundo o Ranking de Universidades Folha (2017) que classifica as melhores universidades do país, entre as 296 instituições públicas de nível superior a UnB se encontra na posição número 20 sendo a 11ª em número de teses publicadas, a 10ª e número de publicações em revistas nacionais e a 20ª em núméro de publicações por docente.
 
 ###Descrição das pós-graduações da UnB
 
