@@ -1,8 +1,8 @@
 ---
 title:  Ciência de Dados para Todos (Data Science
   For All) - 2018.1 - Análise da Produção Científica e Acadêmica da Universidade de Brasília - Relatório Final da Disciplina - Departamento de Ciência da Computação da UnB
-author: "Jorge H. C. Fernandes, Ricardo B. Sampaio, João Ribas de Moura e Jerônimo A. Filho"
-date: "11/06/2018"
+author: "Raphael Soares, Paulo Henrique Ferreira e Nur Corezzi"
+date: "06/07/2018"
 output:
   html_document:
     df_print: paged
@@ -13,7 +13,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r libraries, echo=FALSE, results='hide'}
+```{r libraries, include = FALSE}
 library(jsonlite)
 library(readxl)
 library(tidyr)
@@ -28,8 +28,6 @@ setwd("~/R/Data-Science")
 O presente relatório tem por objetivo descrever e analisar 3 programas de pós-graduação da UNB, tendo como foco principal dois programas de Pós-Graduação em Matemática da UnB e o  programa de Ensino em Ciências.
 Serão analisados o contexto dos programas de pós-graduação (PPG), para que sejam expostas de maneira organizada as informações levantadas pelos datasets disponibilizados pela plataforma do E-Lattes. Também serão propostas relações com outras bases de dados da UNB como a base do DGP(dados de grupos de pesquisa) e da base OASIS que contém informações sobre as produções nacionais. A metodologia de análise a ser seguida é uma aproximação ao CRISP-DM que visa unificar as formas de se realizar mineração de dados, para que os procedimentos possam ser reproduzidos e possuem algum nivel de confiabilizade com relação ao resultados obtidos.
 
-...
-
 #Metodologia
 
 ## Delimitações iniciais
@@ -42,11 +40,11 @@ O domínio de aplicação do projeto é o da produção científica e acadêmica
 
 ###Tipo de Problema abordado
 
-O tipo de problema abordado é o da produção de análises descritivas, quantitativas e de modelagem computacional ou estatística, que permitam caracterizar como e porque ocorre a produção científica e acadêmica de um grupo de pesquisadores. Essa caracterização visa subsidiar a tomada de decisão por membros do Sistema Nacional de Pós-Graduação. O tipo de problema abordado no projeto deve ser declarado na introdução ao relatório.
+O tipo de problema abordado é o da produção de análises descritivas, quantitativas e de modelagem computacional ou estatística, que permitam caracterizar como e porque ocorre a produção científica e acadêmica de um grupo de pesquisadores. Essa caracterização visa subsidiar a tomada de decisão por membros do Sistema Nacional de Pós-Graduação. É importante que estas analises sejam feitas poís servem de aprimoramento as instituições públicas, para que possam produzir pesquisas e profissionais de qualidade.
+
+Grande parte destas informações não estão disponibilizadas de maneira prática de serem interpretadas, portanto é necessário que sejam tratadas para permitirem melhor acesso e interpretação a usuários que tenham interesse nas produções nacionais acadêmicas. Além disso boa parte dos datasets sendo estudados não foram devidamente padronizados e muitas vezes possuem dados incorretos que também devem ser corrigidos e serão tratados neste relatório.
 
 ##Modelo de Referência CRISP-DM
-
-Miner (2012), aprofunda: “(…) In CRISP-DM, the complete life cycle of a data mining project is represented with __six phases__: business understanding (determining the purpose of the study), data understanding (data exploration and understanding), data preparation, modeling, evaluation, and deployment.(…). [Miner, Gary. Practical Text Mining and Statistical Analysis for Non-structure Text Data Applications. Academic Press, 2012.]
 
 ###Por que usar o CRISP-DM?
 
@@ -62,7 +60,7 @@ Voltando ao exemplo do bolo, a atividade ” 1. Entendimento do Bolo” poderia 
 
 ### Seis Fases do CRISP-DM
 
-Com base no apresentado, segue uma descrição um pouco mais detalhada das seis fases de um projeto no CRISP-DM, interpretadas no contexto deste relatório.
+Com base no apresentado, segue uma descrição um pouco mais detalhada das seis fases de um projeto no CRISP-DM. Neste relatório será seguido um modelo aproximado uma vez que não será realizada a fase de modelagem. A seguir seguem as etapas simplificadas do CRISP-DM. 
 
 #### Entendimento do Negócio
 É o desenvolvimento dos objetivos e declaração das necessidades do projeto sob a perspectiva do negócio,
@@ -153,7 +151,7 @@ atividades é dos alunos, com exceção da apresentação do relatório final, q
 
 # CRISP-DM Fase 1 - Entendimento do Negócio
 
-##O que é o Sistema Nacional de Pós-Graduação? (Contextualização)
+##O que é o Sistema Nacional de Pós-Graduação? 
 
 A produção do conhecimento científico, no Brasil, é predominantemente efetuada por meio do Sistema Nacional de Pós-Graduação - SNPG, e mais fortemente relacionada com a formação de doutores nesse sistema (Pátaro e Mezzomo, 2013), por meio de cursos de pós-graduação _strictu sensu_. 
 
@@ -219,7 +217,7 @@ Sociologia|-|-
 Cada um desses colégios, grandes áreas e áreas de conhecimento possuem dinâmicas próprias, e, portanto, não há um modelo universal que se aplique a todas.
 Existem aspectos comuns, mas também grandes peculiaridades, descritas parcialmente nos correspondentes documentos de área disponíveis em CAPES (2018).
 
-##A UnB dentro do Sistema Nacional de Pós-Graduação (Contextualização)
+##A UnB dentro do Sistema Nacional de Pós-Graduação
 
 ### O que é a UnB?
 <p>A Universidade de Brasília é uma instituição de ensino superior composta por cinco campus em Brasília e cidades satélites que oferecem formação da graduação à pós-graduação. Do ponto de vista de sua produção científica a UnB ocupa atualmente a posição número 737 no ranking mundial de melhores universidades do mundo  de acordo com o Center for World University Rankings (CWUR), que leva em consideração principalmente premiações, artigos, número de citações, pesquisas e publicações. 
@@ -227,7 +225,7 @@ Existem aspectos comuns, mas também grandes peculiaridades, descritas parcialme
 
 ###Descrição das pós-graduações da UnB
 
-Neste trabalho o foco foi em três programas de pós-graduação da UNB. Entre eles dois programas do departamento de matemática e outro do programa de ensino em ciências. Nós próximos tópicos serão detalhados os contextos de cada PPG sendo trabalhado.
+Neste trabalho o foco será encima de três programas de pós-graduação da UNB. Entre eles dois programas do departamento de matemática e outro do programa de ensino em ciências. Nós próximos tópicos serão detalhados os contextos de cada PPG sendo trabalhado.
 
 #### Programa de Pós-graduação de ensino em ciências
 
@@ -402,8 +400,6 @@ library(readr)
 library(ggplot2)
 suppressMessages(library("tidyverse"))
 ```
-
-Como já informado, a descrição dos dados verifica se os dados sendo acessados terão potencial para responder às questões de _data mining_. Além disso, deve-se avaliar qual o volume de dados, a estrutura dos dados (tipos), codificações usadas, etc. Neste projeto, a descrição dos dados é responsabilidade parcial dos alunos, tendo em vista que esta seção já oferece uma descrição inicial simplificada. O relatório final deve conter descrições significativas e aprofundadas dos dados.
 
 ###Descrição dos dados do perfil
 
@@ -1067,52 +1063,52 @@ Além disso, 2014 foi o ano com o maior número de bolsistas: 47 do total de 236
 
 O ano de 2014 também foi o ano com resultados mais expressivos para publicações do programa, conforme comentado anteriormente. Isso nos mostra uma relação direta entre o número de bolsas para orientações e publicações. 
 
-```{r orientacoes, results='hide'}
-orientacoes <- fromJSON("Matematica.advise.json")
-names(orientacoes)
-# orientacoes <- orientacoes[-4:-5] # Tirar dados da Graduação
-names(orientacoes)
-
-sum(sapply(orientacoes$ORIENTACAO_EM_ANDAMENTO_DE_POS_DOUTORADO, length))
-sum(sapply(orientacoes$ORIENTACAO_EM_ANDAMENTO_DOUTORADO, length))
-sum(sapply(orientacoes$ORIENTACAO_EM_ANDAMENTO_MESTRADO, length))
-
-sum(sapply(orientacoes$ORIENTACAO_CONCLUIDA_POS_DOUTORADO, length))
-sum(sapply(orientacoes$ORIENTACAO_CONCLUIDA_DOUTORADO, length))
-sum(sapply(orientacoes$ORIENTACAO_CONCLUIDA_MESTRADO, length))
-
-ori.df <- data.frame()
-for(i in orientacoes) {
-  for(j in i) {
-    ori.df <- rbind(ori.df, j)
-  }
-}
-
-glimpse(ori.df)
-unique(ori.df$natureza)
-unique(ori.df$curso)
-
-ori.df$curso <- 
-  ori.df$curso %>%
-    str_replace_all("Dotorado em matemática", "Doutorado em Matemática") %>%
-    str_replace_all("Doutorado em Matematica", "Doutorado em Matemática") %>%
-    str_replace_all("Doutorado em matemática", "Doutorado em Matemática") %>%
-    str_replace_all("Matematica", "Matemática") %>%
-    str_replace_all("matemática", "Matemática") %>%
-    str_replace_all("matematica", "Matemática") %>%
-    str_replace_all("Ciências da Computação", "Ciência da Computação")
-
-ori.df %>%
-  filter(bolsa == "SIM") %>%
-  group_by(natureza, curso) %>%
-  summarise(bolsas = n()) %>%
-  arrange(desc(bolsas)) %>%
-  ggplot(aes(x = natureza, y = bolsas, col = curso)) +
-  geom_jitter() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```{r orientacoes, include = FALSE}
+# orientacoes <- fromJSON("Matematica.advise.json")
+# names(orientacoes)
+# # orientacoes <- orientacoes[-4:-5] # Tirar dados da Graduação
+# names(orientacoes)
+# 
+# sum(sapply(orientacoes$ORIENTACAO_EM_ANDAMENTO_DE_POS_DOUTORADO, length))
+# sum(sapply(orientacoes$ORIENTACAO_EM_ANDAMENTO_DOUTORADO, length))
+# sum(sapply(orientacoes$ORIENTACAO_EM_ANDAMENTO_MESTRADO, length))
+# 
+# sum(sapply(orientacoes$ORIENTACAO_CONCLUIDA_POS_DOUTORADO, length))
+# sum(sapply(orientacoes$ORIENTACAO_CONCLUIDA_DOUTORADO, length))
+# sum(sapply(orientacoes$ORIENTACAO_CONCLUIDA_MESTRADO, length))
+# 
+# ori.df <- data.frame()
+# for(i in orientacoes) {
+#   for(j in i) {
+#     ori.df <- rbind(ori.df, j)
+#   }
+# }
+# 
+# glimpse(ori.df)
+# unique(ori.df$natureza)
+# unique(ori.df$curso)
+# 
+# ori.df$curso <- 
+#   ori.df$curso %>%
+#     str_replace_all("Dotorado em matemática", "Doutorado em Matemática") %>%
+#     str_replace_all("Doutorado em Matematica", "Doutorado em Matemática") %>%
+#     str_replace_all("Doutorado em matemática", "Doutorado em Matemática") %>%
+#     str_replace_all("Matematica", "Matemática") %>%
+#     str_replace_all("matemática", "Matemática") %>%
+#     str_replace_all("matematica", "Matemática") %>%
+#     str_replace_all("Ciências da Computação", "Ciência da Computação")
+# 
+# ori.df %>%
+#   filter(bolsa == "SIM") %>%
+#   group_by(natureza, curso) %>%
+#   summarise(bolsas = n()) %>%
+#   arrange(desc(bolsas)) %>%
+#   ggplot(aes(x = natureza, y = bolsas, col = curso)) +
+#   geom_jitter() +
+#   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ``` 
-##AQUI VAI O DO PAULO
+##Avaliação PPG Matematica Rede
 <p>
 O dataset MatematicaRedeResearchers.json contém todas as áreas em que existem algum tipo de produção científica, a nível de pós-graduação, produzida ou em produção até 2017 por membros do Departamento de Matemática. Como é possível notar os temas desenvolvidos não são exculivamente da Matemática ou ainda das Ciências Exatas, existe uma flexibilização que permite ao pesquisador trabalhar em diferentes campos do saber. Outro dado interessante é o desenvolvimento de trabalhos na área da educação o que valida as informações apresentadas no site do departamento onde são apresentados diversos projetos nesse âmbito.
 </p>
@@ -1194,9 +1190,7 @@ legend("topleft",x=0, y=-2, xpd=TRUE, ncol=2, legend=c("Europa", "Brasil"),
 
 ```
 
-#CRISP-DM Fase.Atividade 5 -  conclusões dos relatorios 3
-
-##Quanto ao PPG de ensino de ciências
+#CRISP-DM Fase.Atividade 5 - Avaliação dos resultados
 
 Portanto podemos observar que o programa de pós-graduação de ensino em ciências apresenta um baixo nível de internacionalização uma vez que grande parte de suas produções e orientações são voltadas a alunos de instituições nacionais e a periódicos nacionais em sua grande maioria publicados em língua portuguesa do Brasil.  
 
@@ -1204,24 +1198,9 @@ Portanto podemos observar que o programa de pós-graduação de ensino em ciênc
 
 Algumas informações sobre a mudança no quadro de funcionários também foi levantada durante a pesquisa e poderá também ser avaliada com mais profundidade para averiguar qual o real impacto disso no programa. 
 
-##AQUI VAI O DO PAULO
+Quanto ao estudos dos datasets da Matemática, permitiu-se tirar conclusões acerca de seu programa de pós-graduação e validar as informações contidas no site do programa. Assim como havia sido afirmado anteriormente o Departamento é capaz de oferecer oportunidades de estudo em diversos campos do saber, ainda assim não deixa de privilegiar as sub-áreas das Ciências Exatas como a Álgebra e a Estatística. De acordo com os resultados obtidos é possível notar que as áreas de pós-graduação dentro da Matemática que não trabalham diretamente com sub-áreas das exatas não possuem o mesmo grau de internacionalização que as demais, porém por serem numericamente inferiores não tem impacto direto na nota do curso que é alta, outra informação que foi validade de acordo com o que está no site do programa. 
 
-O simples estudo dos datasets da Matemática permitiu tirar conclusões acerca de seu programa de pós-graduação e validar as informações contidas no site do programa. Assim como havia sido afirmado anteriormente o Departamento é capaz de oferecer oportunidades de estudo em diversos campos do saber, ainda assim não deixa de privilegiar as sub-áreas das Ciências Exatas como a Álgebra e a Estatística. De acordo com os resultados obtidos é possível notar que as áreas de pós-graduação dentro da Matemática que não trabalham diretamente com sub-áreas das exatas não possuem o mesmo grau de internacionalização que as demais, porém por serem numericamente inferiores não tem impacto direto na nota do curso que é alta, outra informação que foi validade de acordo com o que está no site do programa. 
-
-#CRISP-DM Fase.Atividade 6
-
-De que forma os produtos desenvolvidos pelo grupo poderiam ser colocados em uso prático regular, na organização cliente?
-
-##CRISP-DM Fase.Atividade 6.2 -  Planejamento do monitoramento dos produtos 
-
-De que forma seria possível realizar o monitoramento do funcionamento dos produtos em utilização no ambiente operacional?
-
-##CRISP-DM Fase.Atividade 6.3 -  Planejamento de manuteção 
-
-que manutenções, ajustes, mudanças, poderia ter que ser eventualmente realizadas no produto (scripts), quando em uso no ambiente operacional do cliente?
-
-
-##CRISP-DM Fase.Atividade 6.6 -  Revisão sobre a execução do projeto
+#CRISP-DM Fase.Atividade 6 - Revisão sobre a execução do projeto
 
 O trabalho feito visou o estudo de tudo aquilo que é produzido cientificamente pela universidade (ciência da ciência) e qual a relevância destas descobertas para os próprios pesquisadores e alunos, com o intuito de validarem o método que utilizam e a qualidade daquilo que vem sendo criado.
 
