@@ -1069,7 +1069,7 @@ Além disso, 2014 foi o ano com o maior número de bolsistas: 47 do total de 236
 
 O ano de 2014 também foi o ano com resultados mais expressivos para publicações do programa, conforme comentado anteriormente. Isso nos mostra uma relação direta entre o número de bolsas para orientações e publicações. 
 
-```{r orientacoes, echo=FALSE, results='hide'}
+```{r orientacoes, results='hide'}
 orientacoes <- fromJSON("Matematica.advise.json")
 names(orientacoes)
 # orientacoes <- orientacoes[-4:-5] # Tirar dados da Graduação
@@ -1104,14 +1104,14 @@ ori.df$curso <-
     str_replace_all("matematica", "Matemática") %>%
     str_replace_all("Ciências da Computação", "Ciência da Computação")
 
-# ori.df %>%
-#   filter(bolsa == "SIM") %>%
-#   group_by(natureza, curso) %>%
-#   summarise(bolsas = n()) %>%
-#   arrange(desc(bolsas)) %>%
-#   ggplot(aes(x = natureza, y = bolsas, col = curso)) +
-#   geom_jitter() + 
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+ori.df %>%
+  filter(bolsa == "SIM") %>%
+  group_by(natureza, curso) %>%
+  summarise(bolsas = n()) %>%
+  arrange(desc(bolsas)) %>%
+  ggplot(aes(x = natureza, y = bolsas, col = curso)) +
+  geom_jitter() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ``` 
 ##AQUI VAI O DO PAULO
