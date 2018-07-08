@@ -4,9 +4,9 @@ title:  Ciência de Dados para Todos (Data Science
 author: "Jorge H. C. Fernandes, Ricardo B. Sampaio, João Ribas de Moura e Jerônimo A. Filho"
 date: "11/06/2018"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -19,41 +19,18 @@ knitr::opts_chunk$set(echo = TRUE)
 #library(tidyr)
 # library(reshape2)
 suppressMessages(library("tidyverse"))
-setwd("~/Documentos/UnB/Listas e Trabalhos/Data Science/Relatório 4")
+setwd("~/R/Data-Science")
 ```
 
 
 # Introdução
 
-Este relatório tem como foco principal a contextualização das áreas de pesquisa relacionadas ao programa de Pós-Graduação em Matemática da UnB, dos anos 2010 à 2017. Para tal está sendo apresentado dados de produção científica dos docentes do programa, retirados do currículo Lattes dos professores e do repositório `OASIS` do `IBICT` (Instituto Brasileiro de Informação em Ciência e Tecnologia). 
-
-O programa de pesquisa utilizado neste relatório é o de Matemática (código: `53001010003P2`). O coordenador é o Carlos Alberto Pereira dos Santos e as subáreas de concentração são: **Álgebra, Análise, Geometria e Matemática Aplicada**. Mais informações do programa podem ser acessadas pelo site [sucupira](https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/programa/viewPrograma.jsf?popup=true&cd_programa=53001010003P2).
-
-O programa de Pós-Graduação em Matemática da UnB, iniciado em 1962, oferece Mestrado e Doutorado em Matemática nas subáreas de Álgebra, Análise, Geometria e Matemática Aplicada (Probabilidade, Física-Matemática e Computação). O corpo docente mantém um programa ativo de pesquisa, participa regular e ativamente de forma destacada em reuniões científicas e em corpos editoriais de revistas científicas, além de manter intercâmbio científico com diversas instituições do país e do exterior. 
-
-Há também um programa de mestrado profissional `PROFMAT`, que é um programa de pós-graduação stricto sensu em Matemática, reconhecido pelo Ministério da Educação e conduzindo ao título de Mestre. Tem como objetivo proporcionar formação matemática aprofundada relevante ao exercício da docência no Ensino Básico, visando dar ao egresso a qualificação certificada para o exercício da profissão de professor de Matemática.
-
-O `PROFMAT` é um curso semipresencial ministrado por Instituições de Ensino Superior associadas em uma Rede Nacional, no âmbito do **Sistema Universidade Aberta do Brasil** (UAB). É coordenado pela Comissão Acadêmica Nacional, que opera sob a égide da Diretoria da **Sociedade Brasileira de Matemática** (SBM).
-
-As Instituições de Ensino Superior que integram a Rede Nacional do `PROFMAT` são denominadas Instituições Associadas e são responsáveis, por intermédio das respectivas Coordenações Acadêmicas Institucionais, por toda a gestão local do `PROFMAT`, descritas no Regimento. Informações completas sobre este mestrado podem ser encontradas na página do [`PROFMAT`](http://www.profmat-sbm.org.br). Na Universidade de Brasília este curso é ofertado no âmbito do Instituto de Ciências Exatas, Departamento de Matemática.
-
-O Departamento de Matemática da UnB obteve nota 7 na última avaliação trienal da Capes. Essa avaliação de excelência é o resultado de um longo, árduo e contínuo trabalho iniciado em 1962 por professores/colaboradores corajosos e idealistas que acreditaram em tornar o sonho do Departamento de Matemática da Universidade de Brasília uma realidade. Desde então, esse ideal vem sendo fortalecido com a chegada de novos professores/colaboradores que conduziram este programa ao reconhecimento da sua excelência. 
-
-A metodologia para desenvolvimento do relatório é baseada no modelo de mineração de dados denominado CRISP-DM (Chapman et al., 2000, Mariscal et al., 2010). 
+O presente relatório tem por objetivo descrever e analisar 3 programas de pós-graduação da UNB, tendo como foco principal dois programas de Pós-Graduação em Matemática da UnB e o  programa de Ensino em Ciências.
+Serão analisados o contexto dos programas de pós-graduação (PPG), para que sejam expostas de maneira organizada as informações levantadas pelos datasets disponibilizados pela plataforma do E-Lattes. Também serão propostas relações com outras bases de dados da UNB como a base do DGP(dados de grupos de pesquisa) e da base OASIS que contém informações sobre as produções nacionais. A metodologia de análise a ser seguida é uma aproximação ao CRISP-DM que visa unificar as formas de se realizar mineração de dados, para que os procedimentos possam ser reproduzidos e possuem algum nivel de confiabilizade com relação ao resultados obtidos.
 
 ...
 
 #Metodologia
-
-#CRISP-DM (Corresponderia à seção de Metodologia)
-
-Para desenvolvimento do trabalho devem ser seguidos, da forma mais simplificada e coerente possível, as fases e atividades genéricas do ciclo de vida de um projeto executado em aderência ao CRISP-DM. Em outras palavras, a produção do relatorio deve seguir a metodologia CRISP-DM.
-
-<!-- ![Fases do Ciclo de Vida do CRISM-DM. Fonte: (Chapman et al., 2000).](CRISP-DM) -->
-
-"A widely used methodology for data mining is the CRoss-Industry Standard Process for Data Mining (CRISP-DM) which mas initiated in 1996 (…) with the intent of providing a process that is __reliable and repeatable__ by people with little data-mining background, with a framework within which experience can be recorded, to support the replication of projects, to support planning and management, as well as to demonstrate data mining as a mature discipline (…)" [Sullivan, Rob. Introduction to Data Mining for the Life Sciences. Springer Science & Business Media. 2012]
-
-O seu trabalho deve conter uma seção metodologia, onde você faz uma breve descrição da metodologia que seu grupo adotou para realização do trabalho, que pode ser baseada no texto dessa seção, desde que citado adequadamente.
 
 ## Delimitações iniciais
 Em aderência à estrutura do CRISP-DM, algumas delimitações de contexto para o trabalho são apresentadas a seguir:
@@ -66,22 +43,6 @@ O domínio de aplicação do projeto é o da produção científica e acadêmica
 ###Tipo de Problema abordado
 
 O tipo de problema abordado é o da produção de análises descritivas, quantitativas e de modelagem computacional ou estatística, que permitam caracterizar como e porque ocorre a produção científica e acadêmica de um grupo de pesquisadores. Essa caracterização visa subsidiar a tomada de decisão por membros do Sistema Nacional de Pós-Graduação. O tipo de problema abordado no projeto deve ser declarado na introdução ao relatório.
-
-###Conjunto de Ferramentas e Técnicas
-
-O conjunto de requisitos relativos a ferramentas e técnicas a serem empregadas na execução do trabalho é:
-
-* O relatório deve ser entregue no formato R Markdown, apto à geração de saída \LaTeX e PDF, composto por comandos em R entremeados por descrições textuais que auxiliem na interpretação dos resultados, bem como na compreensão do domínio de conhecimento sob análise.
-* As análises descritivas devem empregar de forma criativa as funções das bibliotecas de ciência de dados em R propostas por Wickham e Grolemund (2016).
-* As análises quantitativas devem lançar mão de recursos gráficos variados, que complementarão análises descritivas com _insights_ sobre de que forma os processos de produção científica e acadêmica contribuem para os resultados apresentados. 
-Por exemplo, os dados analisados possibilitam justificar o eventual crescimento ou decréscimo de índices de produção observados?
-* A modelagem computacional ou estatística avançada dos dados deve usar uma das quatro técnicas prescritas: 
-    + Aprendizado de Máquina (Datacamp, 2018; Kuhn et al., 2018; Bruce e Bruce, 2017); 
-    + Aprendizado Estatístico; 
-    + Mineração de Texto ou; 
-    + Análise de Redes (Kolaczyk e Csárdi, 2014; Lusher et al., 2013; de Nooy et al., 2005).
-
-O conjunto de requisitos relativos a ferramentas e técnicas a serem empregadas na execução do trabalhodo projeto deve ser declarado na parte de metodologia do relatório.
 
 ##Modelo de Referência CRISP-DM
 
@@ -98,109 +59,6 @@ Tendo por objetivo fazer com que essa receita (script de mineração de dados) p
 Dentro de cada fase no CRISP-DM existe uma estrutura hierárquica de atividades genéricas para serem realizadas. Cada uma dessas atividades __genéricas__ pode determinar a execução de atividades __específicas__. 
 
 Voltando ao exemplo do bolo, a atividade ” 1. Entendimento do Bolo” poderia conter uma atividade genérica chamada “1.1. Determinar para que o bolo servirá (simples café da manhã? bolo de aniversário? bolo de casamento?)“. Dentro dessa atividade genérica poderia haver atividades específicas como “1.1.1.Entrevistar o contratante para obter detalhes de onde o bolo será usado?“; “1.1.2. Conversar com os convidados sob alguma necessidade especial (sem lactose? sem glútem?)“, etc. 
-
-### Seis Fases do CRISP-DM
-
-Com base no apresentado, segue uma descrição um pouco mais detalhada das seis fases de um projeto no CRISP-DM, interpretadas no contexto deste relatório.
-
-#### __Entendimento do Negócio__ 
-
-É o desenvolvimento dos objetivos e declaração das necessidades do projeto sob a perspectiva do negócio, para transformar isso tudo em definição de um problema de data mining. No caso desse relatório irá se buscar encontrar dados referentes aos perfis, publicações e orientações dos discentes dos programas de pós-graduação em matemática, ..., . Deve-se
-também definir um grupo de objetivos, um plano para a realização do projeto e um critério de sucesso.
-Como objetivo para a parte de datamining desse relatório tem-se conseguir dados referentes às seguintes áreas:
-
-* Áreas com resultados mais relevantes / expressivos;  
-* Nível de Internacionalização;
-* Principais congressos e eventos da área no Brasil e no mundo;
-* Principais revistas e local de publicação de trabalhos no Brasil e no mundo;
-* Quantitativo de pessoas e programas dentro do universo;
-* Quantitativo de orientandos atuais e que já finalizaram;
-* Grupos de pesquisa associados ou que os professores / pesquisadores fazem parte.
-
-Quanto ao plano para realização do projeto, será realizada as seguintes etapas:
-
-* Tratamento dos dados para transformá-lo em um dataset;
-* Análise dos dados para a criação de resultados relevantes;
-* Análise dos resultados para encontrar os dados citados nos objetivos.
-
-<!-- As atividades genéricas dentro dessa fase envolvem: -->
-
-<!-- * Identificar o que a organização realmente necessita alcançar. No caso específico desta disciplina, a necessidade do Sistema Nacional de Pós-Graduação do Brasil de produzir análises de alta qualidade de suas pós-graduações, com baixo custo. Como produzir um projeto de mineração de dados se você não sabe o que necessita encontrar ou resolver? Se você não entender os objetivos da organização pode levar ao erro de procurar as respostas certas para as perguntas erradas.  -->
-
-<!-- * Avaliação das Circunstâncias. Envolve identificar quais recursos ou dificuldades podem influenciar os  objetivos da mineração ou do projeto em si. No caso específico desta disciplina, isso envolve refletir, entre vários outros aspectos, sobre as limitações de tempo do projeto, que precisa ser realizado dentro de um semestre letivo, de modo que considerável parte das atividades já foram pré-organizadas pelos docentes responsáveis pela disciplina.  -->
-
-
-#### __Entendimento dos Dados__ 
-
-O segundo estágio do CRISP-DM requer que se tenha acesso ao dado listado nos recursos do projeto. Essa fase requer a realização da descrição, exploração, verificação da qualidade e relatório da qualidade dos dados.
-
-Os dados analisados nesse relatório foram pegos a partir do arquivo Matematica.profile.json que representa o dataset do programa de pós graduação em Matemática (código: `53001010003P2`) e conta com uma lista de docentes e seus dados pessoais. Essa descrição e exploração foi feita utilizando do comando **View** no rstudio. A qualidade dos dados se encontra bastante satisfatória, com alguns problemas na padronização de alguns
-dados como o endereço que em alguns casos apresenta diferentes nomes para um mesmo curso como "Matematica" e "Matemática".
-<!-- Na fase de entendimento dos dados pode-se trabalhar com quatro atividades genéricas: -->
-
-<!-- * Coleta inicial dos dados. Essa atividade envolve a análise das permissões de acesso e outras questões envolvendo sigilo e outros proprietários dos dados (terceiros). Por exemplo, eu poderia estar acessando uma base de dados que foi obtida de outro órgão por convênio, mas nesse convênio (contrato) não foi dada permissão para qualquer outro tipo de acesso ou exploração dos dados. Neste projeto, a coleta inicial foi feita pelos autores deste relatório. O relatório final deve conter indicações de como foi realizada a coleta inicial dos dados. -->
-
-<!-- * Descrição dos dados. A descrição dos dados verifica se os dados sendo acessados terão potencial para responder às questões de _data mining_. Além disso, deve-se avaliar qual o volume de dados, a estrutura dos dados (tipos), codificações usadas, etc. Neste projeto, a descrição dos dados é responsabilidade parcial dos alunos, tendo em vista que este modelo já oferece uma descrição inicial. O relatório final deve conter descrições significativas e aprofundadas dos dados. -->
-
-<!-- * Análise exploratória dos dados. A análise exploratória dos dados possibilita um entendimento mais profundo da relação estatística existente entre os dados dos _datasets_ para um melhor entendimento da qualidade daqueles dados para o objetivo do projeto.  -->
-<!-- Neste projeto, a análise exploratória dos dados é responsabilidade parcial dos alunos, tendo em vista que este relatório apresenta uma análise exploratória preliminar. -->
-<!-- O relatório final deve conter análises exploratórias dos dados que sejam significativas e aprofundadas. -->
-
-<!-- * Verificação da qualidade dos dados. A verificação da qualidade dos dados envolve responder se os dados disponíveis estão realmente completos. As informações disponíveis são suficientes para o trabalho proposto? Neste projeto, a verificação da qualidade dos dados é responsabilidade dos alunos. -->
-
-#### __Preparação dos Dados__ 
-Aqui os dados são “filtrados” retirando-se partes que não interessam e selecionando-se os “campos" necessários para o trabalho de mineração. 
-
-São 5 as atividades genéricas nesta fase de preparação dos dados:
-
-* Seleção dos dados. Envolve identificar quais dados, da nossa "montanha de dados", serão realmente utilizados. Quais variáveis dos dados brutos serão convertidas para o _dataset_? Não é raro cometer o erro de selecionar dados para um modelo preditivo com base em uma falsa ideia de que aqueles dados contém a resposta para o modelo que se quer construir. Surge o cuidado de se separar o sinal do ruído (Silver, Nate. The Signal and the Noise: Why so many predictions fail — but some don’t. USA: The Penguin Press HC, 2012.). 
-
-* Limpeza dos dados.
-
-* Construção dos dados. Envolve a criação de novas variáveis a partir de outras presentes nos _datasets_.
-
-* Integração dos dados. Envolve a união (merge) de diferentes tabelas para criar um único _dataset_ para ser utilizado no R, por exemplo.
-
-* Formatação dos dados. Envolve a realização de pequenas alterações na estrutura dos dados, como a ordem das variáveis, para permitir a execução de determinado método de data mining.
-
-#### __Modelagem__ 
-
-No CRISP-DM este estágio envolve a construção e avaliação do modelo, podendo ser realizada em quatro atividades genéricas:
-
-* Seleção das técnicas de modelagem.
-
-* Realização de testes de modelagem, onde diferentes modelos são previamente testados e avaliados. Pode-se dividir o _dataset_ criado na etapa anterior para se ter uma base de treino na construção de modelos, e outra pequena parte para validar  e avaliar a eficiência de cada modelo criado até se chegar ao mais “eficiente”. 
-
-* Construção do modelo definitivo, com base na melhor experiência do passo anterior.
-
-* Avaliação do modelo.
-
-#### __Avaliação__ 
-
-Aqui os resultados não são apenas avaliados, mas se verifica se existem questões relacionadas à organização que não foram suficientemente abordadas. Deve-se refletir se o uso arepetido do modelo criado pode trazer algum “efeito colateral” para a organização. 
-
-Nesta fase, pode-se trabalhar com 3 atividades genéricas:
-
-* Avaliação dos resultados
-
-* Revisão do processo, por meio da qual verifica-se se o modelo foi construído adequadamente. As variáveis (passadas) para construir o modelo estarão disponíveis no futuro?
-
-* Determinação dos etapas seguintes. Pode ser necessário decidir-se por finalizar o projeto, passar à etapa de desenvolvimento, ou rever algumas fases anteriores para a melhoria do projeto.
-
-#### __Implantação__ (_deployment_) 
-
-Foi realizado o planejamento de implantação dos produtos desenvolvidos (scripts, no caso do executado nesta disciplina) para o ambiente operacional, para seu uso repetitivo, envolvendo atividades de monitoramento e manutenção do sistema (script) desenvolvido. A fase de implantação concluir com a produção e apresentação do relatório final com os resultados do projeto.
-
-São atividades genéricas  na fase de __implantação__:
-
-* Planejamento da transição dos produtos;
-* Planejamento do monitoramento dos produtos em utilização no ambiente operacional;
-* Planejamento de manuteção a ser eventualmente efetuada no produto (scripts);
-* Produção do relatório final;
-* Apresentação do relatório final;
-* Revisão sobre a execução do projeto, com registro de lições aprendidas etc.
-
-No contexto do projeto realizado no âmbito desta disciplina, a responsabilidade por execução de todas essas atividades é dos alunos, com exceção da apresentação do relatório final, que não será realizada.
 
 # CRISP-DM Fase 1 - Entendimento do Negócio
 
@@ -276,37 +134,92 @@ Existem aspectos comuns, mas também grandes peculiaridades, descritas parcialme
 Descrição da Universidade de Brasília, com foco na sua produção científica e acadêmica.
 
 ###Descrição das pós-graduações da UnB
-Texto a desenvolver.
 
-###Outros aspectos que caracterizam a produção científica e acadêmica da UnB
-Texto a desenvolver.
+Neste trabalho o foco foi em três programas de pós-graduação da UNB. Entre eles dois programas do departamento de matemática e outro do programa de ensino em ciências. Nós próximos tópicos serão detalhados os contextos de cada PPG sendo trabalhado.
 
-## O que a Organização precisa realmente alcançar?
+#### Programa de Pós-graduação de ensino em ciências
 
-Vários stakeholders estão envolvidos no projeto em curso, e poderíamos considerar cada um deles como distintas organizações que possuem interesses distintos e complementares. Elas são:
-* A Disciplina Ciência de Dados para Todos 2018.1, que quer comprovar que seus alunos dominam ferramentas e técnicas de ciência de dados, para fins de avaliação de rendimento da disciplina.
-* A UnB, representada pelos decanatos de pós-graduação (DPG) e de pesquisa e inovação (DPI), que querem dispor de instrumentos para realização de avaliações contínuas de suas pós-graduações.
-* O SNPG, que assim com o DPG e DPI, também pode se beneficiar do uso de instrumentos para realização de avaliações contínuas de suas pós-graduações.
-* Os interessados em melhor conhecer o que é produzido pelo Sistema Nacional de Pós-graduação, como empresas privadas, que querem desfrutar dos benefícios gerados pela  ciência brasileira.
+```{r init, include = FALSE}
+library(jsonlite);library(tidyverse)
+library(readxl);library(ggplot2)
+library(XLConnect);library(stringr)
+library(RColorBrewer)
 
-A fim de dar maior fidelidade e homogeneidade ao exercício realizado na disciplina, focaremos em atendimento aos interesses comuns das organizações DPI, DPG e CAPES, que desejam dispor de instrumentos ágeis para avaliação contínua da pós-graduação brasileira. 
+setwd("~/R/Relatorio3")
 
-Com base no exposto, o objetivo do trabalho final a ser alcançado pelos produtos d emineração de dados desenvolvido pelos alunos da disciplina Ciência de Dados para Todos é produzir, tomando por base inicial os dados fornecidos pelos professores responsáveis pela disciplina, ferramentas para análise e avaliação contínuas e de baixo custo, do desempenho de um conjunto de pós-graduações que estão vinculadas a uma mesma subárea ou grupo de conhecimento. Cada área de pós-graduação apresenta suas características peculiares, assim como cada um dos programas vinculados a essas áreas.
-Como já informado, características peculiares de cada programa podem ser obtidas a partir de visita ao sítio da CAPES (2018).
+ori <- fromJSON("EnsCiencias.advise.json")
+pub <- fromJSON("EnsCiencias.publication.json")
+```
 
-##Avaliação das Circunstâncias
+O programa de pós-graduação em ensino de ciências, tem como objetivo qualificar os professores de nível básico em matérias relativas a ciências e afins. O foco é dado no desenvolvimento de conteúdos de ciências, o que envolve aspectos teóricos, metodológicos e epistemológicos relativo ao ensino de ciências além do desenvolvimento e aprendizado de novas tecnologias que permitam a evolução do ensino. 
 
-Este documento serve como base para a realização dos trabalhos dos alunos. apresenta limitações no tocante à quantidade pequena de dados que serão empregados para análises e avaliações, tendo em vista sua finalidade maior que é a didática, de permitir aos alunos demonstrarem a capacidade de aplicação das técnicas e ferramentas apreendidas durante o semestre.
+O programa engloba professores com as mais diversas áreas de atuação e de diferentes cantos da universidade. Podemos citar como áreas a física, bioquímica, ecologia, história, química, genética, medicina, psicologia entre outras, com destaques para a participação do Instituto de Física, Química e Ciências Biológicas. Os programas englobam três linhas de pesquisa sendo elas: Ensino-Aprendizagem em Ciências da Natureza em seus mutilplos aspectos; Formação de Professores de Ciências da Natureza e Educação Científica e Cidadania. 
 
-###Avaliação preliminar das pós-graduações na UnB
-Texto a desenvolver.
+A implementação do Programa de Pós-Graduação em Ensino de Ciências na UnB, se deu inicialmente em 2007 e desde 2010, tem sido ampliado seu quadro de docentes por meio do credenciamento de novos orientadores, principalmente a partir da aproximação com o curso de Licenciatura em Ciências Naturais da Faculdade UnB Planaltina.  
 
-###Avaliação preliminar da produção científica e acadêmica da UnB
-Texto a desenvolver.
+O programa é composto por 19 professores que já realizaram cerca de 709 orientações ao longo dos anos de 2010 a 2017 com cerca de 174 dissertações de mestrado concluidas até o momento. Podemos observar abaixo as distribuições de cada orientação realizada ao longo dos anos. É possível observar um grande aumento na quantidade(relativa) de orientações realizadas de mestrado, o que pode ser explicado pelo aumento do número de novos orientadores credenciados ao PPG. 
+
+
+```{r plot1, echo = FALSE, fig.width=8,fig.height=4}
+get.ori.tipo <- function(ori, j){
+  ori.df <- data.frame();
+  for (i in 1:length(ori[[j]]))
+    ori.df <- rbind(ori.df, ori[[c(j,i)]])
+  return(ori.df)  
+}
+
+ori.df <- data.frame();
+for(i in 1:length(ori))
+  ori.df <- rbind(ori.df, get.ori.tipo(ori, i))
+
+blues <- brewer.pal(7, "Greens")
+blue_range <- colorRampPalette(blues) 
+
+ori.df %>% 
+  group_by(natureza,ano) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(x = ano, y = count, fill = natureza)) + 
+    geom_bar(position = "fill",stat = "identity") +
+    scale_fill_manual(values = blue_range(11)) + theme_dark()
+```
+
+
+Abaixo teremos as quantidades absolutas totais de orientações realizadas ao longo dos anos de 2010 a 2017  apenas para complementar a distribuição acima apresentada: 
+
+```{r plot2, echo = FALSE, warning=FALSE, fig.width=12,fig.height=4}
+ori.df %>%
+  group_by(natureza) %>%
+  summarise(count = n()) %>% 
+  arrange(desc(count)) %>% head(10) %>%
+  ggplot(aes(x = natureza, y = count, fill = natureza)) +
+  geom_bar(position = "stack", stat = "identity") +
+  geom_text(aes(label=count), hjust = -0.5, size = 3.5) +
+  coord_flip() + 
+  theme(legend.position = "none")
+```
+ 
+
+Em média os orientadores possuem nível de senioridade 7, tendo 5 como mínimo e 9 como máximo, o que indica que no geral os professores possuem bastante experiência no meio acadêmico, e pode ser relevante para explicar a quantidade de orientações realizadas pelo programa e também o número de publicações realizadas. No total os orientadores participam de 29 grupos de pesquisa e são em sua totalidade nascidos no brasil com uma idade média de 58 anos de idade.  Entre os grupos aos quais os orientadores participam podemos citar os de Educação Científica e Cidadania, Ensino de Ciências e Mediação Pedagógica, Aprendizagem e mediação pedagógica, Ecologia e Comportamento e o grupo de Ensino de Química. 
+
+Atualmente estão sendo realizadas 74 orientações que incluem, mestrandos, doutorandos e PHDs. Deste conjunto existem alunos que vieram de diversas instituições, dentre elas Universidade Federal de Mato Grosso, Universidade Federal de Pernambuco, Universidade Federal de Sergipe e Centro Universitário Norte do Espírito Santo, porém nenhum estudante proveniente de instituições internacionais. 
+
+#### Programas de Pós-graduação da Matemática
+
+Aqui será feita uma contextualização das áreas de pesquisa relacionadas ao programa de Pós-Graduação em Matemática da UnB, dos anos 2010 à 2017. Para tal está sendo apresentado dados de produção científica dos docentes do programa, retirados do currículo Lattes dos professores e do repositório `OASIS` do `IBICT` (Instituto Brasileiro de Informação em Ciência e Tecnologia). 
+
+O coordenador do PPG é o Carlos Alberto Pereira dos Santos e as subáreas de concentração são: **Álgebra, Análise, Geometria e Matemática Aplicada**. Mais informações do programa podem ser acessadas pelo site [sucupira](https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/programa/viewPrograma.jsf?popup=true&cd_programa=53001010003P2).
+
+O programa de Pós-Graduação em Matemática da UnB, iniciado em 1962, oferece Mestrado e Doutorado em Matemática nas subáreas de Álgebra, Análise, Geometria e Matemática Aplicada (Probabilidade, Física-Matemática e Computação). O corpo docente mantém um programa ativo de pesquisa, participa regular e ativamente de forma destacada em reuniões científicas e em corpos editoriais de revistas científicas, além de manter intercâmbio científico com diversas instituições do país e do exterior. 
+
+Há também um programa de mestrado profissional `PROFMAT`, que é um programa de pós-graduação stricto sensu em Matemática, reconhecido pelo Ministério da Educação e conduzindo ao título de Mestre. Tem como objetivo proporcionar formação matemática aprofundada relevante ao exercício da docência no Ensino Básico, visando dar ao egresso a qualificação certificada para o exercício da profissão de professor de Matemática.
+
+O `PROFMAT` é um curso semipresencial ministrado por Instituições de Ensino Superior associadas em uma Rede Nacional, no âmbito do **Sistema Universidade Aberta do Brasil** (UAB). É coordenado pela Comissão Acadêmica Nacional, que opera sob a égide da Diretoria da **Sociedade Brasileira de Matemática** (SBM).
+
+As Instituições de Ensino Superior que integram a Rede Nacional do `PROFMAT` são denominadas Instituições Associadas e são responsáveis, por intermédio das respectivas Coordenações Acadêmicas Institucionais, por toda a gestão local do `PROFMAT`, descritas no Regimento. Informações completas sobre este mestrado podem ser encontradas na página do [`PROFMAT`](http://www.profmat-sbm.org.br). Na Universidade de Brasília este curso é ofertado no âmbito do Instituto de Ciências Exatas, Departamento de Matemática.
+
+O Departamento de Matemática da UnB obteve nota 7 na última avaliação trienal da Capes. Essa avaliação de excelência é o resultado de um longo, árduo e contínuo trabalho iniciado em 1962 por professores/colaboradores corajosos e idealistas que acreditaram em tornar o sonho do Departamento de Matemática da Universidade de Brasília uma realidade. Desde então, esse ideal vem sendo fortalecido com a chegada de novos professores/colaboradores que conduziram este programa ao reconhecimento da sua excelência.
 
 #CRISP-DM Fase 2 - Entendimento dos Dados
-
-Doravante, a fim de facilitar aos alunos seguirem a metodologia CRISP-DM, os nomes das seções e subseções de texto serão prefixadas com o número e nome da fase e atividade genérica do CRISP-DM. Fica facultado aos grupos seguir ou não a sequência prevista, tendo em vista que se pode retornar às fases anteriores, bem como podem haver atividades que não foram adequadas às características do problema específico sob análise.
 
 ##CRISP-DM Fase.Atividade 2.1 - Coleta inicial dos dados
 Todos os arquivos com dados iniciais a seguir apresentados foram fornecidos pelos professores responsáveis pela disciplina. Os dados foram gerados no mês de maio de 2018, e compilam informações entre os anos de 2010 e 2017. 
@@ -355,15 +268,11 @@ O arquivo `r json.researchers_by_area` apresenta as vinculações de todos os do
 file.info('Matematica.graph.json')
 ```
 
-###Redes de colaboração entre docentes
-
-O arquivo data/unbpos.graph.json apresenta redes de colaboração na co-autoria de artigos cientpificos, feitas entre os docentes vinculados a programas de pós-graduação da UnB, entre 2010 e 2017.
-
 ##CRISP-DM Fase.Atividade 2.2 - Descrição dos Dados
 
 Para ler e manipular inicialmente esses dados, serão usadas primordialmente as bibliotecas seguintes 
 
-```{r library-load}
+```{r library-load, warnings = FALSE}
 library(jsonlite)
 library(listviewer)
 library(readxl)
@@ -402,24 +311,6 @@ Uma breve inspeção visual dos atributos anteriormente apresentados permite inf
 * Possui três artigos recentes publicados, além de um aceito para publicação.
 * Possui uma orientação de doutorado em andamento, iniciada em 2014.
 * Foi classificado com senioridade 5.
-
-####Potencial de utilização dos dados do perfil dos docentes
-
-Esses dados terão potencial para responder às questões de _data mining_?
-O que é possível gerar a partir desses dados, para o conjunto dos 1592 docentes da UnB?
-A fim de compreender a relevância dos dados para a avaliação da produção acadêmica nas pós-graduações brasileiras pode-se recorrer a trabalhos como os seguintes:
-
-* Leite (2018) apresenta, em suas "Considerações básicas sobre  a Avaliação do Sistema  Nacional de Pós-Graduação", o conjunto dos itens que são tópicos de avaliação das pós-graduações pela CAPES, e que envolvem, entre outros:
-    + Avaliação do corpo docente, com 20% a 30% de peso na avaliação total do programa, a depender do seu tipo. Analisando-se de forma mais detalhada os critérios de avaliação do corpo docente, indicados por Leite, o que é possível gerar com base nos dados disponíveis em unb.prof? Há dados que permitam identificar o perfil do docente, como proposto pela CAPES, inclusive no documento de área específica na qual atua o pesquisador? Que outros aspectos relevantes para a CAPES podem ser levantados com base nos dados dessa fonte?
-    + Avaliação do corpo discente, Teses e dissertações, com 30% a 20% de peso na avaliação total do programa, a depender de seu tipo. Os dados sobre orientação permitem fazer quais tipos de avaliações do corpo discente?
-    + Avaliação da produção intelectual, com 40% de peso na avaliação total. Qual a relevância dos dados em unb.prof para essa avaliação? Que outros arquivos podem melhor subsidiar essa avaliação?
-* Em busca de considerar outros fatores relevantes para a avaliação da pós-graduação, não considerados no modelo da CAPES, pode-se recorrer ao trabalho de Kalpazidou Schmidt e Graversen (2018), que apresentam um conjunto de fatores persistentes que facilitam a existência de ambientes de pesquisa inovadores e dinâmicos, dentre os quais se destaca:
-    + Atividade em pesquisas com elevado grau de impacto social;
-    + Promoção de elevado grau de autonomia individual, tanto do ponto de vista teórico quanto metodológico;
-    + Possuem um bom clima de trabalho, baseado no trabalho em times;
-    + São internacioinalmente bem conhecidas etc.
-    
-    Estariam esses fatores contemplados, de alguma forma, memso que parcialmente, nos dados presentes em unb.prof? Ou em qualquer outros dos arquivos? Cabe explorar.
 
 ###Descrição dos dados de orientações
 
@@ -460,9 +351,6 @@ head(unb.area.df[])
 ##CRISP-DM Fase.Atividade 2.3 - Análise exploratória dos dados
 
 Como já informado, a análise exploratória dos dados possibilita um entendimento mais profundo da relação estatística existente entre os dados dos _datasets_ para um melhor entendimento da qualidade daqueles dados para os objetivos do projeto. 
-
-Como já informado, a análise exploratória dos dados é responsabilidade parcial dos alunos, tendo em vista que este relatório apresenta uma análise exploratória preliminar.
-O relatório final deve conter análises exploratórias dos dados que sejam significativas e aprofundadas.
 
 ###Arquivo Profile
 
@@ -563,31 +451,11 @@ head(sort(table(rbind(unb.adv.df$ori1, unb.adv.df$ori2)), decreasing = TRUE), 20
 ```
 
 
-##CRISP-DM Fase.Atividade 2.4 - Verificação da qualidade dos dados. 
-
-Como já informado, a verificação da qualidade dos dados envolve responder se os dados disponíveis estão realmente completos. 
-
-As informações disponíveis são suficientes para o trabalho proposto? 
-
-Neste projeto, a verificação da qualidade dos dados é responsabilidade dos alunos.
-
 #CRISP-DM Fase 3 -  __Preparação dos Dados__
 
 Como já informado, na fase de __Preparação dos Dados__ os _datasets_ que serão utilizados em todo o trabalho são construídos a partir dos dados brutos. Aqui os dados são “filtrados” retirando-se partes que não interessam e selecionando-se os “campos” necessários para o trabalho de mineração. 
 
-São 5 as atividades genéricas nesta fase de preparação dos dados, a seguir divididas em subseções
-
-##CRISP-DM Fase.Atividade 3.1 - Seleção dos dados. 
-
-Como já informado, a seleção dos dados envolve identificar quais dados, da nossa "montanha de dados", serão realmente utilizados. 
-
-Quais variáveis dos dados brutos serão convertidas para o _dataset_? 
-
-Não é raro cometer o erro de selecionar dados para um modelo preditivo com base em uma falsa ideia de que aqueles dados contém a resposta para o modelo que se quer construir. Surge o cuidado de se separar o sinal do ruído (Silver, Nate. The Signal and the Noise: Why so many predictions fail — but some don’t. USA: The Penguin Press HC, 2012.). 
-
-##CRISP-DM Fase.Atividade 3.2 - Limpeza dos dados
-
-##CRISP-DM Fase.Atividade 3.3 - Construção dos dados
+##CRISP-DM Fase.Atividade 3.1 - Construção dos dados
 
 Como já informado, a construção dos dados envolve a criação de novas variáveis a partir de outras presentes nos _datasets_.
 ```{r}
@@ -850,54 +718,144 @@ unb.prof.df.areas.de.atuacao <- extrai_areas_atuacao(unb.prof)
 # glimpse(unb.prof.df)
 ```
 
+#CRISP-DM Fase.Atividade 4 - Avaliação dados qualitativos e quantitativos
 
-##CRISP-DM Fase.Atividade 3.4 - Integração dos dados
+##Orientações do PPG de Ensino Ciências
 
-Como já informado, a integração dos dados envolve a união (merge) de diferentes tabelas para criar um único _dataset_ para ser utilizado no R, por exemplo.
+Como foi dito o foco da análise será nas publicações realizadas pelo programa. Os tipos de publicações envolvem periódicos, livros, capítulos de livros, textos em jornais, eventos, artigos e outras demais publicações. Abaixo teremos as quantidades totais de registros no conjunto de dados obtidos: 
 
-##CRISP-DM Fase.Atividade 3.5 -  Formatação dos dados
+```{r plot3, echo = FALSE, fig.width=8,fig.height=5}
+ori.c = c(
+  "PERIODICOS" = 1,
+  "LIVROS" = 2,
+  "CAP_LIVROS" = 3,
+  "TEXT_JORNAIS" = 4,
+  "EVENTOS" = 5,
+  "ARTIGOS" = 6,
+  "DEMAIS" = 7
+)
 
-Como já informado, a formatação de dados envolve a realização de pequenas alterações na estrutura dos dados, como a ordem das variáveis, para permitir a execução de determinado método de data mining.
+ori.names = c(
+  "PERIODICOS",
+  "LIVROS",
+  "CAP_LIVROS",
+  "TEXT_JORNAIS",
+  "EVENTOS",
+  "ARTIGOS",
+  "DEMAIS"
+)
 
-#CRISP-DM Fase 4 - __Modelagem__
+pub.list.df <- list()
+for(j in 1:length(pub)){
+  pub.df <- data.frame();
+  
+  for(i in 1:length(pub[[j]]))
+    pub.df <- rbind(pub.df, pub[[c(j,i)]])
+  pub.df$ano <- as.numeric(pub.df$ano)
+  pub.list.df[[j]] <- pub.df
+}
 
-Como já informado, na fase de __Modelagem__ no CRISP-DM ocorre a construção e avaliação de modelos estatísticos ou computacionais, podendo ser realizada em quatro atividades genéricas, a seguir organizadas na forma de seções
+pub.types <- as.data.frame(names(pub))
+names(pub.types) <- c("type")
+pub.types <- cbind(pub.types, sapply(pub.list.df, function(x){return(length(x[,1]))}))
+names(pub.types) <- c("type", "count")
 
-##CRISP-DM Fase.Atividade 4.1 - Seleção das técnicas de modelagem
 
-##CRISP-DM Fase.Atividade 4.2 -  Realização de testes de modelagem
+ggplot(pub.types, aes(x="", y= count, fill=type)) +
+  geom_bar(width = 1, stat = "identity")+ 
+  geom_text(aes(label = paste0(round(count), "")), 
+            position = position_stack(vjust = 0.5)) +
+  coord_polar("y")+
+  theme_void()
+```
+ 
 
-Como já informado, na realização de testes de modelagem diferentes modelos estatísticos ou computacionais são previamente testados e avaliados. Pode-se dividir o _dataset_ criado na etapa anterior para se ter uma base de treino na construção de modelos, e outra pequena parte para validar  e avaliar a eficiência de cada modelo criado até se chegar ao mais “eficiente”. 
+As maiores quantidades observadas são de participações em periódicos e de eventos sejam eles internacionais ou nacionais. Participações em eventos geralmente evidenciam algum tipo de engajamento dos pesquisadores com as comunidades externas a universidade e podem trazer informações importantes sobre o quanto determinado departamento da UNB influencia ou é influenciado por outras comunidades. A seguir teremos as quantidades especificadas de participações em eventos: 
 
-##CRISP-DM Fase.Atividade 4.3 -  Construção do modelo definitivo
+```{r plot4, echo = FALSE, fig.width=7,fig.height=4}
+pub.list.df[[ori.c["EVENTOS"]]] %>%
+  group_by(pais_do_evento, ano) %>%
+    ggplot(aes(x = ano, y = pais_do_evento, col = pais_do_evento)) +
+    geom_point() + geom_jitter()
+```
 
-Como já informado, a construçao do modelo definitivo é realizada com base na melhor experiência do passo anterior.
+Como pode-se notar a maior quantidade de participações são de eventos nacionais, com destaque também para participações em Portugal e na Espanha, o que indica que o departamento tende a se relacionar majoritariamente com países que não possuam grandes barreiras línguisticas em relação ao português do Brasil.  
 
-##CRISP-DM Fase.Atividade 4.4 - Avaliação do modelo
+Ao analisar as publicações realizadas pelo programa também podemos notar que em sua grande maioria são focadas em periódicos nacionais o que fortalece a ideia de que o departamento tende a manter sua influência apenas dentro do país. Isto poderia ser explicado pelo fato de que as áreas de pesquisa do programa são mais aplicáveis ou fazem mais sentido em um contexto brasileiro, talvez por questões culturais ou até mesmo porque o ensino sempre deve ser algo particular de uma população (o que é o foco do PPG). Abaixo podemos observar os dez periódicos em que ocorreram mais publicações pelo programa: 
 
-#CRISP-DM Fase 5 - __Avaliação__
+```{r plot5, echo = FALSE, fig.width=10,fig.height=3}
+pub.list.df[[ori.c["PERIODICOS"]]] %>%
+  group_by(periodico) %>%
+  summarise(count = n()) %>% 
+  arrange(desc(count)) %>% head(10) %>%
+  ggplot(aes(x = periodico, y = count, col = periodico)) +
+    geom_bar(position = "stack", stat = "identity") +
+    geom_text(aes(label=count), hjust = -0.5, size = 3.5) +
+    coord_flip() + 
+    theme(legend.position = "none")
+```
 
-Como já informado, na fase de __Avaliação__ do CRISP-DM os resultados não são apenas avaliados, mas se verifica se existem questões relacionadas à organização que não foram suficientemente abordadas. Deve-se refletir se o uso arepetido do modelo criado pode trazer algum “efeito colateral” para a organização. 
+Apenas para medir a relevância dos periódicos publicados foram verificados os qualis a partir da plataforma sucupira e foram identificados para os periódicos acima citados as classificações B5, B2, B4, B1 e C que definem um nível de relevância médio, Outro aspecto importante de se avaliar são as parcerias que estes orientadores realizam, podemos avaliar por exemplo a quantidade de autores associada a uma mesma publicação de um periódico e observar se obtemos mais publicações solo ou publicações conjuntas e determinar o grau de colaboração entre os profissionais. 
 
-Como já informado, nesta fase, pode-se trabalhar com 3 atividades genéricas, a seguir distribuídas em seções.
+```{r plot6, echo = FALSE, fig.width=10,fig.height=4}
+pub.count <- sapply(pub.list.df[[ori.c["PERIODICOS"]]]$autores, function(x){
+  return(length(x))
+}) %>% as.data.frame()
+names(pub.count) <- c("colaboradores")
+pub.count %>% 
+  group_by(colaboradores) %>%
+  summarise(total = n()) %>%  
+  ggplot(aes(x = colaboradores, y = total, fill = colaboradores)) +
+  geom_bar(position = "stack",stat = "identity") + 
+  geom_text(aes(label=total), vjust = -0.3, size = 3.5)
+```
 
-##CRISP-DM Fase.Atividade 5.1 - Avaliação dos resultados
+O gráfico acima mostra que em sua grande maioria as publicações em periódicos envolvem 2 ou 3 pesquisadores e a maior parte da distribuição se concentra em colaborações de 2 a 6 pesquisadores. Isto mostra que o programa possui um forte grau de colaboração entre seus pesquisadores e juntamente com a quantidade de grupos de pesquisa podemos dizer que o departamento possui um bom engajamento com relação a produção acadêmica sendo realizada na universidade. 
 
-##CRISP-DM Fase.Atividade 5.2 - Revisão do processo
+Com relações aos outros tipos de publicações temos um volume de dados menor a serem considerados mas vale a pena também analisa-los de alguma forma. Com relação a publicação de livros, temos no total 27 publicações todas realizadas para o Brasil, o que evidencia a tendência observada anteriormente de que o foco do programa é em território nacional. No total existe uma média de 208 páginas por livro e as publicações são realizadas em colaborações em sua maioria de 2 e 8 escritores, o que também evidencia o caráter colaborativo do programa, sendo que grande parte das publicações foram realizadas em 2010 e 2013 com 7 publicações e 8 respectivamente. 
 
-Como já informado, durante a revisão do processo verifica-se se o modelo foi construído adequadamente. As variáveis (passadas) para construir o modelo estarão disponíveis no futuro?
+Para propósitos mais gerais podemos analisar se existe alguma tendência em relação a quantidade de cada tipo de produção realizada ao longo do tempo pelo PPG. É de se esperar que as quantidades absolutas apresentem um aumento com relação ao tempo, uma vez que o departamento apresentou uma expansão de seu quadro de docentes em 2010. Também é importante que sejam analisadas as distribuições do que é produzido uma vez que isto pode revelar algum tipo de influência externa aos pesquisadores, como por exemplo um grande evento em que ocorrerão mais publicações ou algum período de crise em que as verbas de pesquisas foram cortadas. Abaixo seguem os modelos de regressão que apresentam as tendências para cada tipo de produção: 
 
-##CRISP-DM Fase.Atividade 5.3 -  Determinação dos etapas seguintes
+```{r plot7, echo = FALSE, fig.width=12,fig.height=4}
+livro.count <- sapply(pub.list.df[[ori.c["LIVROS"]]]$autores, function(x){
+  return(length(x))
+}) %>% as.data.frame()
 
-Como já informado, pode ser necessário decidir-se por finalizar o projeto, passar à etapa de desenvolvimento, ou rever algumas fases anteriores para a melhoria do projeto.
+types.by.year <- data.frame()
+for(i in 1:length(pub.list.df)){
+  types.by.year <- pub.list.df[[i]] %>%group_by(ano) %>%summarise(count = n()) %>%
+    cbind("type"=c(ori.names[i])) %>% rbind(types.by.year)
+}
 
-#CRISP-DM Fase 6 - __Implantação__ (_deployment_)
+types.by.year %>%
+  ggplot(aes(x = ano, y = count, col = type))+
+  geom_point() + 
+  geom_smooth(se =FALSE ,method = "lm", span = 0.7)+
+  facet_grid(. ~ type)
+```
 
-Como já informado, na fase de __Implantação__ (_deployment_) se realiza o planejamento de implantação dos produtos desenvolvidos (scripts, no caso do executado nesta disciplina) para o ambiente operacional, para seu uso repetitivo, envolvendo atividades de monitoramento e manutenção do sistema (script) desenvolvido. A fase de implantação concluir com a produção e apresentação do relatório final com os resultados do projeto.
+Como podemos notar, a quantidade de participações em eventos veio decrescendo nos últimos anos, talvez devido a cortes recentes em verbas acadêmicas que podem estar fortemente associadas a crise em que o país vem vivendo nos últimos anos. Já as participações em periódicos demostraram um aumento considerável o que pode também estar associado a diminuição de participações em eventos. Para os demais tipos de publicações não existe uma tendência clara uma vez que os mesmos se apresentaram relativamente constantes nos últimos 7 anos. 
 
-Como já informado, são seis as atividades genéricas na fase de __implantação__, a seguir apresentadas na forma de seções.
+##AQUI VAI O DO RAFAEL
 
-##CRISP-DM Fase.Atividade 6.1 -  Planejamento da transição 
+##AQUI VAI O DO PAULO
+
+#CRISP-DM Fase.Atividade 5 -  conclusões dos relatorios 3
+
+##Quanto ao PPG de ensino de ciências
+
+Portanto podemos observar que o programa de pós-graduação de ensino em ciências apresenta um baixo nível de internacionalização uma vez que grande parte de suas produções e orientações são voltadas a alunos de instituições nacionais e a periódicos nacionais em sua grande maioria publicados em língua portuguesa do Brasil.  
+
+É importante também notar que o programa possui um grande grau de colaboração entre seus participantes uma vez que a maior parte das publicações são realizadas em grupos, assim como as produções literárias e artigos produzidos. Também foram observadas mudanças nas produções do departamento ao longo dos últimos anos que podem ser analisadas mais a fundo, aqui foi proposta uma relação com cortes de fundos mas que devem ser avaliados traçando relações com informações sobre o cenário brasileiro. 
+
+Algumas informações sobre a mudança no quadro de funcionários também foi levantada durante a pesquisa e poderá também ser avaliada com mais profundidade para averiguar qual o real impacto disso no programa. 
+
+##AQUI VAI O DO RAFAEL
+
+##AQUI VAI O DO PAULO
+
+
+#CRISP-DM Fase.Atividade 6
 
 De que forma os produtos desenvolvidos pelo grupo poderiam ser colocados em uso prático regular, na organização cliente?
 
@@ -909,13 +867,6 @@ De que forma seria possível realizar o monitoramento do funcionamento dos produ
 
 que manutenções, ajustes, mudanças, poderia ter que ser eventualmente realizadas no produto (scripts), quando em uso no ambiente operacional do cliente?
 
-##CRISP-DM Fase.Atividade 6.4 -  Produção do relatório final
-
-A entrega do relatório do grupo, tomando como base este aqui, reflete  a execução desta etapa.
-
-##CRISP-DM Fase.Atividade 6.5 -  Apresentação do relatório final
-
-Como já informado, não será feita apresentação do relatório, mas esperamos que publicações científicas possam ser geradas com pelo seu grupo, com o apoio dos professores da disciplina.
 
 ##CRISP-DM Fase.Atividade 6.6 -  Revisão sobre a execução do projeto
 

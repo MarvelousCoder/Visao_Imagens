@@ -1,0 +1,2607 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={CiÃªncia de Dados para Todos (Data Science For All) - 2018.1 - AnÃ¡lise da ProduÃ§Ã£o CientÃ­fica e AcadÃªmica da Universidade de BrasÃ­lia - RelatÃ³rio Final da Disciplina - Departamento de CiÃªncia da ComputaÃ§Ã£o da UnB},
+            pdfauthor={Jorge H. C. Fernandes, Ricardo B. Sampaio, JoÃ£o Ribas de Moura e JerÃ´nimo A. Filho},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{CiÃªncia de Dados para Todos (Data Science For All) - 2018.1 - AnÃ¡lise
+da ProduÃ§Ã£o CientÃ­fica e AcadÃªmica da Universidade de BrasÃ­lia -
+RelatÃ³rio Final da Disciplina - Departamento de CiÃªncia da
+ComputaÃ§Ã£o da UnB}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Jorge H. C. Fernandes, Ricardo B. Sampaio, JoÃ£o Ribas de Moura e
+JerÃ´nimo A. Filho}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{11/06/2018}
+
+
+\begin{document}
+\maketitle
+
+\begin{verbatim}
+## Warning: package 'tidyverse' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tibble' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tidyr' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'readr' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'purrr' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'forcats' was built under R version 3.4.4
+\end{verbatim}
+
+\section{IntroduÃ§Ã£o}\label{introduaao}
+
+Este relatÃ³rio tem como foco principal a contextualizaÃ§Ã£o das Ã¡reas
+de pesquisa relacionadas ao programa de PÃ³s-GraduaÃ§Ã£o em MatemÃ¡tica
+da UnB, dos anos 2010 Ã~ 2017. Para tal estÃ¡ sendo apresentado dados de
+produÃ§Ã£o cientÃ­fica dos docentes do programa, retirados do currÃ­culo
+Lattes dos professores e do repositÃ³rio \texttt{OASIS} do
+\texttt{IBICT} (Instituto Brasileiro de InformaÃ§Ã£o em CiÃªncia e
+Tecnologia).
+
+O programa de pesquisa utilizado neste relatÃ³rio Ã© o de MatemÃ¡tica
+(cÃ³digo: \texttt{53001010003P2}). O coordenador Ã© o Carlos Alberto
+Pereira dos Santos e as subÃ¡reas de concentraÃ§Ã£o sÃ£o:
+\textbf{Ãlgebra, AnÃ¡lise, Geometria e MatemÃ¡tica Aplicada}. Mais
+informaÃ§Ãµes do programa podem ser acessadas pelo site
+\href{https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/programa/viewPrograma.jsf?popup=true\&cd_programa=53001010003P2}{sucupira}.
+
+O programa de PÃ³s-GraduaÃ§Ã£o em MatemÃ¡tica da UnB, iniciado em 1962,
+oferece Mestrado e Doutorado em MatemÃ¡tica nas subÃ¡reas de Ãlgebra,
+AnÃ¡lise, Geometria e MatemÃ¡tica Aplicada (Probabilidade,
+FÃ­sica-MatemÃ¡tica e ComputaÃ§Ã£o). O corpo docente mantÃ©m um programa
+ativo de pesquisa, participa regular e ativamente de forma destacada em
+reuniÃµes cientÃ­ficas e em corpos editoriais de revistas cientÃ­ficas,
+alÃ©m de manter intercÃ¢mbio cientÃ­fico com diversas instituiÃ§Ãµes do
+paÃ­s e do exterior.
+
+HÃ¡ tambÃ©m um programa de mestrado profissional \texttt{PROFMAT}, que
+Ã© um programa de pÃ³s-graduaÃ§Ã£o stricto sensu em MatemÃ¡tica,
+reconhecido pelo MinistÃ©rio da EducaÃ§Ã£o e conduzindo ao tÃ­tulo de
+Mestre. Tem como objetivo proporcionar formaÃ§Ã£o matemÃ¡tica
+aprofundada relevante ao exercÃ­cio da docÃªncia no Ensino BÃ¡sico,
+visando dar ao egresso a qualificaÃ§Ã£o certificada para o exercÃ­cio da
+profissÃ£o de professor de MatemÃ¡tica.
+
+O \texttt{PROFMAT} Ã© um curso semipresencial ministrado por
+InstituiÃ§Ãµes de Ensino Superior associadas em uma Rede Nacional, no
+Ã¢mbito do \textbf{Sistema Universidade Aberta do Brasil} (UAB). Ã
+coordenado pela ComissÃ£o AcadÃªmica Nacional, que opera sob a Ã©gide da
+Diretoria da \textbf{Sociedade Brasileira de MatemÃ¡tica} (SBM).
+
+As InstituiÃ§Ãµes de Ensino Superior que integram a Rede Nacional do
+\texttt{PROFMAT} sÃ£o denominadas InstituiÃ§Ãµes Associadas e sÃ£o
+responsÃ¡veis, por intermÃ©dio das respectivas CoordenaÃ§Ãµes
+AcadÃªmicas Institucionais, por toda a gestÃ£o local do
+\texttt{PROFMAT}, descritas no Regimento. InformaÃ§Ãµes completas sobre
+este mestrado podem ser encontradas na pÃ¡gina do
+\href{http://www.profmat-sbm.org.br}{\texttt{PROFMAT}}. Na Universidade
+de BrasÃ­lia este curso Ã© ofertado no Ã¢mbito do Instituto de CiÃªncias
+Exatas, Departamento de MatemÃ¡tica.
+
+O Departamento de MatemÃ¡tica da UnB obteve nota 7 na Ãºltima
+avaliaÃ§Ã£o trienal da Capes. Essa avaliaÃ§Ã£o de excelÃªncia Ã© o
+resultado de um longo, Ã¡rduo e contÃ­nuo trabalho iniciado em 1962 por
+professores/colaboradores corajosos e idealistas que acreditaram em
+tornar o sonho do Departamento de MatemÃ¡tica da Universidade de
+BrasÃ­lia uma realidade. Desde entÃ£o, esse ideal vem sendo fortalecido
+com a chegada de novos professores/colaboradores que conduziram este
+programa ao reconhecimento da sua excelÃªncia.
+
+A metodologia para desenvolvimento do relatÃ³rio Ã© baseada no modelo de
+mineraÃ§Ã£o de dados denominado CRISP-DM (Chapman et al., 2000, Mariscal
+et al., 2010).
+
+\ldots{}
+
+\section{Metodologia}\label{metodologia}
+
+\section{CRISP-DM (Corresponderia Ã~ seÃ§Ã£o de
+Metodologia)}\label{crisp-dm-corresponderia-a-seaao-de-metodologia}
+
+Para desenvolvimento do trabalho devem ser seguidos, da forma mais
+simplificada e coerente possÃ­vel, as fases e atividades genÃ©ricas do
+ciclo de vida de um projeto executado em aderÃªncia ao CRISP-DM. Em
+outras palavras, a produÃ§Ã£o do relatorio deve seguir a metodologia
+CRISP-DM.
+
+``A widely used methodology for data mining is the CRoss-Industry
+Standard Process for Data Mining (CRISP-DM) which mas initiated in 1996
+(â¦) with the intent of providing a process that is \textbf{reliable
+and repeatable} by people with little data-mining background, with a
+framework within which experience can be recorded, to support the
+replication of projects, to support planning and management, as well as
+to demonstrate data mining as a mature discipline (â¦)'' {[}Sullivan,
+Rob. Introduction to Data Mining for the Life Sciences. Springer Science
+\& Business Media. 2012{]}
+
+O seu trabalho deve conter uma seÃ§Ã£o metodologia, onde vocÃª faz uma
+breve descriÃ§Ã£o da metodologia que seu grupo adotou para realizaÃ§Ã£o
+do trabalho, que pode ser baseada no texto dessa seÃ§Ã£o, desde que
+citado adequadamente.
+
+\subsection{DelimitaÃ§Ãµes iniciais}\label{delimitaaaes-iniciais}
+
+Em aderÃªncia Ã~ estrutura do CRISP-DM, algumas delimitaÃ§Ãµes de
+contexto para o trabalho sÃ£o apresentadas a seguir:
+
+\subsubsection{DomÃ­nio de AplicaÃ§Ã£o do
+projeto}\label{domanio-de-aplicaaao-do-projeto}
+
+O domÃ­nio de aplicaÃ§Ã£o do projeto Ã© o da produÃ§Ã£o cientÃ­fica e
+acadÃªmica brasileira, mais especÃ­ficamente a produÃ§Ã£o cientÃ­fica ou
+produÃ§Ã£o acadÃªmica de um subgrupo de pesquisadores vinculados Ã~
+Universidade de BrasÃ­lia. O domÃ­nio de aplicaÃ§Ã£o do projeto deve ser
+declarado na introduÃ§Ã£o ao relatÃ³rio.
+
+\subsubsection{Tipo de Problema
+abordado}\label{tipo-de-problema-abordado}
+
+O tipo de problema abordado Ã© o da produÃ§Ã£o de anÃ¡lises descritivas,
+quantitativas e de modelagem computacional ou estatÃ­stica, que permitam
+caracterizar como e porque ocorre a produÃ§Ã£o cientÃ­fica e acadÃªmica
+de um grupo de pesquisadores. Essa caracterizaÃ§Ã£o visa subsidiar a
+tomada de decisÃ£o por membros do Sistema Nacional de PÃ³s-GraduaÃ§Ã£o.
+O tipo de problema abordado no projeto deve ser declarado na
+introduÃ§Ã£o ao relatÃ³rio.
+
+\subsubsection{Conjunto de Ferramentas e
+TÃ©cnicas}\label{conjunto-de-ferramentas-e-tacnicas}
+
+O conjunto de requisitos relativos a ferramentas e tÃ©cnicas a serem
+empregadas na execuÃ§Ã£o do trabalho Ã©:
+
+\begin{itemize}
+\tightlist
+\item
+  O relatÃ³rio deve ser entregue no formato R Markdown, apto Ã~
+  geraÃ§Ã£o de saÃ­da \LaTeX e PDF, composto por comandos em R
+  entremeados por descriÃ§Ãµes textuais que auxiliem na interpretaÃ§Ã£o
+  dos resultados, bem como na compreensÃ£o do domÃ­nio de conhecimento
+  sob anÃ¡lise.
+\item
+  As anÃ¡lises descritivas devem empregar de forma criativa as funÃ§Ãµes
+  das bibliotecas de ciÃªncia de dados em R propostas por Wickham e
+  Grolemund (2016).
+\item
+  As anÃ¡lises quantitativas devem lanÃ§ar mÃ£o de recursos grÃ¡ficos
+  variados, que complementarÃ£o anÃ¡lises descritivas com
+  \emph{insights} sobre de que forma os processos de produÃ§Ã£o
+  cientÃ­fica e acadÃªmica contribuem para os resultados apresentados.
+  Por exemplo, os dados analisados possibilitam justificar o eventual
+  crescimento ou decrÃ©scimo de Ã­ndices de produÃ§Ã£o observados?
+\item
+  A modelagem computacional ou estatÃ­stica avanÃ§ada dos dados deve
+  usar uma das quatro tÃ©cnicas prescritas:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Aprendizado de MÃ¡quina (Datacamp, 2018; Kuhn et al., 2018; Bruce e
+    Bruce, 2017);
+  \item
+    Aprendizado EstatÃ­stico;
+  \item
+    MineraÃ§Ã£o de Texto ou;
+  \item
+    AnÃ¡lise de Redes (Kolaczyk e CsÃ¡rdi, 2014; Lusher et al., 2013; de
+    Nooy et al., 2005).
+  \end{itemize}
+\end{itemize}
+
+O conjunto de requisitos relativos a ferramentas e tÃ©cnicas a serem
+empregadas na execuÃ§Ã£o do trabalhodo projeto deve ser declarado na
+parte de metodologia do relatÃ³rio.
+
+\subsection{Modelo de ReferÃªncia
+CRISP-DM}\label{modelo-de-referancia-crisp-dm}
+
+Miner (2012), aprofunda: â(â¦) In CRISP-DM, the complete life cycle
+of a data mining project is represented with \textbf{six phases}:
+business understanding (determining the purpose of the study), data
+understanding (data exploration and understanding), data preparation,
+modeling, evaluation, and deployment.(â¦). {[}Miner, Gary. Practical
+Text Mining and Statistical Analysis for Non-structure Text Data
+Applications. Academic Press, 2012.{]}
+
+\subsubsection{Por que usar o CRISP-DM?}\label{por-que-usar-o-crisp-dm}
+
+Imagine uma analogia entre um projeto de datamining e a preparaÃ§Ã£o de
+uma receita de bolo para ser usada em uma fÃ¡brica. Para iniciar a
+produÃ§Ã£o, com base numa receita de comprovada eficÃ¡cia (metodolÃ³gica
+e cientÃ­fica), vocÃª tem que minerar os ingredientes (dados) em um
+grande supermercado (\emph{dataset}). Com os ingredientes vocÃª precisa
+aplicar um mÃ©todo (a forma de misturÃ¡-los), colocar os ingredientes
+numa determinada ordem, mexer por um certo tempo, aquecer por tantos
+minutos atÃ© o bolo ficar pronto e ser aprovado em um ou mais testes de
+degustaÃ§Ã£o.
+
+Tendo por objetivo fazer com que essa receita (script de mineraÃ§Ã£o de
+dados) possa ser executada com sucesso diversas vezes, numa fÃ¡brica,
+serÃ¡ que outro cozinheiro (cientista) que reproduzisse a receita
+(mÃ©todo) chegaria ao mesmo resultado? Se a metodologia (receita) jÃ¡
+foi bastante testada, entÃ£o Ã© bem provÃ¡vel que o resultado serÃ¡ o
+mesmo e seu produto (receita de bolo) serÃ¡ aceito para a produÃ§Ã£o
+(\emph{deployment}) de anÃ¡lises para consumo futuro, com base em
+fundamentos cientÃ­ficos.
+
+\subsubsection{OrganizaÃ§Ã£o hierÃ¡rquica de atividades em
+fases}\label{organizaaao-hierarquica-de-atividades-em-fases}
+
+Dentro de cada fase no CRISP-DM existe uma estrutura hierÃ¡rquica de
+atividades genÃ©ricas para serem realizadas. Cada uma dessas atividades
+\textbf{genÃ©ricas} pode determinar a execuÃ§Ã£o de atividades
+\textbf{especÃ­ficas}.
+
+Voltando ao exemplo do bolo, a atividade â 1. Entendimento do Boloâ
+poderia conter uma atividade genÃ©rica chamada â1.1. Determinar para
+que o bolo servirÃ¡ (simples cafÃ© da manhÃ£? bolo de aniversÃ¡rio? bolo
+de casamento?)â. Dentro dessa atividade genÃ©rica poderia haver
+atividades especÃ­ficas como â1.1.1.Entrevistar o contratante para
+obter detalhes de onde o bolo serÃ¡ usado?â; â1.1.2. Conversar com
+os convidados sob alguma necessidade especial (sem lactose? sem
+glÃºtem?)â, etc.
+
+\subsubsection{Seis Fases do CRISP-DM}\label{seis-fases-do-crisp-dm}
+
+Com base no apresentado, segue uma descriÃ§Ã£o um pouco mais detalhada
+das seis fases de um projeto no CRISP-DM, interpretadas no contexto
+deste relatÃ³rio.
+
+\paragraph{\texorpdfstring{\textbf{Entendimento do
+NegÃ³cio}}{Entendimento do NegÃ³cio}}\label{entendimento-do-negacio}
+
+Ã o desenvolvimento dos objetivos e declaraÃ§Ã£o das necessidades do
+projeto sob a perspectiva do negÃ³cio, para transformar isso tudo em
+definiÃ§Ã£o de um problema de data mining. No caso desse relatÃ³rio irÃ¡
+se buscar encontrar dados referentes aos perfis, publicaÃ§Ãµes e
+orientaÃ§Ãµes dos discentes dos programas de pÃ³s-graduaÃ§Ã£o em
+matemÃ¡tica, \ldots{}, . Deve-se tambÃ©m definir um grupo de objetivos,
+um plano para a realizaÃ§Ã£o do projeto e um critÃ©rio de sucesso. Como
+objetivo para a parte de datamining desse relatÃ³rio tem-se conseguir
+dados referentes Ã~s seguintes Ã¡reas:
+
+\begin{itemize}
+\tightlist
+\item
+  Ãreas com resultados mais relevantes / expressivos;\\
+\item
+  NÃ­vel de InternacionalizaÃ§Ã£o;
+\item
+  Principais congressos e eventos da Ã¡rea no Brasil e no mundo;
+\item
+  Principais revistas e local de publicaÃ§Ã£o de trabalhos no Brasil e
+  no mundo;
+\item
+  Quantitativo de pessoas e programas dentro do universo;
+\item
+  Quantitativo de orientandos atuais e que jÃ¡ finalizaram;
+\item
+  Grupos de pesquisa associados ou que os professores / pesquisadores
+  fazem parte.
+\end{itemize}
+
+Quanto ao plano para realizaÃ§Ã£o do projeto, serÃ¡ realizada as
+seguintes etapas:
+
+\begin{itemize}
+\tightlist
+\item
+  Tratamento dos dados para transformÃ¡-lo em um dataset;
+\item
+  AnÃ¡lise dos dados para a criaÃ§Ã£o de resultados relevantes;
+\item
+  AnÃ¡lise dos resultados para encontrar os dados citados nos objetivos.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Entendimento dos
+Dados}}{Entendimento dos Dados}}\label{entendimento-dos-dados}
+
+O segundo estÃ¡gio do CRISP-DM requer que se tenha acesso ao dado
+listado nos recursos do projeto. Essa fase requer a realizaÃ§Ã£o da
+descriÃ§Ã£o, exploraÃ§Ã£o, verificaÃ§Ã£o da qualidade e relatÃ³rio da
+qualidade dos dados.
+
+Os dados analisados nesse relatÃ³rio foram pegos a partir do arquivo
+Matematica.profile.json que representa o dataset do programa de pÃ³s
+graduaÃ§Ã£o em MatemÃ¡tica (cÃ³digo: \texttt{53001010003P2}) e conta com
+uma lista de docentes e seus dados pessoais. Essa descriÃ§Ã£o e
+exploraÃ§Ã£o foi feita utilizando do comando \textbf{View} no rstudio. A
+qualidade dos dados se encontra bastante satisfatÃ³ria, com alguns
+problemas na padronizaÃ§Ã£o de alguns dados como o endereÃ§o que em
+alguns casos apresenta diferentes nomes para um mesmo curso como
+``Matematica'' e ``MatemÃ¡tica''.
+
+\paragraph{\texorpdfstring{\textbf{PreparaÃ§Ã£o dos
+Dados}}{PreparaÃ§Ã£o dos Dados}}\label{preparaaao-dos-dados}
+
+Aqui os dados sÃ£o âfiltradosâ retirando-se partes que nÃ£o
+interessam e selecionando-se os âcampos" necessÃ¡rios para o trabalho
+de mineraÃ§Ã£o.
+
+SÃ£o 5 as atividades genÃ©ricas nesta fase de preparaÃ§Ã£o dos dados:
+
+\begin{itemize}
+\item
+  SeleÃ§Ã£o dos dados. Envolve identificar quais dados, da nossa
+  ``montanha de dados'', serÃ£o realmente utilizados. Quais variÃ¡veis
+  dos dados brutos serÃ£o convertidas para o \emph{dataset}? NÃ£o Ã©
+  raro cometer o erro de selecionar dados para um modelo preditivo com
+  base em uma falsa ideia de que aqueles dados contÃ©m a resposta para o
+  modelo que se quer construir. Surge o cuidado de se separar o sinal do
+  ruÃ­do (Silver, Nate. The Signal and the Noise: Why so many
+  predictions fail â but some donât. USA: The Penguin Press HC,
+  2012.).
+\item
+  Limpeza dos dados.
+\item
+  ConstruÃ§Ã£o dos dados. Envolve a criaÃ§Ã£o de novas variÃ¡veis a
+  partir de outras presentes nos \emph{datasets}.
+\item
+  IntegraÃ§Ã£o dos dados. Envolve a uniÃ£o (merge) de diferentes tabelas
+  para criar um Ãºnico \emph{dataset} para ser utilizado no R, por
+  exemplo.
+\item
+  FormataÃ§Ã£o dos dados. Envolve a realizaÃ§Ã£o de pequenas
+  alteraÃ§Ãµes na estrutura dos dados, como a ordem das variÃ¡veis, para
+  permitir a execuÃ§Ã£o de determinado mÃ©todo de data mining.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Modelagem}}{Modelagem}}\label{modelagem}
+
+No CRISP-DM este estÃ¡gio envolve a construÃ§Ã£o e avaliaÃ§Ã£o do
+modelo, podendo ser realizada em quatro atividades genÃ©ricas:
+
+\begin{itemize}
+\item
+  SeleÃ§Ã£o das tÃ©cnicas de modelagem.
+\item
+  RealizaÃ§Ã£o de testes de modelagem, onde diferentes modelos sÃ£o
+  previamente testados e avaliados. Pode-se dividir o \emph{dataset}
+  criado na etapa anterior para se ter uma base de treino na
+  construÃ§Ã£o de modelos, e outra pequena parte para validar e avaliar
+  a eficiÃªncia de cada modelo criado atÃ© se chegar ao mais
+  âeficienteâ.
+\item
+  ConstruÃ§Ã£o do modelo definitivo, com base na melhor experiÃªncia do
+  passo anterior.
+\item
+  AvaliaÃ§Ã£o do modelo.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{AvaliaÃ§Ã£o}}{AvaliaÃ§Ã£o}}\label{avaliaaao}
+
+Aqui os resultados nÃ£o sÃ£o apenas avaliados, mas se verifica se
+existem questÃµes relacionadas Ã~ organizaÃ§Ã£o que nÃ£o foram
+suficientemente abordadas. Deve-se refletir se o uso arepetido do modelo
+criado pode trazer algum âefeito colateralâ para a organizaÃ§Ã£o.
+
+Nesta fase, pode-se trabalhar com 3 atividades genÃ©ricas:
+
+\begin{itemize}
+\item
+  AvaliaÃ§Ã£o dos resultados
+\item
+  RevisÃ£o do processo, por meio da qual verifica-se se o modelo foi
+  construÃ­do adequadamente. As variÃ¡veis (passadas) para construir o
+  modelo estarÃ£o disponÃ­veis no futuro?
+\item
+  DeterminaÃ§Ã£o dos etapas seguintes. Pode ser necessÃ¡rio decidir-se
+  por finalizar o projeto, passar Ã~ etapa de desenvolvimento, ou rever
+  algumas fases anteriores para a melhoria do projeto.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{ImplantaÃ§Ã£o}
+(\emph{deployment})}{ImplantaÃ§Ã£o (deployment)}}\label{implantaaao-deployment}
+
+Foi realizado o planejamento de implantaÃ§Ã£o dos produtos desenvolvidos
+(scripts, no caso do executado nesta disciplina) para o ambiente
+operacional, para seu uso repetitivo, envolvendo atividades de
+monitoramento e manutenÃ§Ã£o do sistema (script) desenvolvido. A fase de
+implantaÃ§Ã£o concluir com a produÃ§Ã£o e apresentaÃ§Ã£o do relatÃ³rio
+final com os resultados do projeto.
+
+SÃ£o atividades genÃ©ricas na fase de \textbf{implantaÃ§Ã£o}:
+
+\begin{itemize}
+\tightlist
+\item
+  Planejamento da transiÃ§Ã£o dos produtos;
+\item
+  Planejamento do monitoramento dos produtos em utilizaÃ§Ã£o no ambiente
+  operacional;
+\item
+  Planejamento de manuteÃ§Ã£o a ser eventualmente efetuada no produto
+  (scripts);
+\item
+  ProduÃ§Ã£o do relatÃ³rio final;
+\item
+  ApresentaÃ§Ã£o do relatÃ³rio final;
+\item
+  RevisÃ£o sobre a execuÃ§Ã£o do projeto, com registro de liÃ§Ãµes
+  aprendidas etc.
+\end{itemize}
+
+No contexto do projeto realizado no Ã¢mbito desta disciplina, a
+responsabilidade por execuÃ§Ã£o de todas essas atividades Ã© dos alunos,
+com exceÃ§Ã£o da apresentaÃ§Ã£o do relatÃ³rio final, que nÃ£o serÃ¡
+realizada.
+
+\section{CRISP-DM Fase 1 - Entendimento do
+NegÃ³cio}\label{crisp-dm-fase-1---entendimento-do-negacio}
+
+\subsection{O que Ã© o Sistema Nacional de PÃ³s-GraduaÃ§Ã£o?
+(ContextualizaÃ§Ã£o)}\label{o-que-a-o-sistema-nacional-de-pas-graduaaao-contextualizaaao}
+
+A produÃ§Ã£o do conhecimento cientÃ­fico, no Brasil, Ã©
+predominantemente efetuada por meio do Sistema Nacional de
+PÃ³s-GraduaÃ§Ã£o - SNPG, e mais fortemente relacionada com a formaÃ§Ã£o
+de doutores nesse sistema (PÃ¡taro e Mezzomo, 2013), por meio de cursos
+de pÃ³s-graduaÃ§Ã£o \emph{strictu sensu}.
+
+Fernandes e Sampaio (2017) jÃ¡ indicaram que a ciÃªncia Ã©
+reconhecidamente um elemento essencial para o desenvolvimento social e
+econÃ´mico de qualquer naÃ§Ã£o. Assim sendo, faz-se mister aprimorar o
+SNPG como forma de promoÃ§Ã£o desse crescimento, visando maximizar o
+retorno decorrente do emprego dos recursos nele aplicados. A promoÃ§Ã£o
+do crescimento do SNPG se dÃ¡ predominantemente por meio de avaliaÃ§Ãµes
+regulares de seus programas de pÃ³s-graduaÃ§Ã£o, sob responsabilidade da
+CAPES, que realiza a cada quatro anos um complexo (Leite, 2018, p.~13) e
+custoso processo de coleta de dados, anÃ¡lise e deliberaÃ§Ã£o sobre as
+pÃ³s-graduaÃ§Ãµes \emph{strictu sensu}, em coerÃªncia com o estabelecido
+no Plano Nacional de PÃ³s-GraduaÃ§Ã£o (PNPG) 2012-2020 (CAPES, 2010) e
+nos diversos documentos que definem os critÃ©rios de organizaÃ§Ã£o da
+pÃ³s-graduaÃ§Ã£o em cada Ã¡rea do conhecimento (CAPES, 2018). Leite
+(2018) faz uma apresentaÃ§Ã£o geral de como se organizam e sÃ£o
+avaliadas as pÃ³s-graduaÃ§Ãµes no Brasil.
+
+O Plano Nacional de PÃ³s-GraduaÃ§Ã£o (PNPG), por outro lado, define
+diretrizes estratÃ©gicas para desenvolvimento da pÃ³s-graduaÃ§Ã£o
+brasileira, que deve abordar prioritariamente grandes temas de interesse
+nacional, tais como a reduÃ§Ã£o das assimetrias de desenvolvimento entre
+as regiÃµes do Brasil, a formaÃ§Ã£o de professores para a educaÃ§Ã£o
+bÃ¡sica, a formaÃ§Ã£o de recursos humanos para as empresas, a resposta
+aos grandes desafios brasileiros sobre Ãgua, Energia, Transporte,
+Controle de Fronteiras, AgronegÃ³cio, AmazÃ´nia, AmazÃ´nia Azul (Mar),
+SaÃºde, Defesa, Programa Espacial, alÃ©m de JustiÃ§a, SeguranÃ§a
+PÃºblica, Criminologia e DesequilÃ­brio Regional. O PNPG tambÃ©m traÃ§a
+as diretrizes para financiamento da pÃ³s-graduaÃ§Ã£o e sua
+internacionalizaÃ§Ã£o, apresentando conclusÃµes e recomendaÃ§Ãµes.
+
+As avaliaÃ§Ãµes do SNPG, ao atribuirem mensuraÃ§Ãµes de desempenho Ã~s
+diversas pÃ³s-graduaÃ§Ãµes que dele fazem parte, geram incentivos e
+penalidades aos programas, tendo em vista a limitada disponibilidade de
+recursos para investimento em bolsas, taxas de bancada etc. Embora o
+sistema seja altamente sofisticado ele Ã© tambÃ©m altamente criticado
+(Azevedo et al., 2016), sobretudo porque hÃ¡ percalÃ§os na busca por um
+equilÃ­brio entre as diferentes concepÃ§Ãµes de finalidade da ciÃªncia.
+Se de um lado a promoÃ§Ã£o do conhecimento gerado predominantemente nas
+ditas ciÃªncias \emph{hard} constribui para criar fluxos econÃ´micos
+mais intensos, isso nÃ£o significa que essa promoÃ§Ã£o possa ocorrer em
+detrimento da menor promoÃ§Ã£o na geraÃ§Ã£o de conhecimento sobre
+problemas sociais, predominantemente gerado nas ditas ciÃªncias
+\emph{soft}, especialmente das Ã¡reas de humanidades, sob pena de
+ampliaÃ§Ã£o de desigualdades (Azevedo et al., 2016).
+
+NÃ£o hÃ¡ soluÃ§Ã£o simples, mas postula-se, nesta disciplina, que uma
+maior agilidade na avaliaÃ§Ã£o e a utilizaÃ§Ã£o de critÃ©rios mais
+objetivos, poderÃ¡ facilitar a melhoria do sistema.
+
+\subsubsection{Os ColÃ©gios, Grandes Ãreas e Ãreas da PÃ³s-GraduaÃ§Ã£o
+Brasileira}\label{os-colagios-grandes-areas-e-areas-da-pas-graduaaao-brasileira}
+
+A partir de 2018, as diversas Ã¡reas da pÃ³s-graduaÃ§Ã£o brasileira
+foram organizadas na forma de colÃ©gios, grandes Ã¡reas e Ã¡reas,
+conforme apresentam as tabelas a seguir.
+
+\paragraph{ColÃ©gio de CiÃªncias da
+vida}\label{colagio-de-ciancias-da-vida}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+CIÃNCIAS AGRÃRIAS & CIÃNCIAS BIOLÃ``GICAS & CIÃNCIAS DA
+SAÃDE\tabularnewline
+\midrule
+\endhead
+CiÃªncia de Alimentos & Biodiversidade & EducaÃ§Ã£o
+FÃ­sica\tabularnewline
+CiÃªncias AgrÃ¡rias I & CiÃªncias BiolÃ³gicas I &
+Enfermagem\tabularnewline
+Medicina VeterinÃ¡ria & CiÃªncias BiolÃ³gicas II &
+FarmÃ¡cia\tabularnewline
+Zootecnia / Recursos Pesqueiros & CiÃªncias BiolÃ³gicas III & Medicina
+I\tabularnewline
+- & - & Medicina II\tabularnewline
+- & - & Medicina III\tabularnewline
+- & - & NutriÃ§Ã£o\tabularnewline
+- & - & Odontologia\tabularnewline
+- & - & SaÃºde Coletiva\tabularnewline
+\bottomrule
+\end{longtable}
+
+\paragraph{ColÃ©gio de CiÃªncias Exatas, TecnolÃ³gicas e
+Multidisciplinar}\label{colagio-de-ciancias-exatas-tecnolagicas-e-multidisciplinar}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+CIÃNCIAS EXATAS E DA TERRA & ENGENHARIAS &
+MULTIDISCIPLINAR\tabularnewline
+\midrule
+\endhead
+Astronomia / FÃ­sica & Engenharias I & Biotecnologia\tabularnewline
+CiÃªncia da ComputaÃ§Ã£o & Engenharias II & CiÃªncias
+Ambientais\tabularnewline
+GeociÃªncias & Engenharias III & Ensino\tabularnewline
+MatemÃ¡tica / Probabilidade e EstatÃ­stica & Engenharias IV &
+Interdisciplinar\tabularnewline
+QuÃ­mica & - & Materiais\tabularnewline
+\bottomrule
+\end{longtable}
+
+\paragraph{ColÃ©gio de Humanidades}\label{colagio-de-humanidades}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\begin{minipage}[b]{0.03\columnwidth}\raggedright\strut
+CIÃNCIAS HUMANAS\strut
+\end{minipage} & \begin{minipage}[b]{0.03\columnwidth}\raggedright\strut
+CIÃNCIAS SOCIAIS APLICADAS\strut
+\end{minipage} & \begin{minipage}[b]{0.03\columnwidth}\raggedright\strut
+LINGUÃSTICA, LETRAS E ARTES\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Antropol/Arqueol\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Admin.PÃºb./Empr.,C.ContÃ¡b. e Tur.\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Artes\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+CiÃªncia Pol. e Rel. Int.\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Arquit., Urban. e Design\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+LinguÃ­stica e Literatura\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+CiÃªncias da ReligiÃ£o e Teol.\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+ComunicaÃ§Ã£o e InformaÃ§Ã£o\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+EducaÃ§Ã£o\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Direito\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Filosofia\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Economia\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Geografia\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Planej. Urbano e Reg. / Demografia\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+HistÃ³ria\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+ServiÃ§o Social\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Psicologia\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+-\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Sociologia\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+-\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Cada um desses colÃ©gios, grandes Ã¡reas e Ã¡reas de conhecimento
+possuem dinÃ¢micas prÃ³prias, e, portanto, nÃ£o hÃ¡ um modelo universal
+que se aplique a todas. Existem aspectos comuns, mas tambÃ©m grandes
+peculiaridades, descritas parcialmente nos correspondentes documentos de
+Ã¡rea disponÃ­veis em CAPES (2018).
+
+\subsection{A UnB dentro do Sistema Nacional de PÃ³s-GraduaÃ§Ã£o
+(ContextualizaÃ§Ã£o)}\label{a-unb-dentro-do-sistema-nacional-de-pas-graduaaao-contextualizaaao}
+
+\subsubsection{O que Ã© a UnB?}\label{o-que-a-a-unb}
+
+DescriÃ§Ã£o da Universidade de BrasÃ­lia, com foco na sua produÃ§Ã£o
+cientÃ­fica e acadÃªmica.
+
+\subsubsection{DescriÃ§Ã£o das pÃ³s-graduaÃ§Ãµes da
+UnB}\label{descriaao-das-pas-graduaaaes-da-unb}
+
+Texto a desenvolver.
+
+\subsubsection{Outros aspectos que caracterizam a produÃ§Ã£o cientÃ­fica
+e acadÃªmica da
+UnB}\label{outros-aspectos-que-caracterizam-a-produaao-cientafica-e-acadamica-da-unb}
+
+Texto a desenvolver.
+
+\subsection{O que a OrganizaÃ§Ã£o precisa realmente
+alcanÃ§ar?}\label{o-que-a-organizaaao-precisa-realmente-alcanaar}
+
+VÃ¡rios stakeholders estÃ£o envolvidos no projeto em curso, e
+poderÃ­amos considerar cada um deles como distintas organizaÃ§Ãµes que
+possuem interesses distintos e complementares. Elas sÃ£o: * A Disciplina
+CiÃªncia de Dados para Todos 2018.1, que quer comprovar que seus alunos
+dominam ferramentas e tÃ©cnicas de ciÃªncia de dados, para fins de
+avaliaÃ§Ã£o de rendimento da disciplina. * A UnB, representada pelos
+decanatos de pÃ³s-graduaÃ§Ã£o (DPG) e de pesquisa e inovaÃ§Ã£o (DPI),
+que querem dispor de instrumentos para realizaÃ§Ã£o de avaliaÃ§Ãµes
+contÃ­nuas de suas pÃ³s-graduaÃ§Ãµes. * O SNPG, que assim com o DPG e
+DPI, tambÃ©m pode se beneficiar do uso de instrumentos para realizaÃ§Ã£o
+de avaliaÃ§Ãµes contÃ­nuas de suas pÃ³s-graduaÃ§Ãµes. * Os interessados
+em melhor conhecer o que Ã© produzido pelo Sistema Nacional de
+PÃ³s-graduaÃ§Ã£o, como empresas privadas, que querem desfrutar dos
+benefÃ­cios gerados pela ciÃªncia brasileira.
+
+A fim de dar maior fidelidade e homogeneidade ao exercÃ­cio realizado na
+disciplina, focaremos em atendimento aos interesses comuns das
+organizaÃ§Ãµes DPI, DPG e CAPES, que desejam dispor de instrumentos
+Ã¡geis para avaliaÃ§Ã£o contÃ­nua da pÃ³s-graduaÃ§Ã£o brasileira.
+
+Com base no exposto, o objetivo do trabalho final a ser alcanÃ§ado pelos
+produtos d emineraÃ§Ã£o de dados desenvolvido pelos alunos da disciplina
+CiÃªncia de Dados para Todos Ã© produzir, tomando por base inicial os
+dados fornecidos pelos professores responsÃ¡veis pela disciplina,
+ferramentas para anÃ¡lise e avaliaÃ§Ã£o contÃ­nuas e de baixo custo, do
+desempenho de um conjunto de pÃ³s-graduaÃ§Ãµes que estÃ£o vinculadas a
+uma mesma subÃ¡rea ou grupo de conhecimento. Cada Ã¡rea de
+pÃ³s-graduaÃ§Ã£o apresenta suas caracterÃ­sticas peculiares, assim como
+cada um dos programas vinculados a essas Ã¡reas. Como jÃ¡ informado,
+caracterÃ­sticas peculiares de cada programa podem ser obtidas a partir
+de visita ao sÃ­tio da CAPES (2018).
+
+\subsection{AvaliaÃ§Ã£o das
+CircunstÃ¢ncias}\label{avaliaaao-das-circunstancias}
+
+Este documento serve como base para a realizaÃ§Ã£o dos trabalhos dos
+alunos. apresenta limitaÃ§Ãµes no tocante Ã~ quantidade pequena de dados
+que serÃ£o empregados para anÃ¡lises e avaliaÃ§Ãµes, tendo em vista sua
+finalidade maior que Ã© a didÃ¡tica, de permitir aos alunos demonstrarem
+a capacidade de aplicaÃ§Ã£o das tÃ©cnicas e ferramentas apreendidas
+durante o semestre.
+
+\subsubsection{AvaliaÃ§Ã£o preliminar das pÃ³s-graduaÃ§Ãµes na
+UnB}\label{avaliaaao-preliminar-das-pas-graduaaaes-na-unb}
+
+Texto a desenvolver.
+
+\subsubsection{AvaliaÃ§Ã£o preliminar da produÃ§Ã£o cientÃ­fica e
+acadÃªmica da
+UnB}\label{avaliaaao-preliminar-da-produaao-cientafica-e-acadamica-da-unb}
+
+Texto a desenvolver.
+
+\section{CRISP-DM Fase 2 - Entendimento dos
+Dados}\label{crisp-dm-fase-2---entendimento-dos-dados}
+
+Doravante, a fim de facilitar aos alunos seguirem a metodologia
+CRISP-DM, os nomes das seÃ§Ãµes e subseÃ§Ãµes de texto serÃ£o prefixadas
+com o nÃºmero e nome da fase e atividade genÃ©rica do CRISP-DM. Fica
+facultado aos grupos seguir ou nÃ£o a sequÃªncia prevista, tendo em
+vista que se pode retornar Ã~s fases anteriores, bem como podem haver
+atividades que nÃ£o foram adequadas Ã~s caracterÃ­sticas do problema
+especÃ­fico sob anÃ¡lise.
+
+\subsection{CRISP-DM Fase.Atividade 2.1 - Coleta inicial dos
+dados}\label{crisp-dm-fase.atividade-2.1---coleta-inicial-dos-dados}
+
+Todos os arquivos com dados iniciais a seguir apresentados foram
+fornecidos pelos professores responsÃ¡veis pela disciplina. Os dados
+foram gerados no mÃªs de maio de 2018, e compilam informaÃ§Ãµes entre os
+anos de 2010 e 2017. Os arquivos estÃ£o no formato JSON, e seus
+atributos iniciais e conteÃºdos sÃ£o apresentados a seguir.
+
+\subsubsection{Perfil profissional dos docentes vinculados Ã~s
+pÃ³s-graduaÃ§Ãµes}\label{perfil-profissional-dos-docentes-vinculados-as-pas-graduaaaes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{json.perfil <-}\StringTok{ "Matematica.profile.json"}
+\KeywordTok{file.info}\NormalTok{(json.perfil)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                           size isdir mode               mtime
+## Matematica.profile.json 654736 FALSE  666 2018-07-07 17:52:28
+##                                       ctime               atime exe
+## Matematica.profile.json 2018-07-07 17:52:28 2018-07-07 17:52:28  no
+\end{verbatim}
+
+O arquivo Matematica.profile.json apresenta dados sobre o perfil de
+todos os docentes vinculados a programas de pÃ³s-graduaÃ§Ã£o da UnB,
+entre 2010 e 2017. Esse arquivo foi fornecido pelos docentes
+responsÃ¡veis pela disciplina.
+
+\subsubsection{OrientaÃ§Ãµes de mestrado e doutorado realizadas pelos
+docentes vinculados Ã~s
+pÃ³s-graduaÃ§Ãµes}\label{orientaaaes-de-mestrado-e-doutorado-realizadas-pelos-docentes-vinculados-as-pas-graduaaaes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{json.advise <-}\StringTok{ "Matematica.advise.json"}
+\KeywordTok{file.info}\NormalTok{(json.advise)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                          size isdir mode               mtime
+## Matematica.advise.json 235679 FALSE  666 2018-07-07 17:52:28
+##                                      ctime               atime exe
+## Matematica.advise.json 2018-07-07 17:52:28 2018-07-07 17:52:28  no
+\end{verbatim}
+
+O arquivo Matematica.advise.json apresenta dados sobre o orientaÃ§Ãµes
+de mestrado e doutorado feitas por todos os docentes vinculados a
+programas de pÃ³s-graduaÃ§Ã£o da UnB, entre 2010 e 2017. Esse arquivo
+foi fornecido pelos docentes responsÃ¡veis pela disciplina.
+
+\subsubsection{ProduÃ§Ã£o bibliogrÃ¡fica gerada pelos docentes
+vinculados Ã~s
+pÃ³s-graduaÃ§Ãµes}\label{produaao-bibliografica-gerada-pelos-docentes-vinculados-as-pas-graduaaaes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{json.producao.bibliografica <-}\StringTok{ "Matematica.publication.json"}
+\KeywordTok{file.info}\NormalTok{(json.producao.bibliografica) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                               size isdir mode               mtime
+## Matematica.publication.json 313273 FALSE  666 2018-07-07 17:52:28
+##                                           ctime               atime exe
+## Matematica.publication.json 2018-07-07 17:52:28 2018-07-07 17:52:28  no
+\end{verbatim}
+
+O arquivo Matematica.publication.json apresenta dados sobre a produÃ§Ã£o
+bibliogrÃ¡fica gerada por todos os docentes vinculados a programas de
+pÃ³s-graduaÃ§Ã£o da UnB, entre 2010 e 2017.
+
+\subsubsection{Agrupamento dos docentes conforme Ã¡reas de
+atuaÃ§Ã£o}\label{agrupamento-dos-docentes-conforme-areas-de-atuaaao}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{json.researchers_by_area <-}\StringTok{ "Matematica.researchers_by_area.json"} 
+\KeywordTok{file.info}\NormalTok{(json.researchers_by_area)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                     size isdir mode               mtime
+## Matematica.researchers_by_area.json 1161 FALSE  666 2018-07-07 17:52:28
+##                                                   ctime
+## Matematica.researchers_by_area.json 2018-07-07 17:52:28
+##                                                   atime exe
+## Matematica.researchers_by_area.json 2018-07-07 17:52:28  no
+\end{verbatim}
+
+O arquivo Matematica.researchers\_by\_area.json apresenta as
+vinculaÃ§Ãµes de todos os docentes que declararam atuar em cada uma das
+Ã¡reas de pÃ³s-graduaÃ§Ã£o do Sistema Nacional de PÃ³s-GraduaÃ§Ã£o da
+CAPES, conforme apresenta-se registrada essa informaÃ§Ã£o no currÃ­culo
+Lattes de cada um, em data recente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{file.info}\NormalTok{(}\StringTok{'Matematica.graph.json'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                       size isdir mode               mtime
+## Matematica.graph.json 6179 FALSE  666 2018-07-07 17:52:28
+##                                     ctime               atime exe
+## Matematica.graph.json 2018-07-07 17:52:28 2018-07-07 17:52:28  no
+\end{verbatim}
+
+\subsubsection{Redes de colaboraÃ§Ã£o entre
+docentes}\label{redes-de-colaboraaao-entre-docentes}
+
+O arquivo data/unbpos.graph.json apresenta redes de colaboraÃ§Ã£o na
+co-autoria de artigos cientpificos, feitas entre os docentes vinculados
+a programas de pÃ³s-graduaÃ§Ã£o da UnB, entre 2010 e 2017.
+
+\subsection{CRISP-DM Fase.Atividade 2.2 - DescriÃ§Ã£o dos
+Dados}\label{crisp-dm-fase.atividade-2.2---descriaao-dos-dados}
+
+Para ler e manipular inicialmente esses dados, serÃ£o usadas
+primordialmente as bibliotecas seguintes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(jsonlite)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'jsonlite'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     flatten
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(listviewer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'listviewer' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readxl)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'readxl' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\CommentTok{#library(readtext)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{suppressMessages}\NormalTok{(}\KeywordTok{library}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Como jÃ¡ informado, a descriÃ§Ã£o dos dados verifica se os dados sendo
+acessados terÃ£o potencial para responder Ã~s questÃµes de \emph{data
+mining}. AlÃ©m disso, deve-se avaliar qual o volume de dados, a
+estrutura dos dados (tipos), codificaÃ§Ãµes usadas, etc. Neste projeto,
+a descriÃ§Ã£o dos dados Ã© responsabilidade parcial dos alunos, tendo em
+vista que esta seÃ§Ã£o jÃ¡ oferece uma descriÃ§Ã£o inicial simplificada.
+O relatÃ³rio final deve conter descriÃ§Ãµes significativas e
+aprofundadas dos dados.
+
+\subsubsection{DescriÃ§Ã£o dos dados do
+perfil}\label{descriaao-dos-dados-do-perfil}
+
+O arquivo unb.perfis.json, que contÃ©m dados que caracterizam o perfil
+profissional de todos os docentes do grupo sob anÃ¡lise, podem ser lido
+por meio do comando seguinte.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unb.prof <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\StringTok{"Matematica.profile.json"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+A quantidade de docentes sob anÃ¡lise Ã© apresentada a seguir.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(unb.prof)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 44
+\end{verbatim}
+
+Para gerar uma apresentaÃ§Ã£o inicial dos dados que estÃ£o contido nos
+dados de perfil dos docentes, pode-se usar a funÃ§Ã£o glimpse, da
+biblioteca dplyr, como ilustra o cÃ³digo seguinte, que apresenta os
+atributos tÃ­picos que podem ser obtidos relativamente a um pesquisador
+especÃ­fico, o mais antigo docente ainda em exercÃ­cio na UnB a ter
+criado seu registro na plataforma Lattes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr) }
+\KeywordTok{glimpse}\NormalTok{(unb.prof[[}\DecValTok{1}\NormalTok{]], }\DataTypeTok{width =} \DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 7
+##  $ nome                  : chr "Norai Romeu Rocco"
+##  $ resumo_cv             : chr "Possui graduação em Matemática (licenciatura plena) pela Universidade Estadual Paulista Júlio de Mesquita Filho"| __truncated__
+##  $ areas_de_atuacao      :'data.frame':  5 obs. of  4 variables:
+##   ..$ grande_area  : chr [1:5] "CIENCIAS_EXATAS_E_DA_TERRA" "CIENCIAS_EXATAS_E_DA_TERRA" "CIENCIAS_EXATAS_E_DA_TERRA" "CIENCIAS_EXATAS_E_DA_TERRA" ...
+##   ..$ area         : chr [1:5] "Matemática" "Matemática" "Matemática" "Ciência da Computação" ...
+##   ..$ sub_area     : chr [1:5] "" "Álgebra" "Álgebra" "Matemática da Computação" ...
+##   ..$ especialidade: chr [1:5] "" "" "Grupos de Álgebra Não-Comutaviva" "Matemática Simbólica" ...
+##  $ endereco_profissional :List of 8
+##   ..$ instituicao: chr "Universidade de Brasília"
+##   ..$ orgao      : chr "Instituto de Ciências Exatas"
+##   ..$ unidade    : chr "Departamento de Matemática"
+##   ..$ DDD        : chr "061"
+##   ..$ telefone   : chr "31076442"
+##   ..$ bairro     : chr "Asa Norte"
+##   ..$ cep        : chr "70910900"
+##   ..$ cidade     : chr "Brasília"
+##  $ producao_bibiografica :List of 4
+##   ..$ ARTIGO_ACEITO                         :'data.frame':   1 obs. of  10 variables:
+##   .. ..$ natureza        : chr "NAO_INFORMADO"
+##   .. ..$ titulo          : chr "Finiteness conditions for the non-abelian tensor product of groups"
+##   .. ..$ periodico       : chr "MONATSHEFTE FUR MATHEMATIK"
+##   .. ..$ ano             : chr "2017"
+##   .. ..$ volume          : chr ""
+##   .. ..$ issn            : chr "00269255"
+##   .. ..$ paginas         : chr " - "
+##   .. ..$ doi             : chr "10.1007/s00605-017-1143-x"
+##   .. ..$ autores         :List of 1
+##   .. ..$ autores-endogeno:List of 1
+##   ..$ DEMAIS_TIPOS_DE_PRODUCAO_BIBLIOGRAFICA:'data.frame':   7 obs. of  9 variables:
+##   .. ..$ natureza          : chr [1:7] "DIVULGAÇÃO DE RESULTADOS DE PESQUISA" "DIVULGAÇÃO DE RESULTADOS DE PESQUISA" "DIVULGAÇÃO DE RESULTADOS DE PESQUISA" "DIVULGAÇÃO DE RESULTADOS DE PESQUISA" ...
+##   .. ..$ titulo            : chr [1:7] "NON-ABELIAN TENSOR SQUARE OF FINITE-BY-NILPOTENT GROUPS" "The q-tensor square of finitely generated nilpotent groups, q >=0" "The q-tensor square of finitely generated nilpotent groups, q >=0" "THE NON-ABELIAN TENSOR SQUARE OF RESIDUALLY FINITE GROUPS" ...
+##   .. ..$ ano               : chr [1:7] "2015" "2016" "2016" "2016" ...
+##   .. ..$ pais_de_publicacao: chr [1:7] "Estados Unidos" "Estados Unidos" "Estados Unidos" "Estados Unidos" ...
+##   .. ..$ editora           : chr [1:7] "" "ArXiv.com - Cornell University Library" "ArXiv.com - Cornell University Library" "ArXiv.com - Cornell University Library" ...
+##   .. ..$ doi               : chr [1:7] "" "" "" "" ...
+##   .. ..$ numero_de_paginas : chr [1:7] "8" "12" "12" "11" ...
+##   .. ..$ autores           :List of 7
+##   .. ..$ autores-endogeno  :List of 7
+##   ..$ EVENTO                                :'data.frame':   1 obs. of  11 variables:
+##   .. ..$ natureza        : chr "RESUMO"
+##   .. ..$ titulo          : chr "On Semidirect Products and non-abelian Tensor Products of Groups"
+##   .. ..$ nome_do_evento  : chr "XIX Colóquio Latinoamericano de Álgebra"
+##   .. ..$ ano_do_trabalho : chr "2012"
+##   .. ..$ pais_do_evento  : chr "Chile"
+##   .. ..$ cidade_do_evento: chr "Pucón - Chile"
+##   .. ..$ doi             : chr ""
+##   .. ..$ classificacao   : chr "INTERNACIONAL"
+##   .. ..$ paginas         : chr " - "
+##   .. ..$ autores         :List of 1
+##   .. ..$ autores-endogeno:List of 1
+##   ..$ PERIODICO                             :'data.frame':   6 obs. of  10 variables:
+##   .. ..$ natureza        : chr [1:6] "COMPLETO" "COMPLETO" "COMPLETO" "COMPLETO" ...
+##   .. ..$ titulo          : chr [1:6] "On the q-tensor square of a group" "A survey of non-abelian tensor products of groups and related constructions" "The q-tensor square of finitely generated nilpotent groups, q odd" "Non-abelian tensor square of finite-by-nilpotent groups" ...
+##   .. ..$ periodico       : chr [1:6] "Journal of Group Theory" "Boletim da Sociedade Paranaense de Matemática" "JOURNAL OF ALGEBRA AND ITS APPLICATIONS" "Archiv der Mathematik (Printed ed.)" ...
+##   .. ..$ ano             : chr [1:6] "2011" "2012" "2016" "2016" ...
+##   .. ..$ volume          : chr [1:6] "14" "30" "16" "107" ...
+##   .. ..$ issn            : chr [1:6] "14335883" "21751188" "02194988" "0003889X" ...
+##   .. ..$ paginas         : chr [1:6] "785 - 805" "77 - 89" "1750211 - " "127 - 133" ...
+##   .. ..$ doi             : chr [1:6] "10.1515/JGT.2010.084" "10.5269/bspm.v30i1.13350" "10.1142/S0219498817502115" "10.1007/s00013-016-0930-2" ...
+##   .. ..$ autores         :List of 6
+##   .. ..$ autores-endogeno:List of 6
+##  $ orientacoes_academicas:List of 3
+##   ..$ ORIENTACAO_CONCLUIDA_DOUTORADO   :'data.frame':    3 obs. of  13 variables:
+##   .. ..$ natureza                   : chr [1:3] "Tese de doutorado" "Tese de doutorado" "Tese de doutorado"
+##   .. ..$ titulo                     : chr [1:3] "Cotas superiores para o expoente e o número mínimo de geradores do quadrado q-tensorial de grupos nilpotentes, q geq 0." "Uma Apresentação Policíclica para o Quadrado q-Tensorial de um Grupo Policíclico" "Quadrado Tensorial Não-Abeliano de p-Grupos Finitos com Subgrupo Derivado de Ordem p, p ímpar"
+##   .. ..$ ano                        : chr [1:3] "2011" "2011" "2017"
+##   .. ..$ id_lattes_aluno            : chr [1:3] "9037151037918091" "8664599889120339" "0723203301483174"
+##   .. ..$ nome_aluno                 : chr [1:3] "Eunice Cândida Pereira Rodrigues" "Ivonildes Ribeiro Martins" "Cleilton Aparecido Canal"
+##   .. ..$ instituicao                : chr [1:3] "Universidade de Brasília" "Universidade de Brasília" "Universidade de Brasília"
+##   .. ..$ curso                      : chr [1:3] "Matemática" "Matemática" "Matemática"
+##   .. ..$ codigo_do_curso            : chr [1:3] "51500035" "51500035" "51500035"
+##   .. ..$ bolsa                      : chr [1:3] "SIM" "SIM" "NAO"
+##   .. ..$ agencia_financiadora       : chr [1:3] "Fundação de Amparo à Pesquisa do Estado de Mato Grosso" "Conselho Nacional de Desenvolvimento Científico e Tecnológico" ""
+##   .. ..$ codigo_agencia_financiadora: chr [1:3] "035600000004" "002200000000" ""
+##   .. ..$ nome_orientadores          :List of 3
+##   .. ..$ id_lattes_orientadores     :List of 3
+##   ..$ ORIENTACAO_CONCLUIDA_MESTRADO    :'data.frame':    3 obs. of  13 variables:
+##   .. ..$ natureza                   : chr [1:3] "Dissertação de mestrado" "Dissertação de mestrado" "Dissertação de mestrado"
+##   .. ..$ titulo                     : chr [1:3] "Algumas Cotas Súperiores para aordem do Quadrado Tensorial não abeliano de um Grupo" "O Grau de Permutabilidade de Subgrupos de um Grupo Finito" "Sobre pE-grupos e pA-grupos finitos"
+##   .. ..$ ano                        : chr [1:3] "2010" "2011" "2012"
+##   .. ..$ id_lattes_aluno            : chr [1:3] "5367744818899315" "" "0121355793029434"
+##   .. ..$ nome_aluno                 : chr [1:3] "Bruno Cesar Rodrigues Lima" "Mônica Aparecida Crunivel Valadão" "Marina Gabriella Ribeiro Bardella"
+##   .. ..$ instituicao                : chr [1:3] "Universidade de Brasília" "Universidade de Brasília" "Universidade de Brasília"
+##   .. ..$ curso                      : chr [1:3] "Matemática" "Matemática" "Matemática"
+##   .. ..$ codigo_do_curso            : chr [1:3] "51500035" "51500035" "51500035"
+##   .. ..$ bolsa                      : chr [1:3] "NAO" "SIM" "SIM"
+##   .. ..$ agencia_financiadora       : chr [1:3] "" "Coordenação de Aperfeiçoamento de Pessoal de Nível Superior" "Coordenação de Aperfeiçoamento de Pessoal de Nível Superior"
+##   .. ..$ codigo_agencia_financiadora: chr [1:3] "" "045000000000" "045000000000"
+##   .. ..$ nome_orientadores          :List of 3
+##   .. ..$ id_lattes_orientadores     :List of 3
+##   ..$ ORIENTACAO_EM_ANDAMENTO_DOUTORADO:'data.frame':    1 obs. of  13 variables:
+##   .. ..$ natureza                   : chr "Tese de doutorado"
+##   .. ..$ titulo                     : chr "Quadrado Tensorial não Abeliano de certas classes de Grupos Finitos"
+##   .. ..$ ano                        : chr "2014"
+##   .. ..$ id_lattes_aluno            : chr "1933036212945705"
+##   .. ..$ nome_aluno                 : chr "Juliana Silva Canella"
+##   .. ..$ instituicao                : chr "Universidade de Brasília"
+##   .. ..$ curso                      : chr "Matemática"
+##   .. ..$ codigo_do_curso            : chr "51500035"
+##   .. ..$ bolsa                      : chr "SIM"
+##   .. ..$ agencia_financiadora       : chr "Coordenação de Aperfeiçoamento de Pessoal de Nível Superior"
+##   .. ..$ codigo_agencia_financiadora: chr "045000000000"
+##   .. ..$ nome_orientadores          :List of 1
+##   .. ..$ id_lattes_orientadores     :List of 1
+##  $ senioridade           : chr "8"
+\end{verbatim}
+
+Uma breve inspeÃ§Ã£o visual dos atributos anteriormente apresentados
+permite inferir que o pesquisador sob anÃ¡lise:
+
+\begin{itemize}
+\tightlist
+\item
+  Atua predominantemente na Ã¡rea de matemÃ¡tica.
+\item
+  Trabalha no Instituto de CiÃªncias Exatas da UnB.
+\item
+  Possui trÃªs artigos recentes publicados, alÃ©m de um aceito para
+  publicaÃ§Ã£o.
+\item
+  Possui uma orientaÃ§Ã£o de doutorado em andamento, iniciada em 2014.
+\item
+  Foi classificado com senioridade 5.
+\end{itemize}
+
+\paragraph{Potencial de utilizaÃ§Ã£o dos dados do perfil dos
+docentes}\label{potencial-de-utilizaaao-dos-dados-do-perfil-dos-docentes}
+
+Esses dados terÃ£o potencial para responder Ã~s questÃµes de \emph{data
+mining}? O que Ã© possÃ­vel gerar a partir desses dados, para o conjunto
+dos 1592 docentes da UnB? A fim de compreender a relevÃ¢ncia dos dados
+para a avaliaÃ§Ã£o da produÃ§Ã£o acadÃªmica nas pÃ³s-graduaÃ§Ãµes
+brasileiras pode-se recorrer a trabalhos como os seguintes:
+
+\begin{itemize}
+\tightlist
+\item
+  Leite (2018) apresenta, em suas ``ConsideraÃ§Ãµes bÃ¡sicas sobre a
+  AvaliaÃ§Ã£o do Sistema Nacional de PÃ³s-GraduaÃ§Ã£o'', o conjunto dos
+  itens que sÃ£o tÃ³picos de avaliaÃ§Ã£o das pÃ³s-graduaÃ§Ãµes pela
+  CAPES, e que envolvem, entre outros:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    AvaliaÃ§Ã£o do corpo docente, com 20\% a 30\% de peso na avaliaÃ§Ã£o
+    total do programa, a depender do seu tipo. Analisando-se de forma
+    mais detalhada os critÃ©rios de avaliaÃ§Ã£o do corpo docente,
+    indicados por Leite, o que Ã© possÃ­vel gerar com base nos dados
+    disponÃ­veis em unb.prof? HÃ¡ dados que permitam identificar o
+    perfil do docente, como proposto pela CAPES, inclusive no documento
+    de Ã¡rea especÃ­fica na qual atua o pesquisador? Que outros aspectos
+    relevantes para a CAPES podem ser levantados com base nos dados
+    dessa fonte?
+  \item
+    AvaliaÃ§Ã£o do corpo discente, Teses e dissertaÃ§Ãµes, com 30\% a
+    20\% de peso na avaliaÃ§Ã£o total do programa, a depender de seu
+    tipo. Os dados sobre orientaÃ§Ã£o permitem fazer quais tipos de
+    avaliaÃ§Ãµes do corpo discente?
+  \item
+    AvaliaÃ§Ã£o da produÃ§Ã£o intelectual, com 40\% de peso na
+    avaliaÃ§Ã£o total. Qual a relevÃ¢ncia dos dados em unb.prof para
+    essa avaliaÃ§Ã£o? Que outros arquivos podem melhor subsidiar essa
+    avaliaÃ§Ã£o?
+  \end{itemize}
+\item
+  Em busca de considerar outros fatores relevantes para a avaliaÃ§Ã£o da
+  pÃ³s-graduaÃ§Ã£o, nÃ£o considerados no modelo da CAPES, pode-se
+  recorrer ao trabalho de Kalpazidou Schmidt e Graversen (2018), que
+  apresentam um conjunto de fatores persistentes que facilitam a
+  existÃªncia de ambientes de pesquisa inovadores e dinÃ¢micos, dentre
+  os quais se destaca:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Atividade em pesquisas com elevado grau de impacto social;
+  \item
+    PromoÃ§Ã£o de elevado grau de autonomia individual, tanto do ponto
+    de vista teÃ³rico quanto metodolÃ³gico;
+  \item
+    Possuem um bom clima de trabalho, baseado no trabalho em times;
+  \item
+    SÃ£o internacioinalmente bem conhecidas etc.
+  \end{itemize}
+
+  Estariam esses fatores contemplados, de alguma forma, memso que
+  parcialmente, nos dados presentes em unb.prof? Ou em qualquer outros
+  dos arquivos? Cabe explorar.
+\end{itemize}
+
+\subsubsection{DescriÃ§Ã£o dos dados de
+orientaÃ§Ãµes}\label{descriaao-dos-dados-de-orientaaaes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unb.adv <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\StringTok{"Matematica.advise.json"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(unb.adv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "ORIENTACAO_EM_ANDAMENTO_DE_POS_DOUTORADO"    
+## [2] "ORIENTACAO_EM_ANDAMENTO_DOUTORADO"           
+## [3] "ORIENTACAO_EM_ANDAMENTO_MESTRADO"            
+## [4] "ORIENTACAO_EM_ANDAMENTO_GRADUACAO"           
+## [5] "ORIENTACAO_EM_ANDAMENTO_INICIACAO_CIENTIFICA"
+## [6] "ORIENTACAO_CONCLUIDA_POS_DOUTORADO"          
+## [7] "ORIENTACAO_CONCLUIDA_DOUTORADO"              
+## [8] "ORIENTACAO_CONCLUIDA_MESTRADO"               
+## [9] "OUTRAS_ORIENTACOES_CONCLUIDAS"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(unb.adv}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_DOUTORADO)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2010" "2011" "2012" "2013" "2014" "2015" "2016" "2017"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(unb.adv}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_DOUTORADO}\OperatorTok{$}\StringTok{`}\DataTypeTok{2016}\StringTok{`}\OperatorTok{$}\NormalTok{natureza)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{sort}\NormalTok{(}\KeywordTok{table}\NormalTok{(unb.adv}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_DOUTORADO}\OperatorTok{$}\StringTok{`}\DataTypeTok{2017}\StringTok{`}\OperatorTok{$}\NormalTok{curso), }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{), }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##              Matemática Doutorado em Matematica Doutorado em Matemática 
+##                       8                       2                       1 
+##             Informática              Matematica 
+##                       1                       1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{sort}\NormalTok{(}\KeywordTok{table}\NormalTok{(unb.adv}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_MESTRADO}\OperatorTok{$}\StringTok{`}\DataTypeTok{2017}\StringTok{`}\OperatorTok{$}\NormalTok{curso), }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{), }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##                           Matemática Mestrado em Matemática e Estatística 
+##                                   13                                    2 
+##                          Informática                           Matematica 
+##                                    1                                    1
+\end{verbatim}
+
+\subsubsection{DescriÃ§Ã£o dos dados de produÃ§Ã£o
+bibliogrÃ¡fica}\label{descriaao-dos-dados-de-produaao-bibliografica}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unb.pub <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\StringTok{"Matematica.publication.json"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(unb.pub)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "PERIODICO"                             
+## [2] "LIVRO"                                 
+## [3] "CAPITULO_DE_LIVRO"                     
+## [4] "TEXTO_EM_JORNAIS"                      
+## [5] "EVENTO"                                
+## [6] "ARTIGO_ACEITO"                         
+## [7] "DEMAIS_TIPOS_DE_PRODUCAO_BIBLIOGRAFICA"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(unb.pub}\OperatorTok{$}\NormalTok{PERIODICO}\OperatorTok{$}\StringTok{`}\DataTypeTok{2012}\StringTok{`}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "natureza"         "titulo"           "periodico"       
+##  [4] "ano"              "volume"           "issn"            
+##  [7] "paginas"          "doi"              "autores"         
+## [10] "autores-endogeno"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{sort}\NormalTok{(}\KeywordTok{table}\NormalTok{(unb.pub}\OperatorTok{$}\NormalTok{PERIODICO}\OperatorTok{$}\StringTok{`}\DataTypeTok{2017}\StringTok{`}\OperatorTok{$}\NormalTok{periodico), }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{), }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##                   ANNALI DI MATEMATICA PURA ED APPLICATA 
+##                                                        4 
+##          Bulletin of the Australian Mathematical Society 
+##                                                        4 
+##                               Journal of Algebra (Print) 
+##                                                        4 
+##                                       JOURNAL OF ALGEBRA 
+##                                                        3 
+##             Electronic Journal of Differential Equations 
+##                                                        2 
+##                            ISRAEL JOURNAL OF MATHEMATICS 
+##                                                        2 
+##           Journal of Fixed Point Theory and Applications 
+##                                                        2 
+##                          JOURNAL OF GEOMETRY AND PHYSICS 
+##                                                        2 
+##                                  JOURNAL OF GROUP THEORY 
+##                                                        2 
+## JOURNAL OF THE LONDON MATHEMATICAL SOCIETY-SECOND SERIES 
+##                                                        2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{sort}\NormalTok{(}\KeywordTok{table}\NormalTok{(unb.pub}\OperatorTok{$}\NormalTok{LIVRO}\OperatorTok{$}\StringTok{`}\DataTypeTok{2015}\StringTok{`}\OperatorTok{$}\NormalTok{nome_da_editora), }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{), }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Elsevier ENTCS - Electronic Notes in Theoretical Computer Science 
+##                                                                 1
+\end{verbatim}
+
+\subsubsection{DescriÃ§Ã£o dos dados de agregaÃ§Ã£o de docentes por
+Ã¡rea}\label{descriaao-dos-dados-de-agregaaao-de-docentes-por-area}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unb.area <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\StringTok{"Matematica.researchers_by_area.json"}\NormalTok{)}
+\NormalTok{unb.area.df <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{names}\NormalTok{(unb.area}\OperatorTok{$}\StringTok{`}\DataTypeTok{Areas dos pesquisadores}\StringTok{`}\NormalTok{),}
+\NormalTok{           (}\KeywordTok{sapply}\NormalTok{(unb.area}\OperatorTok{$}\StringTok{`}\DataTypeTok{Areas dos pesquisadores}\StringTok{`}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x))))}
+\KeywordTok{rownames}\NormalTok{(unb.area.df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(unb.area.df)); }\KeywordTok{colnames}\NormalTok{(unb.area.df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Area"}\NormalTok{, }\StringTok{"Professores"}\NormalTok{)}
+\KeywordTok{glimpse}\NormalTok{(unb.area.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  chr [1:6, 1:2] "Ciência da Computação" "Engenharia Aeroespacial" ...
+##  - attr(*, "dimnames")=List of 2
+##   ..$ : chr [1:6] "1" "2" "3" "4" ...
+##   ..$ : chr [1:2] "Area" "Professores"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(unb.area.df[])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Area                          Professores
+## 1 "Ciência da Computação"       "4"        
+## 2 "Engenharia Aeroespacial"     "1"        
+## 3 "Engenharia Biomédica"        "1"        
+## 4 "Física"                      "1"        
+## 5 "Matemática"                  "40"       
+## 6 "Probabilidade e Estatística" "2"
+\end{verbatim}
+
+\subsubsection{DescriÃ§Ã£o dos dados de redes de
+colaboraÃ§Ã£o}\label{descriaao-dos-dados-de-redes-de-colaboraaao}
+
+\subsection{CRISP-DM Fase.Atividade 2.3 - AnÃ¡lise exploratÃ³ria dos
+dados}\label{crisp-dm-fase.atividade-2.3---analise-explorataria-dos-dados}
+
+Como jÃ¡ informado, a anÃ¡lise exploratÃ³ria dos dados possibilita um
+entendimento mais profundo da relaÃ§Ã£o estatÃ­stica existente entre os
+dados dos \emph{datasets} para um melhor entendimento da qualidade
+daqueles dados para os objetivos do projeto.
+
+Como jÃ¡ informado, a anÃ¡lise exploratÃ³ria dos dados Ã©
+responsabilidade parcial dos alunos, tendo em vista que este relatÃ³rio
+apresenta uma anÃ¡lise exploratÃ³ria preliminar. O relatÃ³rio final deve
+conter anÃ¡lises exploratÃ³rias dos dados que sejam significativas e
+aprofundadas.
+
+\subsubsection{Arquivo Profile}\label{arquivo-profile}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# jsonedit(unb.prof)}
+\CommentTok{# NÃºmero de Ã¡reas de atuaÃ§Ã£o cumulativo}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{nrow}\NormalTok{(x}\OperatorTok{$}\NormalTok{areas_de_atuacao)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 104
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# NÃºmero de Ã¡reas de atuaÃ§Ã£o por pessoa}
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{nrow}\NormalTok{(x}\OperatorTok{$}\NormalTok{areas_de_atuacao))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  1  2  3  4  5  6 
+## 14 12 10  5  2  1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# NÃºmero de pessoas por grande area}
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{areas_de_atuacao}\OperatorTok{$}\NormalTok{grande_area))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##                            CIENCIAS_EXATAS_E_DA_TERRA 
+##                          2                        100 
+##                ENGENHARIAS 
+##                          2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# NÃºmero de pessoas que produziram os especÃ­ficos tipos de produÃ§Ã£o}
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{names}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##                          ARTIGO_ACEITO 
+##                                      7 
+##                      CAPITULO_DE_LIVRO 
+##                                     11 
+## DEMAIS_TIPOS_DE_PRODUCAO_BIBLIOGRAFICA 
+##                                      9 
+##                                 EVENTO 
+##                                     20 
+##                                  LIVRO 
+##                                      6 
+##                              PERIODICO 
+##                                     44 
+##                       TEXTO_EM_JORNAIS 
+##                                      1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# NÃºmero de publicaÃ§Ãµes por tipo}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{ARTIGO_ACEITO}\OperatorTok{$}\NormalTok{ano)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{CAPITULO_DE_LIVRO}\OperatorTok{$}\NormalTok{ano)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{LIVRO}\OperatorTok{$}\NormalTok{ano)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 13
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{PERIODICO}\OperatorTok{$}\NormalTok{ano)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 642
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{TEXTO_EM_JORNAIS}\OperatorTok{$}\NormalTok{ano)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# NÃºmero de pessoas por quantitativo de produÃ§Ãµes por pessoa 0 = 1; 1 = 2...}
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{ARTIGO_ACEITO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  0  1 
+## 37  7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{CAPITULO_DE_LIVRO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  0  1  2  3 
+## 33  7  3  1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{LIVRO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  0  1  2  7 
+## 38  4  1  1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{PERIODICO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  1  2  3  4  5  6  7  8  9 10 11 12 14 15 17 21 22 23 28 36 41 63 78 
+##  1  3  2  4  3  2  2  1  3  1  1  5  3  1  1  3  1  1  2  1  1  1  1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{TEXTO_EM_JORNAIS}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  0  1 
+## 43  1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# NÃºmero de produÃ§Ãµes por ano}
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{ARTIGO_ACEITO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 2013 2016 2017 
+##    1    1    5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{CAPITULO_DE_LIVRO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 2010 2011 2012 2013 2014 2015 2016 2017 
+##    3    1    1    1    2    4    1    3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{LIVRO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 2010 2011 2012 2013 2014 2015 2017 
+##    1    1    1    3    2    1    4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{PERIODICO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 2010 2011 2012 2013 2014 2015 2016 2017 
+##   69   70   62   81   87   86   92   95
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{producao_bibiografica}\OperatorTok{$}\NormalTok{TEXTO_EM_JORNAIS}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 2014 
+##    1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# NÃºmero de pessoas que realizaram diferentes tipos de orientaÃ§Ãµes}
+\KeywordTok{length}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{names}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 130
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# NÃºmero de pessoas por tipo de orientaÃ§Ã£o}
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{names}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##               ORIENTACAO_CONCLUIDA_DOUTORADO 
+##                                           23 
+##                ORIENTACAO_CONCLUIDA_MESTRADO 
+##                                           34 
+##           ORIENTACAO_CONCLUIDA_POS_DOUTORADO 
+##                                            8 
+##            ORIENTACAO_EM_ANDAMENTO_DOUTORADO 
+##                                           26 
+## ORIENTACAO_EM_ANDAMENTO_INICIACAO_CIENTIFICA 
+##                                            9 
+##             ORIENTACAO_EM_ANDAMENTO_MESTRADO 
+##                                            9 
+##                OUTRAS_ORIENTACOES_CONCLUIDAS 
+##                                           21
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#NÃºmero de orientaÃ§Ãµes concluidas}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_MESTRADO}\OperatorTok{$}\NormalTok{ano)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 136
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_DOUTORADO}\OperatorTok{$}\NormalTok{ano)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 96
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_POS_DOUTORADO}\OperatorTok{$}\NormalTok{ano)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 18
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# NÃºmero de pessoas por quantitativo de orientaÃ§Ãµes por pessoa 0 = 1; 1 = 2...}
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_MESTRADO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  0  1  2  3  4  5  6  7  8  9 11 13 
+## 10 11  5  4  3  1  2  2  2  1  2  1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_DOUTORADO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  0  1  2  3  4  5  6  7 12 
+## 21  3  1  7  4  2  3  2  1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_POS_DOUTORADO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  0  1  2  3  4 
+## 36  3  2  1  2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# NÃºmero de orientaÃ§Ãµes por ano}
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_MESTRADO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 2010 2011 2012 2013 2014 2015 2016 2017 
+##   14    9   16   21   22   14   23   17
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_DOUTORADO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 2010 2011 2012 2013 2014 2015 2016 2017 
+##   18   14    7   14    9    5   16   13
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(unb.prof, }\ControlFlowTok{function}\NormalTok{(x) (x}\OperatorTok{$}\NormalTok{orientacoes_academicas}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_POS_DOUTORADO}\OperatorTok{$}\NormalTok{ano))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 2010 2011 2012 2013 2014 2015 2016 2017 
+##    1    4    2    2    3    2    3    1
+\end{verbatim}
+
+\subsubsection{Arquivo PublicaÃ§Ã£o}\label{arquivo-publicaaao}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Visualizar a estrutura do arquivo de Publicacao}
+\CommentTok{#jsonedit(unb.pub)}
+\CommentTok{#Criando um data-frame com todos os anos}
+\NormalTok{unb.pub.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(unb.pub[[}\DecValTok{1}\NormalTok{]]))}
+\NormalTok{  unb.pub.df <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(unb.pub.df, unb.pub}\OperatorTok{$}\NormalTok{PERIODICO[[i]])}
+\KeywordTok{glimpse}\NormalTok{(unb.pub.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Observations: 569
+## Variables: 10
+## $ natureza           <chr> "COMPLETO", "COMPLETO", "COMPLETO", "COMPLE...
+## $ titulo             <chr> "Symmetric 1-factorizations of the complete...
+## $ periodico          <chr> "European Journal of Combinatorics (Print)"...
+## $ ano                <chr> "2010", "2010", "2010", "2010", "2010", "20...
+## $ volume             <chr> "31", "13", "10", "95", "159", "13", "323",...
+## $ issn               <chr> "01956698", "14335883", "15361365", "000388...
+## $ paginas            <chr> "1410 - 1418", "649 - 657", "757 - 770", "2...
+## $ doi                <chr> "10.1016/j.ejc.2009.12.003", "10.1515/JGT.2...
+## $ autores            <list> [<"Pasotti, Anita", "Pellegrini, Marco Ant...
+## $ `autores-endogeno` <list> ["0293171472213095", "0293171472213095", "...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Limpando o data-frame de listas}
+\NormalTok{unb.pub.df}\OperatorTok{$}\NormalTok{autores <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}"}\StringTok{,}\CharTok{\textbackslash{}"}\StringTok{|}\CharTok{\textbackslash{}"}\StringTok{, }\CharTok{\textbackslash{}"}\StringTok{"}\NormalTok{, }\StringTok{"; "}\NormalTok{, unb.pub.df}\OperatorTok{$}\NormalTok{autores)}
+\NormalTok{unb.pub.df}\OperatorTok{$}\NormalTok{autores <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}"}\StringTok{|c}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{(|}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{)"}\NormalTok{, }\StringTok{""}\NormalTok{, unb.pub.df}\OperatorTok{$}\NormalTok{autores)}
+\NormalTok{unb.pub.df}\OperatorTok{$}\StringTok{`}\DataTypeTok{autores-endogeno}\StringTok{`}\NormalTok{ <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{","}\NormalTok{, }\StringTok{";"}\NormalTok{, unb.pub.df}\OperatorTok{$}\StringTok{`}\DataTypeTok{autores-endogeno}\StringTok{`}\NormalTok{)}
+\NormalTok{unb.pub.df}\OperatorTok{$}\StringTok{`}\DataTypeTok{autores-endogeno}\StringTok{`}\NormalTok{ <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}"}\StringTok{|c}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{(|}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{)"}\NormalTok{, }\StringTok{""}\NormalTok{, unb.pub.df}\OperatorTok{$}\StringTok{`}\DataTypeTok{autores-endogeno}\StringTok{`}\NormalTok{)}
+\KeywordTok{glimpse}\NormalTok{(unb.pub.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Observations: 569
+## Variables: 10
+## $ natureza           <chr> "COMPLETO", "COMPLETO", "COMPLETO", "COMPLE...
+## $ titulo             <chr> "Symmetric 1-factorizations of the complete...
+## $ periodico          <chr> "European Journal of Combinatorics (Print)"...
+## $ ano                <chr> "2010", "2010", "2010", "2010", "2010", "20...
+## $ volume             <chr> "31", "13", "10", "95", "159", "13", "323",...
+## $ issn               <chr> "01956698", "14335883", "15361365", "000388...
+## $ paginas            <chr> "1410 - 1418", "649 - 657", "757 - 770", "2...
+## $ doi                <chr> "10.1016/j.ejc.2009.12.003", "10.1515/JGT.2...
+## $ autores            <chr> "Pasotti, Anita; Pellegrini, Marco Antonio"...
+## $ `autores-endogeno` <chr> "0293171472213095", "0293171472213095", "04...
+\end{verbatim}
+
+\subsubsection{Arquivo OrientaÃ§Ã£o}\label{arquivo-orientaaao}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#OrientaÃ§Ã£o}
+\CommentTok{#Visualizar a estrutura do json no painel Viewer}
+\CommentTok{#jsonedit(unb.adv)}
+\CommentTok{#Reunir todos os anos e orientaÃ§Ãµes concluidas em um mesmo data-frame}
+\NormalTok{unb.adv.tipo.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(); unb.adv.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(unb.adv[[}\DecValTok{1}\NormalTok{]]))}
+\NormalTok{  unb.adv.tipo.df <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(unb.adv.tipo.df, unb.adv}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_POS_DOUTORADO[[i]])}
+\NormalTok{unb.adv.df <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(unb.adv.df, unb.adv.tipo.df); unb.adv.tipo.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(unb.adv[[}\DecValTok{1}\NormalTok{]]))}
+\NormalTok{  unb.adv.tipo.df <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(unb.adv.tipo.df, unb.adv}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_DOUTORADO[[i]])}
+\NormalTok{unb.adv.df <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(unb.adv.df, unb.adv.tipo.df); unb.adv.tipo.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(unb.adv[[}\DecValTok{1}\NormalTok{]]))}
+\NormalTok{  unb.adv.tipo.df <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(unb.adv.tipo.df, unb.adv}\OperatorTok{$}\NormalTok{ORIENTACAO_CONCLUIDA_MESTRADO[[i]])}
+\NormalTok{unb.adv.df <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(unb.adv.df, unb.adv.tipo.df)}
+\KeywordTok{glimpse}\NormalTok{(unb.adv.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Observations: 245
+## Variables: 13
+## $ natureza                    <chr> "Supervisão de pós-doutorado", "Su...
+## $ titulo                      <chr> "", "", "", "", "", "", "", "", ""...
+## $ ano                         <chr> "2010", "2011", "2011", "2011", "2...
+## $ id_lattes_aluno             <chr> "", "", "", "", "", "", "", "", ""...
+## $ nome_aluno                  <chr> "Ilir Snopche", "ACCIARRI CRISTINA...
+## $ instituicao                 <chr> "Universidade de Brasília", "Unive...
+## $ curso                       <chr> "", "", "", "", "", "", "", "", ""...
+## $ codigo_do_curso             <chr> "", "", "", "", "", "", "", "", ""...
+## $ bolsa                       <chr> "SIM", "SIM", "SIM", "SIM", "SIM",...
+## $ agencia_financiadora        <chr> "Conselho Nacional de Desenvolvime...
+## $ codigo_agencia_financiadora <chr> "002200000000", "002200000000", "0...
+## $ nome_orientadores           <list> ["Pavel Zalesski", "Pavel Shumyat...
+## $ id_lattes_orientadores      <list> ["9177572441291520", "15954372903...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Transformar as colunas de listas em caracteres eliminando c("")}
+\NormalTok{unb.adv.df}\OperatorTok{$}\NormalTok{nome_orientadores <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}"}\StringTok{|c}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{(|}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{)"}\NormalTok{, }\StringTok{""}\NormalTok{, unb.adv.df}\OperatorTok{$}\NormalTok{nome_orientadores)}
+\NormalTok{unb.adv.df}\OperatorTok{$}\NormalTok{id_lattes_orientadores <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}"}\StringTok{|c}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{(|}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{)"}\NormalTok{, }\StringTok{""}\NormalTok{, unb.adv.df}\OperatorTok{$}\NormalTok{id_lattes_orientadores)}
+\CommentTok{#Separar as colunas com dois orientadores}
+\NormalTok{unb.adv.df <-}\StringTok{ }\KeywordTok{separate}\NormalTok{(unb.adv.df, nome_orientadores, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"ori1"}\NormalTok{, }\StringTok{"ori2"}\NormalTok{), }\DataTypeTok{sep =} \StringTok{","}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 240 rows [1,
+## 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, ...].
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unb.adv.df <-}\StringTok{ }\KeywordTok{separate}\NormalTok{(unb.adv.df, id_lattes_orientadores, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"idLattes1"}\NormalTok{, }\StringTok{"idLattes2"}\NormalTok{), }\DataTypeTok{sep =} \StringTok{","}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 240 rows [1,
+## 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, ...].
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Numero de orientacoes por ano}
+\KeywordTok{table}\NormalTok{(unb.adv.df}\OperatorTok{$}\NormalTok{ano)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 2010 2011 2012 2013 2014 2015 2016 2017 
+##   30   26   25   37   34   21   41   31
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Tabela com nome de professor e numero de orientacoes}
+\KeywordTok{head}\NormalTok{(}\KeywordTok{sort}\NormalTok{(}\KeywordTok{table}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(unb.adv.df}\OperatorTok{$}\NormalTok{ori1, unb.adv.df}\OperatorTok{$}\NormalTok{ori2)), }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{), }\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##                 Mauricio Ayala Rincon 
+##                                    20 
+##   Giovany de Jesus Malcher Figueiredo 
+##                                    17 
+##                        Keti Tenenblat 
+##                                    16 
+##                Diego Marques Ferreira 
+##                                    14 
+##              Marco Antonio Pellegrini 
+##                                    11 
+##                       Ricardo Ruviaro 
+##                                    11 
+##              Leandro Martins Cioletti 
+##                                     9 
+##             Ricardo Parreira da Silva 
+##                                     9 
+##                  Chang Chung Yu Dorea 
+##                                     8 
+##                Hemar Teixeira Godinho 
+##                                     8 
+##               Liliane de Almeida Maia 
+##                                     8 
+##                      Pavel Shumyatsky 
+##                                     8 
+##                   Alexei Krassilnikov 
+##                                     7 
+##     Carlos Alberto Pereira dos Santos 
+##                                     7 
+##                 João Paulo dos Santos 
+##                                     7 
+## Luciana Maria Dias de Ávila Rodrigues 
+##                                     7 
+##            Aline Gomes da Silva Pinto 
+##                                     6 
+##             Marcelo Fernandes Furtado 
+##                                     6 
+##                     Norai Romeu Rocco 
+##                                     6 
+##                        Pavel Zalesski 
+##                                     6
+\end{verbatim}
+
+\subsection{CRISP-DM Fase.Atividade 2.4 - VerificaÃ§Ã£o da qualidade dos
+dados.}\label{crisp-dm-fase.atividade-2.4---verificaaao-da-qualidade-dos-dados.}
+
+Como jÃ¡ informado, a verificaÃ§Ã£o da qualidade dos dados envolve
+responder se os dados disponÃ­veis estÃ£o realmente completos.
+
+As informaÃ§Ãµes disponÃ­veis sÃ£o suficientes para o trabalho proposto?
+
+Neste projeto, a verificaÃ§Ã£o da qualidade dos dados Ã©
+responsabilidade dos alunos.
+
+\section{\texorpdfstring{CRISP-DM Fase 3 - \textbf{PreparaÃ§Ã£o dos
+Dados}}{CRISP-DM Fase 3 - PreparaÃ§Ã£o dos Dados}}\label{crisp-dm-fase-3---preparaaao-dos-dados}
+
+Como jÃ¡ informado, na fase de \textbf{PreparaÃ§Ã£o dos Dados} os
+\emph{datasets} que serÃ£o utilizados em todo o trabalho sÃ£o
+construÃ­dos a partir dos dados brutos. Aqui os dados sÃ£o
+âfiltradosâ retirando-se partes que nÃ£o interessam e
+selecionando-se os âcamposâ necessÃ¡rios para o trabalho de
+mineraÃ§Ã£o.
+
+SÃ£o 5 as atividades genÃ©ricas nesta fase de preparaÃ§Ã£o dos dados, a
+seguir divididas em subseÃ§Ãµes
+
+\subsection{CRISP-DM Fase.Atividade 3.1 - SeleÃ§Ã£o dos
+dados.}\label{crisp-dm-fase.atividade-3.1---seleaao-dos-dados.}
+
+Como jÃ¡ informado, a seleÃ§Ã£o dos dados envolve identificar quais
+dados, da nossa ``montanha de dados'', serÃ£o realmente utilizados.
+
+Quais variÃ¡veis dos dados brutos serÃ£o convertidas para o
+\emph{dataset}?
+
+NÃ£o Ã© raro cometer o erro de selecionar dados para um modelo preditivo
+com base em uma falsa ideia de que aqueles dados contÃ©m a resposta para
+o modelo que se quer construir. Surge o cuidado de se separar o sinal do
+ruÃ­do (Silver, Nate. The Signal and the Noise: Why so many predictions
+fail â but some donât. USA: The Penguin Press HC, 2012.).
+
+\subsection{CRISP-DM Fase.Atividade 3.2 - Limpeza dos
+dados}\label{crisp-dm-fase.atividade-3.2---limpeza-dos-dados}
+
+\subsection{CRISP-DM Fase.Atividade 3.3 - ConstruÃ§Ã£o dos
+dados}\label{crisp-dm-fase.atividade-3.3---construaao-dos-dados}
+
+Como jÃ¡ informado, a construÃ§Ã£o dos dados envolve a criaÃ§Ã£o de
+novas variÃ¡veis a partir de outras presentes nos \emph{datasets}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Funcoes }
+
+\CommentTok{# converte as colunas de um dataframe tipo lista em tipo character}
+\NormalTok{cv_tplista2tpchar <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{( df  ) \{ }
+  \ControlFlowTok{for}\NormalTok{( variavel }\ControlFlowTok{in} \KeywordTok{names}\NormalTok{(df)) \{}
+    \ControlFlowTok{if}\NormalTok{ (}\KeywordTok{class}\NormalTok{(df[[variavel]]) }\OperatorTok{==}\StringTok{ "list"}\NormalTok{ ) \{}
+\NormalTok{      df[[variavel]] <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(df[[variavel]] ,   }\ControlFlowTok{function}\NormalTok{(x)   }\KeywordTok{lista2texto}\NormalTok{( x  ) ) }
+\NormalTok{      df[[variavel]] <-}\StringTok{ }\KeywordTok{as.character}\NormalTok{( df[[variavel]] )}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{(df)}
+\NormalTok{\}}
+\NormalTok{###}
+
+
+\CommentTok{# converte o conteudo de lista em array de characters}
+\NormalTok{lista2texto <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{( lista  ) \{}
+  \ControlFlowTok{if}\NormalTok{(}\KeywordTok{is.null}\NormalTok{(lista)) \{}
+    \KeywordTok{return}\NormalTok{ ( }\OtherTok{NULL}\NormalTok{ )}
+\NormalTok{  \}}
+\NormalTok{  saida <-}\StringTok{ ""}
+  \ControlFlowTok{for}\NormalTok{( j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(lista)) \{ }
+    \ControlFlowTok{for}\NormalTok{( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(lista[[j]]) ) \{}
+\NormalTok{      elemento <-}\StringTok{ }\NormalTok{lista[[j]][i] }
+      \ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(elemento)) \{ }
+        \ControlFlowTok{if}\NormalTok{( i }\OperatorTok{==}\StringTok{ }\KeywordTok{length}\NormalTok{(lista[[j]]) }\OperatorTok{&}\StringTok{ }\NormalTok{j }\OperatorTok{==}\StringTok{ }\KeywordTok{length}\NormalTok{(lista)  ) \{ }
+          \CommentTok{# se for o ultimo elemento nao coloque o ponto e virgula no final            }
+\NormalTok{          saida <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{( saida , elemento  )}
+\NormalTok{        \} }\ControlFlowTok{else}\NormalTok{ \{}
+          \CommentTok{# enquanto nao for o ultimo coloque ; separando os elementos concatenados }
+\NormalTok{          saida <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{( saida , elemento , }\DataTypeTok{sep =} \StringTok{" ; "}\NormalTok{)}
+\NormalTok{        \}}
+\NormalTok{      \}  }
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{( saida )}
+\NormalTok{\}}
+
+\CommentTok{# Converte producao elattes separada por anos em um unico dataframe }
+\NormalTok{converte_producao2dataframe<-}\StringTok{ }\ControlFlowTok{function}\NormalTok{( lista_producao ) \{}
+\NormalTok{  df_saida <-}\StringTok{ }\OtherTok{NULL} 
+  
+  \ControlFlowTok{for}\NormalTok{( ano }\ControlFlowTok{in} \KeywordTok{names}\NormalTok{(lista_producao)) \{}
+\NormalTok{    df_saida <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(df_saida , lista_producao[[ano]])}
+\NormalTok{  \}}
+  
+  \CommentTok{# converte tipo lista em array de character }
+\NormalTok{  df_saida <-}\StringTok{ }\KeywordTok{cv_tplista2tpchar}\NormalTok{(df_saida)}
+  \KeywordTok{return}\NormalTok{(df_saida)}
+  
+
+\NormalTok{\}}
+
+\CommentTok{#concatena dois dataframes com  colunas diferentes }
+\NormalTok{concatenadf <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{( df1, df2) \{ }
+  \CommentTok{#cria colunas de df1 que faltam em df2}
+  \ControlFlowTok{for}\NormalTok{( coluna }\ControlFlowTok{in} \KeywordTok{names}\NormalTok{(df1 ) ) \{}
+    \ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\KeywordTok{is.element}\NormalTok{(coluna, }\KeywordTok{names}\NormalTok{(df2) )) \{}
+\NormalTok{      df2[coluna] <-}\StringTok{ }\OtherTok{NA}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  
+  \CommentTok{#cria colunas de df2 que faltam em df1  }
+  \ControlFlowTok{for}\NormalTok{( coluna }\ControlFlowTok{in} \KeywordTok{names}\NormalTok{(df2 ) ) \{}
+    
+    \ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\KeywordTok{is.element}\NormalTok{(coluna, }\KeywordTok{names}\NormalTok{(df1) )) \{}
+\NormalTok{      df1[coluna] <-}\StringTok{ }\OtherTok{NA}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  
+  
+  \CommentTok{#faz o rbind dos dois dataframes }
+\NormalTok{  df_final <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(df1 , df2)}
+  \KeywordTok{return}\NormalTok{(df_final)}
+  
+\NormalTok{\}}
+
+\CommentTok{# Extracao dos perfis dos professores }
+
+\NormalTok{extrai_1perfil <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{( professor ) \{}
+\NormalTok{  idLattes <-}\StringTok{ }\KeywordTok{names}\NormalTok{(professor)}
+\NormalTok{  nome <-}\StringTok{ }\NormalTok{professor[[idLattes]]}\OperatorTok{$}\NormalTok{nome   }
+\NormalTok{  resumo_cv <-}\StringTok{ }\NormalTok{professor[[idLattes]]}\OperatorTok{$}\NormalTok{resumo_cv }
+\NormalTok{  endereco_profissional <-}\StringTok{ }\NormalTok{professor[[idLattes]]}\OperatorTok{$}\NormalTok{endereco_profissional }\CommentTok{#list }
+\NormalTok{  instituicao <-}\StringTok{ }\NormalTok{endereco_profissional}\OperatorTok{$}\NormalTok{instituicao}
+\NormalTok{  orgao <-}\StringTok{ }\NormalTok{endereco_profissional}\OperatorTok{$}\NormalTok{orgao}
+\NormalTok{  unidade <-}\StringTok{ }\NormalTok{endereco_profissional}\OperatorTok{$}\NormalTok{unidade}
+\NormalTok{  DDD <-}\StringTok{ }\NormalTok{endereco_profissional}\OperatorTok{$}\NormalTok{DDD}
+\NormalTok{  telefone <-}\StringTok{ }\NormalTok{endereco_profissional}\OperatorTok{$}\NormalTok{telefone}
+\NormalTok{  bairro <-}\StringTok{ }\NormalTok{endereco_profissional}\OperatorTok{$}\NormalTok{bairro}
+\NormalTok{  cep <-}\StringTok{ }\NormalTok{endereco_profissional}\OperatorTok{$}\NormalTok{cep}
+\NormalTok{  cidade <-}\StringTok{ }\NormalTok{endereco_profissional}\OperatorTok{$}\NormalTok{cidade}
+\NormalTok{  senioridade <-}\StringTok{ }\NormalTok{professor[[idLattes]]}\OperatorTok{$}\NormalTok{senioridade  }
+\NormalTok{  df_1perfil <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{( idLattes , nome, resumo_cv ,instituicao , }
+\NormalTok{                           orgao, unidade , DDD, telefone, bairro,cep,cidade , senioridade,}
+                           \DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
+  
+  \KeywordTok{return}\NormalTok{(df_1perfil)  }
+\NormalTok{\}}
+
+\NormalTok{extrai_perfis <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(jsonProfessores) \{}
+\NormalTok{  df_saida <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+  \ControlFlowTok{for}\NormalTok{( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(jsonProfessores)) \{}
+\NormalTok{    jsonProfessor <-}\StringTok{ }\NormalTok{jsonProfessores[i]}
+\NormalTok{    df_professor <-}\StringTok{ }\KeywordTok{extrai_1perfil}\NormalTok{(jsonProfessor)}
+    \ControlFlowTok{if}\NormalTok{( }\KeywordTok{nrow}\NormalTok{(df_saida) }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+\NormalTok{      df_saida <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(df_saida , df_professor)}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      df_saida <-}\StringTok{ }\NormalTok{df_professor }
+\NormalTok{    \}}
+\NormalTok{  \}}
+   
+  \KeywordTok{return}\NormalTok{(df_saida)}
+\NormalTok{\}}
+
+\CommentTok{# Extracao da producao bibliografica dos professores }
+
+\NormalTok{extrai_1producao <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(professor) \{}
+\NormalTok{  idLattes <-}\StringTok{ }\KeywordTok{names}\NormalTok{(professor)}
+\NormalTok{  df_1producao <<-}\StringTok{ }\OtherTok{NULL} 
+\NormalTok{  producao_bibliografica <-}\StringTok{ }\NormalTok{professor[[idLattes]]}\OperatorTok{$}\NormalTok{producao_bibiografica  }\CommentTok{#list}
+  \ControlFlowTok{for}\NormalTok{( tipo_producao }\ControlFlowTok{in} \KeywordTok{names}\NormalTok{(producao_bibliografica)) \{ }
+\NormalTok{    df_temporario <-}\StringTok{ }\KeywordTok{cv_tplista2tpchar}\NormalTok{ ( producao_bibliografica[[tipo_producao]]) }
+\NormalTok{    df_temporario}\OperatorTok{$}\NormalTok{tipo_producao <-}\StringTok{  }\NormalTok{tipo_producao }
+\NormalTok{    df_temporario}\OperatorTok{$}\NormalTok{idLattes <-}\StringTok{  }\NormalTok{idLattes}
+\NormalTok{    df_1producao <-}\StringTok{ }\KeywordTok{concatenadf}\NormalTok{( df_1producao , df_temporario  )}
+\NormalTok{  \}  }
+  \KeywordTok{return}\NormalTok{(df_1producao)}
+\NormalTok{\}}
+
+\NormalTok{extrai_producoes <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{( jsonProfessores) \{}
+\NormalTok{  df_saida <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+  \ControlFlowTok{for}\NormalTok{( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(jsonProfessores)) \{}
+\NormalTok{    jsonProfessor <-}\StringTok{ }\NormalTok{jsonProfessores[i]}
+\NormalTok{    df_producao <-}\StringTok{ }\KeywordTok{extrai_1producao}\NormalTok{(jsonProfessor)}
+    \ControlFlowTok{if}\NormalTok{( }\KeywordTok{nrow}\NormalTok{(df_saida) }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+\NormalTok{      df_saida <-}\StringTok{ }\KeywordTok{concatenadf}\NormalTok{(df_saida , df_producao)}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      df_saida <-}\StringTok{ }\NormalTok{df_producao }
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  df_saida <-}\StringTok{ }\NormalTok{df_saida }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{( }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(tipo_producao))}
+  \KeywordTok{return}\NormalTok{(df_saida)  }
+\NormalTok{\}}
+
+\CommentTok{# Extracao das orientacoes dos professores }
+
+\NormalTok{extrai_1orientacao <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(professor) \{}
+\NormalTok{  idLattes <-}\StringTok{ }\KeywordTok{names}\NormalTok{(professor)}
+\NormalTok{  df_1orientacao <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{  orientacoes_academicas  <-}\StringTok{ }\NormalTok{professor[[idLattes]]}\OperatorTok{$}\NormalTok{orientacoes_academicas  }\CommentTok{#list}
+  \ControlFlowTok{for}\NormalTok{( orientacao }\ControlFlowTok{in} \KeywordTok{names}\NormalTok{(orientacoes_academicas )) \{ }
+\NormalTok{    df_temporario <-}\StringTok{ }\KeywordTok{cv_tplista2tpchar}\NormalTok{ ( orientacoes_academicas[[orientacao]])}
+\NormalTok{    df_temporario}\OperatorTok{$}\NormalTok{orientacao <-}\StringTok{  }\NormalTok{orientacao }
+\NormalTok{    df_temporario}\OperatorTok{$}\NormalTok{idLattes <-}\StringTok{  }\NormalTok{idLattes}
+\NormalTok{    df_1orientacao <-}\StringTok{ }\KeywordTok{concatenadf}\NormalTok{( df_1orientacao , df_temporario  )}
+\NormalTok{  \}  }
+  \KeywordTok{return}\NormalTok{(df_1orientacao) }
+\NormalTok{\}}
+
+\NormalTok{extrai_orientacoes <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(jsonProfessores) \{}
+\NormalTok{  df_saida <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+  \ControlFlowTok{for}\NormalTok{( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(jsonProfessores)) \{}
+\NormalTok{    jsonProfessor <-}\StringTok{ }\NormalTok{jsonProfessores[i]}
+\NormalTok{    df_orientacao <-}\StringTok{ }\KeywordTok{extrai_1orientacao}\NormalTok{(jsonProfessor)}
+    \ControlFlowTok{if}\NormalTok{( }\KeywordTok{nrow}\NormalTok{(df_saida) }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+\NormalTok{      df_saida <-}\StringTok{ }\KeywordTok{concatenadf}\NormalTok{(df_saida , df_orientacao)}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      df_saida <-}\StringTok{ }\NormalTok{df_orientacao}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  df_saida <-}\StringTok{ }\NormalTok{df_saida }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(idLattes))}
+  \KeywordTok{return}\NormalTok{(df_saida)  }
+\NormalTok{\}}
+
+\CommentTok{# Extracao das areas de atuacao dos professores }
+
+\NormalTok{extrai_1area_de_atuacao <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(professor)\{}
+\NormalTok{  idLattes <-}\StringTok{ }\KeywordTok{names}\NormalTok{(professor)}
+\NormalTok{  df_1area <-}\StringTok{  }\NormalTok{professor[[idLattes]]}\OperatorTok{$}\NormalTok{areas_de_atuacao}
+\NormalTok{  df_1area}\OperatorTok{$}\NormalTok{idLattes <-}\StringTok{ }\NormalTok{idLattes}
+  \KeywordTok{return}\NormalTok{(df_1area)}
+\NormalTok{\}}
+
+\NormalTok{extrai_areas_atuacao <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(jsonProfessores)\{}
+\NormalTok{  df_saida <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{()}
+  \ControlFlowTok{for}\NormalTok{( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(jsonProfessores)) \{}
+\NormalTok{    jsonProfessor <-}\StringTok{ }\NormalTok{jsonProfessores[i]}
+\NormalTok{    df_area_atuacao <-}\StringTok{ }\KeywordTok{extrai_1area_de_atuacao}\NormalTok{(jsonProfessor)}
+    \ControlFlowTok{if}\NormalTok{( }\KeywordTok{nrow}\NormalTok{(df_saida) }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+\NormalTok{      df_saida <-}\StringTok{ }\KeywordTok{concatenadf}\NormalTok{(df_saida , df_area_atuacao)}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      df_saida <-}\StringTok{ }\NormalTok{df_area_atuacao}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  df_saida <-}\StringTok{ }\NormalTok{df_saida }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{( }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(idLattes))}
+  \KeywordTok{return}\NormalTok{(df_saida)   }
+\NormalTok{\}}
+\NormalTok{########################### Inicio }
+
+\CommentTok{# colocar o diretorio onde estÃ¡ o arquivo json de perfis a serem lidos }
+\NormalTok{unb.prof.json <-}\StringTok{ }\KeywordTok{read_file}\NormalTok{(}\StringTok{"Matematica.profile.json"}\NormalTok{)}
+\CommentTok{# unb.prof.df.capes <- read.csv("data/PesqPosCapes.csv", }
+\CommentTok{#                               sep = ";", header = TRUE, colClasses = "character")}
+\NormalTok{unb.prof <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(unb.prof.json)}
+\KeywordTok{length}\NormalTok{(unb.prof)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 44
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# extrai perfis dos professores }
+\NormalTok{unb.prof.df.professores <-}\StringTok{ }\KeywordTok{extrai_perfis}\NormalTok{(unb.prof)}
+
+\CommentTok{# extrai producao bibliografica de todos os professores }
+\NormalTok{unb.prof.df.publicacoes <-}\StringTok{ }\KeywordTok{extrai_producoes}\NormalTok{(unb.prof)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'bindrcpp' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#extrai orientacoes }
+\NormalTok{unb.prof.df.orientacoes <-}\StringTok{ }\KeywordTok{extrai_orientacoes}\NormalTok{(unb.prof)}
+
+\CommentTok{#extrai areas de atuacao }
+\NormalTok{unb.prof.df.areas.de.atuacao <-}\StringTok{ }\KeywordTok{extrai_areas_atuacao}\NormalTok{(unb.prof)}
+
+\CommentTok{#salva os daframes }
+\CommentTok{# save(unb.prof.df.professores, unb.prof.df.publicacoes,}
+\CommentTok{#      unb.prof.df.orientacoes, unb.prof.df.areas.de.atuacao, file = "dataframes.Rda")}
+
+\CommentTok{#cria arquivo para anÃ¡lise}
+\CommentTok{# unb.prof.df <- data.frame()}
+\CommentTok{# unb.prof.df <- unb.prof.df.professores %>% }
+\CommentTok{#   select(idLattes, nome, resumo_cv, senioridade) %>% }
+\CommentTok{#   left_join(}
+\CommentTok{#     unb.prof.df.orientacoes %>% }
+\CommentTok{#       select(orientacao, idLattes) %>% }
+\CommentTok{#       filter(!grepl("EM_ANDAMENTO", orientacao)) %>% }
+\CommentTok{#       group_by(idLattes) %>% }
+\CommentTok{#       count(orientacao) %>% }
+\CommentTok{#       spread(key = orientacao, value = n), }
+\CommentTok{#     by = "idLattes") %>% }
+\CommentTok{#   left_join(}
+\CommentTok{#     unb.prof.df.publicacoes %>% }
+\CommentTok{#       select(tipo_producao, idLattes) %>% }
+\CommentTok{#       filter(!grepl("ARTIGO_ACEITO", tipo_producao)) %>% }
+\CommentTok{#       group_by(idLattes) %>% }
+\CommentTok{#       count(tipo_producao) %>% }
+\CommentTok{#       spread(key = tipo_producao, value = n), }
+\CommentTok{#     by = "idLattes") %>% }
+\CommentTok{#   left_join(}
+\CommentTok{#     unb.prof.df.areas.de.atuacao %>% }
+\CommentTok{#       select(area, idLattes) %>% }
+\CommentTok{#       group_by(idLattes) %>% }
+\CommentTok{#       summarise(n_distinct(area)), }
+\CommentTok{#     by = "idLattes") %>% }
+\CommentTok{#   left_join(}
+\CommentTok{#     unb.prof.df.capes %>% }
+\CommentTok{#       select(AreaPos, idLattes) %>% }
+\CommentTok{#       group_by(idLattes) %>% }
+\CommentTok{#       summarise(n_distinct(AreaPos)), }
+\CommentTok{#     by = "idLattes")}
+
+\CommentTok{# glimpse(unb.prof.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{CRISP-DM Fase.Atividade 3.4 - IntegraÃ§Ã£o dos
+dados}\label{crisp-dm-fase.atividade-3.4---integraaao-dos-dados}
+
+Como jÃ¡ informado, a integraÃ§Ã£o dos dados envolve a uniÃ£o (merge) de
+diferentes tabelas para criar um Ãºnico \emph{dataset} para ser
+utilizado no R, por exemplo.
+
+\subsection{CRISP-DM Fase.Atividade 3.5 - FormataÃ§Ã£o dos
+dados}\label{crisp-dm-fase.atividade-3.5---formataaao-dos-dados}
+
+Como jÃ¡ informado, a formataÃ§Ã£o de dados envolve a realizaÃ§Ã£o de
+pequenas alteraÃ§Ãµes na estrutura dos dados, como a ordem das
+variÃ¡veis, para permitir a execuÃ§Ã£o de determinado mÃ©todo de data
+mining.
+
+\section{\texorpdfstring{CRISP-DM Fase 4 -
+\textbf{Modelagem}}{CRISP-DM Fase 4 - Modelagem}}\label{crisp-dm-fase-4---modelagem}
+
+Como jÃ¡ informado, na fase de \textbf{Modelagem} no CRISP-DM ocorre a
+construÃ§Ã£o e avaliaÃ§Ã£o de modelos estatÃ­sticos ou computacionais,
+podendo ser realizada em quatro atividades genÃ©ricas, a seguir
+organizadas na forma de seÃ§Ãµes
+
+\subsection{CRISP-DM Fase.Atividade 4.1 - SeleÃ§Ã£o das tÃ©cnicas de
+modelagem}\label{crisp-dm-fase.atividade-4.1---seleaao-das-tacnicas-de-modelagem}
+
+\subsection{CRISP-DM Fase.Atividade 4.2 - RealizaÃ§Ã£o de testes de
+modelagem}\label{crisp-dm-fase.atividade-4.2---realizaaao-de-testes-de-modelagem}
+
+Como jÃ¡ informado, na realizaÃ§Ã£o de testes de modelagem diferentes
+modelos estatÃ­sticos ou computacionais sÃ£o previamente testados e
+avaliados. Pode-se dividir o \emph{dataset} criado na etapa anterior
+para se ter uma base de treino na construÃ§Ã£o de modelos, e outra
+pequena parte para validar e avaliar a eficiÃªncia de cada modelo criado
+atÃ© se chegar ao mais âeficienteâ.
+
+\subsection{CRISP-DM Fase.Atividade 4.3 - ConstruÃ§Ã£o do modelo
+definitivo}\label{crisp-dm-fase.atividade-4.3---construaao-do-modelo-definitivo}
+
+Como jÃ¡ informado, a construÃ§ao do modelo definitivo Ã© realizada com
+base na melhor experiÃªncia do passo anterior.
+
+\subsection{CRISP-DM Fase.Atividade 4.4 - AvaliaÃ§Ã£o do
+modelo}\label{crisp-dm-fase.atividade-4.4---avaliaaao-do-modelo}
+
+\section{\texorpdfstring{CRISP-DM Fase 5 -
+\textbf{AvaliaÃ§Ã£o}}{CRISP-DM Fase 5 - AvaliaÃ§Ã£o}}\label{crisp-dm-fase-5---avaliaaao}
+
+Como jÃ¡ informado, na fase de \textbf{AvaliaÃ§Ã£o} do CRISP-DM os
+resultados nÃ£o sÃ£o apenas avaliados, mas se verifica se existem
+questÃµes relacionadas Ã~ organizaÃ§Ã£o que nÃ£o foram suficientemente
+abordadas. Deve-se refletir se o uso arepetido do modelo criado pode
+trazer algum âefeito colateralâ para a organizaÃ§Ã£o.
+
+Como jÃ¡ informado, nesta fase, pode-se trabalhar com 3 atividades
+genÃ©ricas, a seguir distribuÃ­das em seÃ§Ãµes.
+
+\subsection{CRISP-DM Fase.Atividade 5.1 - AvaliaÃ§Ã£o dos
+resultados}\label{crisp-dm-fase.atividade-5.1---avaliaaao-dos-resultados}
+
+\subsection{CRISP-DM Fase.Atividade 5.2 - RevisÃ£o do
+processo}\label{crisp-dm-fase.atividade-5.2---revisao-do-processo}
+
+Como jÃ¡ informado, durante a revisÃ£o do processo verifica-se se o
+modelo foi construÃ­do adequadamente. As variÃ¡veis (passadas) para
+construir o modelo estarÃ£o disponÃ­veis no futuro?
+
+\subsection{CRISP-DM Fase.Atividade 5.3 - DeterminaÃ§Ã£o dos etapas
+seguintes}\label{crisp-dm-fase.atividade-5.3---determinaaao-dos-etapas-seguintes}
+
+Como jÃ¡ informado, pode ser necessÃ¡rio decidir-se por finalizar o
+projeto, passar Ã~ etapa de desenvolvimento, ou rever algumas fases
+anteriores para a melhoria do projeto.
+
+\section{\texorpdfstring{CRISP-DM Fase 6 - \textbf{ImplantaÃ§Ã£o}
+(\emph{deployment})}{CRISP-DM Fase 6 - ImplantaÃ§Ã£o (deployment)}}\label{crisp-dm-fase-6---implantaaao-deployment}
+
+Como jÃ¡ informado, na fase de \textbf{ImplantaÃ§Ã£o}
+(\emph{deployment}) se realiza o planejamento de implantaÃ§Ã£o dos
+produtos desenvolvidos (scripts, no caso do executado nesta disciplina)
+para o ambiente operacional, para seu uso repetitivo, envolvendo
+atividades de monitoramento e manutenÃ§Ã£o do sistema (script)
+desenvolvido. A fase de implantaÃ§Ã£o concluir com a produÃ§Ã£o e
+apresentaÃ§Ã£o do relatÃ³rio final com os resultados do projeto.
+
+Como jÃ¡ informado, sÃ£o seis as atividades genÃ©ricas na fase de
+\textbf{implantaÃ§Ã£o}, a seguir apresentadas na forma de seÃ§Ãµes.
+
+\subsection{CRISP-DM Fase.Atividade 6.1 - Planejamento da
+transiÃ§Ã£o}\label{crisp-dm-fase.atividade-6.1---planejamento-da-transiaao}
+
+De que forma os produtos desenvolvidos pelo grupo poderiam ser colocados
+em uso prÃ¡tico regular, na organizaÃ§Ã£o cliente?
+
+\subsection{CRISP-DM Fase.Atividade 6.2 - Planejamento do monitoramento
+dos
+produtos}\label{crisp-dm-fase.atividade-6.2---planejamento-do-monitoramento-dos-produtos}
+
+De que forma seria possÃ­vel realizar o monitoramento do funcionamento
+dos produtos em utilizaÃ§Ã£o no ambiente operacional?
+
+\subsection{CRISP-DM Fase.Atividade 6.3 - Planejamento de
+manuteÃ§Ã£o}\label{crisp-dm-fase.atividade-6.3---planejamento-de-manuteaao}
+
+que manutenÃ§Ãµes, ajustes, mudanÃ§as, poderia ter que ser eventualmente
+realizadas no produto (scripts), quando em uso no ambiente operacional
+do cliente?
+
+\subsection{CRISP-DM Fase.Atividade 6.4 - ProduÃ§Ã£o do relatÃ³rio
+final}\label{crisp-dm-fase.atividade-6.4---produaao-do-relatario-final}
+
+A entrega do relatÃ³rio do grupo, tomando como base este aqui, reflete a
+execuÃ§Ã£o desta etapa.
+
+\subsection{CRISP-DM Fase.Atividade 6.5 - ApresentaÃ§Ã£o do relatÃ³rio
+final}\label{crisp-dm-fase.atividade-6.5---apresentaaao-do-relatario-final}
+
+Como jÃ¡ informado, nÃ£o serÃ¡ feita apresentaÃ§Ã£o do relatÃ³rio, mas
+esperamos que publicaÃ§Ãµes cientÃ­ficas possam ser geradas com pelo seu
+grupo, com o apoio dos professores da disciplina.
+
+\subsection{CRISP-DM Fase.Atividade 6.6 - RevisÃ£o sobre a execuÃ§Ã£o do
+projeto}\label{crisp-dm-fase.atividade-6.6---revisao-sobre-a-execuaao-do-projeto}
+
+Deve-se fazer aqui o registro de liÃ§Ãµes aprendidas, bem como traÃ§adas
+perspectivas futuras de aprimoramento deste trabalho, da disciplina de
+CiÃªncia de Dados para Todos etc.
+
+\section{ReferÃªncias}\label{referancias}
+
+\begin{itemize}
+\tightlist
+\item
+  Azevedo, MÃ¡rio Luiz Neves de, JoÃ£o Ferreira de Oliveira, e AfrÃ¢nio
+  Mendes Catani. âO Sistema Nacional de PÃ³s-GraduaÃ§Ã£o (SNPG) e o
+  Plano Nacional de EducaÃ§Ã£o (PNE 2014-2024): regulaÃ§Ã£o, avaliaÃ§Ã£o
+  e financiamentoâ. Revista Brasileira de PolÃ­tica e AdministraÃ§Ã£o
+  da EducaÃ§Ã£o 32, nÂº 3 (2016).
+  \url{http://dx.doi.org/10.21573/vol32n32016.68576}.
+\item
+  Can, Fazli, Tansel Ãzyer, e Faruk Polat, orgs. State of the Art
+  Applications of Social Network Analysis. Lecture Notes in Social
+  Networks. Switzerland: Springer International Publishing, 2014.
+\item
+  CAPES. âDocumentos de Ãreaâ. CAPES.gov.br. Acessado 12 de junho
+  de 2018.
+  \url{http://avaliacaoquadrienal.capes.gov.br/documentos-de-area}.
+\item
+  âââ. âPlano Nacional de PÃ³s-GraduaÃ§Ã£o - PNPG 2011/2020 Vol.
+  1â. BrasÃ­lia - DF, dezembro de 2010.
+  \url{http://www.capes.gov.br/images/stories/download/Livros-PNPG-Volume-I-Mont.pdf}.
+\item
+  âââ. âPlano Nacional de PÃ³s-GraduaÃ§Ã£o - PNPG 2011/2020 Vol.
+  2â. BrasÃ­lia - DF, dezembro de 2010.
+  \url{http://www.capes.gov.br/images/stories/download/PNPG_Miolo_V2.pdf}.
+\item
+  âââ. âSucupira: coleta de dados, docentes de pÃ³s-graduaÃ§Ã£o
+  stricto sensu no Brasil 2015â. CAPES - Banco de Metadados, 16 de
+  marÃ§o de 2016.
+  \url{http://metadados.capes.gov.br/index.php/catalog/63}.
+\item
+  Chapman, Pete, Julian Clinton, Randy Kerber, Thomas Khabaza, Thomas
+  Reinartz, Colin Shearer, e RÃ¼diger Wirth. âCRISP-DM 1.0:
+  Step-by-Step Data Mining Guideâ. USA: CRISP-DM Consortium, 2000.
+  \url{https://www.the-modeling-agency.com/crisp-dm.pdf}.
+\item
+  Datacamp. âMachine Learning with R (Skill Track)â. Datacamp, 2018.
+  \url{https://www.datacamp.com/tracks/machine-learning}.
+\item
+  Fernandes, Jorge H C, e Ricardo Barros Sampaio.
+  âDataScienceForAllâ. Zotero, 13 de junho de 2018.
+  \url{https://www.zotero.org/groups/2197167/datascienceforall}.
+\item
+  âââ. âEspecificaÃ§Ã£o do Trabalho Final da Disciplina de
+  CiÃªncia de Dados para Todos 2017.2: Estudo sobre a visibilidade
+  internacional da produÃ§Ã£o cientÃ­fica das pÃ³s-graduaÃ§Ãµes
+  vinculadas Ã~s Ã¡reas de conhecimento da CAPES, na Universidade de
+  BrasÃ­lia (ComunicaÃ§Ã£o Interna)â. Disciplina 116297 - TÃ³picos
+  AvanÃ§ados em Computadores, turma D, do semestre 2017.2, do
+  Departamento de CiÃªncia da ComputaÃ§Ã£o do Instituto de CiÃªncias
+  Exatas da Universidade de BrasÃ­lia, 28 de novembro de 2017.
+  \url{https://aprender.ead.unb.br/pluginfile.php/474549/mod_resource/content/1/Estudo\%20da\%20Cie\%CC\%82ncia.pdf}.
+\item
+  Fernandes, Jorge H C, Ricardo Barros Sampaio, e JoÃ£o Ribas de Moura.
+  âCiÃªncia de Dados para Todos (Data Science For All) - 2018.1 -
+  AnÃ¡lise da ProduÃ§Ã£o CientÃ­fica e AcadÃªmica da Universidade de
+  BrasÃ­lia - Modelo de RelatÃ³rio Final da Disciplina - Departamento de
+  CiÃªncia da ComputaÃ§Ã£o da UnBâ. Disciplina 116297 - TÃ³picos
+  AvanÃ§ados em Computadores, turma D, do semestre 2018.1, do
+  Departamento de CiÃªncia da ComputaÃ§Ã£o do Instituto de CiÃªncias
+  Exatas da Universidade de BrasÃ­lia, 13 de junho de 2018.
+\item
+  Frickel, Scott, e Kelly Moore. The New Political Sociology of Science:
+  Institutions, Networks, and Power. Science and technology in society.
+  USA: The University of Wisconsin Press, 2006.
+\item
+  Graduate Prospects Ltd. âJob profile: Higher education lecturerâ,
+  2018.
+  \url{https://www.prospects.ac.uk/job-profiles/higher-education-lecturer}.
+\item
+  Kalpazidou Schmidt, Evanthia, e Ebbe Krogh Graversen. âPersistent
+  factors facilitating excellence in research environmentsâ. Higher
+  Education 75, nÂº 2 (1Âº de fevereiro de 2018): 341â``63.
+  \url{https://doi.org/10.1007/s10734-017-0142-0}.
+\item
+  Kilduff, Martin, e Wenpin Tsai. Social Networks and Organizations. UK:
+  Sage Publications, 2003.
+\item
+  Kolaczyk, Eric D., e GÃ¡bor CsÃ¡rdi. Statistical Analysis of Network
+  Data with R. USA: Springer, 2014.
+\item
+  Kuhn, Max, Jed Wing, Steve Weston, Andre Williams, Chris Keefer, Allan
+  Engelhardt, Tony Cooper, et al. âPackage âCaretâ -
+  Classification and Regression Trainingâ, 27 de maio de 2018.
+  \url{https://cran.r-project.org/web/packages/caret/caret.pdf}.
+\item
+  Leite, Fernando CÃ©sar Lima. âConsideraÃ§Ãµes bÃ¡sicas sobre a
+  AvaliaÃ§Ã£o do Sistema Nacional de PÃ³s-GraduaÃ§Ã£oâ. ComunicaÃ§Ã£o
+  Pessoal (slides). Universidade de BrasÃ­lia, abril de 2018.
+  \url{https://aprender.ead.unb.br/pluginfile.php/502250/mod_resource/content/1/Considera\%C3\%A7\%C3\%B5es\%20b\%C3\%A1sicas\%20sobre\%20a\%20Avalia\%C3\%A7\%C3\%A3o\%20do\%20Sistema\%20Nacional.pdf}.
+\item
+  Lusher, Dean, Johan Koskinen, e Garry Robins, orgs. Exponential Random
+  Graph Models for Social Networks: Theory, methods, and applications.
+  Structural Analysis in the Social Sciences. USA: Cambridge University
+  Press, 2013.
+\item
+  Mariscal, Gonzalo, Ã``scar MarbÃ¡n, e Covadonga FernÃ¡ndez. âA
+  survey of data mining and knowledge discovery process models and
+  methodologiesâ. The Knowledge Engineering Review 25, nÂº 2 (2010):
+  137â``66. \url{https://doi.org/10.1017/S0269888910000032}.
+\item
+  Nery, Guilherme, Ana Paula Bragaglia, FlÃ¡via Clemente, e Suzana
+  Barbosa. âNem tudo parece o que Ã©: Entenda o que Ã© plÃ¡gioâ.
+  Instituto de Arte e ComunicaÃ§Ã£o Social da UFF, 2009.
+  \url{http://www.noticias.uff.br/arquivos/cartilha-sobre-plagio-academico.pdf}.
+\item
+  Nooy, Wouter de, Andrej Mrvar, e Vladimir Batagelj. Exploratory Social
+  Network Analysis with Pajek. Structural Analysis in the Social
+  Sciences. USA: Routldge, 2005.
+\item
+  PÃ¡taro, Cristina SaitÃª de Oliveira, e Frank Antonio Mezzomo.
+  âSistema Nacional de PÃ³s-GraduaÃ§Ã£o no Brasil: estrutura,
+  resultados e desafios para polÃ­tica de Estado - LÃ­vio Amaralâ.
+  Revista EducaÃ§Ã£o e Linguagens 2, nÂº 3 (julho de 2013): 11â``17.
+\item
+  Schwartzman, Simon. âA CiÃªncia da CiÃªnciaâ. CiÃªncia Hoje 2, nÂº
+  11 (marÃ§o de 1984): 54â``59.
+\item
+  Silver, Nate. The Signal and the Noise: Why so many predictions fail
+  â but some donât. USA: The Penguin Press HC, 2012.
+\item
+  Vicari, Donatella, Akinori Okada, Giancarlo Ragozini, e Claus Wiehs.
+  Analysis and Modeling of Complex Data in Behavioral and Social
+  Sciences. Studies in Classifi cation, Data Analysis, and Knowledge
+  Organization. Switzerland: Springer, 2014.
+\item
+  Wickham, Hadley, e Garrett Grolemund. R for Data Science: Import,
+  Tidy, Transform, Visualize, and Model Data. USA: OâReilly, 2016.
+\end{itemize}
+
+
+\end{document}
