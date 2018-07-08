@@ -839,6 +839,86 @@ Como podemos notar, a quantidade de participações em eventos veio decrescendo 
 ##AQUI VAI O DO RAFAEL
 
 ##AQUI VAI O DO PAULO
+<p>
+O dataset MatematicaRedeResearchers.json contém todas as áreas em que existem algum tipo de produção científica, a nível de pós-graduação, produzida ou em produção até 2017 por membros do Departamento de Matemática. Como é possível notar os temas desenvolvidos não são exculivamente da Matemática ou ainda das Ciências Exatas, existe uma flexibilização que permite ao pesquisador trabalhar em diferentes campos do saber. Outro dado interessante é o desenvolvimento de trabalhos na área da educação o que valida as informações apresentadas no site do departamento onde são apresentados diversos projetos nesse âmbito.
+</p>
+<ul>
+<li>print(administração)</li>
+<li>## [1] 1</li>
+<li>print(educação)</li>
+<li>## [1] 4</li>
+<li>print(engBioMédica)</li>
+<li>## [1] 1</li>
+<li>print(matemática)</li>
+<li>## [1] 26</li>
+<li>print(ProbeEstat)</li>
+<li>## [1] 2</li>
+<li>print(Psicologia)</li>
+<li>## [1] 2</li>
+</ul>
+
+Visando aprofundar as análises será dado foco ao grupo de quatro pesquisadores do Departamento de Matemática que desenvolveram trabalhos na área da Psicologia. Estes podem ser identifados pelo número de seu ID do Currículo Lattes, como já é conhecido temos dois resultados:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+perfil <- fromJSON("MatematicaRede.profile.json")
+area_pesquisas <- fromJSON("MatematicaRede.researchers_by_area.json")
+advise <- fromJSON("MatematicaRede.advise.json")
+perfil <- fromJSON("MatematicaRede.profile.json")
+str(area_pesquisas$`Areas dos pesquisadores`$Psicologia)
+```
+</p>
+<p>
+De posse dos IDs é possível fazer algumas observações, para tal foi adicionado o dataset MatematicaRede.profile.json que contém o perfil Lattes de todos os membros do departamento. De posse dessas informações é possível comprovar a existência dos pesquisadores com os ID que foram encontrados e ainda verificar se eles, mesmo sendo "nativos" da Matemática, possuem alguma pesquisa na área da Psicologia olhando suas áreas de atuação: 
+```{r}
+str(pesq1 <- data_frame(perfil$`0556476746202406`$areas_de_atuacao$area))
+str(pesq2 <- data_frame(perfil$`5874654544324539`$areas_de_atuacao$area))
+```
+</p>
+<p>
+Ainda sobre as áreas de pesquisa é possível notar, como talvez já fosse esperado, que as sub-áreas da Matemáticas são majoritariamente as mais buscadas para desenvolvimento de pesquisas e isso pode ser verificado no gráfico a seguir que mostra a distribuição das pesquisas por área e diante do número pode-se afirmar que as sub-áres da Matemática são as de maior interesse e por consequência possuem os **resultados mais relevantes**.
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+areas <- c(1,4,1,26,2,2)
+names(areas) <- c("Adm", "Educ", "EBioM", "Mat", "Probb&Est", "Psi")
+
+porc<-round(areas*100/sum(areas),2) #arredonda a porcentagem para 2 dígitos significativos)
+rotulos<-paste("(",porc,"%)",sep="")
+rotulos<-paste(names(areas),"(",porc,"%)",sep="")
+pie(areas, main="Áreas de Pesquisa dentro do MAT", labels=rotulos, col=rainbow(7))
+
+```
+</p>
+<p>
+Limitando o escopo de análise aos pesquisadores que se dedicaram à pesquisas envolvendo temas da Psicologia é interessante analisar que se em algum momento antes de adquirirem seus títulos eles se dedicaram de alguma forma ao estudo da Psicologia. Para isso é feita uma análise dos resumos dos seus currículos Lattes. Devido
+```{r}
+resumo_pesq1 <- (perfil$`0556476746202406`$resumo_cv )
+resumo_pesq2 <- (perfil$`5874654544324539`$resumo_cv)
+resumo_pesq1
+resumo_pesq2
+```
+<p>
+Outro dado interessante é analisar o nível de internacionalização das produções dos pesquisadores, isso pode ser analisado com a quantidade de participações em eventos internacionais e nacionais.Como é possível ver através dos gráficos a internacionalização das pequisas pode ser considerada baixa, porém existe forte participação desses pesquisadoes em âmbito nacional.
+</p>
+<p>
+####Pesquisador ID_0556476746202406
+```{r echo=FALSE}
+z <- c(3,26)
+barplot(z, beside=FALSE, col=c("forestgreen", "palegreen"), ylim = c(0,30))
+legend("topleft",x=0, y=-2, xpd=TRUE, ncol=2, legend=c("Europa", "Brasil"),
+       fill=c("forestgreen", "palegreen"), bty="n")
+```
+
+<p>
+####Pesquisador ID_5874654544324539
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+z <- c(0,14)
+barplot(z, beside=FALSE, col=c("blue", "lightblue"), ylim = c(0,30))
+legend("topleft",x=0, y=-2, xpd=TRUE, ncol=2, legend=c("Europa", "Brasil"),
+       fill=c("blue", "lightblue"), bty="n")
+
+
+```
 
 #CRISP-DM Fase.Atividade 5 -  conclusões dos relatorios 3
 
@@ -854,6 +934,7 @@ Algumas informações sobre a mudança no quadro de funcionários também foi le
 
 ##AQUI VAI O DO PAULO
 
+O simples estudo dos datasets da Matemática permitiu tirar conclusões acerca de seu programa de pós-graduação e validar as informações contidas no site do programa. Assim como havia sido afirmado anterioremente o Departamento é capaz de oferecer oportunidades de estudo em diversos campos do saber, ainda assim não deixa de privilegiar as sub-áreas das Ciências Exatas como a Álgebra e a Estatística. De acordo com os resultados obtidos é possível notar que as áreas de pós-graduação dentro da Matemática que não trabalham diretamente com sub-áreas das exatas não possuem o mesmo grau de internacionalização que as demais, porém por serem numericamente inferiores não tem impacto direto na nota do curso que é alta, outra informação que foi validade de acordo com o que está no site do programa. 
 
 #CRISP-DM Fase.Atividade 6
 
