@@ -17,6 +17,7 @@ using namespace std;
 
 bool cinza = false;
 int x2, y2;
+bool clique = false;
 // void help(char **argv);
 // void pinta(Mat **img, uchar blue_clique, uchar green_clique, uchar red_clique);
 // void onMouse(int event, int x, int y, int flags, void* userdata);
@@ -29,6 +30,23 @@ void help(char** argv ) {
   << "Digite 2 e <path/imagem> para Req. 2 ou 4 para Req. 4\n"
   << "Por exemplo: \n"
   << argv[0] <<" 2 fruits.jpg\n" << endl;
+}
+
+
+void pinta2(Mat* img, Vec3b intensity_clique) {
+    for(int j=0; j<(*img).cols; j++) 
+    {
+      for (int i=0; i<(*img).rows; i++)
+      {
+        Vec3b intensity = (*img).at<Vec3b>(Point(j,i));
+        uchar blue  = intensity[0];
+        uchar green = intensity[1];
+        uchar red   = intensity[2];
+
+        if((uint)(red) == 255 && (uint)blue == 0 && (uint)green == 0) continue;
+        if(norm(intensity_clique, intensity, NORM_L2) < 13) (*img).at<Vec3b>(Point(j,i)) = {0, 0, 255};
+      }
+    }
 }
 
 void pinta(Mat** img, Vec3b intensity_clique) {
@@ -61,38 +79,9 @@ void pinta(Mat** img, Vec3b intensity_clique) {
     }
 }
 
-void pinta2(Mat* img, Vec3b intensity_clique) {
-    // Mat D((*img)->rows, (*img)->cols, CV_8UC3, Scalar(blue_clique, green_clique, red_clique));
-
-    // vector<Mat> bgr(3);
-    // split(D, bgr);
-    // absdiff(**img, D, E)
-    // **img = D;
-
-    for(int j=0; j<(*img).cols; j++) 
-    {
-      for (int i=0; i<(*img).rows; i++)
-      {
-        Vec3b intensity = (*img).at<Vec3b>(Point(j,i));
-        uchar blue  = intensity[0];
-        uchar green = intensity[1];
-        uchar red   = intensity[2];
-
-        if((uint)(red) == 255 && (uint)blue == 0 && (uint)green == 0) continue;
-        if(norm(intensity_clique, intensity, NORM_L2) < 13) (*img).at<Vec3b>(Point(j,i)) = {0, 0, 255};
-
-
-        // uint square = (uint)(blue_clique - blue)*(uint)(blue_clique - blue) + 
-        //   (uint)(red_clique - red)*(uint)(red_clique - red) + 
-        //   (uint)(green_clique - green)*(uint)(green_clique - green);
-        // if((square*square) < 169)
-        //     (*img)->at<Vec3b>(Point(j,i)) = {0, 0, 255};
-      }
-    }
-}
-
 void onMouse(int event, int x, int y, int flags, void* userdata) {
   if ( event == EVENT_LBUTTONDOWN ) {
+    clique = true;
     x2 = x;
     y2 = y;
     Mat* img = (Mat*) userdata;
@@ -200,7 +189,7 @@ void video (char **argv) {
 
     // imshow( "Req4", frame );
     setMouseCallback("Req4", onMouse, &frame);
-    pinta2(&frame, frame.at< Vec3b >(y2, x2));
+    if(clique) pinta2(&frame, frame.at<Vec3b>(y2, x2));
 
     if((char)waitKey(1000.0/FPS) == 27) break;
     imshow( "Req4", frame );
