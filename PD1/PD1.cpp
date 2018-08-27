@@ -1,5 +1,16 @@
-// Example 2-11. A complete program to read in a color video and write out the log-polar-
-// transformed video
+/** ********************************************************************************
+ *  @brief Montador: 
+ *         Neste projeto em questão foi desenvolvido um algoritmo que abre um arquivo de imagem ou vídeo e permite ao usuário 
+ *         clicar sobre um ponto na área da imagem ou vídeo, mostrando os valores da intensidade e a posição do pixel clicado. 
+ *         Além disso, também foi feita uma rotina de seleção de pixels para pintar de vermelho os pixels ``parecidos'' com o clicado, 
+ *         seguindo um critério de comparação definido pela função pinta.
+ *         
+ *
+ * @author RAPHAEL SOARES - MAT. 14/0160299
+ * @version 2.0
+ * @since 26/08/2018
+ *
+ ********************************************************************************/
 
 #include <../opencv2/opencv.hpp>
 #include <iostream>
@@ -13,40 +24,40 @@ using namespace cv;
 using namespace std;
 
 #define COLOR_ROWS 80
-#define COLOR_COLS 600
+#define COLOR_COLS 630
 
 bool cinza = false;
 int x2, y2;
 bool clique = false;
-// void help(char **argv);
-// void pinta(Mat **img, uchar blue_clique, uchar green_clique, uchar red_clique);
-// void onMouse(int event, int x, int y, int flags, void* userdata);
-// void imagem(char** argv);
-// void video (char **argv);
+bool clique_inicial = false;
 
+void help(char **argv);
+void pinta(Mat **img, Vec3b intensity_clique);
+void onMouse(int event, int x, int y, int flags, void* userdata);
+void imagem(char** argv);
+void video (char** argv);
+void checa_cinza(Mat *img);
+
+int main( int argc, char** argv ) {
+  if (argc < 2) {
+    help(argv);
+    return 0;
+  }
+
+  if(*argv[1] == '2')
+    imagem(argv);
+  else if(*argv[1] == '4' || *argv[1] == '3') 
+    video(argv);
+  else help(argv);
+
+  return 0;
+}
 
 void help(char** argv ) {
 	cout << "\n"
-  << "Digite 2 e <path/imagem> para Req. 2 ou 4 para Req. 4\n"
+  << "Digite 2 e <path/imagem> para Req. 2 ou 3 e <path/video> para Req. 3 ou 4 para Req. 4\n"
   << "Por exemplo: \n"
   << argv[0] <<" 2 fruits.jpg\n" << endl;
-}
-
-
-void pinta2(Mat* img, Vec3b intensity_clique) {
-    for(int j=0; j<(*img).cols; j++) 
-    {
-      for (int i=0; i<(*img).rows; i++)
-      {
-        Vec3b intensity = (*img).at<Vec3b>(Point(j,i));
-        uchar blue  = intensity[0];
-        uchar green = intensity[1];
-        uchar red   = intensity[2];
-
-        if((uint)(red) == 255 && (uint)blue == 0 && (uint)green == 0) continue;
-        if(norm(intensity_clique, intensity, NORM_L2) < 13) (*img).at<Vec3b>(Point(j,i)) = {0, 0, 255};
-      }
-    }
 }
 
 void pinta(Mat** img, Vec3b intensity_clique) {
@@ -62,11 +73,8 @@ void pinta(Mat** img, Vec3b intensity_clique) {
       for (int i=0; i<(*img)->rows; i++)
       {
         Vec3b intensity = (*img)->at<Vec3b>(Point(j,i));
-        uchar blue  = intensity[0];
-        uchar green = intensity[1];
-        uchar red   = intensity[2];
 
-        if((uint)(red) == 255 && (uint)blue == 0 && (uint)green == 0) continue;
+        if((uint)intensity[2] == 255 && (uint)intensity[0] == 0 && (uint)intensity[1] == 0) continue;
         if(norm(intensity_clique, intensity, NORM_L2) < 13) (*img)->at<Vec3b>(Point(j,i)) = {0, 0, 255};
 
 
@@ -82,13 +90,26 @@ void pinta(Mat** img, Vec3b intensity_clique) {
 void onMouse(int event, int x, int y, int flags, void* userdata) {
   if ( event == EVENT_LBUTTONDOWN ) {
     clique = true;
+    clique_inicial = true;
     x2 = x;
     y2 = y;
+
+
     Mat* img = (Mat*) userdata;
     Vec3b intensity = img->at< Vec3b >(y, x);
     uchar blue_clique  = intensity[0];
     uchar green_clique = intensity[1];
     uchar red_clique   = intensity[2];
+    float luminance = 1 - (0.299*(int)red_clique + 0.587*(int)green_clique + 0.114*(int)blue_clique) / 255;
+
+
+    Scalar textColor;
+    if (luminance < 0.5)
+      textColor = Scalar(0,0,0);
+    else 
+      textColor = Scalar(255,255,255);
+    
+    Mat colorArray;
 
     if(!cinza) {
 
@@ -96,9 +117,6 @@ void onMouse(int event, int x, int y, int flags, void* userdata) {
             ") " + "=" + " [R = " + to_string(red_clique) + ", G = " + 
             to_string(green_clique) + ", B = " + to_string(blue_clique) + "]";
 
-      Scalar textColor;
-
-      Mat colorArray;
       colorArray = Mat(COLOR_ROWS, COLOR_COLS, CV_8UC3, Scalar(blue_clique,green_clique,red_clique));
       putText(colorArray, rgbText, Point2d(20, COLOR_ROWS - 20), FONT_HERSHEY_SIMPLEX, 0.8, textColor);
       imshow("Color", colorArray);
@@ -110,22 +128,35 @@ void onMouse(int event, int x, int y, int flags, void* userdata) {
         (uint)  red_clique << ")" << endl;
         
     } else {
-        string rgbText = "(" + to_string(x) + "," + to_string(y) +
-          ") " + "=" + " [CINZA = " + to_string(img->at<uchar>(y,x)) + "]";
+      string rgbText = "(" + to_string(x) + "," + to_string(y) +
+        ") " + "=" + " [CINZA = " + to_string(img->at<uchar>(y,x)) + "]";
 
-        Scalar textColor;
 
-        Mat colorArray;
-        colorArray = Mat(COLOR_ROWS, COLOR_COLS, CV_8UC3, Scalar(blue_clique,green_clique,red_clique));
-        putText(colorArray, rgbText, Point2d(20, COLOR_ROWS - 20), FONT_HERSHEY_SIMPLEX, 0.8, textColor);
-        imshow("Color", colorArray);
+      colorArray = Mat(COLOR_ROWS, COLOR_COLS, CV_8UC3, Scalar(blue_clique,green_clique,red_clique));
+      putText(colorArray, rgbText, Point2d(20, COLOR_ROWS - 20), FONT_HERSHEY_SIMPLEX, 0.8, textColor);
+      imshow("Color", colorArray);
 
-        cout << "Em (x,y) = (" << x << ", " << y <<
-          "), onde y = coluna e x = linha, temos o pixel cinza = " <<
-          (uint) img->at<uchar>(y, x) << endl;
+      cout << "Em (x,y) = (" << x << ", " << y <<
+        "), onde y = coluna e x = linha, temos o pixel cinza = " <<
+        (uint) img->at<uchar>(y, x) << endl;
     }
     pinta(&img, intensity);
+  } else {
+    clique = false;
   }
+}
+
+void checa_cinza(Mat *img) {
+  if((int)img->channels() == 1) {
+    Mat img_gry;
+    cvtColor( *img, img_gry, COLOR_GRAY2BGR, 3);
+    img_gry.copyTo(*img);
+    cinza = true;
+  } else {
+    Mat img_gry2;
+    cvtColor( *img, img_gry2, COLOR_BGR2GRAY);
+    cinza = equal(img->begin<uchar>(), img->end<uchar>(), img_gry2.begin<uchar>());
+  } 
 }
 
 
@@ -136,80 +167,42 @@ void imagem(char** argv) {
     cout << "Imagem nao encontrada!" << endl; 
     return;
   } 
-  
-  if((int)img.channels() == 1) {
-    Mat img_gry;
-    cvtColor( img, img_gry, COLOR_GRAY2BGR, 3);
-    img_gry.copyTo(img);
-    cinza = true;
-  } else {
-    Mat img_gry2;
-    cvtColor( img, img_gry2, COLOR_BGR2GRAY);
-    cinza = equal(img.begin<uchar>(), img.end<uchar>(), img_gry2.begin<uchar>());
-  } 
-  
+  checa_cinza(&img);
   namedWindow( "Req1", WINDOW_AUTOSIZE );
 
-  // img.at<Vec3b>(Point(j,i)) = {0, 0, 255};
   for(;;) {
     setMouseCallback("Req1", onMouse, &img);
     imshow( "Req1", img);
-    char c = (char)waitKey(33);
-    if( c == 27 ) break; // allow the user to break out
+    if((char)waitKey(33) == 27 ) break; // verifica se o ESC foi teclado
   }
 }
 
 void video (char **argv) {
   namedWindow( "Req4", WINDOW_AUTOSIZE );
 
-  // VideoCapture capture( argv[1] );
+  VideoCapture cap(0); /* Comentar essa linha se deseja abrir vídeo do computador */
+  // VideoCapture cap( argv[2] );
 
-  VideoCapture cap( 0 );
+
   if (!cap.isOpened()) {
     cout << "Error opening VideoCapture." << endl;
     return;
   }
   
-  Size size(
-    (int)cap.get( CV_CAP_PROP_FRAME_WIDTH ),
-    (int)cap.get( CV_CAP_PROP_FRAME_HEIGHT )
-  );
-
+  Mat frame;
+  Mat* frame_out = &frame;
   double FPS = cap.get(CV_CAP_PROP_FPS);
-  VideoWriter out("output.mp4", CV_FOURCC('M','J','P','G'), FPS, size);
-  
-  Mat frame, frame_out;
-  
-  // Mat snapshot = Mat(frame.size(), CV_8UC3, Scalar(0,0,0));
-
 
   for(;;) {
     cap >> frame;
     if( frame.empty() ) break; // end if done
+    checa_cinza(&frame);
 
-    // imshow( "Req4", frame );
     setMouseCallback("Req4", onMouse, &frame);
-    if(clique) pinta2(&frame, frame.at<Vec3b>(y2, x2));
+    if(!clique && clique_inicial) pinta(&frame_out, frame.at<Vec3b>(y2, x2));
 
-    if((char)waitKey(1000.0/FPS) == 27) break;
     imshow( "Req4", frame );
-
+    if((char)waitKey(1000.0/FPS) == 27) break; // verifica se o ESC foi teclado
   }
   cap.release();
-}
-
-int main( int argc, char** argv ) {
-  
-  if (argc < 2) {
-    help(argv);
-    return 0;
-  }
-
-  if(*argv[1] == '2')
-    imagem(argv);
-  else if(*argv[1] == '4') 
-    video(argv);
-  else help(argv);
-
-  return 0;
 }
