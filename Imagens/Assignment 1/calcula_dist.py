@@ -14,8 +14,8 @@ Cada uma das 8 listas xi contém o a distância do pixel x até o destino, além
 em relação à p (ponto atual). 
 """
 
-def calcDist(atualX, atualY, destX, destY):
-    listDistancias = [0, 0, 0, 0, 0, 0, 0, 0]
+def calcula_dist(atualX, atualY, destX, destY):
+    lista_distancias = [0, 0, 0, 0, 0, 0, 0, 0]
 
     sudoeste = np.sqrt( (destX - (atualX-1))**2 + (destY - (atualY+1))**2 )
 
@@ -33,13 +33,13 @@ def calcDist(atualX, atualY, destX, destY):
 
     oeste = np.sqrt( (destX - (atualX-1))**2 + (destY - (atualY))**2 )
 
-    listDistancias[0] = [sudoeste, atualX-1, atualY+1]
-    listDistancias[1] = [sul, atualX, atualY+1]
-    listDistancias[2] = [sudeste, atualX+1, atualY+1]
-    listDistancias[4] = [leste, atualX+1, atualY]
-    listDistancias[7] = [nordeste, atualX+1, atualY-1]
-    listDistancias[6] = [norte, atualX, atualY-1]
-    listDistancias[5] = [noroeste, atualX-1, atualY-1]
-    listDistancias[3] = [oeste, atualX-1, atualY]
+    lista_distancias[0] = [sudoeste, atualX-1, atualY+1]
+    lista_distancias[1] = [sul, atualX, atualY+1]
+    lista_distancias[2] = [sudeste, atualX+1, atualY+1]
+    lista_distancias[4] = [leste, atualX+1, atualY]
+    lista_distancias[7] = [nordeste, atualX+1, atualY-1]
+    lista_distancias[6] = [norte, atualX, atualY-1]
+    lista_distancias[5] = [noroeste, atualX-1, atualY-1]
+    lista_distancias[3] = [oeste, atualX-1, atualY]
 
-    return listDistancias
+    return lista_distancias

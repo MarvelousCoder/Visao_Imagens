@@ -13,7 +13,7 @@ cálculos com floats, precisamos desta função.
 A função cv2.split() é usada para separar os 3 canais da imagem (Blue, Green e Red).
 """
 
-def transGray(image):
+def trans_gray(image):
     (B, G, R) = cv2.split(image)
 
     Y = 0.299*R + 0.587*G + 0.114*B
