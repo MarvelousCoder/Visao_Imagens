@@ -1,3 +1,10 @@
+""" 
+Nome: Raphael Soares Ramos
+Matrícula: 140160299
+
+Leia o read_me.txt para mais informações.
+"""
+
 import argparse
 import cv2
 from calcula_dist import calcula_dist
@@ -70,7 +77,7 @@ def conta_componentes(img, tarefa): # A estratégia BFS será usada para contar 
     height = img.shape[0] 
     arr = np.zeros((width + 2, height + 2, 3), dtype = int) + 255
     """ Criamos um numpy array, que é como as imagens são representadas em OpenCV para python, 
-        cheios de 0 para tratar os vizinhos de pixels da borda da imagem. 
+        cheios com a cor branca para tratar os vizinhos de pixels da borda da imagem. 
         Depois colocamos a imagem original no centro deste array, através do próximo comando.
     """ 
     arr[1:(width+1), 1:(height+1)] = img[0:width, 0:height] 

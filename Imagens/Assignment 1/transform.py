@@ -57,7 +57,7 @@ def equalizar(img):
     """ No primeiro if do for acima verificamos se o pixel x já apareceu antes.
         Se ele já apareceu, incrementamos a quantidade de vezes que ele apareceu.
         Fazemos isso acessando o conteúdo do elemento x do array, que guarda a quantidade de vezes
-        que x aparece na imagem.
+        que o pixel x aparece na imagem.
     """
 
     probabilidades = (probabilidades)/(height*width)
