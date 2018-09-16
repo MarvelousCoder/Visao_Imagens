@@ -1,0 +1,145 @@
+\documentclass{bmvc2k}
+
+%% Enter your paper number here for the review copy
+% \bmvcreviewcopy{??}
+
+% \usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+
+
+\title{Projeto Demonstrativo 2}
+
+% Enter the paper's authors in order
+% \addauthor{Name}{email/homepage}{INSTITUTION_CODE}
+\addauthor{Raphael Soares 14/0160299}{raphael.soares.1996@gmail.com}{1}
+
+% Enter the institutions
+% \addinstitution{Name\\Address}
+\addinstitution{
+  Departamento de Ciência da Computa\c{c}\~ao\\
+  Universidade de Bras\'{\i}lia\\
+  Campus Darcy Ribeiro, Asa Norte\\
+  Bras\'{\i}lia-DF, CEP 70910-900, Brazil,  
+}
+
+\runninghead{Raphael, Soares Ramos}{Computer Vision Assignment -- \today}
+
+% Any macro definitions you would like to include
+% These are not defined in the style file, because they don't begin
+% with \bmva, so they might conflict with the user's own macros.
+% The \bmvaOneDot macro adds a full stop unless there is one in the
+% text already.
+\def\eg{\emph{e.g}\bmvaOneDot}
+\def\Eg{\emph{E.g}\bmvaOneDot}
+\def\etal{\emph{et al}\bmvaOneDot}
+
+%-------------------------------------------------------------------------
+% Document starts here
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este segundo projeto tem como objetivo principal a avaliação dos aspectos envolvidos em calibração de câmeras. Para isso, foi desenvolvida uma ``régua visual'' que tenta estimar a altura ou largura de um objeto através apenas da sua imagem capturada pela câmera. Ou seja, através da medida em pixels de um objeto o programa é capaz de estimar a medida real, em metros, deste objeto. Para atingir esse objetivo foi necessário transformar coordenadas em pixels da imagem em coordenadas tridimensionais do mundo real, usando a matriz de parâmetros intrínsecos da câmera, que por sua vez foi obtida através da calibração realizada.
+\end{abstract}
+
+%-------------------------------------------------------------------------
+\section{Introdução}
+\label{sec:intro}
+A visão começa com a detecção de luz do mundo. Esta luz começa com raios emanando de alguma origem, que viajam pelo espaço até atingir algum objeto. Quando esta luz atinge algum objeto, muito dela é absorvida, e o que não é absorvido nós percebemos como a cor do objeto. A luz refletida que encontra o caminho até o nosso olho (ou nossa câmera) é colecionada na nossa retina/imager (ou nosso ``filme/aparelho''). A geometria desse arranjo (particularmente da viagem dos raios do objeto através da lente em nossos olhos ou câmera e para a retina ou filme) é de grande importância para a prática de visão computacional. Um modelo simples, porém útil de como isso acontece é o modelo da câmera pinhole apresentado em~\cite{Hartley}. Infelizmente, um pinhole real não é uma boa forma de obter imagens porque ele não obtém luz suficiente para exposições rápidas e isso é um dos motivos de nossas câmeras e olhos usarem lentes, porque dessa forma podemos obter mais luz do que estaria disponível em um ponto.
+
+Este projeto tem como objetivo usar calibração de câmeras para corrigir (matematicamente) desvios principais que o uso de lentes nos traz, as distorções. Existem dois tipos principais de distorções de lentes: radial, que é resultado da forma das lentes; e a tangencial, que surge do processo de montagem da câmera. Na teoria é possível definir lentes que não introduzem distorções, porém na prática nenhuma lente é perfeita. A calibração de câmeras é importante também, para relacionar as medidas da câmera com as medidas no mundo real tridimensional, isso é importante não só porque as cenas são tridimensionais, mas porque elas também são espaços físicos com unidades físicas. Portanto, a relação entre a unidade natural da câmera (pixels) e as unidades do mundo físico (metros, por exemplo) é um componente crítico para reconstruir uma cena tridimensional ou construir uma régua visual.
+
+%-------------------------------------------------------------------------
+\section{Metodologia}
+\label{sec:Methods}
+Nesta seção são apresentados os métodos e procedimentos utilizados em cada um dos requisitos para obter os resultados pedidos.
+\subsection{Requisito 1}
+
+
+
+%A relação que mapeia um conjunto de pontos $\overrightarrow{Q_i}$ no mundo físico com coordenadas ($X_i$,$Y_i$,$Z_i$) para pontos na tela de projeção com coordenadas ($x_i$,$y_i$) é chamada de transformação projetiva. Quando você está trabalhando com tais transformações é conveniente usar o que nós chamamos de coordenadas homogêneas. As coordenadas homogêneas associadas a um ponto no espaço de projeção de dimensão $n$ são normalmente expressadas como um vetor de $n+1$ dimensões (por exemplo: \textit{x,y,z} se tornam \textit{x,y,z,w}), com uma restrição adicional que dois pontos cujo valores são proporcionais são, de fato, pontos equivalentes. No nosso caso o plano da imagem é o espaço de projeção, e possui duas dimensões, então vamos representar pontos neste plano como vetores tridimensionais $\overrightarrow{q} = (q_1,\,q_2,\,q_3)$. Como todos os pontos que possuem valores proporcionais no espaço de projeção são equivalentes, nós podemos recuperar as coordenadas do pixel dividindo por $q_3$. Isso nos permite organizar os parâmetros que definem a nossa câmera (i.e., $f_x,\,f_y,\,c_x \mbox{ and } c_y$) em uma única matriz 3 x 3, que nós chamamos de matriz intrínseca da câmera (M). A projeção dos pontos no mundo físico para a câmera, que é a abordagem usada pelo OpenCV~\cite{OpenCV}, é resumida pela simples fórmula: $$\overrightarrow{q} = M \cdot \overrightarrow{Q}, \mbox{ onde: }$$ $$\overrightarrow{q} = 
+%\begin{bmatrix}
+%x \\
+%y \\
+%w 
+%\end{bmatrix},\, M = \begin{bmatrix}
+%f_x & 0 & c_x \\
+%0 & f_y & c_y \\
+%0 & 0 & 1 
+%\end{bmatrix},\, e\, \overrightarrow{Q} = 
+%\begin{bmatrix}
+%X \\
+%Y \\
+%Z 
+%\end{bmatrix} 
+% Página 641$$
+
+\subsection{Requisito 2}
+O OpenCV~\cite{OpenCV} fornece vários algoritmos para nos ajudar a computar os parâmetros intrínsecos e o vetor de distorção. A calibração é feita via \textit{cv::calibrateCamera()}, que já fornece os vetores de translação, rotação, o vetor de distorção e a matriz com os parâmetros intrínsecos da câmera. Para cada imagem que a câmera captura de um objeto particular, nós podemos descrever a pose do objeto relativo ao sistema de coordenadas da câmera em termos da rotação e da translação. Em geral, uma rotação pode ser descrita em termos da multiplicação de um de um vetor de coordenadas por uma matriz quadrada de tamanho apropriado. Basicamente uma rotação é equivalente a introduzir uma nova descrição da localização de um ponto em um sistema de coordenadas diferente. O vetor de translação é como nós representamos um deslocamento de um sistema de coordenadas para outro cuja origem é deslocada para outra localização. Ou seja, o vetor de translação é apenas o deslocamento da origem do primeiro sistema de coordenadas para o segundo. Assim, para mudar de um sistema de coordenadas centrado em um objeto para um centrado na câmera, o vetor de translação apropriado é: $\overrightarrow{T} = origin_{object} - origin_{camera}$. Assim, é possível notar pela \textbf{Figura} \ref{fig:req2} que um ponto das coordenadas do objeto (ou mundo) $\overrightarrow{P_o}$ tem coordenadas $\overrightarrow{P_c}$ nas coordenadas do frame da câmera: $\overrightarrow{P_c} = R \cdot (\overrightarrow{P_o} - \overrightarrow{T})$. 
+
+\begin{figure}
+\begin{center}
+\begin{tabular}{c}
+\bmvaHangBox{\fbox{\includegraphics[width=8cm]{Figs/rot_trans.png}}} \\
+\rule{0pt}{1ex}
+\end{tabular}
+\end{center}
+\caption{Convertendo do sistema de coordenadas do objeto para o sistema de coordenadas da câmera: o ponto P no objeto é visto como o ponto p no plano da imagem; nós relacionamos o ponto p com o ponto P aplicando uma matriz de rotação R e um vetor de translação t em P}
+\label{fig:req2}
+\end{figure}
+
+No OpenCV nós temos 4 parâmetros associados a matriz intrínseca da câmera, cinco (ou mais) parâmetros de distorção, que consistem de três (ou mais) parâmetros radiais, e dois tangenciais. Os parâmetros intrínsecos controlam a transformação linear de projeção que relacionam o objeto físico com a imagem produzida. Na teoria seria necessário apenas três pontos de cantos em um padrão conhecido para resolver os nossos 5 parâmetros de distorção. Logo, apenas uma \textit{``screenshot''} do tabuleiro de xadrez seria suficiente. Entretanto, devido ao casamento dos parâmetros intrínsecos com os extrínsecos, apenas uma ``screenshot'' não é suficiente. Pode-se notar que os parâmetros extrínsecos incluem três parâmetros de translação ($T_x$, $T_y$, $T_z$) e três de rotação dando um total de 6 por imagem do tabuleiro de xadrez. Junto com os 4 parâmetros da matriz dos intrínsecos da câmera ($f_x, f_y, c_x, c_y$) nós temos um total de 10 que precisamos resolver, em um caso de uma única imagem, e 6 adicionais para cada imagem. Supondo que temos $N$ cantos e $K$ imagens do tabuleiro de xadrez (em posições diferentes) é necessário ter $2 \cdot N \cdot K \geq 6 \cdot K \cdot 4 ((N - 3)\cdot K \geq 2)$, onde $K \ge 1$ para resolver o problema de calibração. Entretanto, conforme apresentado em~\cite{kaehler2016learning}, na prática para resultados de alta qualidades é necessário pelo menos 10 imagens de um xadrez 7 x 8 ou maior. Esta disparidade entre as 2 imagens na teoria, e 10 ou mais requeridas na prática, é resultado de um alto grau de sensibilidade que os parâmetros intrínsecos possuem, mesmo com pouco ruído. Por isso, nesse passo, foram obtidas 25 snapshots para obter a matriz de calibração, vetores de translação, rotação e coeficientes de distorção.
+
+
+\subsection{Requisito 3}
+O parâmetro \textit{objectPoints} da função \textit{cv::calibrateCamera()} foi definido da seguinte forma no programa: o primeiro canto no tabuleiro de xadrez está no ponto (0,0,0), o próximo no (0,1,0), o próximo (0,2,0), e assim em diante. Dessa forma, a escala do vetor \textit{tvec} de translação da saída da função \textit{cv::calibrateCamera} foi implicitamente alterada. Ou seja, ao definir os pontos dos cantos dos tabuleiros de xadrez desta forma mencionada anteriormente, as distâncias são medidas em ``quadrados do tabuleiro''. Entretanto, os parâmetros da matriz intrínseca da câmera são sempre reportados em pixels. Assim, ao calcular a norma do vetor de translação foi necessário depois multiplicar pela largura ou altura do quadrado do tabuleiro (na unidade correspondente sas distâncias) para comparar com as distâncias $d_{min},\,d_{med},\,d_{max}$. 
+
+Os parâmetros extrínsecos são os vetores de rotação e translação (\textit{tvec e rvec}). Eles são saídas da função \textit{cv::calibrateCamera()} e são apresentados no terminal durante a execução do programa. Cada vetor possui 3 elementos, correspondentes aos eixos \textit{x, y, z}, e temos \textit{n} de cada um desses vetores, onde \textit{n} é o número de capturas do tabuleiro. 
+
+% Requisito 4
+%Para distorções radiais, a distorção é 0 no centro óptico do aparelho e cresce assim que movemos para a periferia. Na prática, esta distorção é pequena e pode ser caracterizada por poucos termos de uma expansão da série de Taylor em torno de $r = 0$. Para câmeras baratas, nós normalmente usamos os dois primeiros termos; o primeiro deles é convencionalmente chamado de $k_1$ e o segundo $k_2$.  Para câmera mais distorcidas um terceiro termo de distorção radial é usado: $k_3$. No geral, a localização radial de um ponto no aparelho será ajustado de acordo com as seguintes equações: $$x_{corrected} = x \cdot (1 + k_1r^2 + k_2r^4 + k_3r^6)$$ e: $$y_{corrected} = y \cdot (1 + k_1r^2 + k_2r^4 + k_3r^6)$$
+%
+%Aqui, $(x,y)$ é a localização original (no imager) do ponto distorcido e $(x_{corrected}, y_{corrected})$ é a nova localização como resultado da correção.
+%
+%A distorção tangencial é caracterizada por dois parâmetros adicionais: $p_1$ e $p_2$ tal que: $$x_{\mbox{corrected}} = x + (2p_1xy + p_2(r^2 + 2x^2))$$ e: $$y_{corrected} = y + (p_1(r^2 + 2y^2) + 2p_2xy)$$
+%
+%Dessa forma, temos um total de 5 coeficientes de distorção requeridos. Esses 5 coeficientes de distorção são apresentados como saída do programa em uma única matriz 5 x 1 contendo $k_1,\,k_2,\,p_1,\,p_2$ e $k_3$ (nessa ordem).
+
+
+%O OpenCV possui várias técnicas de calibração e vários tipos de padrões de tabuleiro, como apresentado no livro~\cite{kaehler2016learning}.
+
+
+
+
+
+%-------------------------------------------------------------------------
+\section{Resultados}
+\label{sec:Results}
+%-------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------
+Nas subseções seguintes são apresentados os resultados das implementações efetuadas, na forma de figuras.
+\subsection{Requisitos 1 e 2}
+\label{sec:Req1e2}
+%-------------------------------------------------------------------------
+Para estes requisitos é feita a seleção de pixels em imagens de acordo com o pixel clicado pelo mouse, conforme detalhado na Introdução [\ref{sec:intro}].
+
+
+
+%-------------------------------------------------------------------------
+\subsection{Requisitos 3 e 4}
+\label{sec:Req3e4}
+%-------------------------------------------------------------------------
+Para estes requisitos é feita a seleção de pixels em vídeos de acordo com o pixel clicado pelo mouse, conforme detalhado na Introdução. Para o requisito 3 o vídeo deve estar salvo no computador, e para o 4 deve ser aberto de uma câmera.
+
+%-------------------------------------------------------------------------
+\section{Discussões e Conclusões}
+\label{sec:Conclusion}
+%-------------------------------------------------------------------------
+The camera intrinsic matrix is perhaps the most interesting final result, because it is
+what allows us to transform from three-dimensional coordinates to the image’s two-
+dimensional coordinates.
+
+\bibliography{refs}
+\end{document}
