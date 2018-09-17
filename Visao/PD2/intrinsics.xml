@@ -7,13 +7,13 @@
   <cols>3</cols>
   <dt>d</dt>
   <data>
-    9.0225277036850071e+02 0. 320. 0. 8.8701952282661227e+02 240. 0. 0.
+    8.1374265153302383e+02 0. 320. 0. 8.0097381738023205e+02 240. 0. 0.
     1.</data></camera_matrix>
 <distortion_coefficients type_id="opencv-matrix">
   <rows>1</rows>
   <cols>5</cols>
   <dt>d</dt>
   <data>
-    5.3003091444313344e-01 -5.6762734806010640e+00 0. 0.
-    2.1750398076801901e+01</data></distortion_coefficients>
+    -7.8435765053810474e-02 -8.6023662813071528e-02 0. 0.
+    -2.6124320249228523e+00</data></distortion_coefficients>
 </opencv_storage>

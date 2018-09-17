@@ -1,3 +1,3 @@
 all:
 	g++ -std=c++11 calibration.cpp `pkg-config --libs --cflags opencv` -I/usr/local/include -L/usr/local/lib -o calib
-	./calib 8 6 15 500 0.5
+	./calib 8 6 24 500 0.5

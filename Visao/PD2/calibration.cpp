@@ -9,9 +9,9 @@
 using namespace std;
 using namespace cv;
 
-#define MIN 30
-#define MED 44
-#define MAX 58
+#define DMIN 30
+#define DMED 44
+#define DMAX 58
 
 struct Imagem {
 	Mat img;
@@ -40,14 +40,14 @@ void help(char **argv) {  // todo rewrite this
 
 void on_mouse(int event, int x, int y, int flags, void* userdata) {
     Imagem* img = (Imagem*) userdata;
-    if ( event == EVENT_LBUTTONDOWN ) {
+    if (event == EVENT_LBUTTONDOWN) {
         if(img->primeiro_clique) {
             img->segundo_clique = true;
             img->x2 = x;
             img->y2 = y;
-            line(img->img, Point(img->x1,img->y1), Point(x, y), Scalar(0,0,255), 3);
+            line(img->img, Point(img->x1,img->y1), Point(x, y), Scalar(), 3);
             printf("Comprimento: %.3f pixels\n", sqrt((img->x1 - x)*(img->x1 - x) + (img->y1 - y)*(img->y1 - y)));
-            printf("(%d,%d)\n(%d,%d)\n", img->x1, img->y1, x, y);
+            printf("Pixel 1 = (%d,%d)\nPixel 2 = (%d,%d)\n", img->x1, img->y1, x, y);
         } else {
             img->segundo_clique = false;
             img->x1 = x;
@@ -58,6 +58,23 @@ void on_mouse(int event, int x, int y, int flags, void* userdata) {
     } else {
         img->clique = false;
     } 
+}
+
+void object_size(int x1, int y1, int x2, int y2, int z, Mat camera_matrix) {
+    Mat canto1(1, 3, CV_64F, Scalar());
+    canto1.at<double>(0,0) = x1;
+    canto1.at<double>(0,1) = y1;
+    canto1.at<double>(0,2) = 1;
+    
+    Mat canto2(1, 3, CV_64F, Scalar());
+    canto2.at<double>(0,0) = x2;
+    canto2.at<double>(0,1) = y2;
+    canto2.at<double>(0,2) = 1;
+    
+    canto1 = z*(camera_matrix.inv() * canto1.t());
+    canto2 = z*(camera_matrix.inv() * canto2.t());
+    double norma = norm(canto2, canto1, NORM_L2);
+    printf("Altura/Largura em cm: %f\nEm milimetros: %f\n", norma, norma*10);
 }
 
 
@@ -98,7 +115,6 @@ int main(int argc, char *argv[]) {
     //
     vector<vector<cv::Point2f> > image_points;
     vector<vector<cv::Point3f> > object_points;
-    Mat tvec, rvec, rmat;
 
     // Capture corner views: loop until we've got n_boards successful
     // captures (all corners on the board are found).
@@ -158,6 +174,7 @@ int main(int argc, char *argv[]) {
     // CALIBRATE THE CAMERA!
     //
     Mat intrinsic_matrix, distortion_coeffs;
+    Mat tvec, rvec, rmat;
     double err = calibrateCamera(
         object_points, image_points, image_size, intrinsic_matrix,
         distortion_coeffs, rvec, tvec,
@@ -190,10 +207,7 @@ int main(int argc, char *argv[]) {
                               cv::Mat(), intrinsic_matrix_loaded, image_size,
                               CV_16SC2, map1, map2);
 
-    // solvePnP(object_points[0], image_points[0], intrinsic_matrix_loaded, distortion_coeffs_loaded, 
-    //         rvec, tvec);
 
-    // Rodrigues(rvec, rmat);  
     cout << "Rvec" << rvec << endl << "Tvec" << tvec << endl;
     Imagem frame;
     Imagem frame_undis;
@@ -202,43 +216,39 @@ int main(int argc, char *argv[]) {
     for (;;) {
         capture >> frame.img;
         frame_undis.img = (frame.img).clone();
-        if ((frame.img).empty()) {
+        if ((frame.img).empty())
             break;
-        }  
+
         setMouseCallback("Raw", on_mouse, &frame);
-        if(!frame.clique && frame.segundo_clique)
+        bool raw = !frame.clique && frame.segundo_clique;
+        if(raw) 
             line(frame.img, Point(frame.x1,frame.y1), Point(frame.x2, frame.y2), Scalar(), 3);
         imshow("Raw", frame.img);
+
 
         remap(frame_undis.img, frame_undis.img, map1, map2, INTER_LINEAR,
                 cv::BORDER_CONSTANT, Scalar());
         setMouseCallback("Undistorted", on_mouse, &frame_undis);
-        if(!frame_undis.clique && frame_undis.segundo_clique)
+        bool undis = !frame_undis.clique && frame_undis.segundo_clique;
+        if(undis)
             line(frame_undis.img, Point(frame_undis.x1,frame_undis.y1), 
                     Point(frame_undis.x2, frame_undis.y2), Scalar(), 3);
-
         imshow("Undistorted", frame_undis.img);
-        if((char)waitKey(30) == 'c' && (!frame_undis.clique && frame_undis.segundo_clique)) {
-            Mat canto1(1, 3, CV_64F, Scalar());
-            canto1.at<double>(0,0) = frame_undis.x1;
-            canto1.at<double>(0,1) = frame_undis.y1;
-            canto1.at<double>(0,2) = 1;
-            
-            cout << canto1 << endl << canto1.t() << endl;
 
-            Mat canto2(1, 3, CV_64F, Scalar());
-            canto2.at<double>(0,0) = frame_undis.x2;
-            canto2.at<double>(0,1) = frame_undis.y2;
-            canto2.at<double>(0,2) = 1;
-        
-            cout << canto2 << endl << canto2.t() << endl;
-
-            canto1 = 30*(intrinsic_matrix_loaded.inv() * canto1.t());
-            canto2 = 30*(intrinsic_matrix_loaded.inv() * canto2.t());
-            double norma = norm(canto2, canto1, NORM_L2);
-            cout << "Altura/Largura em cm: " << norma << endl;
-        }
-        if ((waitKey(30) & 255) == 27)
+        char calcula = (char)waitKey(45);
+        if(raw and calcula == '1')
+            object_size(frame.x1, frame.y1, frame.x2, frame.y2, DMIN, intrinsic_matrix_loaded);
+        else if(raw and calcula == '2')
+            object_size(frame.x1, frame.y1, frame.x2, frame.y2, DMED, intrinsic_matrix_loaded);
+        else if(raw and calcula == '3')
+            object_size(frame.x1, frame.y1, frame.x2, frame.y2, DMAX, intrinsic_matrix_loaded);
+        else if(undis and calcula == '4')
+            object_size(frame_undis.x1, frame_undis.y1, frame_undis.x2, frame_undis.y2, DMIN, intrinsic_matrix_loaded);
+        else if(undis and calcula == '5')
+            object_size(frame_undis.x1, frame_undis.y1, frame_undis.x2, frame_undis.y2, DMED, intrinsic_matrix_loaded);
+        else if(undis and calcula == '6')
+            object_size(frame_undis.x1, frame_undis.y1, frame_undis.x2, frame_undis.y2, DMAX, intrinsic_matrix_loaded);
+        else if(calcula == 27)
             break;
     }
 
