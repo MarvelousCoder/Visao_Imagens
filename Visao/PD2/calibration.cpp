@@ -23,13 +23,13 @@ struct Imagem {
     bool cinza = false;
 };
 
-void help(char **argv) {  // todo rewrite this
+void help(char **argv) { 
     cout << "\n\n"
-         << "Example 18-1:\nReading a chessboard’s width and height,\n"
+         << "Reading a chessboard’s width and height,\n"
          << "              reading and collecting the requested number of views,\n" 
          << "              and calibrating the camera\n\n" 
          << "Call:\n" << argv[0] << " <board_width> <board_height> <number_of_boards> <if_video,_delay_between_frame_capture> <image_scaling_factor>\n\n"
-         << "Example:\n" << argv[0] << " 8 6 14 500 0.5\n"
+         << "Example:\n" << argv[0] << " 8 6 24 500 0.5\n"
          << "-- to use the checkerboard8x6 provided\n\n"
          << " * First it reads in checker boards and calibrates itself\n" 
          << " * Then it saves and reloads the calibration matricies\n"
