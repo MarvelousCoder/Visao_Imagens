@@ -7,7 +7,7 @@ void translacao2D(GLfloat tx, GLfloat ty);
 void escala2D(GLfloat x, GLfloat y);
 
 char tecla = 'n';
-
+int cnt = 1;
 GLfloat cx = (0.5f + 0.5f + 0.7f + 0.7f)/4.0;
 GLfloat cy = (0.5f + 0.7f + 0.7f + 0.5f)/4.0;
 
@@ -34,20 +34,20 @@ void executaOperacao(GLint specialKey, GLint xMouse, GLint yMouse)
     switch (specialKey)
     {
         case GLUT_KEY_UP:
-            if(tecla == 'r') rotacao2D(0.9f);
+            if(tecla == 'r') { rotacao2D(0.9f); cnt++; }
             else if (tecla == 's') escala2D(2.0f, 2.0f);
-            else if (tecla == 't') { translacao2D(0.0f, 0.1f); cy += 0.0f; }
+            else if (tecla == 't') translacao2D(0.0f, 0.1f);
             break;
         case GLUT_KEY_DOWN:
             if(tecla == 'r') rotacao2D(-0.9f);
             else if (tecla == 's') escala2D(0.5f, 0.5f);
-            else if (tecla == 't') { translacao2D(0.0f, -0.1f); cy -= 0.0f; }
+            else if (tecla == 't') translacao2D(0.0f, -0.1f);
             break;
         case GLUT_KEY_LEFT:
-            if (tecla == 't') { translacao2D(-0.1f, 0.0f); cx -= 0.0f; } 
+            if (tecla == 't') translacao2D(-0.1f, 0.0f);
             break;
         case GLUT_KEY_RIGHT:
-            if (tecla == 't') { translacao2D(0.1f, 0.0f); cx += 0.0f; }
+            if (tecla == 't') translacao2D(0.1f, 0.0f);
             break;
         default:
             break;
@@ -67,7 +67,8 @@ void rotacao2D(GLfloat angle)
     glPushMatrix();
 }
 
-void translacao2D(GLfloat tx, GLfloat ty) {
+void translacao2D(GLfloat tx, GLfloat ty) 
+{
     /* Habilita a matriz de transformações geométricas */
     glMatrixMode(GL_MODELVIEW);
 
@@ -75,13 +76,28 @@ void translacao2D(GLfloat tx, GLfloat ty) {
     Identidade */
     glLoadIdentity();
 
+    glPopMatrix();
+    glTranslatef(cx, cy, 0.0f);
+    glRotatef(-cnt*0.9f, 0.0f, 0.0f, 1.0f);
+    glTranslatef(-cx, -cy, 0.0f);
+    glPushMatrix();
+
+    glLoadIdentity();
+    glPopMatrix();
+    glTranslatef(tx, ty, 0.0f);
+    glTranslatef(cx, cy, 0.0f);
+    glRotatef(cnt*0.9f, 0.0f, 0.0f, 1.0f);
+    glTranslatef(-cx, -cy, 0.0f);
+    glPushMatrix();
+
+
+    // glPopMatrix();
+
     /* Recupera o estado da Matriz na pilha antes da translação */
     /* Pode ser usado para mover quadrados, por exemplo */
-    glPopMatrix();
-
-    glTranslatef(tx, ty, 0.0f);
-    glPushMatrix();
-    /* Salva o estado da Matriz na pilha antes da translação */
+    
+    // glPushMatrix();
+    /* Salva o estado da Matriz na pilha */
 }
 
 void escala2D(GLfloat x, GLfloat y) 
