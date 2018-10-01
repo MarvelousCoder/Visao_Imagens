@@ -17,8 +17,6 @@ const String keys =
     "{help h usage ? |                  | print this message                                                }"
     "{@left          |data/aloeL.jpg    | left view of the stereopair                                     }"
     "{@right         |data/aloeL.jpg    | right view of the stereopair                                   }"
-    "{dst_path       |None              | optional path to save the resulting filtered disparity map        }"
-    "{dst_raw_path   |None              | optional path to save raw disparity map before filtering          }"
     "{algorithm      |bm                | stereo matching method (bm or sgbm)                               }"
     "{no-display     |                  | don't display results                                             }"
     "{no-downscale   |                  | force stereo matching on full-sized views to improve quality      }"
@@ -43,8 +41,6 @@ int main(int argc, char** argv)
     String left_im = parser.get<String>(0);
     String right_im = parser.get<String>(1);
 
-    String dst_path = parser.get<String>("dst_path");
-    String dst_raw_path = parser.get<String>("dst_raw_path");
     String dst_conf_path = parser.get<String>("dst_conf_path");
     String algo = parser.get<String>("algorithm");
     bool no_display = parser.has("no-display");
@@ -76,17 +72,11 @@ int main(int argc, char** argv)
     //! [load_views]
     Mat left  = imread(left_im ,IMREAD_COLOR);
     if ( left.empty() )
-    {
-        cout <<"Cannot read image file: "<< left_im;
-        return -1;
-    }
+        return printf("Cannot read image file: %s", left_im), -1;
 
     Mat right = imread(right_im,IMREAD_COLOR);
-    if ( right.empty() )
-    {
-        cout << "Cannot read image file: " << right_im;
-        return -1;
-    }
+    if ( right.empty() ) 
+        return printf("Cannot read image file: %s", right_im), -1;
     //! [load_views]
     Mat left_for_matcher, right_for_matcher;
     Mat left_disp,right_disp;
@@ -97,15 +87,10 @@ int main(int argc, char** argv)
     Ptr<DisparityWLSFilter> wls_filter;
     double matching_time, filtering_time;
     if(max_disp<=0 || max_disp%16!=0)
-    {
-        cout<<"Incorrect max_disparity value: it should be positive and divisible by 16";
-        return -1;
-    }
-    if(wsize<=0 || wsize%2!=1)
-    {
-        cout<<"Incorrect window_size value: it should be positive and odd";
-        return -1;
-    }
+        return printf("Incorrect max_disparity value: it should be positive and divisible by 16"), -1;
+
+    if(wsize<=0 || wsize%2!=1) 
+        return printf("Incorrect window_size value: it should be positive and odd"), -1;
 
     if(!no_downscale)
     {
@@ -156,11 +141,9 @@ int main(int argc, char** argv)
         right_matcher->compute(right_for_matcher,left_for_matcher, right_disp);
         matching_time = ((double)getTickCount() - matching_time)/getTickFrequency();
     }
-    else
-    {
-        cout << "Unsupported algorithm";
-        return -1;
-    }
+    else 
+        return printf("Unsupported algorithm"), -1;
+
 
     //! [filtering]
     wls_filter->setLambda(lambda);
@@ -183,28 +166,13 @@ int main(int argc, char** argv)
 
     //collect and print all the stats:
     cout.precision(2);
-    cout<<"Matching time:  "<<matching_time<<"s"<<endl;
-    cout<<"Filtering time: "<<filtering_time<<"s"<<endl;
-    cout<<endl;
+    cout << "Matching time:  "<< matching_time << "s" << endl;
+    cout << "Filtering time: "<< filtering_time << "s" << endl;
 
     double MSE_before,percent_bad_before,MSE_after,percent_bad_after;
 
-    if(dst_path!="None")
-    {
-        Mat filtered_disp_vis;
-        getDisparityVis(filtered_disp,filtered_disp_vis,vis_mult);
-        imwrite(dst_path,filtered_disp_vis);
-    }
-    if(dst_raw_path!="None")
-    {
-        Mat raw_disp_vis;
-        getDisparityVis(left_disp,raw_disp_vis,vis_mult);
-        imwrite(dst_raw_path,raw_disp_vis);
-    }
     if(dst_conf_path!="None")
-    {
         imwrite(dst_conf_path,conf_map);
-    }
 
     if(!no_display)
     {
