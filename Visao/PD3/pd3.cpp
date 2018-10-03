@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <map>
 
 using namespace cv;
 using namespace std;
@@ -16,25 +17,15 @@ using namespace cv::ximgproc;
 
 int cx1, cy1, cx2, cy2;
 bool clique = false;
+map<int, int> cliques;
 
 void on_mouse(int event, int x, int y, int flags, void* userdata) {
-    if ( event == EVENT_LBUTTONDOWN ) {
-        if(clique) cx2 = x, cy2 = y;
-        else {
-            cx1 = x;
-            cy1 = y;
-            clique = true; 
-        }
-    }
-    printf("p1(%d,%d);p2(%d,%d)\n", cx1, cy1, cx2, cy2);
+    if ( event == EVENT_LBUTTONDOWN )
+        cliques.insert(make_pair(x, y));
 }
 
 
 int main () {
-    Mat aloe_l = imread("data/aloeL.png", -1);
-    Mat aloe_r = imread("data/aloeR.png", -1);
-    Mat baby_l = imread("data/babyL.png", -1);
-    Mat baby_r = imread("data/babyR.png", -1);
     Mat R_r(3,3, CV_64FC1), R_l(3,3, CV_64FC1);
     Mat T_r(3,1, CV_64FC1), T_l(3,1, CV_64FC1);
 
@@ -88,7 +79,6 @@ int main () {
     cam_matrix_r.at<double>(2, 1) =  0.0;
     cam_matrix_r.at<double>(2, 2) = 1.0;
 
-    // Mat dist_coefs = Mat(1, 5, CV_64FC1, Scalar(0));
     Mat R = R_r * R_l.t();
     Mat T = T_r - R * T_l;
 
@@ -116,7 +106,7 @@ int main () {
     Mat morpheus_l = imread("data/MorpheusL.jpg", 0);
     Mat morpheus_r = imread("data/MorpheusR.jpg", 0);
     Size image_size_l = morpheus_l.size(); 
-    Size image_size_r = morpheus_r.size();
+    // Size image_size_r = morpheus_r.size();
     Mat R1, R2, P1, P2, Q;
     stereoRectify(cam_matrix_l, noArray(), cam_matrix_r, 
                     noArray(), image_size_l, R, T, R1, R2, P1, P2, Q, 0);
@@ -164,7 +154,7 @@ int main () {
     double lambda = 8000.0;
     double sigma  = 1.5;
     double vis_mult = 1.0;
-    int wsize = 5; 
+    int wsize = 9; 
     Mat left, right;
     img_l.convertTo(left, CV_8U);
     img_r.convertTo(right, CV_8U);
@@ -216,31 +206,45 @@ int main () {
     disparity = (disparity - mini) * (255/(maxi - mini));
     disparity.convertTo(disparity, CV_8U);
     imshow("Mapa de disparidade", disparity);
-    imwrite("_dispt.png", disparity);
     waitKey(0);
 
     Mat filtered_disp_vis;
     getDisparityVis(filtered_disp, filtered_disp_vis, vis_mult);
     namedWindow("filtered disparity", WINDOW_AUTOSIZE);
     imshow("filtered disparity", filtered_disp_vis);
-    imwrite("profundidade.jpg", filtered_disp_vis);
+    imwrite("teste2.jpg", filtered_disp_vis);
     waitKey(0);
 
-    namedWindow( "Req3", WINDOW_AUTOSIZE );
+    namedWindow("Req3", WINDOW_NORMAL);
+    resizeWindow("Req3", 1000,  1000);
     while(1) {
-        imshow( "Req3", filtered_disp_vis );
         setMouseCallback("Req3", on_mouse);
+        imshow( "Req3", filtered_disp_vis );
         if((char)waitKey(55) == 27) break;
     }
-    Mat pt_1(4, 1, CV_64FC1);
-    // cout << Q.type() << endl << filtered_disp.type() << endl;
-    pt_1.at<double>(0,0) = (double)cx1;
-    pt_1.at<double>(1,0) = (double)cy1;
-    pt_1.at<double>(2,0) = filtered_disp.at<double>(Point(cy1, cx1));
-    pt_1.at<double>(3,0) = 1;
-    // short intensity = filtered_disp.at<short>(Point(j, i));
-    cout << Q;
-    // Mat tmp = Q*pt_1;
+
+
+    Mat pt_1(4, 1, CV_64FC1), pt_2(4, 1, CV_64FC1);
+    auto start = cliques.begin();
+    int i = 0;
+    while(start != cliques.end()) {
+        pt_1.at<double>(0,0) = (double)start->first;
+        pt_1.at<double>(1,0) = (double)start->second;
+        pt_1.at<double>(2,0) = filtered_disp.at<double>(Point(start->second, start->first));
+        pt_1.at<double>(3,0) = 1;
+        ++start;
+        
+        pt_2.at<double>(0,0) = (double)start->first;
+        pt_2.at<double>(1,0) = (double)start->second;
+        pt_2.at<double>(2,0) = filtered_disp.at<double>(Point(start->second, start->first));
+        pt_2.at<double>(3,0) = 1;
+        pt_1 = Q * pt_1;
+        pt_2 = Q * pt_2;
+        if(i == 0) cout << "largura em mm(?): " << norm(pt_1, pt_2, NORM_L2) << endl;
+        else if(i == 1) cout << "altura em mm(?): " << norm(pt_1, pt_2, NORM_L2) << endl;
+        else if(i == 2) cout << "profundidade em mm(?): " << norm(pt_1, pt_2, NORM_L2) << endl;
+        i++;
+    }
 
 
 
