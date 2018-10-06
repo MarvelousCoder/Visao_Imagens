@@ -165,7 +165,7 @@ void calcula_mapas(Mat l, Mat r, parameters params)
         left_matcher->setP1(24*params.wsize*params.wsize);
         left_matcher->setP2(96*params.wsize*params.wsize);
         left_matcher->setPreFilterCap(63);
-        left_matcher->setMode(StereoSGBM::MODE_SGBM_3WAY);
+        left_matcher->setMode(StereoSGBM::MODE_SGBM);
         wls_filter = createDisparityWLSFilter(left_matcher);
         Ptr<StereoMatcher> right_matcher = createRightMatcher(left_matcher);
 
@@ -212,7 +212,7 @@ void calcula_mapas(Mat l, Mat r, parameters params)
 
     //! [visualization]
     Mat raw_disp_vis;
-    getDisparityVis(left_disp,raw_disp_vis,params.vis_mult);
+    getDisparityVis(left_disp, raw_disp_vis, params.vis_mult);
     namedWindow("raw disparity", WINDOW_AUTOSIZE);
     imshow("raw disparity", raw_disp_vis);
     Mat disparity = left_disp.clone();
@@ -357,7 +357,7 @@ void calcula_morpheus(parameters params)
 
 void estima_medidas_morpheus(Mat Q, parameters pars)
 {
-    Mat img = imread("morpheus_depth.png", -1);
+    Mat img = imread("morpheu_depth.png", -1);
     namedWindow("Req3", WINDOW_NORMAL);
     resizeWindow("Req3", 1000,  1000);
     while(1) {
@@ -365,26 +365,41 @@ void estima_medidas_morpheus(Mat Q, parameters pars)
         imshow( "Req3", img);
         if((char)waitKey(55) == 27) break;
     }
-    // for(auto v : pars.cliques) cout << v.first << " " << v.second << endl;
-    Mat pt_1(4, 1, CV_64FC1), pt_2(4, 1, CV_64FC1);
-    
+    Mat out;
+    reprojectImageTo3D(img, out, Q);
+    // Mat pt_1(4, 1, CV_64FC1), pt_2(4, 1, CV_64FC1);
+    // for(int i = 0; i < pars.cliques.size(); i+=2)
+    // {
+    //     pt_1.at<double>(0,0) = (double)pars.cliques[i].first;
+    //     pt_1.at<double>(1,0) = (double)pars.cliques[i].second;
+    //     pt_1.at<double>(2,0) = img.at<double>(pars.cliques[i].second, pars.cliques[i].first);
+    //     pt_1.at<double>(3,0) = 1;
+
+    //     pt_2.at<double>(0,0) = (double)pars.cliques[i+1].first;
+    //     pt_2.at<double>(1,0) = (double)pars.cliques[i+1].second;
+    //     pt_2.at<double>(2,0) = img.at<double>(pars.cliques[i+1].second, pars.cliques[i+1].first);
+    //     pt_2.at<double>(3,0) = 1;
+    //     pt_1 = Q * pt_1;
+    //     pt_2 = Q * pt_2;
+    //     pt_1 = pt_1 / pt_1.at<double>(3, 0);
+    //     pt_2 = pt_2 / pt_2.at<double>(3, 0);
+    //     Mat dst_1, dst_2;
+    //     pt_1.rowRange(0, 3).copyTo(dst_1);
+    //     pt_2.rowRange(0, 3).copyTo(dst_2);
+    //     cout << dst_1 << endl << dst_2 << endl;
+
+    //     if(i == 0) cout << "largura em mm(?): " << norm(dst_1, dst_2, NORM_L2) << endl;
+    //     else if(i == 2) cout << "altura em mm(?): " << norm(dst_1, dst_2, NORM_L2) << endl;
+    //     else if(i == 4) cout << "profundidade em mm(?): " << norm(dst_1, dst_2, NORM_L2) << endl;
+    // }
+
     for(int i = 0; i < pars.cliques.size(); i+=2)
     {
-        pt_1.at<double>(0,0) = (double)pars.cliques[i].first;
-        pt_1.at<double>(1,0) = (double)pars.cliques[i].second;
-        pt_1.at<double>(2,0) = img.at<double>(Point(pars.cliques[i].second, pars.cliques[i].first));
-        pt_1.at<double>(3,0) = 1;
-
-        pt_2.at<double>(0,0) = (double)pars.cliques[i+1].first;
-        pt_2.at<double>(1,0) = (double)pars.cliques[i+1].second;
-        pt_2.at<double>(2,0) = img.at<double>(Point(pars.cliques[i].second, pars.cliques[i].first));
-        pt_2.at<double>(3,0) = 1;
-        pt_1 = Q * pt_1;
-        pt_2 = Q * pt_2;
-
-        if(i == 0) cout << "largura em mm(?): " << norm(pt_1, pt_2, NORM_L2) << endl;
-        else if(i == 2) cout << "altura em mm(?): " << norm(pt_1, pt_2, NORM_L2) << endl;
-        else if(i == 4) cout << "profundidade em mm(?): " << norm(pt_1, pt_2, NORM_L2) << endl;
+        Vec3b pt1 = out.at<Vec3b>(pars.cliques[i].second, pars.cliques[i].first);
+        Vec3b pt2 = out.at<Vec3b>(pars.cliques[i+1].second, pars.cliques[i+1].first);
+        if(i == 0) cout << "largura em mm: " << norm(pt1, pt2, NORM_L2) << endl;
+        else if(i == 2) cout << "altura em mm: " << norm(pt1, pt2, NORM_L2) << endl;
+        else if(i == 4) cout << "profundidade em mm: " << norm(pt1, pt2, NORM_L2) << endl;
     }
 }
 
@@ -408,7 +423,7 @@ void cria_mapas_morpheus(Mat left_2, Mat right_2, parameters params)
     left_matcher->setP1(24*params.wsize*params.wsize);
     left_matcher->setP2(96*params.wsize*params.wsize);
     left_matcher->setPreFilterCap(63);
-    left_matcher->setMode(StereoSGBM::MODE_SGBM_3WAY);
+    left_matcher->setMode(StereoSGBM::MODE_SGBM);
     wls_filter = createDisparityWLSFilter(left_matcher);
     Ptr<StereoMatcher> right_matcher = createRightMatcher(left_matcher);
 
@@ -432,6 +447,7 @@ void cria_mapas_morpheus(Mat left_2, Mat right_2, parameters params)
 
     //! [visualization]
     Mat raw_disp_vis;
+
     getDisparityVis(left_disp,raw_disp_vis,params.vis_mult);
     namedWindow("raw disparity", WINDOW_AUTOSIZE);
     imshow("raw disparity", raw_disp_vis);
@@ -445,6 +461,7 @@ void cria_mapas_morpheus(Mat left_2, Mat right_2, parameters params)
     waitKey(0);
 
     Mat filtered_disp_vis;
+    imwrite("estima_morpheus.png", filtered_disp);
     getDisparityVis(filtered_disp, filtered_disp_vis, params.vis_mult);
     namedWindow("Mapa de profundidade", WINDOW_AUTOSIZE);
     imshow("Mapa de profundidade", filtered_disp_vis);
