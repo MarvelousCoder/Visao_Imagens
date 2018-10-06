@@ -1,0 +1,119 @@
+ \documentclass{bmvc2k}
+
+%% Enter your paper number here for the review copy
+% \bmvcreviewcopy{??}
+
+% \usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+
+\title{Projeto Demonstrativo 3}
+
+% Enter the paper's authors in order
+% \addauthor{Name}{email/homepage}{INSTITUTION_CODE}
+\addauthor{Raphael Soares 14/0160299}{raphael.soares.1996@gmail.com}{1}
+
+% Enter the institutions
+% \addinstitution{Name\\Address}
+\addinstitution{
+  Departamento de Ciência da Computa\c{c}\~ao\\
+  Universidade de Bras\'{\i}lia\\
+  Campus Darcy Ribeiro, Asa Norte\\
+  Bras\'{\i}lia-DF, CEP 70910-900, Brazil,  
+}
+
+\runninghead{Raphael, Soares Ramos}{Computer Vision Assignment -- \today}
+
+% Any macro definitions you would like to include
+% These are not defined in the style file, because they don't begin
+% with \bmva, so they might conflict with the user's own macros.
+% The \bmvaOneDot macro adds a full stop unless there is one in the
+% text already.
+\def\eg{\emph{e.g}\bmvaOneDot}
+\def\Eg{\emph{E.g}\bmvaOneDot}
+\def\etal{\emph{et al}\bmvaOneDot}
+
+%-------------------------------------------------------------------------
+% Document starts here
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Todos nós estamos familiares com a capacidade de imageamento estéreo que nossos olhos nos fornecem. Em qual grau podemos simular essa capacidade em sistemas computacionais? Os computadores realizaram essa tarefa achando correspondências entre pontos que são vistos pelas duas câmeras. Com essa correspondência e com a distância de separação entre as duas câmeras conhecida é possível calcular a localização tridimensional dos pontos.
+Esse segundo projeto tem como objetivo principal explorar e desenvolver algoritmos para extração de mapas de profundidade a partir de pares estéreo de imagens. Esses mapas foram obtidos a partir do mapa de disparidade, que contém informação de disparidade dos pontos correspondentes vistos pelas duas câmeras. Para as imagens obtidas de câmeras que não estavam alinhadas em paralelo foi necessário retificá-las antes. Além disso, medidas de um objeto de uma imagem foram estimadas calculando a distância da localização tridimensional dos pontos, assim como no projeto demonstrativo 2.
+\end{abstract}
+
+%-------------------------------------------------------------------------
+\section{Introdução}
+\label{sec:intro}
+Nós achamos pontos correspondentes em nossos olhos esquerdos e direitos e usamos isso para trabalhar o quão longe algum objeto está de nós. Com apenas um olho nós temos algumas pistas monoculares que podemos usar para estimar profundidade, entretanto o verdadeiro ``3D'', a verdadeira percepção de profundidade só existe quando temos dois olhos. Com um único olho é possível obter apenas deduções, como saber a distância de um objeto observando o tamanho dele em dois instantes de tempo diferentes. Os computadores realizam essa tarefa de imageamento estéreo dos nossos olhos achando correspondências entre pontos que são vistos por duas câmeras. Para computadores, apesar da busca de pontos correspondentes ser computacionalmente cara, é usado o conhecimento de geometria do sistema para limitar a busca o máximo possível~\cite{Hartley}. Na prática, o imageamento estéreo feito nesse projeto envolveu 3 passos, já que as imagens usadas foram obtidas a partir de duas câmeras:
+\begin{enumerate}
+\item Ajuste dos ângulos e das distâncias entre as câmeras, que é conhecido como retificação. A saída desse passo são as imagens retificadas e alinhadas por linha\footnote{A principal informação que o computador precisa para fazer imageamento estéreo é saber onde estão nossas câmeras. Note que no caso dos nossos olhos, o cérebro já sabe onde estão nossos olhos e eles já estão ``alinhados por linha''}.
+\item Busca das mesmas características na visão das duas câmeras (que também poderiam estar orientadas verticalmente, mudando assim as disparidades), um processo conhecido como correspondência. A saída desse passo é o mapa de disparidade, onde as disparidades são as diferenças no eixo $x$ nos planos da imagens das mesmas características vistas na câmera da esquerda e da direita: $x_l - x_r$.
+\item Sabendo o arranjo geométrico das câmeras, é possível transformar o mapa de disparidade em profundidade, usando triangulação. Esse passo é chamado de reprojeção e a saída é o mapa de profundidade.
+\end{enumerate}
+
+Normalmente, seria necessário um passo adicional para remover as distorções radiais e tangenciais da lente antes da retificação. Entretanto, as imagens usadas tanto no requisito 1 quanto no 2 já estão sem distorção.
+
+
+%Em geral, não há modo confiável de fazer calibração ou extrair informação tridimensional sem múltiplas imagens. O exemplo mais simples é a visão estéreo, onde nós usamos múltiplas imagens para reconstruir uma cena tridimensional. Na visão estéreo, características em duas ou mais imagens capturadas ao mesmo tempo de câmeras diferentes são casadas com as características correspondentes nas outras imagens. As diferenças são analisadas para produzir informação de profundidade.
+%-------------------------------------------------------------------------
+\section{Metodologia}
+\label{sec:Methods}
+Nesta seção são apresentados os métodos e procedimentos utilizados em cada um dos requisitos para obter os resultados pedidos.
+\subsection{Requisito 1}
+No Requisito 1 foi necessaŕio fazer a correspondência estéreo (casamento de pontos tridimensionais em visões diferentes da câmera) entre as duas imagens. A título de comparação, dois algoritmos foram utilizados para fazer a correspondência estéreo. Ambos algoritmos de casamento estéreo servem ao mesmo propósito: converter duas imagens, uma esquerda e uma direita, em uma única imagem de profundidade. Esta imagem basicamente irá associar com cada pixel uma distância das câmeras para o objeto que esse pixel representa.  
+% e \textit{semi-global block matching}.
+
+O primeiro, denominado \textit{block matching (BM)} é um algoritmo rápido e efetivo que é similar ao desenvolvido por Kurt Konolige~\cite{kurt}. Ele funciona usando pequenas janelas de ``somas de diferenças absolutas'' (SAD) para encontrar pontos correspondentes entre as imagens estéreo retificadas da esquerda e da direita. Este algoritmo encontra somente pontos com alta correspondência entre as duas imagens (alta textura). Assim, em uma cena altamente texturizada todos os pixels vão ter profundidade computada. Em uma cena com pouca textura, como um corredor, poucos pontos devem registrar profundidade. 
+
+O segundo é conhecido como \textit{semi-global matching (SGBM) algorithm}. SGBM, uma variação do SGM introduzido em ~\cite{hirschmullerstereo}, difere do BM em dois aspectos. O primeiro é que o casamento é feito em nível de subpixel usando a métrica Birchfield-Tomasi ~\cite{birchfield1999depth}. A segunda diferença é que o SGBM tenta impor uma limitação global de suavidade na informação de profundidade computada. Esses dois métodos são complementares, no sentido que o BM é mais rápido, mas não fornece a confiança e acurácia do SGBM.
+
+Ambos os algoritmos que são implementados pela OpenCV~\cite{OpenCV} são melhor detalhados e explicados em ~\cite{kaehler2016learning}.
+\subsubsection{Block Matching}
+O algoritmo estéreo BM implementando na OpenCV é uma versão modificada do que se tornou uma das técnicas canônicas para computação estéreo. O mecanismo básico é retificar e alinhar as imagens de tal forma que as comparações precisem ser feitas apenas em linhas individuais, e então ter um algoritmo que procura linhas nas duas imagens para grupos correspondentes de pixels. O resultado é um algoritmo confiável que é vastamente usado. Existem três estágios para o algoritmo estéreo bm, que funciona em pares de imagens retificadas e sem distorção:
+\begin{enumerate}
+\item Pré-filtragem para normalizar o brilho da imagem e realçar a textura.
+\item Busca por correspondência ao longo das linhas horizontais epipolares usando uma janela SAD.
+\item Pós-filtragem para eliminar correspondências ruins de casamentos.
+\end{enumerate}
+\subsubsection{Semi-global block matching}
+O algoritmo SGM, que deriva o SGBM implementado pela OpenCV, possui várias novas ideias, mas um custo computacional bem maior que o BM. As mais importantes novas ideias introduzidas no SGM são o uso de informação mútua como uma medida superior de correspondência local e o reforço de restrições consistentes ao longo de outras direções além da linha (epipolar) horizontal. De um modo geral, os efeitos dessas adições são fornecer uma maior robustez para iluminação e outras variações entre as imagens da esquerda e da direita, e ajudar a eliminar erros impondo restrições geométricas mais fortes através da imagem. O ponto principal do algoritmo é como atribuir um custo para cada pixel para todos as possíveis disparidades. Essencialmente, isso é análogo ao que é feito no \textit{block matching}, mas há alguns novos passos. O primeiro novo passo é que é usado as métricas de Birchfield-Tomasi para comparar pixels, em vez de usar soma das diferenças absolutas. O segundo novo passo é que é usado uma importante suposição para a continuidade de disparidade (pixels vizinhos provavelmente tem a mesma ou disparidade similar) e ao mesmo tempo é usado um bloco de tamanho menor. Inclusive, no BM, janelas grandes tendem a ser um problema perto de discontinuidades (borda de algum elemento da imagem).
+%-------------------------------------------------------------------------
+\subsection{Requisito 2}
+\label{Methods:req2}
+
+
+
+
+
+
+\subsection{Requisito 4}
+\label{Met:Req4}
+
+
+
+%-------------------------------------------------------------------------
+\section{Resultados}
+\label{sec:Results}
+Nesta seção são apresentados em forma de figuras e tabelas os resultados da aplicação para cada um dos requisitos. 
+%-------------------------------------------------------------------------
+\subsection{Requisito 1}
+
+
+\subsection{Requisito 2}
+
+
+\subsection{Requisitos 3 e 4}
+\label{res:Req4}
+
+
+%-------------------------------------------------------------------------
+\section{Discussões e Conclusões}
+\label{sec:Conclusion}
+%-------------------------------------------------------------------------
+Para distorções radiais, a distorção é 0 no centro óptico do aparelho e cresce assim que movemos para a periferia. Na prática, esta distorção é pequena e pode ser caracterizada por poucos termos de uma expansão da série de Taylor em torno de $r = 0$. Isso explica porque as medidas do objeto tiradas próximo ao centro da imagem se aproximam mais da medida real $l, \mbox{ onde } l = 2.5 \mbox{ cm }$. Além disso, algumas medidas da largura poderiam ser mais precisas se uma linha exatamente reta pudesse ser desenhada. Por exemplo, em $I_{raw,centre}$ para $d_{min}$ a coordenada \textit{y}, que corresponde a altura, não deveria ser alterada. Entretanto, podemos observar que as medidas estimadas foram bastante próximas da medida (largura l) real. Os resultados foram satisfatórios. 
+
+\bibliography{refs}
+\end{document}
