@@ -1,4 +1,4 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{7}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -21,6 +21,10 @@ Heiko Hirschmuller.
 \newblock Stereo processing by semiglobal matching and mutual information.
 \newblock \emph{IEEE Transactions on pattern analysis and machine
   intelligence}, 30\penalty0 (2):\penalty0 328--341, 2008.
+
+\bibitem[Its(2016)]{opencvmanual}
+\emph{The OpenCV Reference Manual}.
+\newblock Itseez, 3.2.0 edition, Dezembro 2016.
 
 \bibitem[Itseez(2018)]{OpenCV}
 Itseez.

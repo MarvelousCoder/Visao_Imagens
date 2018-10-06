@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.8.13)  5 OCT 2018 22:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.8.13)  6 OCT 2018 19:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -861,45 +861,136 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
  BMVC cite {Kurt} 1997 BMVC cite {Hirschmuller} 2008
 BMVC cite {Birchfield and Tomasi} 1999 BMVC cite {Itseez} 2018
 BMVC cite {Kaehler and Bradski} 2016
+Overfull \hbox (2.3074pt too wide) in paragraph at lines 76--76
+\OT1/ztmcm/m/n/10 ([]\OML/ztmcm/m/it/10 ; []\OT1/ztmcm/m/n/10 )$ \T1/ptm/m/n/10
+ para val-ores de in-ten-si-dade no in-ter-valo $\OT1/ztmcm/m/n/10 ([]\OML/ztmc
+m/m/it/10 ; []\OT1/ztmcm/m/n/10 )$ \T1/ptm/m/n/10 foi us-ada a seguinte
+ []
+
+[2]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 74.
- [2] [3] (./pd3.bbl
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 28.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 77.
+ [3]
+<Figs/rot_trans.png, id=63, 847.165pt x 882.29625pt>
+File: Figs/rot_trans.png Graphic file (type png)
+<use Figs/rot_trans.png>
+Package pdftex.def Info: Figs/rot_trans.png  used on input line 94.
+(pdftex.def)             Requested size: 85.35826pt x 88.89445pt.
+ BMVC cite {Kaehler and Bradski} 2016 BMVC cite {Its} 2016
+<Figs/stereo_rectification.png, id=72, 1103.12125pt x 856.19875pt>
+File: Figs/stereo_rectification.png Graphic file (type png)
+<use Figs/stereo_rectification.png>
+Package pdftex.def Info: Figs/stereo_rectification.png  used on input line 110.
+
+(pdftex.def)             Requested size: 71.13188pt x 55.1976pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4 <./Figs/rot_trans.png>]
+<Figs/baby_bm_disp.png, id=82, 1244.65pt x 1114.1625pt>
+File: Figs/baby_bm_disp.png Graphic file (type png)
+<use Figs/baby_bm_disp.png>
+Package pdftex.def Info: Figs/baby_bm_disp.png  used on input line 141.
+(pdftex.def)             Requested size: 71.13188pt x 63.66772pt.
+<Figs/baby_sgbm_disp.png, id=83, 1244.65pt x 1114.1625pt>
+File: Figs/baby_sgbm_disp.png Graphic file (type png)
+<use Figs/baby_sgbm_disp.png>
+Package pdftex.def Info: Figs/baby_sgbm_disp.png  used on input line 142.
+(pdftex.def)             Requested size: 71.13188pt x 63.66772pt.
+<Figs/baby_bm_depth.png, id=84, 1244.65pt x 1114.1625pt>
+File: Figs/baby_bm_depth.png Graphic file (type png)
+<use Figs/baby_bm_depth.png>
+Package pdftex.def Info: Figs/baby_bm_depth.png  used on input line 143.
+(pdftex.def)             Requested size: 71.13188pt x 63.66772pt.
+<Figs/baby_sgbm_depth.png, id=85, 1244.65pt x 1114.1625pt>
+File: Figs/baby_sgbm_depth.png Graphic file (type png)
+<use Figs/baby_sgbm_depth.png>
+Package pdftex.def Info: Figs/baby_sgbm_depth.png  used on input line 144.
+(pdftex.def)             Requested size: 71.13188pt x 63.66772pt.
+<Figs/aloe_bm_disp.png, id=86, 1286.8075pt x 1114.1625pt>
+File: Figs/aloe_bm_disp.png Graphic file (type png)
+<use Figs/aloe_bm_disp.png>
+Package pdftex.def Info: Figs/aloe_bm_disp.png  used on input line 156.
+(pdftex.def)             Requested size: 71.13188pt x 61.57663pt.
+<Figs/aloe_sgbm_disp.png, id=87, 1286.8075pt x 1114.1625pt>
+File: Figs/aloe_sgbm_disp.png Graphic file (type png)
+<use Figs/aloe_sgbm_disp.png>
+Package pdftex.def Info: Figs/aloe_sgbm_disp.png  used on input line 157.
+(pdftex.def)             Requested size: 71.13188pt x 61.57663pt.
+<Figs/aloe_bm_depth.png, id=88, 1286.8075pt x 1114.1625pt>
+File: Figs/aloe_bm_depth.png Graphic file (type png)
+<use Figs/aloe_bm_depth.png>
+Package pdftex.def Info: Figs/aloe_bm_depth.png  used on input line 158.
+(pdftex.def)             Requested size: 71.13188pt x 61.57663pt.
+<Figs/aloe_sgbm_depth.png, id=89, 1286.8075pt x 1114.1625pt>
+File: Figs/aloe_sgbm_depth.png Graphic file (type png)
+<use Figs/aloe_sgbm_depth.png>
+Package pdftex.def Info: Figs/aloe_sgbm_depth.png  used on input line 159.
+(pdftex.def)             Requested size: 71.13188pt x 61.57663pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5 <./Figs/stereo_rectification.png> <./Figs/baby_bm_disp.png (PNG copy)> <./Fi
+gs/baby_sgbm_disp.png (PNG copy)> <./Figs/baby_bm_depth.png (PNG copy)> <./Figs
+/baby_sgbm_depth.png (PNG copy)>]
+<Figs/pair.jpg, id=104, 2810.5pt x 1304.875pt>
+File: Figs/pair.jpg Graphic file (type jpg)
+<use Figs/pair.jpg>
+Package pdftex.def Info: Figs/pair.jpg  used on input line 176.
+(pdftex.def)             Requested size: 170.71652pt x 79.24483pt.
+<Figs/morpheus_disp.png, id=106, 1405.25pt x 1304.875pt>
+File: Figs/morpheus_disp.png Graphic file (type png)
+<use Figs/morpheus_disp.png>
+Package pdftex.def Info: Figs/morpheus_disp.png  used on input line 188.
+(pdftex.def)             Requested size: 71.13188pt x 66.04399pt.
+<Figs/morpheus_depth.png, id=107, 1405.25pt x 1304.875pt>
+File: Figs/morpheus_depth.png Graphic file (type png)
+<use Figs/morpheus_depth.png>
+Package pdftex.def Info: Figs/morpheus_depth.png  used on input line 189.
+(pdftex.def)             Requested size: 71.13188pt x 66.04399pt.
+ [6 <./Figs/aloe_bm_disp.png (PNG copy)> <./Figs/aloe_sgbm_disp.png (PNG copy)>
+ <./Figs/aloe_bm_depth.png (PNG copy)> <./Figs/aloe_sgbm_depth.png (PNG copy)> 
+<./Figs/pair.jpg> <./Figs/morpheus_disp.png (PNG copy)> <./Figs/morpheus_depth.
+png (PNG copy)>] (./pd3.bbl
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 32.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-))
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 119.
- [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 119.
+) [7])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 211.
+ [8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 211.
  (./pd3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 119.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 119.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 119.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 211.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 211.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 211.
  ) 
 Here is how much of TeX's memory you used:
- 7576 strings out of 494789
- 106229 string characters out of 6177364
- 199903 words of memory out of 5000000
- 10732 multiletter control sequences out of 15000+600000
- 76722 words of font info for 102 fonts, out of 8000000 for 9000
+ 7682 strings out of 494789
+ 108142 string characters out of 6177364
+ 206763 words of memory out of 5000000
+ 10795 multiletter control sequences out of 15000+600000
+ 84520 words of font info for 118 fonts, out of 8000000 for 9000
  83 hyphenation exceptions out of 8191
- 35i,13n,32p,1362b,441s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,18n,32p,1724b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/u
-hvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
-times/utmri8a.pfb>
-Output written on pd3.pdf (4 pages, 125423 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/cou
+rier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
+utmri8a.pfb>
+Output written on pd3.pdf (8 pages, 3512635 bytes).
 PDF statistics:
- 123 PDF objects out of 1000 (max. 8388607)
- 99 compressed objects within 1 object stream
- 31 named destinations out of 1000 (max. 500000)
- 37 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 193 PDF objects out of 1000 (max. 8388607)
+ 146 compressed objects within 2 object streams
+ 43 named destinations out of 1000 (max. 500000)
+ 114 words of extra memory for PDF output out of 10000 (max. 10000000)
 

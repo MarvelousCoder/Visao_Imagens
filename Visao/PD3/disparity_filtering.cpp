@@ -38,9 +38,9 @@ void on_mouse(int event, int x, int y, int flags, void* userdata);
 
 const String keys =
     "{help h usage ? |                  | print this message                                                }"
-    "{@left          |data/aloeL.png    | left view of the stereopair                                       }"
-    "{@right         |data/aloeR.png    | right view of the stereopair                                      }"
-    "{algorithm      |bm                | stereo matching method (bm or sgbm)                               }"
+    "{@left          |data/babyL.png    | left view of the stereopair                                       }"
+    "{@right         |data/babyR.png    | right view of the stereopair                                      }"
+    "{algorithm      |sgbm                | stereo matching method (bm or sgbm)                               }"
     "{no-downscale   |                  | force stereo matching on full-sized views to improve quality      }"
     "{dst_conf_path  |None              | optional path to save the confidence map used in filtering        }"
     "{vis_mult       |1.0               | coefficient used to scale disparity map visualizations            }"
@@ -105,6 +105,7 @@ int main(int argc, char** argv)
     if(params.req_2)
         calcula_morpheus(params);
     return 0;
+    
 }
 
 void on_mouse(int event, int x, int y, int flags, void* userdata) {
@@ -221,7 +222,7 @@ void calcula_mapas(Mat l, Mat r, parameters params)
     disparity = (disparity - mini) * (255/(maxi - mini));
     disparity.convertTo(disparity, CV_8U);
     imshow("Mapa de disparidade", disparity);
-    imwrite("_disp.png", disparity);
+    imwrite("aloe_sgbm_disp.png", disparity);
     
     //! [visualization]
     Mat depth(filtered_disp.rows, filtered_disp.cols, CV_16SC1);
@@ -240,7 +241,7 @@ void calcula_mapas(Mat l, Mat r, parameters params)
     
     namedWindow("Mapa de Profundidade", WINDOW_NORMAL);
     imshow("Mapa de Profundidade", depth);
-    imwrite("_depth.png", depth);
+    imwrite("aloe_sgbm_depth.png", depth);
     waitKey(0);
 }
 
@@ -300,6 +301,18 @@ void calcula_morpheus(parameters params)
     Mat R_r(3,3, CV_64FC1), R_l(3,3, CV_64FC1);
     Mat T_r(3,1, CV_64FC1), T_l(3,1, CV_64FC1);
     Mat cam_matrix_l(3, 3, CV_64FC1), cam_matrix_r(3, 3, CV_64FC1);
+    // Mat K_l(1,5, CV_64FC1), K_r(1,5, CV_64FC1);
+    
+    // K_l.at<double>(0, 0) = -0.125368;
+    // K_l.at<double>(0, 1) = -0.097388;
+    // K_l.at<double>(0, 2) = -0.003711;
+    // K_l.at<double>(0, 3) = -0.000161;
+    // K_l.at<double>(0, 4) = 0.000000;
+    // K_r.at<double>(0, 0) = -0.106090;
+    // K_r.at<double>(0, 1) = -0.533543;
+    // K_r.at<double>(0, 2) = -0.005174;
+    // K_r.at<double>(0, 3) =  0.000517;
+    // K_r.at<double>(0, 4) = 0.00;
 
     inicia_matrizes_morpheus(&R_l, &R_r, &T_l, &T_r, &cam_matrix_l, &cam_matrix_r);
 
@@ -357,7 +370,7 @@ void calcula_morpheus(parameters params)
 
 void estima_medidas_morpheus(Mat Q, parameters pars)
 {
-    Mat img = imread("morpheu_depth.png", -1);
+    Mat img = imread("morpheus_depth.png", -1);
     namedWindow("Req3", WINDOW_NORMAL);
     resizeWindow("Req3", 1000,  1000);
     while(1) {
@@ -367,6 +380,7 @@ void estima_medidas_morpheus(Mat Q, parameters pars)
     }
     Mat out;
     reprojectImageTo3D(img, out, Q);
+   
     // Mat pt_1(4, 1, CV_64FC1), pt_2(4, 1, CV_64FC1);
     // for(int i = 0; i < pars.cliques.size(); i+=2)
     // {
@@ -461,7 +475,7 @@ void cria_mapas_morpheus(Mat left_2, Mat right_2, parameters params)
     waitKey(0);
 
     Mat filtered_disp_vis;
-    imwrite("estima_morpheus.png", filtered_disp);
+    // imwrite("estima_morpheus.png", filtered_disp);
     getDisparityVis(filtered_disp, filtered_disp_vis, params.vis_mult);
     namedWindow("Mapa de profundidade", WINDOW_AUTOSIZE);
     imshow("Mapa de profundidade", filtered_disp_vis);
