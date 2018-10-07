@@ -55,8 +55,6 @@ Nós achamos pontos correspondentes em nossos olhos esquerdos e direitos e usamo
 \end{enumerate}
 
 Normalmente, seria necessário um passo adicional para remover as distorções radiais e tangenciais da lente antes da retificação. Entretanto, as imagens usadas tanto no requisito 1 quanto no 2 já estão sem distorção.
-
-
 %Em geral, não há modo confiável de fazer calibração ou extrair informação tridimensional sem múltiplas imagens. O exemplo mais simples é a visão estéreo, onde nós usamos múltiplas imagens para reconstruir uma cena tridimensional. Na visão estéreo, características em duas ou mais imagens capturadas ao mesmo tempo de câmeras diferentes são casadas com as características correspondentes nas outras imagens. As diferenças são analisadas para produzir informação de profundidade.
 %-------------------------------------------------------------------------
 \section{Metodologia}
@@ -73,7 +71,7 @@ O segundo é conhecido como \textit{semi-global matching (SGBM) algorithm}. SGBM
 
 Ambos os algoritmos são implementados pela OpenCV~\cite{OpenCV} e são melhor detalhados e explicados em ~\cite{kaehler2016learning}. A saída destes algoritmos é o mapa de disparidade. O mapa de profundidade é calculado a partir desse mapa de disparidade, usando os valores de $b$ e $f$ fornecidos. A dimensão da janela $W$, utilizada para a realização da correspondência, foi 9. Esse bloco $W$ é necessário tanto para o BM quanto para o SGBM.
 
-Para normalizar a imagem em tons de cinza com valores de intensidade no intervalo $(\mbox{Min}, \mbox{ Max})$ para valores de intensidade no intervalo $(\mbox{newMin}, \mbox{ newMax})$ foi usada a seguinte fórmula $$I_N = (\mbox{I } - \mbox{Min})\frac{\mbox{newMax } - \mbox{ newMin}}{\mbox{Max } - \mbox{Min}} + \mbox{newMin}.$$ Essa fórmula foi utilizada para que o intervalo dinâmico dos valores dos pixels não fosse perdido. Aqui $I$ representa a antiga imagem e $I_N$ a nova.
+Para normalizar a imagem em tons de cinza com valores de intensidade no intervalo $(\mbox{Min}, \mbox{ Max})$ para valores de intensidade no intervalo $(\mbox{newMin}, \mbox{ newMax})$ foi usada a seguinte fórmula: $$I_N = (\mbox{I } - \mbox{Min})\frac{\mbox{newMax } - \mbox{ newMin}}{\mbox{Max } - \mbox{Min}} + \mbox{newMin}$$ Essa fórmula foi utilizada para que o intervalo dinâmico dos valores dos pixels não fosse perdido. Aqui $I$ representa a antiga imagem e $I_N$ a nova.
 \subsubsection{Block Matching}
 O algoritmo estéreo BM implementando na OpenCV é uma versão modificada do que se tornou uma das técnicas canônicas para computação estéreo. O mecanismo básico é retificar e alinhar as imagens de tal forma que as comparações precisem ser feitas apenas em linhas individuais, e então ter um algoritmo que procura linhas nas duas imagens para grupos correspondentes de pixels. O resultado é um algoritmo confiável que é vastamente usado. Existem três estágios para o algoritmo estéreo bm, que funciona em pares de imagens retificadas e sem distorção:
 \begin{enumerate}
@@ -82,7 +80,7 @@ O algoritmo estéreo BM implementando na OpenCV é uma versão modificada do que
 \item Pós-filtragem para eliminar correspondências ruins de casamentos.
 \end{enumerate}
 \subsubsection{Semi-global block matching}
-O algoritmo SGM, que deriva o SGBM\footnote{No SGBM também é usado um bloco, entretanto esse bloco de tamanho $W$ informado pelo usuário configura o tamanho da região em torno de cada pixel onde a métrica do ``sinal da diferença absoluta'' será computada.} implementado pela OpenCV, possui várias novas ideias, mas um custo computacional bem maior que o BM. As mais importantes novas ideias introduzidas no SGM são o uso de informação mútua como uma medida superior de correspondência local, e o reforço de restrições consistentes ao longo de outras direções além da linha (epipolar) horizontal (na implementação foi utilizado o valor \textit{StereoSGBM::MODE\_SGBM} que denota a versão com cinco direções do algoritmo). De um modo geral, os efeitos dessas adições são fornecer uma maior robustez para iluminação e outras variações entre as imagens da esquerda e da direita, e ajudar a eliminar erros impondo restrições geométricas mais fortes através da imagem. O ponto principal do algoritmo é como atribuir um custo para cada pixel para todos as possíveis disparidades.  Essencialmente, isso é análogo ao que é feito no \textit{block matching}, mas há alguns novos passos. O primeiro novo passo é que é usado as métricas de Birchfield-Tomasi para comparar pixels, em vez de usar soma das diferenças absolutas. O segundo novo passo é que é usado uma importante suposição para a continuidade de disparidade: pixels vizinhos provavelmente tem a mesma ou disparidade similar. Ao mesmo tempo é usado um bloco de tamanho menor. Inclusive, no BM, janelas grandes tendem a ser um problema perto de discontinuidades (borda de algum elemento da imagem).
+O algoritmo SGM, que deriva o SGBM\footnote{No SGBM também é usado um bloco, entretanto esse bloco de tamanho $W$ configura o tamanho da região em torno de cada pixel onde a métrica do ``sinal da diferença absoluta'' será computada.} implementado pela OpenCV, possui várias novas ideias, mas um custo computacional bem maior que o BM. As mais importantes novas ideias introduzidas no SGM são o uso de informação mútua como uma medida superior de correspondência local, e o reforço de restrições consistentes ao longo de outras direções além da linha (epipolar) horizontal (na implementação foi utilizado o valor \textit{StereoSGBM::MODE\_SGBM} que denota a versão com cinco direções do algoritmo). De um modo geral, os efeitos dessas adições são fornecer uma maior robustez para iluminação e outras variações entre as imagens da esquerda e da direita, e ajudar a eliminar erros impondo restrições geométricas mais fortes através da imagem. O ponto principal do algoritmo é como atribuir um custo para cada pixel para todos as possíveis disparidades.  Essencialmente, isso é análogo ao que é feito no \textit{block matching}, mas há alguns novos passos. O primeiro novo passo é que é usado as métricas de Birchfield-Tomasi para comparar pixels, em vez de usar soma das diferenças absolutas. O segundo novo passo é que é usado uma importante suposição para a continuidade de disparidade: pixels vizinhos provavelmente tem a mesma ou disparidade similar. Ao mesmo tempo é usado um bloco de tamanho menor. Inclusive, no BM, janelas grandes tendem a ser um problema perto de discontinuidades (borda de algum elemento da imagem).
 %-------------------------------------------------------------------------
 \subsection{Requisito 2}
 \label{Methods:req2}
@@ -100,7 +98,7 @@ O algoritmo SGM, que deriva o SGBM\footnote{No SGBM também é usado um bloco, e
 
 Para um ponto tridimensional $\overrightarrow{P}$ nas coordenadas do objeto, nós podemos separá-lo usando a calibração de uma única câmera para as duas câmeras. Assim, para por $\overrightarrow{P}$ nas coordenadas da câmera para cada câmera fazemos: $\overrightarrow{P_l} = {R_l} \cdot (\overrightarrow{P}) + \overrightarrow{T_l})$ e $\overrightarrow{P_r} = {R_r} \cdot (\overrightarrow{P}) + \overrightarrow{T_r})$.
 As duas vistas deste ponto $\overrightarrow{P}$ (obtidas das duas câmeras) são relacionadas por $\overrightarrow{P_l} = {R^T} \cdot (\overrightarrow{P_r} - \overrightarrow{T} )$, onde $R$ e $\overrightarrow{T}$ são, respectivamente, a matriz de rotação e o vetor de translação entre as câmeras. Usando essas três equações é possível obter a rotação $R$ e a translação $\overrightarrow{T}$ que foi usada para a retificação das imagens do Morpheus: $$R = R_r \cdot {R_l}^T \, \mbox{e } \overrightarrow{T} = \overrightarrow{T_r} - R \cdot \overrightarrow{T_l}.$$
-Aplicando o método para alinhar os planos da imagens descrito acima, que é conhecido como o algoritmo de Bouget apresentado em ~\cite{kaehler2016learning}, é obtido a configuração estéreo necessária. Os novos centros da imagens e as novas bordas são então escolhidas para as imagens rotacionadas, de forma a maximizar a área de visualização sobreposta. No contexto da biblioteca OpenCV, o algoritmo de Bouget é implementado pela função \textit{cv::stereoRectify()}~\cite{opencvmanual}. Para esta função é fornecido as matrizes das câmeras, o tamanho da imagem, $R$ e $\overrightarrow{T}$ calculados anteriormente. Os parâmetros de retorno são $R_l$, $R_r$ (as rotações para a retificação dos planos esquerdo e direito da imagem), $P_l$ e $P_r$ (matrizes 3x4 de projeção) e, por fim, a matriz de reprojeção $Q$.
+Aplicando o método para alinhar os planos da imagens descrito acima, que é conhecido como o algoritmo de Bouget apresentado em ~\cite{kaehler2016learning}, é obtida a configuração estéreo necessária. Os novos centros da imagens e as novas bordas são então escolhidas para as imagens rotacionadas, de forma a maximizar a área de visualização sobreposta. No contexto da biblioteca OpenCV, o algoritmo de Bouget é implementado pela função \textit{cv::stereoRectify()}~\cite{opencvmanual}. Para esta função é fornecido as matrizes das câmeras, o tamanho da imagem, $R$ e $\overrightarrow{T}$ calculados anteriormente. Os parâmetros de retorno são $R_l$, $R_r$ (as rotações para a retificação dos planos esquerdo e direito da imagem), $P_l$ e $P_r$ (matrizes 3x4 de projeção) e, por fim, a matriz de reprojeção $Q$.
 
 O processo de retificação é então feito pela função \textit{cv::initUndistortRectifyMap()}, usando as saídas $R_l$, $R_r$, $P_l$ e $P_r$. Esta função é chamada duas vezes, uma para a imagem da esquerda e uma para a da direita. O processo de retificação é ilustrado na \textbf{Figura} \ref{fig:req2.2}. Como mostrado na equação da figura, o processo de retificação funciona de (c) para (a) em um processo conhecido como mapeamento reverso. Para cada pixel inteiro na imagem retificada (c), é encontrado as suas coordenadas na imagem sem distorção (b) e eles são usados para procurar as verdadeiras coordenadas (ponto flutuante) na imagem de origem (a). O valor da coordenada do pixel em ponto flutuante é então interpolado com os pixels vizinhos inteiros na imagem original, e este valor é usado para preencher a posição dos pixels inteiros retificados na imagem de destino (c).
 
@@ -125,7 +123,7 @@ Pontos em duas dimensões podem ser reprojetados em três dimensões dados as co
 \end{bmatrix}  $$
 Os parâmetros são da imagem da esquerda, exceto por ${c_x}^{'}$, que é o ponto principal na coordenada x da imagem da direita. Se os raios principais se cruzam no infinito, então ${c_x}^{'} = c_x$. Dado um ponto bidimensional homogêneo e sua disparidade associada $d$, nós podemos projetar o ponto em 3D usando a matriz $Q$, conforme a função da OpenCV utilizada: \textit{reprojectImageTo3D()}.
 
-Após os pontos terem sido projetados nas coordenadas do mundo real, foi calculado a norma entre os pontos para obter as medidas pedidas.
+Após os pontos terem sido projetados nas coordenadas do mundo real, foi calculado a norma entre eles para obter as medidas pedidas.
 %-------------------------------------------------------------------------
 \section{Resultados}
 \label{sec:Results}
@@ -164,7 +162,19 @@ As imagens da \textbf{Figura} \ref{res:req1} e \ref{res:req1.2} mostram a compar
 \label{res:req1.2}
 \end{figure}
 
-Para a imagem da \textit{aloe} o tempo necessário para correspondência/casamento foi de 0.35s para o SGBM e 0.024s para o BM. Para a imagem do \textit{baby} o tempo necessário para correspondência/casamento foi de 0.34s para o SGBM e 0.023s para o BM. O SGBM teve um tempo de execução mais de 10 vezes superior ao BM para que a correspondência estéreo apresentada em \ref{req1} fosse realizada, o que já era esperado.
+Conforme mostra a \textbf{Tabela} \ref{table}, o SGBM teve um tempo de execução mais de 20 vezes superior ao BM para que a correspondência/casamento entre os pontos apresentada em \ref{req1} fosse realizada, o que já era esperado.
+\begin{table}[h]
+\centering
+\label{table}
+\caption{Tabela de comparação BM x SGBM.}
+\begin{tabular}{|c|c|c|}
+\hline
+               & \textbf{Baby}                                                                              & \textbf{Aloe}                                                                              \\ \hline
+\textbf{BM}    & \textbf{\begin{tabular}[c]{@{}l@{}}Correspondência:  0.22s\\ Filtragem: 0.1s\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Correspondência: 0.15s\\ Filtragem: 0.09s\end{tabular}} \\ \hline
+\textbf{SGBM} & \textbf{\begin{tabular}[c]{@{}l@{}}Correspondência: 3.6s\\ Filtragem: 0.095s\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Correspondência: 3.8s\\ Filtragem: 0.096s\end{tabular}} \\ \hline
+\end{tabular}
+\end{table}
+
 %-------------------------------------------------------------------------
 \subsection{Requisito 2}
 %-------------------------------------------------------------------------
@@ -172,40 +182,43 @@ Como pode-se notar pela \textbf{Figura} \ref{pair}, a retificação estéreo exp
 
 \begin{figure}[h]
 \begin{center}
-\begin{tabular}{c}
-\bmvaHangBox{\fbox{\includegraphics[width=6cm]{Figs/pair.jpg}}}
+\begin{tabular}{cc}
+\bmvaHangBox{\fbox{\parbox{4.5cm}{
+\includegraphics[width=4.5cm]{Figs/pair.jpg}}}} &
+\bmvaHangBox{\fbox{\includegraphics[width=4.5cm]{Figs/pair_warrior.jpg}}}
 \end{tabular}
 \end{center}
-\caption{Imagens do morpheus retificadas e alinhadas.}
+\caption{Imagens do morpheus e do warrior retificadas e alinhadas.}
 \label{pair}
 \end{figure}
 
-Abaixo seguem as \textbf{Figuras} \ref{morpheus} da disparidade e profundidade do Morpheus. Pixels mais claros tendem a estar mais próximo da câmera.
-\begin{figure}[h]
+A \textbf{Figura} \ref{morpheus} apresenta a disparidade e profundidade do Morpheus e do Warrior.
+\begin{figure}[]
 \begin{center}
-\begin{tabular}{cc}
+\begin{tabular}{cccc}
 \bmvaHangBox{\fbox{\parbox{2.5cm}{
 \includegraphics[width=2.5cm]{Figs/morpheus_disp.png}}}} &
-\bmvaHangBox{\fbox{\includegraphics[width=2.5cm]{Figs/morpheus_depth.png}}} \\
-(a) & (b)
+\bmvaHangBox{\fbox{\includegraphics[width=2.5cm]{Figs/morpheus_depth.png}}} &
+\bmvaHangBox{\fbox{\includegraphics[width=2.5cm]{Figs/warrior_disp.png}}} &
+\bmvaHangBox{\fbox{\includegraphics[width=2.5cm]{Figs/warrior_depth.png}}} \\
+(a) & (b) & (c) & (d)
 \end{tabular}
 \end{center}
-\caption{(a) e (b) são as imagens de disparidade e profundidade obtidas para o Morpheus, respectivamente.}
+\caption{(a) e (b) são as imagens de disparidade e profundidade obtidas para o Morpheus, respectivamente. Assim como (c) e (d) são as do Warrior.}
 \label{morpheus}
 \end{figure}
 
 \subsection{Requisito 3}
 %-------------------------------------------------------------------------
 As dimensões para a caixa (largura, altura e profundidade) obtidas foram, respectivamente: 15.1407 x 21.6495 x 9.45939 cm. Elas foram obtidas primeiro medindo a largura a partir do canto superior esquerdo do sofá, depois medindo a altura partindo do mesmo ponto, e por fim a profundidade foi obtida a partir da diagonal, clicando primeiro no canto inferior direito e depois no canto superior direito.
-
 %-------------------------------------------------------------------------
 \section{Discussões, Conclusões e Análise de Parâmetros}
 \label{sec:Conclusion}
 %-------------------------------------------------------------------------
-Pode-se notar pela \textbf{Figura} \ref{res:req1} e \ref{res:req1.2} que o SGBM de fato cumpriu com o que prometeu e forneceu maior robustez e acurácia nos resultados comparado ao mais velho BM, apesar do mapa de profundidade não ter tantas diferenças aparentes. No mapa de profundidade ao contrário do mapa de disparidade, pixels mais escuros significam uma maior proximidade do elemento da imagem para a câmera.
+Pode-se notar pela \textbf{Figura} \ref{res:req1} e \ref{res:req1.2} que o SGBM de fato cumpriu com o que prometeu e forneceu maior robustez e acurácia nos resultados, comparado ao mais velho BM, apesar do mapa de profundidade não ter tantas diferenças aparentes. No mapa de profundidade, ao contrário do mapa de disparidade, pixels mais escuros significam uma maior proximidade do elemento da imagem para a câmera.
 
-Conforme dito anteriormente, no BM a correspondência é computada deslizando a janela SAD (soma das diferenças absolutas) nas imagens e no SGBM é usada um bloco com uma métrica de diferença absoluta dos sinais. Para cada característica na imagem da esquerda, nós procuramos a linha correspondente na imagem da direita por um melhor casamento. Depois da retificação, cada linha é uma linha epipolar de modo que a posição correspondente do ponto procurado na imagem da direita deve estar na mesma linha (mesma coordenada y) da imagem da esquerda. Esta posição pode ser encontrada se possui textura suficiente para ser detectável e se não está oculto na visão da câmera da direita. As posições não encontradas observadas nos mapas de disparidade apresentados em \ref{sec:Results} são justamente aquelas que não satisfazem estas duas condições. Isso vale, principalmente, para as imagens do morpheus, onde há mais regiões ocultas e uniformes. Nestas regiões uniformes (cenas com pouca textura), poucos pontos registraram profundidade. Enquanto em regiões com maior textura, todos os pixels registraram profundidade.
+Conforme dito anteriormente, no BM a correspondência é computada deslizando a janela SAD (soma das diferenças absolutas) nas imagens e no SGBM é usada um bloco com uma métrica de diferença absoluta dos sinais. Para cada característica na imagem da esquerda, nós procuramos a linha correspondente na imagem da direita por um melhor casamento. Depois da retificação, cada linha é uma linha epipolar de modo que a posição correspondente do ponto procurado na imagem da direita deve estar na mesma linha (mesma coordenada y) da imagem da esquerda. Esta posição pode ser encontrada se possui textura suficiente para ser detectável e se não está oculto na visão da câmera da direita. As posições não encontradas observadas nos mapas de disparidade apresentados em \ref{sec:Results} são justamente aquelas que não satisfazem estas duas condições. Isso vale, principalmente, para as imagens do morpheus, onde há mais regiões ocultas e uniformes. Nestas regiões uniformes (cenas com pouca textura), poucos pontos registraram profundidade. Enquanto em regiões com maior textura, muitos pixels registraram profundidade.
 
-Além disso, quanto maior o tamanho $W$ da janela usada tanto no BM quanto no SGBM, menos falsas correspondências deveríamos encontrar. Entretanto, não só o custo computacional pode aumentar com o aumento de $W$, mas também há o problema que surge com a suposição implícita que a disparidade é a mesma na área da janela. Perto de descontinuidades (contornos dos objetos) essa suposição é falsa, e é possível não haver casamento. O resultado será regiões vazias onde não há disparidade perto dos contornos dos objetos. 
+Além disso, quanto maior o tamanho $W$ da janela usada tanto no BM quanto no SGBM, menos falsas correspondências deveríamos encontrar. Entretanto, não só o custo computacional pode aumentar com o aumento de $W$, mas também há o problema que surge com a suposição implícita que a disparidade é a mesma na área da janela. Perto de descontinuidades de pixels (contornos dos objetos) essa suposição é falsa, e é possível não haver casamento. O resultado será regiões vazias onde não há disparidade perto dos contornos/bordas dos objetos. 
 \bibliography{refs}
 \end{document}

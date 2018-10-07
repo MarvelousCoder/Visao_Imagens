@@ -17,9 +17,10 @@ struct parameters {
     String right_im;
     String dst_conf_path;
     String algo;
+    String al;
     bool no_display;
-    bool no_downscale;
-    bool req_2;
+    String req_2;
+    String req_1;
     int max_disp;
     double lambda;
     double sigma;
@@ -28,7 +29,6 @@ struct parameters {
     vector<pair<int, int>> cliques;
 };
 
-Rect computeROI(Size2i src_sz, Ptr<StereoMatcher> matcher_instance);
 void calcula_morpheus(parameters params);
 void inicia_matrizes_morpheus(Mat* R_l, Mat* R_r, Mat* T_l, Mat* T_r, Mat* cam_matrix_l, Mat* cam_matrix_r);
 void cria_mapas_morpheus(Mat left, Mat right, parameters params);
@@ -38,17 +38,17 @@ void on_mouse(int event, int x, int y, int flags, void* userdata);
 
 const String keys =
     "{help h usage ? |                  | print this message                                                }"
-    "{@left          |data/babyL.png    | left view of the stereopair                                       }"
-    "{@right         |data/babyR.png    | right view of the stereopair                                      }"
-    "{algorithm      |sgbm                | stereo matching method (bm or sgbm)                               }"
-    "{no-downscale   |                  | force stereo matching on full-sized views to improve quality      }"
-    "{dst_conf_path  |None              | optional path to save the confidence map used in filtering        }"
+    "{@left_a        |                  | left view of the stereopair                                       }"
+    "{@right_a       |                  | left view of the stereopair                                       }"
+    "{@req_1         |                  | execute or not the requirement one                                }"
+    "{@req_2         |                  | execute or not the requirement two                                }"
+    "{@algorithm     |                  | stereo matching method (bm or sgbm)                               }"
+    "{@al            |                  | aloe or baby?                                                     }"
+    "{@window_size   |                  | window size                                                       }"
     "{vis_mult       |1.0               | coefficient used to scale disparity map visualizations            }"
     "{max_disparity  |160               | parameter of stereo matching                                      }"
-    "{window_size    |-1                | parameter of stereo matching                                      }"
     "{wls_lambda     |8000.0            | parameter of post-filtering                                       }"
     "{wls_sigma      |1.5               | parameter of post-filtering                                       }"
-    "{req_2          |s                  | execute or not the requirement two                                }"
     ;
 
 int main(int argc, char** argv)
@@ -59,29 +59,20 @@ int main(int argc, char** argv)
         return parser.printMessage(), 0;
 
     parameters params;
+
     params.left_im = parser.get<String>(0);
     params.right_im = parser.get<String>(1);
+    params.req_1 = parser.get<String>(2);
+    params.req_2 = parser.get<String>(3);
+    params.algo = parser.get<String>(4);
+    params.al = parser.get<String>(5);
+    params.wsize = parser.get<int>(6);
 
-    params.dst_conf_path = parser.get<String>("dst_conf_path");
-    params.algo = parser.get<String>("algorithm");
-    params.no_downscale = parser.has("no-downscale");
-    params.req_2 = parser.has("req_2");
     params.max_disp = parser.get<int>("max_disparity");
     params.lambda = parser.get<double>("wls_lambda");
     params.sigma  = parser.get<double>("wls_sigma");
     params.vis_mult = parser.get<double>("vis_mult");
 
-    if(parser.get<int>("window_size") >= 0) //user provided window_size value
-        params.wsize = parser.get<int>("window_size");
-    else
-    {
-        if(params.algo=="sgbm")
-            params.wsize = 3; //default window size for SGBM
-        else if(!params.no_downscale && params.algo=="bm")
-            params.wsize = 7; //default window size for BM on downscaled views (downscaling is performed only for wls_conf)
-        else
-            params.wsize = 15; //default window size for BM on full-sized views
-    }
     if (!parser.check()) 
         return parser.printErrors(), -1;
     
@@ -101,9 +92,8 @@ int main(int argc, char** argv)
         return cout << "Cannot read image file: " << params.right_im, -1;
     if(params.algo != "sgbm" and params.algo != "bm") return printf("Unsupported algorithm"), -1;
 
-    // calcula_mapas(left, right, params);
-    if(params.req_2)
-        calcula_morpheus(params);
+    if(params.req_1 == "s") calcula_mapas(left, right, params);
+    if(params.req_2 == "s") calcula_morpheus(params);
     return 0;
     
 }
@@ -123,27 +113,13 @@ void calcula_mapas(Mat l, Mat r, parameters params)
     Mat filtered_disp;
     Mat conf_map = Mat(l.rows, l.cols, CV_8U);
     conf_map = Scalar(255);
-    Rect ROI;
     Ptr<DisparityWLSFilter> wls_filter;
     double matching_time, filtering_time;
 
-    if(!params.no_downscale)
-    {
-        // downscale the views to speed-up the matching stage, as we will need to compute both left
-        // and right disparity maps for confidence map computation
-        //! [downscale]
-        params.max_disp/=2;
-        if(params.max_disp%16!=0)
-            params.max_disp += 16-(params.max_disp%16);
-        resize(l ,left_for_matcher, Size(), 0.5, 0.5);
-        resize(r,right_for_matcher, Size(), 0.5, 0.5);
-        //! [downscale]
-    }
-    else
-    {
-        left_for_matcher  = l.clone();
-        right_for_matcher = r.clone();
-    }
+    
+    left_for_matcher  = l.clone();
+    right_for_matcher = r.clone();
+
     if(params.algo=="bm")
     {
         //! [matching]
@@ -176,7 +152,6 @@ void calcula_mapas(Mat l, Mat r, parameters params)
         matching_time = ((double)getTickCount() - matching_time)/getTickFrequency();
     }
 
-
     //! [filtering]
     wls_filter->setLambda(params.lambda);
     wls_filter->setSigmaColor(params.sigma);
@@ -186,25 +161,12 @@ void calcula_mapas(Mat l, Mat r, parameters params)
     //! [filtering]
     conf_map = wls_filter->getConfidenceMap();
 
-    // Get the ROI that was used in the last filter call:
-    ROI = wls_filter->getROI();
-    if(!params.no_downscale)
-    {
-        // upscale raw disparity and ROI back for a proper comparison:
-        resize(left_disp,left_disp,Size(),2.0,2.0);
-        left_disp = left_disp*2.0;
-        ROI = Rect(ROI.x*2,ROI.y*2,ROI.width*2,ROI.height*2);
-    }
-
     //collect and print all the stats:
     cout.precision(2);
     cout << "Matching time:  "<< matching_time << "s" << endl;
     cout << "Filtering time: "<< filtering_time << "s" << endl;
 
     double MSE_before,percent_bad_before,MSE_after,percent_bad_after;
-
-    if(params.dst_conf_path!="None")
-        imwrite(params.dst_conf_path,conf_map);
 
     namedWindow("left", WINDOW_AUTOSIZE);
     imshow("left", l);
@@ -222,7 +184,9 @@ void calcula_mapas(Mat l, Mat r, parameters params)
     disparity = (disparity - mini) * (255/(maxi - mini));
     disparity.convertTo(disparity, CV_8U);
     imshow("Mapa de disparidade", disparity);
-    imwrite("aloe_sgbm_disp.png", disparity);
+    String s;
+    params.al == "a" ? s = "aloe_" + params.algo + "_disp.png" : s = "baby_" + params.algo + "_disp.png";
+    imwrite(s, disparity);
     
     //! [visualization]
     Mat depth(filtered_disp.rows, filtered_disp.cols, CV_16SC1);
@@ -241,7 +205,8 @@ void calcula_mapas(Mat l, Mat r, parameters params)
     
     namedWindow("Mapa de Profundidade", WINDOW_NORMAL);
     imshow("Mapa de Profundidade", depth);
-    imwrite("aloe_sgbm_depth.png", depth);
+    params.al == "a" ? s = "aloe_" + params.algo + "_depth.png" : s = "baby_" + params.algo + "_depth.png";
+    imwrite(s, depth);
     waitKey(0);
 }
 
@@ -481,22 +446,4 @@ void cria_mapas_morpheus(Mat left_2, Mat right_2, parameters params)
     imshow("Mapa de profundidade", filtered_disp_vis);
     imwrite("morpheus_depth.png", filtered_disp_vis);
     waitKey(0);
-}
-
-Rect computeROI(Size2i src_sz, Ptr<StereoMatcher> matcher_instance)
-{
-    int min_disparity = matcher_instance->getMinDisparity();
-    int num_disparities = matcher_instance->getNumDisparities();
-    int block_size = matcher_instance->getBlockSize();
-
-    int bs2 = block_size/2;
-    int minD = min_disparity, maxD = min_disparity + num_disparities - 1;
-
-    int xmin = maxD + bs2;
-    int xmax = src_sz.width + minD - bs2;
-    int ymin = bs2;
-    int ymax = src_sz.height - bs2;
-
-    Rect r(xmin, ymin, xmax - xmin, ymax - ymin);
-    return r;
 }

@@ -9,49 +9,60 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include <map>
+#include <vector>
 
 using namespace cv;
 using namespace std;
 using namespace cv::ximgproc;
 
-int cx1, cy1, cx2, cy2;
-bool clique = false;
-map<int, int> cliques;
+vector<pair<int, int>> cliques;
 
 void on_mouse(int event, int x, int y, int flags, void* userdata) {
     if ( event == EVENT_LBUTTONDOWN )
-        cliques.insert(make_pair(x, y));
+        cliques.push_back(make_pair(x, y));
 }
 
+void estima_medidas_warrior(Mat Q)
+{
+    Mat img = imread("teste2.png", -1);
+    namedWindow("Req3", WINDOW_NORMAL);
+    resizeWindow("Req3", 1000,  1000);
+    while(1) {
+        setMouseCallback("Req3", on_mouse);
+        imshow( "Req3", img);
+        if((char)waitKey(55) == 27) break;
+    }
+    Mat out;
+    reprojectImageTo3D(img, out, Q);
+   
+    for(int i = 0; i < cliques.size(); i+=2)
+    {
+        Vec3b pt1 = out.at<Vec3b>(cliques[i].second, cliques[i].first);
+        Vec3b pt2 = out.at<Vec3b>(cliques[i+1].second, cliques[i+1].first);
+        if(i == 0) cout << "largura em mm: " << norm(pt1, pt2, NORM_L2) << endl;
+        else if(i == 2) cout << "altura em mm: " << norm(pt1, pt2, NORM_L2) << endl;
+        else if(i == 4) cout << "profundidade em mm: " << norm(pt1, pt2, NORM_L2) << endl;
+    }
+}
 
 int main () {
     Mat R_r(3,3, CV_64FC1), R_l(3,3, CV_64FC1);
     Mat T_r(3,1, CV_64FC1), T_l(3,1, CV_64FC1);
+    Mat R_te(3, 1, CV_64FC1);
 
-    R_r.at<double>(0, 0) = 0.48946344;
-    R_r.at<double>(0, 1) = 0.87099159;
-    R_r.at<double>(0, 2) = -0.04241701;
-    R_r.at<double>(1, 0) = 0.33782142;
-    R_r.at<double>(1, 1) = -0.23423702;
-    R_r.at<double>(1, 2) = -0.91159734;
-    R_r.at<double>(2, 0) = -0.80392924;
-    R_r.at<double>(2, 1) =  0.43186419;
-    R_r.at<double>(2, 2) = -0.40889007;
+    R_te.at<double>(0, 0) = 1.918835;
+    R_te.at<double>(1, 0) = 0.768994;
+    R_te.at<double>(2, 0) = -0.527060;    
+    
+    Rodrigues(R_te, R_l);
+    R_te.at<double>(0, 0) = 1.797318;
+    R_te.at<double>(1, 0) = 1.018771;
+    R_te.at<double>(2, 0) = -0.713289; 
+    Rodrigues(R_te, R_r);
 
     T_r.at<double>(0, 0) = -614.549000;
     T_r.at<double>(1, 0) = 193.240700;
     T_r.at<double>(2, 0) = 3242.754000;
-
-    R_l.at<double>(0, 0) = 0.70717199;
-    R_l.at<double>(0, 1) = 0.70613396;
-    R_l.at<double>(0, 2) = -0.03581348;
-    R_l.at<double>(1, 0) = 0.28815232;
-    R_l.at<double>(1, 1) = -0.33409066;
-    R_l.at<double>(1, 2) = -0.89741388;
-    R_l.at<double>(2, 0) = -0.64565936;
-    R_l.at<double>(2, 1) =  0.62430623;
-    R_l.at<double>(2, 2) = -0.43973369;
 
     T_l.at<double>(0, 0) = -532.285900;
     T_l.at<double>(1, 0) = 207.183600;
@@ -61,20 +72,20 @@ int main () {
 
     cam_matrix_l.at<double>(0, 0) = 6704.926882; // frectl
     cam_matrix_l.at<double>(0, 1) = 0.000103; // alphal
-    cam_matrix_l.at<double>(0, 2) = 738.251932; // cxl
+    cam_matrix_l.at<double>(0, 2) = 838.251932; // cxl
     cam_matrix_l.at<double>(1, 0) = 0.0; 
     cam_matrix_l.at<double>(1, 1) = 6705.241311; // fyl
-    cam_matrix_l.at<double>(1, 2) = 457.560286; // cyl 
+    cam_matrix_l.at<double>(1, 2) = 857.560286; // cyl 
     cam_matrix_l.at<double>(2, 0) = 0.0;
     cam_matrix_l.at<double>(2, 1) =  0.0;
     cam_matrix_l.at<double>(2, 2) = 1.0;
     
     cam_matrix_r.at<double>(0, 0) = 6682.125964; // frectr
     cam_matrix_r.at<double>(0, 1) = 0.000101; // alphar
-    cam_matrix_r.at<double>(0, 2) = 875.207200; // cxr
+    cam_matrix_r.at<double>(0, 2) = 1075.207200; // cxr
     cam_matrix_r.at<double>(1, 0) = 0.0; 
     cam_matrix_r.at<double>(1, 1) = 6681.475962; // fyr
-    cam_matrix_r.at<double>(1, 2) = 357.700292; // cyr
+    cam_matrix_r.at<double>(1, 2) = 757.700292; // cyr
     cam_matrix_r.at<double>(2, 0) = 0.0;
     cam_matrix_r.at<double>(2, 1) =  0.0;
     cam_matrix_r.at<double>(2, 2) = 1.0;
@@ -82,31 +93,9 @@ int main () {
     Mat R = R_r * R_l.t();
     Mat T = T_r - R * T_l;
 
-    // Rodrigues(R, R);
-    // norm = 1114.0849568085998
-    // Mat e1 = T/norm(T, NORM_L2);
-    // Mat aux(3, 1, CV_64FC1); // (-Ty, Tx, 0).t()
-    // aux.at<double>(0,0) = -T.at<double>(1,0); // -Ty
-    // aux.at<double>(1,0) = T.at<double>(0,0); // Tx
-    // aux.at<double>(2,0) = 0.0; // 0
-    // Mat e2 = 1/(sqrt( T.at<double>(1,0) * T.at<double>(1,0) + T.at<double>(0,0)*T.at<double>(0,0) ) * aux);
-    // Mat e3 = e1.cross(e2);
-
-    // Mat R_rect(3, 3, CV_64FC1);
-    // R_rect.at<double>(0,0) = e1.at<double>(0,0);
-    // R_rect.at<double>(0,1) = e1.at<double>(0,1);
-    // R_rect.at<double>(0,2) = e1.at<double>(0,2);
-    // R_rect.at<double>(1,0) = e2.at<double>(0,0);
-    // R_rect.at<double>(1,1) = e2.at<double>(0,1);
-    // R_rect.at<double>(1,2) = e2.at<double>(0,2);
-    // R_rect.at<double>(2,0) = e3.at<double>(0,0);
-    // R_rect.at<double>(2,1) = e3.at<double>(0,1);
-    // R_rect.at<double>(2,2) = e3.at<double>(0,2);
-
-    Mat morpheus_l = imread("data/MorpheusL.jpg", 0);
-    Mat morpheus_r = imread("data/MorpheusR.jpg", 0);
-    Size image_size_l = morpheus_l.size(); 
-    // Size image_size_r = morpheus_r.size();
+    Mat warrior_l = imread("../data/warriorL.jpg", 0);
+    Mat warrior_r = imread("../data/warriorR.jpg", 0);
+    Size image_size_l = warrior_l.size(); 
     Mat R1, R2, P1, P2, Q;
     stereoRectify(cam_matrix_l, noArray(), cam_matrix_r, 
                     noArray(), image_size_l, R, T, R1, R2, P1, P2, Q, 0);
@@ -116,8 +105,8 @@ int main () {
     initUndistortRectifyMap(cam_matrix_l, noArray(), R1, P1, image_size_l, CV_16SC2, l1, l2);
     initUndistortRectifyMap(cam_matrix_r, noArray(), R2, P2, image_size_l, CV_16SC2, r1, r2);
     Mat img_r, img_l;
-    remap(morpheus_l, img_l, l1, l2, INTER_LINEAR);
-    remap(morpheus_r, img_r, r1, r2, INTER_LINEAR);
+    remap(warrior_l, img_l, l1, l2, INTER_LINEAR);
+    remap(warrior_r, img_r, r1, r2, INTER_LINEAR);
 
     cv::Mat pair;
     if (!isVerticalStereo)
@@ -142,7 +131,7 @@ int main () {
                 cv::Scalar(0, 255, 0));
     }
     imshow("rectified", pair);
-    imwrite("pair.jpg", pair);
+    imwrite("pair_warrior.jpg", pair);
     
     imshow("imgl", img_l);
     imwrite("imgl.jpg", img_l);
@@ -154,7 +143,7 @@ int main () {
     double lambda = 8000.0;
     double sigma  = 1.5;
     double vis_mult = 1.0;
-    int wsize = 9; 
+    int wsize = 7; 
     Mat left, right;
     img_l.convertTo(left, CV_8U);
     img_r.convertTo(right, CV_8U);
@@ -206,48 +195,16 @@ int main () {
     disparity = (disparity - mini) * (255/(maxi - mini));
     disparity.convertTo(disparity, CV_8U);
     imshow("Mapa de disparidade", disparity);
+    imwrite("warrior_disp.png", disparity);
     waitKey(0);
 
     Mat filtered_disp_vis;
     getDisparityVis(filtered_disp, filtered_disp_vis, vis_mult);
     namedWindow("filtered disparity", WINDOW_AUTOSIZE);
     imshow("filtered disparity", filtered_disp_vis);
-    imwrite("teste2.jpg", filtered_disp_vis);
+    imwrite("warrior_depth.png", filtered_disp_vis);
     waitKey(0);
 
-    namedWindow("Req3", WINDOW_NORMAL);
-    resizeWindow("Req3", 1000,  1000);
-    while(1) {
-        setMouseCallback("Req3", on_mouse);
-        imshow( "Req3", filtered_disp_vis );
-        if((char)waitKey(55) == 27) break;
-    }
-
-
-    Mat pt_1(4, 1, CV_64FC1), pt_2(4, 1, CV_64FC1);
-    auto start = cliques.begin();
-    int i = 0;
-    while(start != cliques.end()) {
-        pt_1.at<double>(0,0) = (double)start->first;
-        pt_1.at<double>(1,0) = (double)start->second;
-        pt_1.at<double>(2,0) = filtered_disp.at<double>(Point(start->second, start->first));
-        pt_1.at<double>(3,0) = 1;
-        ++start;
-        
-        pt_2.at<double>(0,0) = (double)start->first;
-        pt_2.at<double>(1,0) = (double)start->second;
-        pt_2.at<double>(2,0) = filtered_disp.at<double>(Point(start->second, start->first));
-        pt_2.at<double>(3,0) = 1;
-        pt_1 = Q * pt_1;
-        pt_2 = Q * pt_2;
-        if(i == 0) cout << "largura em mm(?): " << norm(pt_1, pt_2, NORM_L2) << endl;
-        else if(i == 1) cout << "altura em mm(?): " << norm(pt_1, pt_2, NORM_L2) << endl;
-        else if(i == 2) cout << "profundidade em mm(?): " << norm(pt_1, pt_2, NORM_L2) << endl;
-        i++;
-    }
-
-
-
-
+    // estima_medidas_warrior(Q);
     return 0;
 }
