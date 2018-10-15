@@ -82,6 +82,7 @@ def main():
     # Converto para RGB novamente #
     ycbcr_to_rgb(aux_image)
     cv.imwrite("final_image.bmp", aux_image)
+    rgb_to_ycbcr(aux_image)
     locate_airplanes(aux_image)
 
 if __name__ == "__main__":
